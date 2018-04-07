@@ -78,6 +78,8 @@ function getManager() {
 //			+ '/resources/images/leftImg/xinxixiugai1.png\'" onclick="addtabs(\'link\')"></td></tr>';
 	str +=addFunc('xinxixiugai1.png','xinxixiugai2.png','link');
 	str +=addFunc('xinxixiugai1.png','xinxixiugai2.png','introduction');
+	str +=addFunc('xinxixiugai1.png','xinxixiugai2.png','newsType');
+	str +=addFunc('xinxixiugai1.png','xinxixiugai2.png','news');
 	str += '</table></div>';
 	return str;
 }
@@ -94,38 +96,41 @@ function addFunc(png1,png2,tabName){
 
 function addtabs(us) {
 	if (us == "link") {
-		var tab = tabs.getComponent(us);
-		if (tab==null) {
-			tabs.add({
-				itemId : us,
-				layout : 'fit',
-				title : '链接',
-				iconCls : 'link',
-				width : '100%',
-				items : [ new Link.LinkPanel({
-					mainId: us
-				}) ],
-				closable : true
-			}).show();
-		} else {
-			tab.show();
-		}
+		var panel=  new Link.LinkPanel({
+			mainId: us
+		}) ;
+		addTabFuns(us,panel,'相关链接');
 	}else if (us == "introduction") {
-		var tab = tabs.getComponent(us);
-		if (tab==null) {
-			tabs.add({
-				itemId : us,
-				layout : 'fit',
-				title : '简介',
-				iconCls : 'introduction',
-				width : '100%',
-				items : [ new Introduction.IntroductionPanel({
-					mainId: us
-				}) ],
-				closable : true
-			}).show();
-		} else {
-			tab.show();
-		}
+		var panel=  new Introduction.IntroductionPanel({
+			mainId: us
+		});
+		addTabFuns(us,panel,'简介');
+	}else if (us == "newsType") {
+		var panel=  new NewsType.NewsTypePanel({
+			mainId: us
+		});
+		addTabFuns(us,panel,'类型');
+	}else if (us == "news") {
+		var panel=  new News.NewsPanel({
+			mainId: us
+		});
+		addTabFuns(us,panel,'咨讯中心');
+	}
+}
+
+function addTabFuns(us,itemObj,title){
+	var tab = tabs.getComponent(us);
+	if (tab==null) {
+		tabs.add({
+			itemId : us,
+			layout : 'fit',
+			title : title,
+			iconCls : 'introduction',
+			width : '100%',
+			items : [itemObj ],
+			closable : true
+		}).show();
+	} else {
+		tab.show();
 	}
 }

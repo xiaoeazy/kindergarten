@@ -161,7 +161,7 @@ Ext.extend(Link.LinkPanel, Ext.Panel, {
 	            
 	        ],
 	        width:'100%',
-	        autoExpandColumn: 'fieldName',
+	        autoExpandColumn: 'linkUrl',
 	        viewConfig:{forceFit: true}
 	    });
 		

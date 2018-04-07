@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.huan.kindergarten.mapper.KgNewsMapper">
+    <resultMap id="BaseResultMap" type="cn.huan.kindergarten.dto.KgNews">
+        <result column="id" property="id" jdbcType="VARCHAR" />
+        <result column="typeId" property="typeid" jdbcType="DECIMAL" />
+        <result column="newsTitle" property="newstitle" jdbcType="VARCHAR" />
+        <result column="summary" property="summary" jdbcType="VARCHAR" />
+        <result column="thumbnail" property="thumbnail" jdbcType="VARCHAR" />
+        <result column="author" property="author" jdbcType="VARCHAR" />
+        <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="createDate" property="createdate" jdbcType="DATE" />
+        <result column="viewsCount" property="viewscount" jdbcType="DECIMAL" />
+    </resultMap>
+
+	 <resultMap  id="OtherResultMap" type="cn.huan.kindergarten.dto.KgNews">
+        <result column="id" property="id" jdbcType="VARCHAR" />
+        <result column="typeId" property="typeid" jdbcType="DECIMAL" />
+        <result column="newsTitle" property="newstitle" jdbcType="VARCHAR" />
+        <result column="summary" property="summary" jdbcType="VARCHAR" />
+        <result column="thumbnail" property="thumbnail" jdbcType="VARCHAR" />
+        <result column="author" property="author" jdbcType="VARCHAR" />
+        <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="createDate" property="createdate" jdbcType="DATE" />
+        <result column="viewsCount" property="viewscount" jdbcType="DECIMAL" />
+        <association property="kgNewstype" javaType="cn.huan.kindergarten.dto.KgNewstype">
+            <id column="typeid" property="id"></id>
+            <result column="typename" property="typename"/>
+        </association>
+    </resultMap>
+
+   <select id="selectWithOtherInfo" resultMap="OtherResultMap" >
+        select a.*,b.typename from kg_news a left join kg_newsType b
+            on a.typeid=b.id
+    </select>
+</mapper>

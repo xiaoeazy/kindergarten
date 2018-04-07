@@ -1,7 +1,9 @@
 eclipse.preferences.version=1
 encoding//WebContent/WEB-INF/view=UTF-8
 encoding//WebContent/WEB-INF/view/generator/generator.html=UTF-8
+encoding//WebContent/WEB-INF/view/include/navigation.html=UTF-8
 encoding//WebContent/WEB-INF/web.xml=UTF-8
+encoding//WebContent/lib/extjs/ueditor/utf8-jsp/jsp/config.json=UTF-8
 encoding/HTed=UTF-8
 encoding/resources=UTF-8
 encoding/src=UTF-8
