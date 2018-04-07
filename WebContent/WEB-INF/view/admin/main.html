@@ -7,48 +7,48 @@
 
     <title>app</title>
 
-    <!--
-    <script type="text/javascript">
-        var Ext = Ext || {}; // Ext namespace won't be defined yet...
+	<script>
+		var _basePath = '${base.contextPath}',_locale='${base.locale}'; 
+	</script>
 
-        // This function is called by the Microloader after it has performed basic
-        // device detection. The results are provided in the "tags" object. You can
-        // use these tags here or even add custom tags. These can be used by platform
-        // filters in your manifest or by platformConfig expressions in your app.
-        //
-        Ext.beforeLoad = function (tags) {
-            var s = location.search,  // the query string (ex "?foo=1&bar")
-                profile;
-
-            // For testing look for "?classic" or "?modern" in the URL to override
-            // device detection default.
-            //
-            if (s.match(/\bclassic\b/)) {
-                profile = 'classic';
-            }
-            else if (s.match(/\bmodern\b/)) {
-                profile = 'modern';
-            }
-            else {
-                profile = tags.desktop ? 'classic' : 'modern';
-                //profile = tags.phone ? 'modern' : 'classic';
-            }
-
-            Ext.manifest = profile; // this name must match a build profile name
-
-            // This function is called once the manifest is available but before
-            // any data is pulled from it.
-            //
-            //return function (manifest) {
-                // peek at / modify the manifest object
-            //};
-        };
-    </script>
-    -->
-    
-    <!-- The line below must be kept intact for Sencha Cmd to build your application -->
-    <script id="microloader" data-app="86b9aa29-191e-4f22-82a4-475349902c4c" type="text/javascript" src="${base.contextPath}/lib/extjs6/Test/bootstrap.js"></script>
-
+	<script src="${base.contextPath}/lib/extjs/build/ext-all.js"></script>
+	<script src="${base.contextPath}/lib/extjs/build/packages/ext-locale/build/ext-locale-zh_CN.js"></script>
+	<link href="${base.contextPath}/lib/extjs/build/packages/ext-theme-crisp/build/resources/ext-theme-crisp-all.css" rel="stylesheet" />
+	<!-- 自己的js -->
+	<script src="${base.contextPath}/lib/extjs/myExt/Header/Header.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/main.js"></script>
+	
+	<!-- 公共 -->
+	<script src="${base.contextPath}/lib/extjs/myExt/common/common.js"></script>
+	
+	<!-- 超链接 -->
+	<script src="${base.contextPath}/lib/extjs/myExt/Link/Link.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/Link/item/addorUpdateLinkWindow.js"></script>
+	<!-- 简介 -->
+	<script src="${base.contextPath}/lib/extjs/myExt/Introduction/Introduction.js"></script>
+	
+	
+		<script type="text/javascript">
+				var theLoginUserName;
+				var theLoginUserId;
+				function aa(){
+					theLoginUserId=document.getElementById("theLoginUserId").value;
+					theLoginUserName=document.getElementById("theLoginUserName").value;
+				} 
+			
+		</script>
+	
 </head>
-<body></body>
+<body>
+
+
+<input type="hidden" id="theVersion" value="0.0.0" />
+<input type="hidden" id="theLoginUserId" value="admin" /> 
+<input type="hidden" id="theLoginUserName" value="admin" />  
+</body>
 </html>
+
+
+
+
+
