@@ -1,12 +1,16 @@
 package com.huan.HTed.bean;
 
 public class UploadImgAjax {
-	private boolean success;
+	private boolean success =true;
+	private boolean pass;
+	private String message;
 	private String file;
 	
-	public UploadImgAjax(boolean success, String file) {
+	
+	public UploadImgAjax(boolean pass, String message, String file) {
 		super();
-		this.success = success;
+		this.pass = pass;
+		this.message = message;
 		this.file = file;
 	}
 	public boolean isSuccess() {
@@ -21,6 +25,20 @@ public class UploadImgAjax {
 	public void setFile(String file) {
 		this.file = file;
 	}
+	
+	public boolean isPass() {
+		return pass;
+	}
+	public void setPass(boolean pass) {
+		this.pass = pass;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
 	
 	
 }

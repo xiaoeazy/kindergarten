@@ -62,7 +62,7 @@ public class ImageController {
                 File tempFile = new File(file_path+'/'+imgName);
                 if (imgName == null) {
 //                    return "<script>window.parent.showUploadError('NO_FILE')</script>";
-                	return new UploadImgAjax(false, "NO_FILE");
+                	return new UploadImgAjax(false, "NO_FILE",null);
                 } else {
                     int idx = imgName.lastIndexOf(".");
                     if (idx != -1) {
@@ -71,12 +71,12 @@ public class ImageController {
                         if (!ext.equals("jpg") && !ext.equals("png") && !ext.equals("jpeg") && !ext.equals("gif")) {
                             // 错误信息
 //                            return "<script>window.parent.showUploadError('FILE_TYPE_ERROR')</script>";
-                        	return new UploadImgAjax(false, "FILE_TYPE_ERROR");
+                        	return new UploadImgAjax(false, "FILE_TYPE_ERROR",null);
                         }
                     } else {
                         // 文件类型错误
 //                        return "<script>window.parent.showUploadError('FILE_NO_SUFFIX')</script>";
-                    	return new UploadImgAjax(false, "FILE_NO_SUFFIX");
+                    	return new UploadImgAjax(false, "FILE_NO_SUFFIX",null);
                     }
                 }
                 try (InputStream is = fi.getInputStream(); OutputStream os = new FileOutputStream(tempFile)) {
@@ -86,6 +86,6 @@ public class ImageController {
             }
         }
 //        return "<script>window.parent.showUploadSucessLogo()</script>";
-    	return new UploadImgAjax(true, "/resources/upload/"+imgName);
+    	return new UploadImgAjax(true,null, "/resources/upload/"+imgName);
     }
 }

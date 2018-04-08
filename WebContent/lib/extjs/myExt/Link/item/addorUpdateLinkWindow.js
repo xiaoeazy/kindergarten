@@ -126,7 +126,7 @@ Ext.extend(addorUpdateLink.addorUpdateLinkWindow, Ext.Window, {
                 	  Ext.getBody().unmask();
                 	  var responseArray = Ext.util.JSON.decode(response.responseText);
 	                  if (responseArray.success == true) {
-	                	    ExtAlert("成功");
+//	                	    ExtAlert("成功");
 	                	    parentStore.reload();
 	                    	me.close();
 	                    }else{

@@ -93,7 +93,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 								name: 'newstitle',
 								blankText:'必须填写',
 								id:mainId+"newstitle",
-					            maxLength:20  
+					            maxLength:45  
 				  			},
 				  			typeCombo,
 				  			{
@@ -113,6 +113,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 							},{
 								xtype:'container',
 								fieldLabel : '上传',
+								style:'padding:0 0 5px 0',
 								items:[{
 									xtype : 'button',
 									width : 100,
@@ -125,7 +126,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 							 	},{
 									xtype : 'button',
 									width : 100,
-									text : '取消',
+									text : '撤销图片',
 									handler:function(){
 										Ext.getCmp(mainId+"imageUrl").setValue("");
 							    		Ext.getCmp(mainId+"showPict").getEl().dom.src="";
@@ -142,7 +143,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 								name: 'summary',
 								blankText:'必须填写',
 								id:mainId+"summary",
-					            maxLength:20  
+								 maxLength:200  
 				  			},
 				  			{
 				                xtype: 'ueditor',
@@ -177,8 +178,8 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 				title : text+'咨讯',
 				layout:'fit',
 				items : [formpanel],
-				width : 800,
-				height : 680,
+				width : 900,
+				height : 800,
 				xtype : "window",
 				resizable : false,
 				constrain:true,
@@ -256,7 +257,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
                 	  Ext.getBody().unmask();
                 	  var responseArray = Ext.util.JSON.decode(response.responseText);
 	                  if (responseArray.success == true) {
-	                	    ExtAlert("成功");
+//	                	    ExtAlert("成功");
 	                	    parentStore.reload();
 	                    	me.close();
 	                    }else{

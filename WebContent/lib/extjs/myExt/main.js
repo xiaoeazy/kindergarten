@@ -104,7 +104,7 @@ function addtabs(us) {
 		var panel=  new Introduction.IntroductionPanel({
 			mainId: us
 		});
-		addTabFuns(us,panel,'简介');
+		addTabFuns(us,panel,'协会简介');
 	}else if (us == "newsType") {
 		var panel=  new NewsType.NewsTypePanel({
 			mainId: us

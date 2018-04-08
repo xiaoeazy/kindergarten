@@ -57,11 +57,16 @@ Ext.extend(uploadImageBase.uploadImageBaseWin, Ext.Window, {
 		                    waitMsg: '文件上传中,请耐心等待......',
 		                    method : 'post',  
 		                    success: function(form, o){
-	                    		   Ext.getCmp(the_hidden_image_url).setValue(o.result.file);
-	                    		   if(the_image_show!=null){
-	                    			   Ext.getCmp(the_image_show).getEl().dom.src=appName+o.result.file;
-	                    		   }
-					        	   winThis.close();
+		                    	if(o.result.pass==true){
+		                    		Ext.getCmp(the_hidden_image_url).setValue(o.result.file);
+		                    		   if(the_image_show!=null){
+		                    			   Ext.getCmp(the_image_show).getEl().dom.src=appName+o.result.file;
+		                    		   }
+						        	   winThis.close();
+		                    	}else{
+		                    		ExtError(o.result.message)
+		                    	}
+	                    		   
 		                     }
 		                });
 		            }
