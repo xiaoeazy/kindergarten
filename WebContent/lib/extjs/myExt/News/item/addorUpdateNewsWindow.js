@@ -97,14 +97,46 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 				  			},
 				  			typeCombo,
 				  			{
-				          		fieldLabel:'缩略图',
-								allowBlank:false,
-								name: 'thumbnail',
-								blankText:'必须填写',
-								id:mainId+"thumbnail",
-					            maxLength:20  
-				  			},
-				  			{
+							 	width:200,
+							 	height:100,
+							 	fieldLabel : '显示',
+								xtype : 'box',
+								id :mainId+"showPict",
+								autoEl : {
+									width:200,
+								 	height:100,
+									tag : 'img',
+									src :'',
+									style : 'filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);',
+									complete : 'off'
+								}
+							},{
+								xtype:'container',
+								fieldLabel : '上传',
+								items:[{
+									xtype : 'button',
+									width : 100,
+									//name : 'imgupload',
+									text : '上传图片',
+									handler:function(){
+										var win = new uploadImageBase.uploadImageBaseWin({the_hidden_image_url:mainId+"imageUrl",the_image_show:mainId+"showPict",type:'configcolor'});
+										win.show();
+									}
+							 	},{
+									xtype : 'button',
+									width : 100,
+									text : '取消',
+									handler:function(){
+										Ext.getCmp(mainId+"imageUrl").setValue("");
+							    		Ext.getCmp(mainId+"showPict").getEl().dom.src="";
+									}
+							 	}]
+							},{ 
+				             	id:mainId+"imageUrl",
+				                xtype:"textfield",  
+								fieldLabel : '缩略图',
+				                hidden:true
+			                },{
 				          		fieldLabel:'简介',
 								allowBlank:false,
 								name: 'summary',
@@ -162,10 +194,13 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 				    		var thumbnail= record.get("thumbnail");
 				    		var summary= record.get("summary");
 				    		var content= record.get("content");
-				    		
 				    		Ext.getCmp(mainId+"newstitle").setValue(newstitle);
 				    		typeCombo.setValue(typeid);
-				    		Ext.getCmp(mainId+"thumbnail").setValue(thumbnail);
+				    		
+				    		Ext.getCmp(mainId+"imageUrl").setValue(thumbnail);
+				    		if(thumbnail!=null){
+				    			Ext.getCmp(mainId+"showPict").getEl().dom.src=appName+thumbnail;
+				    		}
 				    		Ext.getCmp(mainId+"summary").setValue(summary);
 				    		
 				    		Ext.getCmp(mainId+"content").setValue(content);
@@ -183,7 +218,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 		var newstitle =Ext.getCmp(mainId+"newstitle").getValue().trim();
 		var typeid =Ext.getCmp(mainId+"typeid").getValue();
 		var summary =Ext.getCmp(mainId+"summary").getValue().trim();
-		var thumbnail =Ext.getCmp(mainId+"thumbnail").getValue().trim();
+		var thumbnail =Ext.getCmp(mainId+"imageUrl").getValue().trim();
 		var content = Ext.getCmp(mainId+"content").getEditor().getContent();
 		if(newstitle==""){
 			Ext.getCmp(mainId+"newstitle").markInvalid("咨讯标题不能为空！");
@@ -212,6 +247,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
                 	  __status : type,
                 	  typeid:typeid,
                 	  newstitle : newstitle,
+                	  thumbnail : thumbnail,
                 	  summary:summary,
                 	  content:content,
                 	  id : id
