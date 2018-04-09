@@ -80,6 +80,7 @@ function getManager() {
 	str +=addFunc('xinxixiugai1.png','xinxixiugai2.png','introduction');
 	str +=addFunc('xinxixiugai1.png','xinxixiugai2.png','newsType');
 	str +=addFunc('xinxixiugai1.png','xinxixiugai2.png','news');
+	str +=addFunc('xinxixiugai1.png','xinxixiugai2.png','config');
 	str += '</table></div>';
 	return str;
 }
@@ -109,12 +110,17 @@ function addtabs(us) {
 		var panel=  new NewsType.NewsTypePanel({
 			mainId: us
 		});
-		addTabFuns(us,panel,'类型');
+		addTabFuns(us,panel,'咨询类型');
 	}else if (us == "news") {
 		var panel=  new News.NewsPanel({
 			mainId: us
 		});
 		addTabFuns(us,panel,'咨讯中心');
+	}else if (us == "config") {
+		var panel=  new Config.ConfigPanel({
+			mainId: us
+		});
+		addTabFuns(us,panel,'系统配置');
 	}
 }
 

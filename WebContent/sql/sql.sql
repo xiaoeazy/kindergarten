@@ -22,6 +22,46 @@ CREATE DATABASE IF NOT EXISTS kindergarten_dev;
 USE kindergarten_dev;
 
 --
+-- Definition of table `kg_config`
+--
+
+DROP TABLE IF EXISTS `kg_config`;
+CREATE TABLE `kg_config` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `sysName` varchar(40) NOT NULL,
+  `sysKey` varchar(40) DEFAULT NULL,
+  `sysValue` varchar(200) DEFAULT NULL,
+  `OBJECT_VERSION_NUMBER` bigint(20) DEFAULT '1',
+  `REQUEST_ID` bigint(20) DEFAULT '-1',
+  `PROGRAM_ID` bigint(20) DEFAULT '-1',
+  `CREATED_BY` bigint(20) DEFAULT '-1',
+  `CREATION_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATED_BY` bigint(20) DEFAULT '-1',
+  `LAST_UPDATE_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATE_LOGIN` bigint(20) DEFAULT '-1',
+  `CERTIFICATE_TYPE` varchar(240) DEFAULT 'ID' COMMENT '证件类型',
+  `EFFECTIVE_START_DATE` date DEFAULT NULL COMMENT '有效日期从',
+  `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
+  `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kg_config`
+--
+
+/*!40000 ALTER TABLE `kg_config` DISABLE KEYS */;
+INSERT INTO `kg_config` (`id`,`sysName`,`sysKey`,`sysValue`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
+ (1,'网站名称','webname','欢欢',3,-1,-1,-1,'2018-04-09 14:03:06',-1,'2018-04-09 15:19:40',-1,'ID',NULL,NULL,NULL),
+ (2,'图片上传默认路径','uploadpath','/resources/upload/',3,-1,-1,-1,'2018-04-09 14:03:06',-1,'2018-04-09 15:19:40',-1,'ID',NULL,NULL,NULL),
+ (3,'网站版权信息','copyright','copyright &copy;2018-2018 huanTed ',3,-1,-1,-1,'2018-04-09 14:03:06',-1,'2018-04-09 15:19:40',-1,'ID',NULL,NULL,NULL),
+ (4,'站点默认关键字','keyword','幼儿园1',2,-1,-1,-1,'2018-04-09 14:03:07',-1,'2018-04-09 15:19:27',-1,'ID',NULL,NULL,NULL),
+ (5,'站点描述','webdesc','这是一个幼儿园的站点',1,-1,-1,-1,'2018-04-09 14:03:07',-1,'2018-04-09 14:03:07',-1,'ID',NULL,NULL,NULL),
+ (6,'网站备案号','ICPlicense','',2,-1,-1,-1,'2018-04-09 14:03:08',-1,'2018-04-09 15:19:40',-1,'ID',NULL,NULL,NULL);
+/*!40000 ALTER TABLE `kg_config` ENABLE KEYS */;
+
+
+--
 -- Definition of table `kg_demo`
 --
 
@@ -156,7 +196,7 @@ CREATE TABLE `kg_news` (
 
 /*!40000 ALTER TABLE `kg_news` DISABLE KEYS */;
 INSERT INTO `kg_news` (`id`,`typeId`,`newsTitle`,`summary`,`thumbnail`,`author`,`content`,`createDate`,`viewsCount`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (2,5,'11','11',NULL,NULL,'<p>11</p>','2018-04-07 18:27:05',0,1,-1,-1,-1,'2018-04-07 18:27:05',-1,'2018-04-07 18:27:05',-1,'ID',NULL,NULL,NULL),
+ (2,5,'11','11','/resources/upload/1.png',NULL,'<p>11</p>','2018-04-07 18:27:05',0,3,-1,-1,-1,'2018-04-07 18:27:05',-1,'2018-04-08 16:20:01',-1,'ID',NULL,NULL,NULL),
  (3,5,'22','22',NULL,NULL,'<p><img src=\"/kindergarten/ueditor/jsp/upload/image/20180407/1523106219658083764.jpg\" title=\"1523106219658083764.jpg\" alt=\"timg.jpg\"/>22</p>','2018-04-07 18:27:10',0,2,-1,-1,-1,'2018-04-07 18:27:10',-1,'2018-04-07 21:03:46',-1,'ID',NULL,NULL,NULL),
  (4,5,'11','11',NULL,NULL,'<p>11</p>','2018-04-07 18:49:57',0,1,-1,-1,-1,'2018-04-07 18:49:57',-1,'2018-04-07 18:49:57',-1,'ID',NULL,NULL,NULL),
  (5,5,'44','44',NULL,NULL,'<p>44</p>','2018-04-07 18:59:54',0,1,-1,-1,-1,'2018-04-07 18:59:54',-1,'2018-04-07 18:59:54',-1,'ID',NULL,NULL,NULL);
@@ -195,6 +235,74 @@ INSERT INTO `kg_newstype` (`id`,`typeName`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,
  (5,'公告通知',4,-1,-1,-1,'2018-04-07 16:17:16',-1,'2018-04-07 17:25:18',-1,'ID',NULL,NULL,NULL),
  (6,'培新通知',2,-1,-1,-1,'2018-04-07 17:24:57',-1,'2018-04-07 17:25:29',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_newstype` ENABLE KEYS */;
+
+
+--
+-- Definition of table `kt_demo`
+--
+
+DROP TABLE IF EXISTS `kt_demo`;
+CREATE TABLE `kt_demo` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `OBJECT_VERSION_NUMBER` bigint(20) DEFAULT '1',
+  `REQUEST_ID` bigint(20) DEFAULT '-1',
+  `PROGRAM_ID` bigint(20) DEFAULT '-1',
+  `CREATED_BY` bigint(20) DEFAULT '-1',
+  `CREATION_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATED_BY` bigint(20) DEFAULT '-1',
+  `LAST_UPDATE_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATE_LOGIN` bigint(20) DEFAULT '-1',
+  `CERTIFICATE_TYPE` varchar(240) DEFAULT 'ID' COMMENT '证件类型',
+  `EFFECTIVE_START_DATE` date DEFAULT NULL COMMENT '有效日期从',
+  `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
+  `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kt_demo`
+--
+
+/*!40000 ALTER TABLE `kt_demo` DISABLE KEYS */;
+/*!40000 ALTER TABLE `kt_demo` ENABLE KEYS */;
+
+
+--
+-- Definition of table `kt_link`
+--
+
+DROP TABLE IF EXISTS `kt_link`;
+CREATE TABLE `kt_link` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `link_name` varchar(45) NOT NULL,
+  `link_url` varchar(200) NOT NULL,
+  `OBJECT_VERSION_NUMBER` bigint(20) DEFAULT '1',
+  `REQUEST_ID` bigint(20) DEFAULT '-1',
+  `PROGRAM_ID` bigint(20) DEFAULT '-1',
+  `CREATED_BY` bigint(20) DEFAULT '-1',
+  `CREATION_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATED_BY` bigint(20) DEFAULT '-1',
+  `LAST_UPDATE_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATE_LOGIN` bigint(20) DEFAULT '-1',
+  `CERTIFICATE_TYPE` varchar(240) DEFAULT 'ID' COMMENT '证件类型',
+  `EFFECTIVE_START_DATE` date DEFAULT NULL COMMENT '有效日期从',
+  `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
+  `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kt_link`
+--
+
+/*!40000 ALTER TABLE `kt_link` DISABLE KEYS */;
+INSERT INTO `kt_link` (`id`,`link_name`,`link_url`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
+ (1,'1','2',1,-1,-1,-1,'2018-03-21 14:49:50',-1,'2018-03-21 14:49:51',-1,'ID',NULL,NULL,NULL),
+ (2,'111','222',1,-1,-1,-1,'2018-03-21 14:49:50',-1,'2018-03-21 14:49:51',-1,'ID',NULL,NULL,NULL),
+ (3,'111','222',1,-1,-1,-1,'2018-03-21 14:49:50',-1,'2018-03-21 14:49:51',-1,'ID',NULL,NULL,NULL),
+ (4,'111','222',1,-1,-1,-1,'2018-03-21 14:49:50',-1,'2018-03-21 14:49:51',-1,'ID',NULL,NULL,NULL);
+/*!40000 ALTER TABLE `kt_link` ENABLE KEYS */;
 
 
 

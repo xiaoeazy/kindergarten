@@ -238,7 +238,7 @@ Ext.extend(Link.LinkPanel, Ext.Panel, {
 				Ext.getBody().unmask();
 				ExtError();
 			}
-      });
+		  });
 	}
 	
 	
