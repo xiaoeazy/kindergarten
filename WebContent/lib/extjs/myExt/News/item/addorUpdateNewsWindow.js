@@ -67,11 +67,70 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 //		            		other_Combo_Store.load();
 		            	}
 		            }
+		        }); 
+	       
+	       //=====================source=========================================
+	    	var sourceid_Combo_Store = new Ext.data.Store({
+	    		proxy: {
+			        type: 'ajax',
+			        url : appName+ '/admin/newssource/query',
+			        reader: {
+			        	root : "results",
+						totalProperty: "totalProperty",
+						successProperty:'success'
+			        }
+			    },
+			    autoLoad : true,
+			    fields: ['id', 'sourcename']
+			});
+	    	
+	       var sourceCombo = new Ext.form.ComboBox({
+	    	   		fieldLabel:'来源',
+		    	    id:mainId+"sourceid",
+		            store : sourceid_Combo_Store,  
+		            valueField : "id",  
+		            mode : 'remote',  
+		            displayField : "sourcename",  
+		            forceSelection : true,  
+		            blankText : '请选择',  
+		            emptyText : '请选择',  
+		            editable : false,  
+		            triggerAction : 'all',  
+		            allowBlank : false,  
+		            hiddenName : "sourcename",  
+		            autoShow : true,  
+		            selectOnFocus : true,  
+		            name : "sourceid",
+		            listeners:{
+		            	afterrender:function(comb){
+		            		sourceCombo.setValue(1);
+//		            	     typeCombo.setRawValue("所有");
+		            	},
+		            	select:function(combo, record, index){
+		            	}
+		            }
 		        });  
-		       
-	    	
-	    	
-	    	
+	       //=====================attribute=========================================
+	       var attribute_Combo_Store = new Ext.data.Store({
+	    		proxy: {
+			        type: 'ajax',
+			        url : appName+ '/admin/newsattribute/query',
+			        reader: {
+			        	root : "results",
+						totalProperty: "totalProperty",
+						successProperty:'success'
+			        }
+			    },
+			    autoLoad : true,
+			    fields: ['id', 'attributename'],
+			    listeners:{
+			    	load:function(){
+			    		  me.LoadingAttribute(me,formpanel,attribute_Combo_Store,mainId);
+			    	}
+			    }
+			});
+	       
+	       //=====================formpanel=========================================
 	    	var formpanel = new Ext.FormPanel({
 	    		  labelAlign: "right",
 	    		  labelWidth :100,
@@ -96,6 +155,24 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 					            maxLength:45  
 				  			},
 				  			typeCombo,
+				  			sourceCombo,
+				  			{
+		                        xtype: 'checkboxgroup',
+		                        id: mainId+"attribute",
+		                        name: 'attribute',
+		                        columns: 4,
+		                        fieldLabel: '自定义属性',
+		                        labelWidth: 100,
+		                        width: 750,
+		                        align: 'left',
+		                        border: true,
+		                        anchor: '100%', flex: 1,
+		                        listeners: {
+		                            render: function (view, opt) {
+		                            	
+		                            }
+		                        }
+		                    },
 				  			{
 							 	width:200,
 							 	height:100,
@@ -138,48 +215,55 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 								fieldLabel : '缩略图',
 				                hidden:true
 			                },{
+			                	xtype:'textarea',
 				          		fieldLabel:'简介',
 								allowBlank:false,
 								name: 'summary',
 								blankText:'必须填写',
 								id:mainId+"summary",
 								 maxLength:200  
-				  			},
-				  			{
-				                xtype: 'ueditor',
-				                fieldLabel: '内  容',
-				                id: mainId+"content",
-				                //不要设置高度，否则滚动条出现后工具栏会消失
-				                width: '100%'
-				            }
-				  			],
-				  buttonAlign : "center",
-				  buttons:[{
-					  width:50,
-						text : text,
-						handler : function(button, event) {
-							me.addorUpdateLink(me,formpanel,mainId,parentStore,id,type,isAdd);
-						}
-				  },{
-					  width:50,
-						text : '取消',
-						handler : function(button, event) {
-							me.close();
-						}
-				  }]
+				  			}
+				  			
+				  			]
 		});
 	     
 			
-
-	        
+//==============tabs========================================================
+    	var newsTabs = new Ext.TabPanel({
+			enableTabScroll : true,
+			border : false,
+			activeTab : 0,
+			items : [{
+				itemId : mainId+"_1",
+				layout : 'fit',
+				title : "基本信息",
+				width : '100%',
+				items : [formpanel ],
+				closable : false
+			},{
+				itemId : mainId+"_2",
+				layout : 'fit',
+				title : "主体内容",
+				width : '100%',
+				items : [{
+	                xtype: 'ueditor',
+	                fieldLabel: '内  容',
+	                id: mainId+"content",
+	                //不要设置高度，否则滚动条出现后工具栏会消失
+	                width: '100%'
+	            } ],
+				closable : false
+			}]
+		});
 
 		
 		Ext.apply(this, {
 				title : text+'咨讯',
 				layout:'fit',
-				items : [formpanel],
+				items : [newsTabs],
 				width : 800,
 				height : 700,
+				autoHeight:true,
 				xtype : "window",
 				resizable : false,
 				constrain:true,
@@ -187,6 +271,20 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 		            this.hide(); 
 		        },
 				modal : true,
+			    buttonAlign : "center",
+			    buttons:[{
+				  width:50,
+					text : text,
+					handler : function(button, event) {
+						me.addorUpdateLink(me,formpanel,mainId,parentStore,id,type,isAdd);
+					}
+			    },{
+				  width:50,
+					text : '取消',
+					handler : function(button, event) {
+						me.close();
+					}
+			    }],
 				listeners:{
 					show:function(){
 						if(record!=null){
@@ -213,11 +311,27 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 		);
 		
 	},
-	
+	LoadingAttribute:function(me,formpanel,store,mainId){
+		  var checkboxgroup = Ext.getCmp(mainId+"attribute");
+		  for (var i = 0; i < store.getCount(); i++) {
+			  var record = store.getAt(i);
+			  var checkbox = new Ext.form.Checkbox(
+		                 {
+		                     boxLabel: record.get("attributename"),
+//		                     name: record[i].OperationCode,
+		                     inputValue:record.get("id"),
+		                     checked: false
+		                 });
+		          checkboxgroup.items.add(checkbox);
+		  }
+		  formpanel.doLayout();
+		 
+	},
 	
 	addorUpdateLink : function(me,formpanel,mainId,parentStore,id,type,isAdd) {
 		var newstitle =Ext.getCmp(mainId+"newstitle").getValue().trim();
 		var typeid =Ext.getCmp(mainId+"typeid").getValue();
+		var sourceid = Ext.getCmp(mainId+"sourceid").getValue();
 		var summary =Ext.getCmp(mainId+"summary").getValue().trim();
 		var thumbnail =Ext.getCmp(mainId+"imageUrl").getValue().trim();
 		var content = Ext.getCmp(mainId+"content").getEditor().getContent();
@@ -227,6 +341,10 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 		}
 		if(typeid==null){
 			Ext.getCmp(mainId+"typeid").markInvalid("类型不能为空！");
+			return;
+		}
+		if(sourceid==null){
+			Ext.getCmp(mainId+"sourceid").markInvalid("来源不能为空！");
 			return;
 		}
 		if(summary==""){
@@ -247,6 +365,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
                   params : JSON.stringify([{
                 	  __status : type,
                 	  typeid:typeid,
+                	  sourceid:sourceid,
                 	  newstitle : newstitle,
                 	  thumbnail : thumbnail,
                 	  summary:summary,
