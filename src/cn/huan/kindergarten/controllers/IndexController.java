@@ -37,19 +37,28 @@ public class IndexController extends BaseController{
 	        news.setTypeid(typeid);
 	        List<KgNews> list = iKgNewsService.select(requestContext, news, page, pageSize);
 	        KgNewstype newsType = new KgNewstype();
-	        news.setId(typeid+"");
+	        newsType.setId(typeid+"");
 	        KgNewstype kgNewstype = iKgNewstypeService.selectByPrimaryKey(requestContext, newsType);
 	        mv.addObject("newsList", list);
+	        mv.addObject("page", page);
+	        mv.addObject("pagesize",12);
 	        mv.addObject("kgNewstype", kgNewstype);
+	        mv.addObject("typeid", typeid);
 	        return mv;
 	    }
 
 
     @RequestMapping(value = "/index/newsDetail")
     @ResponseBody
-    public ModelAndView newsDetail(HttpServletRequest request) {
+    public ModelAndView newsDetail(String id,HttpServletRequest request) {
     	ModelAndView mv = new ModelAndView(getViewPath() + "/index/newsDetail");
         IRequest requestContext = createRequestContext(request);
+        
+        KgNews news = new KgNews();
+        news.setId(id);
+        KgNews newsInfo = iKgNewsService.selectByPrimaryKey(requestContext, news);
+        mv.addObject("newsInfo", newsInfo);
+        
         return mv;
     }
 

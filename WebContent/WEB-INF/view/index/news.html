@@ -21,23 +21,23 @@
 <div class="main_left_block mt13">
 <div class="wz_block">
     <div class="vF_deail_currentloc">
-        <p>当前位置：<a href="../index.htm" tppabs="http://www.ccgp.gov.cn/" title="首页" class="CurrChnlCls">首页</a>&nbsp;&raquo;&nbsp;<a href="index.htm" tppabs="http://www.ccgp.gov.cn/zcdt/" title="政府采购动态" class="CurrChnlCls">政府采购动态</a> 列表页</p>
+        <p>当前位置：<a href="../index.htm"  title="首页" class="CurrChnlCls">首页</a>
+        &nbsp;&raquo;&nbsp;<a href="index.htm" title="政府采购动态" class="CurrChnlCls">资讯中心</a>
+        &nbsp;&raquo;&nbsp;<a href="${base.contextPath}/index/newsList?typeid=${typeid}" title="${kgNewstype.typename}" class="CurrChnlCls">${kgNewstype.typename}</a> 列表页</p>
     </div>
 
     <div class="vF_detail_relcontent mt13">
-    <h2><p>政府采购动态</p></h2>
+    <h2><p>${kgNewstype.typename}</p></h2>
     <div class="vF_detail_relcontent_lst">
         <ul class="c_list_tat">
 
 
 
-
-    <li><a href="201803/t20180314_9663334.htm" tppabs="http://www.ccgp.gov.cn/zcdt/201803/t20180314_9663334.htm" title="吉林省财政厅加强内部控制管理规范政府采购活动">吉林省财政厅加强内部控制管理规范政府采购活动</a>
-     
-          <span> 2018-03-14 15:22 </span>
-    </li>
-	<@spring.message "kgNewstype.typename"/> 
-
+	<#list newsList as news>   
+               <li><a href="${base.contextPath}/index/newsDetail?id=${news.id}"  title="${news.newstitle}">${news.newstitle}</a>
+     				 <span> ${news.createdate?string('yyyy-MM-dd HH:mm:ss')} </span>
+			    </li> 
+    </#list>   
 
         </ul>
     </div>
@@ -62,9 +62,48 @@ p.pager{float:right;margin-right:10px;margin-top:8px}
 
 <p class="pager">
 <script language="javascript">
-function Pager(c){var d=function(a,b){for(var p in b)a[p]=b[p];return a};var e=d({size:1,current:0,beforeEnd:2,visible:5,prevLabel:'上一页',nextLabel:'下一页',ellipsis:'<span>...</span>',textboxEnabled:true,showAlways:false},c||{});if(!e.showAlways&&e.size==1)return false;var f=(e.size==1||e.current==0)?'<span class="prev">'+e.prevLabel+'</span>':'<a href="'+e.prefix+(e.current==1?'':'_'+(e.current-1))+'.'+e.suffix+'" class="prev">'+e.prevLabel+'</a>';var g=(e.size==e.current+1)?'<span class="next">'+e.nextLabel+'</span>':'<a href="'+e.prefix+'_'+(e.current+1)+'.'+e.suffix+'" class="next">'+e.nextLabel+'</a>';var h=(e.current==0)?'<span class="current">1</span>':'<a href="'+e.prefix+'.'+e.suffix+'">1</a>';var p=function(s){document.write(s)};p(f);p(h);if(e.size>1){var j=function(a,b){for(var i=a;i<b;i++){e.current==i?p('<span class="current">'+(i+1)+'</span>'):p('<a href="'+e.prefix+'_'+i+'.'+e.suffix+'">'+(i+1)+'</a>')}};var k=Math.max(0,e.current-(e.visible-Math.ceil(e.visible/2)));var l=Math.min(k+e.visible,e.size);j(1,Math.min(e.beforeEnd,e.size));if(e.current>=k){if(e.beforeEnd<k)p(e.ellipsis);j(Math.max(k,e.beforeEnd),l)};if(l!=e.size){if(e.size-e.beforeEnd>l)p(e.ellipsis);j(Math.max(e.size-e.beforeEnd,l),e.size)}};p(g);if(e.textboxEnabled&&e.size>e.beforeEnd*2+e.visible){jump="if(event.keyCode==13){var num=this.value;if(isNaN(num)||num<1||num>"+e.size+")alert('非法页码参数');else{num=num==1?'':'_'+(num-1);location.href='"+e.prefix+"'+num+'"+"."+e.suffix+"';}}";p('<input type="text" size="1" title="输入页码敲击回车键!" onkeypress="'+jump+'" />')}};
+// function Pager(c){var d=function(a,b){for(var p in b)a[p]=b[p];return a};var e=d({size:1,current:0,beforeEnd:2,visible:5,prevLabel:'上一页',nextLabel:'下一页',ellipsis:'<span>...</span>',textboxEnabled:true,showAlways:false},c||{});if(!e.showAlways&&e.size==1)return false;var f=(e.size==1||e.current==0)?'<span class="prev">'+e.prevLabel+'</span>':'<a href="'+e.prefix+(e.current==1?'':'_'+(e.current-1))+'.'+e.suffix+'" class="prev">'+e.prevLabel+'</a>';var g=(e.size==e.current+1)?'<span class="next">'+e.nextLabel+'</span>':'<a href="'+e.prefix+'_'+(e.current+1)+'.'+e.suffix+'" class="next">'+e.nextLabel+'</a>';var h=(e.current==0)?'<span class="current">1</span>':'<a href="'+e.prefix+'.'+e.suffix+'">1</a>';var p=function(s){document.write(s)};p(f);p(h);if(e.size>1){var j=function(a,b){for(var i=a;i<b;i++){e.current==i?p('<span class="current">'+(i+1)+'</span>'):p('<a href="'+e.prefix+'_'+i+'.'+e.suffix+'">'+(i+1)+'</a>')}};var k=Math.max(0,e.current-(e.visible-Math.ceil(e.visible/2)));var l=Math.min(k+e.visible,e.size);j(1,Math.min(e.beforeEnd,e.size));if(e.current>=k){if(e.beforeEnd<k)p(e.ellipsis);j(Math.max(k,e.beforeEnd),l)};if(l!=e.size){if(e.size-e.beforeEnd>l)p(e.ellipsis);j(Math.max(e.size-e.beforeEnd,l),e.size)}};p(g);if(e.textboxEnabled&&e.size>e.beforeEnd*2+e.visible){jump="if(event.keyCode==13){var num=this.value;if(isNaN(num)||num<1||num>"+e.size+")alert('非法页码参数');else{num=num==1?'':'_'+(num-1);location.href='"+e.prefix+"'+num+'"+"."+e.suffix+"';}}";p('<input type="text" size="1" title="输入页码敲击回车键!" onkeypress="'+jump+'" />')}};
+function Pager(c){
+			var d=function(a,b){
+			for(var p in b)
+				a[p]=b[p];
+				return a
+			};
+			var e=d({size:1,current:0,beforeEnd:2,visible:5,prevLabel:'上一页',nextLabel:'下一页',ellipsis:'<span>...</span>',textboxEnabled:true,showAlways:false},c||{});
+			if(!e.showAlways&&e.size==1)return false;
+			var f=(e.size==1||e.current==0)?'<span class="prev">'+e.prevLabel+'</span>':'<a href="'+e.prefix+(e.current==1?'':(e.current))+'" class="prev">'+e.prevLabel+'</a>';
+			var g=(e.size==e.current+1)?'<span class="next">'+e.nextLabel+'</span>':'<a href="'+e.prefix+(e.current+2)+'" class="next">'+e.nextLabel+'</a>';
+			var h=(e.current==0)?'<span class="current">1</span>':'<a href="'+e.prefix+'">1</a>';
+			var p=function(s){document.write(s)};p(f);p(h);
+			if(e.size>1){
+						var j=function(a,b){
+							for(var i=a;i<b;i++){
+								e.current==i?p('<span class="current">'+(i+1)+'</span>'):p('<a href="'+e.prefix+(i+1)+'">'+(i+1)+'</a>')
+							}
+						};
+						var k=Math.max(0,e.current-(e.visible-Math.ceil(e.visible/2)));
+						var l=Math.min(k+e.visible,e.size);
+						j(1,Math.min(e.beforeEnd,e.size));
+						if(e.current>=k){
+						if(e.beforeEnd<k)
+							p(e.ellipsis);
+							j(Math.max(k,e.beforeEnd),l)
+						};
+						if(l!=e.size){
+							if(e.size-e.beforeEnd>l)
+								p(e.ellipsis);
+							j(Math.max(e.size-e.beforeEnd,l),e.size)
+						}
+				};
+				p(g);
+				if(e.textboxEnabled&&e.size>e.beforeEnd*2+e.visible){
+						jump="if(event.keyCode==13){var num=this.value;if(isNaN(num)||num<1||num>"+e.size+")alert('非法页码参数');else{num=num==1?'':(num);location.href='"+e.prefix+"'+num+'';}}";
+						p('<input type="text" size="1" title="输入页码敲击回车键!" onkeypress="'+jump+'" />')
+				}
+};
 </script>
-<script language="javascript">Pager({size:25, current:0, prefix:'index',suffix:'htm'});</script></p></div>
+<!-- <script language="javascript">Pager({size:25, current:0, prefix:'index',suffix:'htm'});</script></p></div> -->
+<script language="javascript">Pager({size:${pagesize}, current:${page-1}, prefix:'newsList?typeid=10&page=',suffix:''});</script></p></div>
 </div>
 
 </div>
@@ -75,58 +114,32 @@ function Pager(c){var d=function(a,b){for(var p in b)a[p]=b[p];return a};var e=d
 
 <!--OTsidebar-->
         <div class="main_right_cbl" style="margin-top:4px">
-            <h2 class="mt10 mb10"><a href="../news/index.htm" tppabs="http://www.ccgp.gov.cn/news/">采购头条</a></h2>
+            <h2 class="mt10 mb10"><a href="../news/index.htm" >采购头条</a></h2>
+                <div class="vT-chs-section-content-con">
+                <ul class="vT-chs-section-content-list mb10">
+						<li><a href="../news/201803/t20180313_9657154.htm" target="_blank" title="聚力增效护航高质量发展 代表委员审查讨论计划报告和预算报告">聚力增效护航高质量发展 代表委员审查...</a></li>
+				 </ul>
+                </div>
+        </div>
+
+        <div class="main_right_cbl mt13">
+            <h2 class="mt10 mb10"><a href="index.htm" >政采动态</a></h2>
                 <div class="vT-chs-section-content-con">
                 <ul class="vT-chs-section-content-list mb10">
 
-<li><a href="../news/201803/t20180313_9657154.htm" tppabs="http://www.ccgp.gov.cn/news/201803/t20180313_9657154.htm" target="_blank" title="聚力增效护航高质量发展 代表委员审查讨论计划报告和预算报告">聚力增效护航高质量发展 代表委员审查...</a></li>
-
-<li><a href="../news/201803/t20180309_9646059.htm" tppabs="http://www.ccgp.gov.cn/news/201803/t20180309_9646059.htm" target="_blank" title="肖捷：运用政府采购政策支持中小微企业发展">肖捷：运用政府采购政策支持中小微企...</a></li>
-
-<li><a href="../news/201803/t20180307_9638224.htm" tppabs="http://www.ccgp.gov.cn/news/201803/t20180307_9638224.htm" target="_blank" title="九三学社：建议政府采购加强标准化管理 加强中国政府采购网建设">九三学社：建议政府采购加强标准化管...</a></li>
-
-<li><a href="../news/201803/t20180307_9638181.htm" tppabs="http://www.ccgp.gov.cn/news/201803/t20180307_9638181.htm" target="_blank" title="关于2017年中央和地方预算执行情况与2018年中央和地方预算草案的报告（摘要）">关于2017年中央和地方预算执行情况与2...</a></li>
-
-<li><a href="../news/201802/t20180226_9608832.htm" tppabs="http://www.ccgp.gov.cn/news/201802/t20180226_9608832.htm" target="_blank" title="关于做好政府采购代理机构名录登记有关工作的通知">关于做好政府采购代理机构名录登记有...</a></li>
+						<li><a href="201803/t20180313_9658339.htm"  target="_blank" title="关于废止国际金融组织和外国政府贷款赠款项目采购管理相关规范性文件的通知">关于废止国际金融组织和外国政府贷款...</a></li>
 
                 </ul>
                 </div>
         </div>
 
         <div class="main_right_cbl mt13">
-            <h2 class="mt10 mb10"><a href="index.htm" tppabs="http://www.ccgp.gov.cn/zcdt/">政采动态</a></h2>
+            <h2 class="mt10 mb10"><a href="../gpsr/index.htm" >购买服务</a></h2>
                 <div class="vT-chs-section-content-con">
                 <ul class="vT-chs-section-content-list mb10">
 
-<li><a href="201803/t20180313_9658339.htm" tppabs="http://www.ccgp.gov.cn/zcdt/201803/t20180313_9658339.htm" target="_blank" title="关于废止国际金融组织和外国政府贷款赠款项目采购管理相关规范性文件的通知">关于废止国际金融组织和外国政府贷款...</a></li>
-
-<li><a href="201803/t20180313_9657119.htm" tppabs="http://www.ccgp.gov.cn/zcdt/201803/t20180313_9657119.htm" target="_blank" title="龙正才代表：进一步强化预算单位的采购主体地位">龙正才代表：进一步强化预算单位的采...</a></li>
-
-<li><a href="201803/t20180313_9657118.htm" tppabs="http://www.ccgp.gov.cn/zcdt/201803/t20180313_9657118.htm" target="_blank" title="胡强代表：解决好采购主体地位就是牵住了牛鼻子">胡强代表：解决好采购主体地位就是牵...</a></li>
-
-<li><a href="201803/t20180312_9652113.htm" tppabs="http://www.ccgp.gov.cn/zcdt/201803/t20180312_9652113.htm" target="_blank" title="韩德云代表：建议继续推进完善公共法律服务政府采购">韩德云代表：建议继续推进完善公共法...</a></li>
-
-<li><a href="201803/t20180312_9652112.htm" tppabs="http://www.ccgp.gov.cn/zcdt/201803/t20180312_9652112.htm" target="_blank" title="刘强东委员：利用互联网和大数据技术 完善电子化政府采购">刘强东委员：利用互联网和大数据技术 ...</a></li>
-
-                </ul>
-                </div>
-        </div>
-
-        <div class="main_right_cbl mt13">
-            <h2 class="mt10 mb10"><a href="../gpsr/index.htm" tppabs="http://www.ccgp.gov.cn/gpsr/">购买服务</a></h2>
-                <div class="vT-chs-section-content-con">
-                <ul class="vT-chs-section-content-list mb10">
-
-<li><a href="../gpsr/zhxx/df/201803/t20180315_9665607.htm" tppabs="http://www.ccgp.gov.cn/gpsr/zhxx/df/201803/t20180315_9665607.htm" target="_blank" title="内蒙古西乌旗积极推进社会养老服务体系建设">内蒙古西乌旗积极推进社会养老服务体...</a></li>
-
-<li><a href="../gpsr/zhxx/df/201803/t20180315_9665452.htm" tppabs="http://www.ccgp.gov.cn/gpsr/zhxx/df/201803/t20180315_9665452.htm" target="_blank" title="许昌“政府购买服务”铺开课后服务">许昌“政府购买服务”铺开课后服务</a></li>
-
-<li><a href="../gpsr/zhxx/df/201803/t20180315_9665420.htm" tppabs="http://www.ccgp.gov.cn/gpsr/zhxx/df/201803/t20180315_9665420.htm" target="_blank" title="温州向社会力量购买森林消防服务">温州向社会力量购买森林消防服务</a></li>
-
-<li><a href="../gpsr/zhxx/df/201803/t20180315_9665419.htm" tppabs="http://www.ccgp.gov.cn/gpsr/zhxx/df/201803/t20180315_9665419.htm" target="_blank" title="厦门翔安力争为89个社区购买居家养老服务">厦门翔安力争为89个社区购买居家养老服务</a></li>
-
-<li><a href="../gpsr/zhxx/df/201803/t20180314_9661622.htm" tppabs="http://www.ccgp.gov.cn/gpsr/zhxx/df/201803/t20180314_9661622.htm" target="_blank" title="政府购买服务 黄州聘请省级危化专家给企业“体检”">政府购买服务 黄州聘请省级危化专家给...</a></li>
-
+						<li><a href="../gpsr/zhxx/df/201803/t20180315_9665607.htm"  target="_blank" title="内蒙古西乌旗积极推进社会养老服务体系建设">内蒙古西乌旗积极推进社会养老服务体...</a></li>
+	
                 </ul>
                 </div>
         </div>

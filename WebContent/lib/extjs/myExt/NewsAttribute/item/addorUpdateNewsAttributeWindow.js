@@ -1,17 +1,17 @@
-Ext.namespace('addorUpdateNewsType');
-addorUpdateNewsType.addorUpdateNewsTypeWindow = function(config) {
+Ext.namespace('addorUpdateNewsAttribute');
+addorUpdateNewsAttribute.addorUpdateNewsAttributeWindow = function(config) {
 	Ext.applyIf(this, config);
 	this.initUIComponents();
-	addorUpdateNewsType.addorUpdateNewsTypeWindow.superclass.constructor.call(this);
+	addorUpdateNewsAttribute.addorUpdateNewsAttributeWindow.superclass.constructor.call(this);
 };
 
-Ext.extend(addorUpdateNewsType.addorUpdateNewsTypeWindow, Ext.Window, {
+Ext.extend(addorUpdateNewsAttribute.addorUpdateNewsAttributeWindow, Ext.Window, {
 	
 	initUIComponents : function() {
 		    var me  = this ; 
 		    
 		    
-	    	var mainId=me.mainId+"_NewsTypewindow";
+	    	var mainId=me.mainId+"_NewsAttributewindow";
 	    	var type = me.type;
 	    	var record = me.record;
 	    	var id ="";
@@ -38,11 +38,11 @@ Ext.extend(addorUpdateNewsType.addorUpdateNewsTypeWindow, Ext.Window, {
 					  			text:''
 				  			},
 				  			{
-				          		fieldLabel:'类型名',
+				          		fieldLabel:'属性名',
 								allowBlank:false,
-								name: 'typename',
+								name: 'attributename',
 								blankText:'必须填写',
-								id:mainId+"typename",
+								id:mainId+"attributename",
 					            maxLength:45  
 				  			}
 				  			],
@@ -51,7 +51,7 @@ Ext.extend(addorUpdateNewsType.addorUpdateNewsTypeWindow, Ext.Window, {
 					  width:50,
 						text : text,
 						handler : function(button, event) {
-							me.addorUpdateType(me,formpanel,mainId,parentStore,id,type,isAdd);
+							me.addorUpdateAttribute(me,formpanel,mainId,parentStore,id,type,isAdd);
 						}
 				  },{
 					  width:50,
@@ -68,7 +68,7 @@ Ext.extend(addorUpdateNewsType.addorUpdateNewsTypeWindow, Ext.Window, {
 
 		
 		Ext.apply(this, {
-				title : text+'类型',
+				title : text+'属性',
 				layout:'fit',
 				items : [formpanel],
 				width : 350,
@@ -83,8 +83,8 @@ Ext.extend(addorUpdateNewsType.addorUpdateNewsTypeWindow, Ext.Window, {
 				listeners:{
 					show:function(){
 						if(record!=null){
-				    		var typename= record.get("typename");
-				    		Ext.getCmp(mainId+"typename").setValue(typename);
+				    		var attributename= record.get("attributename");
+				    		Ext.getCmp(mainId+"attributename").setValue(attributename);
 				    	}
 					}
 				}
@@ -94,22 +94,22 @@ Ext.extend(addorUpdateNewsType.addorUpdateNewsTypeWindow, Ext.Window, {
 	},
 	
 	
-	addorUpdateType : function(me,formpanel,mainId,parentStore,id,type,isAdd) {
-		var typename =Ext.getCmp(mainId+"typename").getValue().trim();
-		if(typename==""){
-			Ext.getCmp(mainId+"typename").markInvalid("类型名不能为空！");
+	addorUpdateAttribute : function(me,formpanel,mainId,parentStore,id,type,isAdd) {
+		var attributename =Ext.getCmp(mainId+"attributename").getValue().trim();
+		if(attributename==""){
+			Ext.getCmp(mainId+"attributename").markInvalid("属性名不能为空！");
 			return;
 		}
 	
 		if( formpanel.getForm().isValid()){
 			Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
 			  Ext.Ajax.request({
-            	  url : appName + '/admin/newstype/submit',
+            	  url : appName + '/admin/newsattribute/submit',
                   method : 'post',
                   headers: {'Content-Type':'application/json'},
                   params : JSON.stringify([{
                 	  __status : type,
-                	  typename : typename,
+                	  attributename : attributename,
                 	  id : id
                   }]),
                   success : function(response, options) {

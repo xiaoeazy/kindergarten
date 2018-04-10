@@ -22,19 +22,16 @@
 <div class="main_left_block mt13">
 <div class="wz_block">
     <div class="vF_deail_currentloc">
-        <p>当前位置：<a href="../../index.htm"  title="首页" main.htm class="CurrChnlCls">首页</a>&nbsp;&raquo;&nbsp;<a href="../index.htm" tppabs="http://www.ccgp.gov.cn/zcdt/" title="政府采购动态" main.htm class="CurrChnlCls">政府采购动态</a></p>
+        <p>当前位置：<a href="../../index.htm"  title="首页" main.htm class="CurrChnlCls">首页</a>&nbsp;&raquo;&nbsp;
+        <a href="${base.contextPath}/index/newsList?typeid=${newsInfo.typeid}" title="政府采购动态" main.htm class="CurrChnlCls">政府采购动态</a></p>
     </div>
     <div class="vF_deail_maincontent">
 
 <div class="vF_detail_main">
-            <div class="vF_detail_header"><h2 class="tc">吉林省财政厅加强内部控制管理规范政府采购活动</h2>
-            <p class="tc"><span id="pubTime">2018年03月14日  15:22</span> 来源：<span id="sourceName">财政部</span> 【<span id="printBtn">打印</span>】 <span id="shareTo" style=""></span><img src="../../../pub.ccgp.gov.cn/common/images/2tqr.jpg" tppabs="http://pub.ccgp.gov.cn/common/images/2tqr.jpg" id="imgqrshow" style="postion: relative;vertical-align:middle" /><div id="qrcode" style="display:none;position: absolute;margin-left:527px;margin-top:-15px;"></div></p></div>
+            <div class="vF_detail_header"><h2 class="tc">${newsInfo.newstitle};</h2>
+            <p class="tc"><span id="pubTime">${newsInfo.createdate?string('yyyy-MM-dd HH:mm:ss')}</span> 来源：<span id="sourceName">财政部</span> 【<span id="printBtn">打印</span>】 <span id="shareTo" style=""></span><img src="../../../pub.ccgp.gov.cn/common/images/2tqr.jpg" tppabs="http://pub.ccgp.gov.cn/common/images/2tqr.jpg" id="imgqrshow" style="postion: relative;vertical-align:middle" /><div id="qrcode" style="display:none;position: absolute;margin-left:527px;margin-top:-15px;"></div></p></div>
             <div class="vF_detail_content">
-                <div class=TRS_Editor>&nbsp;<span style="font-family: Arial;">　　为进一步规范政府采购活动，提高政府采购效率和质量，推动政府采购活动实现公开、公平、公正，日前，吉林省财政厅制定印发了《关于加强政府采购活动内部控制管理的实施意见》，建立了“四个工作机制”。</span>
-<p align="justify" style="margin-bottom: 1em; line-height: 1.8; font-family: Arial; font-size: 16px;">　　一是建立管采分离、职责清晰的工作机制。强化采购人的采购主体责任，明确集中采购机构的依法代理责任，落实预算主管单位的行业监督管理责任，同时强化财政、审计、监察机关的监督管理责任。</p>
-<p align="justify" style="margin-bottom: 1em; line-height: 1.8; font-family: Arial; font-size: 16px;">　　二是建立机构分设、职能分离的制衡机制。采购人对政府采购活动实施归口管理，并按照采购前、采购中和采购后三个阶段设立不相容岗位。集中采购机构按代理业务承接、组织开标评标等设立不相容岗位。财政部门根据政府采购预算的初审、复审和采购计划、采购合同的备案以及监督检查等设立不相容岗位。</p>
-<p align="justify" style="margin-bottom: 1em; line-height: 1.8; font-family: Arial; font-size: 16px;">　　三是建立规范有序的运行机制。规范采购文件的编制和采购项目公告、开标活动、评审专家抽取、评标活动以及评标结果公告等。</p>
-<p align="justify" style="margin-bottom: 1em; line-height: 1.8; font-family: Arial; font-size: 16px;">　　四是建立完善内部约束机制。建立和完善回避制度、保密制度，限时办结制度、轮岗交流和项目责任追溯制度。通过以上四个机制的有效运行，进一步规范政府采购程序，降低政府采购风险，促进政府采购公信力的提高。</p></div>
+                ${newsInfo.content};
             </div>
         </div>
 

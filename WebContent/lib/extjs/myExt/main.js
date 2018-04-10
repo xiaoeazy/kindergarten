@@ -76,11 +76,13 @@ function getManager() {
 //			+ '/resources/images/leftImg/xinxixiugai2.png\';this.style.cursor=\'pointer\'" onmouseout="this.src=\''
 //			+ _basePath
 //			+ '/resources/images/leftImg/xinxixiugai1.png\'" onclick="addtabs(\'link\')"></td></tr>';
-	str +=addFunc('xinxixiugai1.png','xinxixiugai2.png','link');
-	str +=addFunc('xinxixiugai1.png','xinxixiugai2.png','introduction');
-	str +=addFunc('xinxixiugai1.png','xinxixiugai2.png','newsType');
-	str +=addFunc('xinxixiugai1.png','xinxixiugai2.png','news');
-	str +=addFunc('xinxixiugai1.png','xinxixiugai2.png','config');
+	str +=addFunc('link1.png','link2.png','link');
+	str +=addFunc('introduction1.png','introduction2.png','introduction');
+	str +=addFunc('type1.png','type2.png','newsType');
+	str +=addFunc('source1.png','source2.png','newsSource');
+	str +=addFunc('attribute1.png','attribute2.png','newsAttribute');
+	str +=addFunc('news1.png','news2.png','news');
+	str +=addFunc('config1.png','config2.png','config');
 	str += '</table></div>';
 	return str;
 }
@@ -110,7 +112,17 @@ function addtabs(us) {
 		var panel=  new NewsType.NewsTypePanel({
 			mainId: us
 		});
-		addTabFuns(us,panel,'咨询类型');
+		addTabFuns(us,panel,'资讯类型配置');
+	}else if (us == "newsSource") {
+		var panel=  new NewsSource.NewsSourcePanel({
+			mainId: us
+		});
+		addTabFuns(us,panel,'资讯来源配置');
+	}else if (us == "newsAttribute") {
+		var panel=  new NewsAttribute.NewsAttributePanel({
+			mainId: us
+		});
+		addTabFuns(us,panel,'资讯自定义属性配置');
 	}else if (us == "news") {
 		var panel=  new News.NewsPanel({
 			mainId: us
