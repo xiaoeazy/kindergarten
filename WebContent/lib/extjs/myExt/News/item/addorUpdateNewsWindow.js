@@ -125,7 +125,11 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 			    fields: ['id', 'attributename'],
 			    listeners:{
 			    	load:function(){
-			    		  me.LoadingAttribute(me,formpanel,attribute_Combo_Store,mainId);
+			    		if(record==null){
+			    			me.LoadingAttribute1(me,formpanel,attribute_Combo_Store,mainId);
+			    		}else{
+			    			me.LoadingAttribute2(me,record,formpanel,attribute_Combo_Store,mainId);
+			    		}
 			    	}
 			    }
 			});
@@ -252,7 +256,15 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 	                //不要设置高度，否则滚动条出现后工具栏会消失
 	                width: '100%'
 	            } ],
-				closable : false
+				closable : false,
+				listeners:{
+					afterrender:function(){
+						if(record!=null){
+							var content= record.get("content");
+				    		Ext.getCmp(mainId+"content").setValue(content);
+				    	}
+					}
+				}
 			}]
 		});
 
@@ -262,7 +274,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 				layout:'fit',
 				items : [newsTabs],
 				width : 800,
-				height : 700,
+				height : 570,
 				autoHeight:true,
 				xtype : "window",
 				resizable : false,
@@ -302,7 +314,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 				    		}
 				    		Ext.getCmp(mainId+"summary").setValue(summary);
 				    		
-				    		Ext.getCmp(mainId+"content").setValue(content);
+//				    		Ext.getCmp(mainId+"content").setValue(content);
 //				    		Ext.getCmp(mainId+"content").getEditor().setContent(content);
 				    	}
 					}
@@ -311,16 +323,44 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 		);
 		
 	},
-	LoadingAttribute:function(me,formpanel,store,mainId){
+	LoadingAttribute1:function(me,formpanel,store,mainId){
 		  var checkboxgroup = Ext.getCmp(mainId+"attribute");
 		  for (var i = 0; i < store.getCount(); i++) {
 			  var record = store.getAt(i);
+			  var id = record.get("id");
 			  var checkbox = new Ext.form.Checkbox(
 		                 {
 		                     boxLabel: record.get("attributename"),
 //		                     name: record[i].OperationCode,
-		                     inputValue:record.get("id"),
+		                     inputValue:id,
 		                     checked: false
+		                 });
+		          checkboxgroup.items.add(checkbox);
+		  }
+		  formpanel.doLayout();
+		 
+	},
+	LoadingAttribute2:function(me,infoRecord,formpanel,store,mainId){
+		  var checkboxgroup = Ext.getCmp(mainId+"attribute");
+		  var attribute = infoRecord.get("attributeid");
+		  var attributeArray = [];
+		  if(attribute!=null){
+			  attributeArray = attribute.split(",")
+		  }
+		  for (var i = 0; i < store.getCount(); i++) {
+			  var record = store.getAt(i);
+			  var id = record.get("id");
+			  var index = attributeArray.indexOf(id);
+			  var checked = true;
+			  if(index<0){
+				  checked = false;
+			  }
+			  var checkbox = new Ext.form.Checkbox(
+		                 {
+		                     boxLabel: record.get("attributename"),
+//		                     name: record[i].OperationCode,
+		                     inputValue:id,
+		                     checked: checked
 		                 });
 		          checkboxgroup.items.add(checkbox);
 		  }
@@ -329,6 +369,16 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 	},
 	
 	addorUpdateLink : function(me,formpanel,mainId,parentStore,id,type,isAdd) {
+		
+		var attributeValue = Ext.getCmp(mainId+'attribute').getChecked();
+		var attributeid="";
+		Ext.Array.each(attributeValue, function(item){
+//			attributeid +=  item.boxLabel+",";
+			attributeid +=  item.inputValue+",";
+		});
+		if(attributeid!="")
+			attributeid=attributeid.substring(0,attributeid.length-1);
+		
 		var newstitle =Ext.getCmp(mainId+"newstitle").getValue().trim();
 		var typeid =Ext.getCmp(mainId+"typeid").getValue();
 		var sourceid = Ext.getCmp(mainId+"sourceid").getValue();
@@ -355,6 +405,9 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 			Ext.getCmp(mainId+"content").markInvalid("主体内容不能为空！");
 			return;
 		}
+		
+	
+		
 	
 		if( formpanel.getForm().isValid()){
 			Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
@@ -365,6 +418,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
                   params : JSON.stringify([{
                 	  __status : type,
                 	  typeid:typeid,
+                	  attributeid:attributeid,
                 	  sourceid:sourceid,
                 	  newstitle : newstitle,
                 	  thumbnail : thumbnail,

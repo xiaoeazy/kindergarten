@@ -17,6 +17,9 @@ public class KgNews extends BaseDTO {
 
      public static final String FIELD_ID = "id";
      public static final String FIELD_TYPEID = "typeid";
+     public static final String FIELD_SOURCEID = "sourceid";
+     public static final String FIELD_ATTRIBUTEID = "attributeid";
+     
      public static final String FIELD_NEWSTITLE = "newstitle";
      public static final String FIELD_SUMMARY = "summary";
      public static final String FIELD_THUMBNAIL = "thumbnail";
@@ -32,6 +35,10 @@ public class KgNews extends BaseDTO {
 
      private Long typeid;
 
+     private Long sourceid;
+     
+     private String attributeid;
+     
      @NotEmpty
      @Length(max = 45)
      private String newstitle;
@@ -73,7 +80,24 @@ public class KgNews extends BaseDTO {
          return id;
      }
 
-     public void setTypeid(Long typeid){
+     public Long getSourceid() {
+		return sourceid;
+	}
+
+	public void setSourceid(Long sourceid) {
+		this.sourceid = sourceid;
+	}
+	
+
+	public String getAttributeid() {
+		return attributeid;
+	}
+
+	public void setAttributeid(String attributeid) {
+		this.attributeid = attributeid;
+	}
+
+	public void setTypeid(Long typeid){
          this.typeid = typeid;
      }
 

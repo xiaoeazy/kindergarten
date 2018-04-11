@@ -10,36 +10,7 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
 	initUIComponents : function() {
 	var me = this;
 	var mainId = me.mainId;
-	var reader = new Ext.data.JsonReader(
-				{
-					root : "results",
-					totalProperty: "totalProperty",
-					successProperty:'success'
-				}, 
-				[{
-					name : 'id',
-					type : 'string',
-					mapping : 'id'
-				}, {
-					name : 'typeid',
-					type : 'string',
-					mapping : 'typeid'
-				}, {
-					name : 'kgNewstype.typename',
-					type : 'string',
-					mapping : 'kgNewstype.typename'
-				}, {
-					name : 'newstitle',
-					type : 'string',
-					mapping : 'newstitle'
-				}, {
-					name : 'summary',
-					type : 'string',
-					mapping : 'summary'
-				}]
-		);
 	
-
 		var store = new Ext.data.Store({
 			proxy: {
 		        type: 'ajax',
@@ -51,7 +22,7 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
 		        }
 		    },
 		    autoLoad : true,
-		    fields: ['id', 'typename']
+		    fields: ['id', 'newstitle']
 		});
 		
 

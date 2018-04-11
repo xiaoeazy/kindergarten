@@ -10,22 +10,7 @@ Ext.extend(NewsAttribute.NewsAttributePanel, Ext.Panel, {
 	initUIComponents : function() {
 	var me = this;
 	var mainId = me.mainId;
-	var reader = new Ext.data.JsonReader(
-				{
-					root : "results",
-					totalProperty: "totalProperty",
-					successProperty:'success'
-				}, 
-				[{
-					name : 'id',
-					type : 'string',
-					mapping : 'id'
-				}, {
-					name : 'attributename',
-					type : 'string',
-					mapping : 'attributename'
-				}]
-		);
+
 	
 
 		var store = new Ext.data.Store({
