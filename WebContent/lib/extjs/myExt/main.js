@@ -51,6 +51,16 @@ Ext.onReady(function() {
 					border : false,
 					iconCls : 'nav',
 					html : getManager()
+				},{
+					title : '资讯中心',
+					border : false,
+					iconCls : 'nav',
+					html : getNews()
+				},{
+					title : '系统',
+					border : false,
+					iconCls : 'nav',
+					html : getConfig()
 				} ]
 			}, {
 				region : 'center',
@@ -65,6 +75,32 @@ Ext.onReady(function() {
 
 })
 
+function addFuncStr(func){
+	var str = "";
+	str += "<div style='width:100%;height:100%;overflow-y:auto;overflow-x:auto;'>";
+	str += "<table width='100%' border='0' cellpadding='0' cellspacing='0'>";
+	
+	str += func;
+	
+	str += '</table></div>';
+	return str;
+}
+
+function getNews(){
+	var str = "";
+	str +=addFunc('type1.png','type2.png','newsType');
+	str +=addFunc('source1.png','source2.png','newsSource');
+	str +=addFunc('news1.png','news2.png','news');
+	return addFuncStr(str);
+}
+
+function getConfig(){
+	var str = "";
+	str +=addFunc('link1.png','link2.png','link');
+	str +=addFunc('config1.png','config2.png','config');
+	str +=addFunc('attribute1.png','attribute2.png','newsAttribute');
+	return addFuncStr(str);
+}
 function getManager() {
 	var str = "";
 	str += "<div style='width:100%;height:100%;overflow-y:auto;overflow-x:auto;'>";
@@ -76,13 +112,11 @@ function getManager() {
 //			+ '/resources/images/leftImg/xinxixiugai2.png\';this.style.cursor=\'pointer\'" onmouseout="this.src=\''
 //			+ _basePath
 //			+ '/resources/images/leftImg/xinxixiugai1.png\'" onclick="addtabs(\'link\')"></td></tr>';
-	str +=addFunc('link1.png','link2.png','link');
+	
 	str +=addFunc('introduction1.png','introduction2.png','introduction');
-	str +=addFunc('type1.png','type2.png','newsType');
-	str +=addFunc('source1.png','source2.png','newsSource');
-	str +=addFunc('attribute1.png','attribute2.png','newsAttribute');
-	str +=addFunc('news1.png','news2.png','news');
-	str +=addFunc('config1.png','config2.png','config');
+	
+	str +=addFunc('user1.png','user2.png','user');
+	str +=addFunc('role1.png','role2.png','role');
 	str += '</table></div>';
 	return str;
 }
@@ -122,7 +156,7 @@ function addtabs(us) {
 		var panel=  new NewsAttribute.NewsAttributePanel({
 			mainId: us
 		});
-		addTabFuns(us,panel,'资讯自定义属性配置');
+		addTabFuns(us,panel,'自定义文档属性配置');
 	}else if (us == "news") {
 		var panel=  new News.NewsPanel({
 			mainId: us
@@ -133,6 +167,16 @@ function addtabs(us) {
 			mainId: us
 		});
 		addTabFuns(us,panel,'系统配置');
+	}else if (us == "user") {
+		var panel=  new User.UserPanel({
+			mainId: us
+		});
+		addTabFuns(us,panel,'用户管理');
+	}else if (us == "role") {
+		var panel=  new Role.RolePanel({
+			mainId: us
+		});
+		addTabFuns(us,panel,'角色配置');
 	}
 }
 

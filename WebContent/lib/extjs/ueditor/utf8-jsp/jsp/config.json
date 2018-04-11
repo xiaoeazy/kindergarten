@@ -60,7 +60,7 @@
     "fileActionName": "uploadfile", /* controller里,执行上传视频的action名称 */
     "fileFieldName": "upfile", /* 提交的文件表单名称 */
     "filePathFormat": "/ueditor/jsp/upload/file/{yyyy}{mm}{dd}/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
-    "fileUrlPrefix": "", /* 文件访问路径前缀 */
+    "fileUrlPrefix": "/kindergarten", /* 文件访问路径前缀 */
     "fileMaxSize": 51200000, /* 上传大小限制，单位B，默认50MB */
     "fileAllowFiles": [
         ".png", ".jpg", ".jpeg", ".gif", ".bmp",
@@ -81,7 +81,7 @@
     /* 列出指定目录下的文件 */
     "fileManagerActionName": "listfile", /* 执行文件管理的action名称 */
     "fileManagerListPath": "/ueditor/jsp/upload/file/", /* 指定要列出文件的目录 */
-    "fileManagerUrlPrefix": "", /* 文件访问路径前缀 */
+    "fileManagerUrlPrefix": "/kindergarten", /* 文件访问路径前缀 */
     "fileManagerListSize": 20, /* 每次列出文件数量 */
     "fileManagerAllowFiles": [
         ".png", ".jpg", ".jpeg", ".gif", ".bmp",

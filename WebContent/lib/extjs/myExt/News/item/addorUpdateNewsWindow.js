@@ -11,7 +11,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 		    var me  = this ; 
 		    
 		    
-	    	var mainId=me.mainId+"_NewsTypewindow";
+	    	var mainId=me.mainId+"_Newswindow";
 	    	var type = me.type;
 	    	var record = me.record;
 	    	var id ="";

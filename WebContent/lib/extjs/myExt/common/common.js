@@ -18,6 +18,7 @@ function ExtError(str){
 	});
 }
 
+
 function ExtAlert(str){
 	Ext.Msg.alert("提示",str);
 }
@@ -43,4 +44,24 @@ function getDeleteRecords(grid){
 	}
 	return records;
 }
+
+
+Ext.apply(Ext.form.VTypes, {
+    confirmPwd : function(val, field) {
+        if (field.confirmPwd) {
+            var firstPwdId = field.confirmPwd.first;
+            var secondPwdId = field.confirmPwd.second;
+            this.firstField = Ext.getCmp(firstPwdId);
+            this.secondField = Ext.getCmp(secondPwdId);
+            var firstPwd = this.firstField.getValue();
+            var secondPwd = this.secondField.getValue();
+            if (firstPwd == secondPwd) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    },
+    confirmPwdText : '两次输入的密码不一致!'
+});
 

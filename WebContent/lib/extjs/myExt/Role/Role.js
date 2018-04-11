@@ -1,12 +1,12 @@
-Ext.namespace('NewsAttribute');
-NewsAttribute.NewsAttributePanel= function(config) {
+Ext.namespace('Role');
+Role.RolePanel= function(config) {
 	Ext.applyIf(this, config);
 	this.initUIComponents();
-	NewsAttribute.NewsAttributePanel.superclass.constructor.call(this);
+	Role.RolePanel.superclass.constructor.call(this);
 };
 
 
-Ext.extend(NewsAttribute.NewsAttributePanel, Ext.Panel, {
+Ext.extend(Role.RolePanel, Ext.Panel, {
 	initUIComponents : function() {
 	var me = this;
 	var mainId = me.mainId;
@@ -16,7 +16,7 @@ Ext.extend(NewsAttribute.NewsAttributePanel, Ext.Panel, {
 		var store = new Ext.data.Store({
 			proxy: {
 		        type: 'ajax',
-		        url : appName+ '/admin/newsattribute/query',
+		        url : appName+ '/admin/role/query',
 		        reader: {
 		        	root : "results",
 					totalProperty: "totalProperty",
@@ -24,7 +24,7 @@ Ext.extend(NewsAttribute.NewsAttributePanel, Ext.Panel, {
 		        }
 		    },
 		    autoLoad : true,
-		    fields: ['id', 'attributename']
+		    fields: ['roleId', 'roleCode','roleName','roleDescription']
 		});
 		
 
@@ -49,36 +49,38 @@ Ext.extend(NewsAttribute.NewsAttributePanel, Ext.Panel, {
 	        }),
 	        tbar:[{
 					icon : _basePath+'/resources/images/icon/add.png',
-					text : '添加属性',
+					text : '添加角色',
 					handler : function() {
-						me.addNewsAttribute(store,mainId);
+						me.addRole(store,mainId);
 					}
 				},'-',{
 					icon : _basePath+'/resources/images/icon/edit.png',
-					text : '修改属性',
+					text : '修改角色',
 					handler : function() {
 						var records=getRecords(grid);
 						if(records==-1)
 							return;
 						var record = records[0];
-						me.editNewsAttribute(record,store,mainId);
+						me.editRole(record,store,mainId);
 					}
 				},'-',{
 					icon : _basePath+'/resources/images/icon/cancel.png',
-					text : '删除属性',
+					text : '删除角色',
 					handler : function() {
 						var records=getDeleteRecords(grid);
 						if(records==-1)
 							return;
-						me.deleteNewsAttribute(records,store,mainId);
+						me.deleteRole(records,store,mainId);
 					}
 				}],
 	        columns: [
-	            {header: "属性名称",  sortable: true,  dataIndex: 'attributename',align:'center'}
+	            {header: "角色编码",  sortable: true,  dataIndex: 'roleCode',align:'center'},
+	            {header: "角色名称",  sortable: true,  dataIndex: 'roleName',align:'center'},
+	            {header: "角色描述",  sortable: true,  dataIndex: 'roleDescription',align:'center'}
 	            
 	        ],
 	        width:'100%',
-	        autoExpandColumn: 'attributename',
+	        autoExpandColumn: 'roleDescription',
 	        viewConfig:{forceFit: true}
 	    });
 		
@@ -98,8 +100,8 @@ Ext.extend(NewsAttribute.NewsAttributePanel, Ext.Panel, {
 		 });
 	},
 
-	addNewsAttribute:function(store,mainId){
-		var win = new addorUpdateNewsAttribute.addorUpdateNewsAttributeWindow ({
+	addRole:function(store,mainId){
+		var win = new addorUpdateRole.addorUpdateRoleWindow ({
 			mainId:mainId,
 			type:'add',
 			record:null,
@@ -107,9 +109,9 @@ Ext.extend(NewsAttribute.NewsAttributePanel, Ext.Panel, {
 		});
 		win.show();
 	},
-	editNewsAttribute:function(record,store,mainId){
+	editRole:function(record,store,mainId){
 		var id = record.get("id");
-		var win = new addorUpdateNewsAttribute.addorUpdateNewsAttributeWindow ({
+		var win = new addorUpdateRole.addorUpdateRoleWindow ({
 			mainId:mainId,
 			type:'update',
 			record:record,
@@ -117,39 +119,37 @@ Ext.extend(NewsAttribute.NewsAttributePanel, Ext.Panel, {
 		});
 		win.show();
 	},
-	deleteNewsAttribute:function(records,store,mainId){
+	deleteRole:function(records,store,mainId){
 		  Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
 		  var linkobj = [];
 		  for(var i=0;i<records.length;i++){
 			  var record = records[i];
-			  var id = record.get("id");
-			  linkobj.push({"id":id});
+			  var roleId = record.get("roleId");
+			  linkobj.push({"roleId":roleId});
 		  }
-		  
-		  
-		  
+		
 		  Ext.Msg.confirm('提示信息','确认要删除这些信息吗？',function(op){  
 		        if(op == 'yes'){
-		        	Ext.Ajax.request({
-		    			url : appName + '/admin/newsattribute/remove',
-		                method : 'post',
-		                headers: {'Content-Type':'application/json'},
-		                params : JSON.stringify(linkobj),
-		                success : function(response, options) {
-		              	  Ext.getBody().unmask();
-		              	  var responseArray = Ext.util.JSON.decode(response.responseText);
-		                    if (responseArray.success == true) {
-		                  	    ExtAlert("成功");
-		                  	    store.reload();
-		                      }else{
-		                      	ExtError(responseArray.message);
-		                      }
-		                },
-		    			failure : function() {
-		    				Ext.getBody().unmask();
-		    				ExtError();
-		    			}
-		    		  });
+		        	  Ext.Ajax.request({
+		      			url : appName + '/admin/role/remove',
+		                  method : 'post',
+		                  headers: {'Content-Type':'application/json'},
+		                  params : JSON.stringify(linkobj),
+		                  success : function(response, options) {
+		                	  Ext.getBody().unmask();
+		                	  var responseArray = Ext.util.JSON.decode(response.responseText);
+		                      if (responseArray.success == true) {
+		                    	    ExtAlert("成功");
+		                    	    store.reload();
+		                        }else{
+		                        	ExtError(responseArray.message);
+		                        }
+		                  },
+		      			failure : function() {
+		      				Ext.getBody().unmask();
+		      				ExtError();
+		      			}
+		      		  });
 		        }else{
 		        	Ext.getBody().unmask();
 		        }

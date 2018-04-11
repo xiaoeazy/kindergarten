@@ -125,26 +125,34 @@ Ext.extend(NewsSource.NewsSourcePanel, Ext.Panel, {
 			  var id = record.get("id");
 			  linkobj.push({"id":id});
 		  }
-		  Ext.Ajax.request({
-			url : appName + '/admin/newssource/remove',
-            method : 'post',
-            headers: {'Content-Type':'application/json'},
-            params : JSON.stringify(linkobj),
-            success : function(response, options) {
-          	  Ext.getBody().unmask();
-          	  var responseArray = Ext.util.JSON.decode(response.responseText);
-                if (responseArray.success == true) {
-              	    ExtAlert("成功");
-              	    store.reload();
-                  }else{
-                  	ExtError(responseArray.message);
-                  }
-            },
-			failure : function() {
-				Ext.getBody().unmask();
-				ExtError();
-			}
-      });
+		  
+		  
+		  Ext.Msg.confirm('提示信息','确认要删除这些信息吗？',function(op){  
+		        if(op == 'yes'){
+		        	Ext.Ajax.request({
+		    			url : appName + '/admin/newssource/remove',
+		                method : 'post',
+		                headers: {'Content-Type':'application/json'},
+		                params : JSON.stringify(linkobj),
+		                success : function(response, options) {
+		              	  Ext.getBody().unmask();
+		              	  var responseArray = Ext.util.JSON.decode(response.responseText);
+		                    if (responseArray.success == true) {
+		                  	    ExtAlert("成功");
+		                  	    store.reload();
+		                      }else{
+		                      	ExtError(responseArray.message);
+		                      }
+		                },
+		    			failure : function() {
+		    				Ext.getBody().unmask();
+		    				ExtError();
+		    			}
+		    		  });
+		        }else{
+		        	Ext.getBody().unmask();
+		        }
+		  })  
 	}
 	
 	
