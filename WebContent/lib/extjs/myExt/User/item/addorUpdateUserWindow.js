@@ -86,53 +86,72 @@ Ext.extend(addorUpdateUser.addorUpdateUserWindow, Ext.Window, {
 		});
 	     
 	    	//=====================role=========================================
-	    	var ds = new Ext.data.ArrayStore({
-	            data: [[123,'One Hundred Twenty Three'],
-	                ['1', 'One'], ['2', 'Two'], ['3', 'Three'], ['4', 'Four'], ['5', 'Five'],
-	                ['6', 'Six'], ['7', 'Seven'], ['8', 'Eight'], ['9', 'Nine']],
-	            fields: ['value','text'],
-	            sortInfo: {
-	                field: 'value',
-	                direction: 'ASC'
-	            }
+	        var dsFrom = Ext.create('Ext.data.ArrayStore', {
+	            proxy: {
+	                type: 'ajax',
+	                url : appName+ '/admin/role/queryNotHave',
+	                reader: {
+//			        	root : "results",
+//						totalProperty: "totalProperty",
+//						successProperty:'success'
+			        },
+			        extraParams: {
+			        	 userId :  id 
+			        }
+	            },
+	            autoLoad: true,
+//	            sortInfo: {
+//	                field: 'value',
+//	                direction: 'ASC'
+//	            },
+	            fields: ['roleId', 'roleName']
 	        });
+	        
+	        var dsTo = Ext.create('Ext.data.ArrayStore', {
+	            proxy: {
+	                type: 'ajax',
+	                url : appName+ '/admin/role/queryHave',
+	                reader: {
+			        },
+			        extraParams: {
+			        	 userId :  id 
+			        }
+	            },
+	            baseParams: {  
+	                userId :  id 
+	            },  
+	            autoLoad: true,
+	            fields: ['roleId', 'roleName']
+	        });
+	        
 	    	var roleForm = new Ext.form.FormPanel({
-	            title: '角色',
+//	            title: '角色',
 	            bodyStyle: 'padding:10px;',
-	            renderTo: 'itemselector',
 	            items:[{
-	                xtype: 'itemselector',
-	                name: 'itemselector',
-	                fieldLabel: 'ItemSelector',
-	                imagePath: '../ux/images/',
-	                multiselects: [{
-	                    width: 250,
-	                    height: 200,
-	                    store: ds,
-	                    displayField: 'text',
-	                    valueField: 'value'
-	                },{
-	                    width: 250,
-	                    height: 200,
-	                    store: [['10','Ten']],
-	                    tbar:[{
-	                        text: 'clear',
-	                        handler:function(){
-	                       isForm.getForm().findField('itemselector').reset();
-	                   }
-	                    }]
-	                }]
-	            }],
-
-	            buttons: [{
-	                text: 'Save',
-	                handler: function(){
-	                    if(isForm.getForm().isValid()){
-	                        Ext.Msg.alert('Submitted Values', 'The following will be sent to the server: <br />'+
-	                            isForm.getForm().getValues(true));//这里是获得value的值，取值应该是使用request，名字是itemselector
-	                    }
-	                }
+	            	 xtype: 'itemselector',
+	                 name: 'itemselector',
+	                 id: 'itemselector-field',
+	                 anchor: '100%',
+//	                 fieldLabel: 'ItemSelector',
+	                 imagePath: '../ux/images/',
+	                 store: dsFrom,
+	                 tostore: dsTo,
+	                 displayField: 'roleName',
+	                 valueField: 'roleId',
+	                 allowBlank: false,
+	                 msgTarget: 'side',
+	                 fromTitle: '未选角色',
+	                 toTitle: '已选角色'
 	            }]
+//	            buttons: [{
+//	                text: 'Save',
+//	                handler: function(){
+//	                    if(isForm.getForm().isValid()){
+//	                        Ext.Msg.alert('Submitted Values', 'The following will be sent to the server: <br />'+
+//	                            isForm.getForm().getValues(true));//这里是获得value的值，取值应该是使用request，名字是itemselector
+//	                    }
+//	                }
+//	            }]
 	        });
 
 //==============tabs========================================================
@@ -155,12 +174,6 @@ Ext.extend(addorUpdateUser.addorUpdateUserWindow, Ext.Window, {
 				items : [roleForm],
 				closable : false,
 				listeners:{
-					afterrender:function(){
-						if(record!=null){
-							var content= record.get("content");
-				    		Ext.getCmp(mainId+"content").setValue(content);
-				    	}
-					}
 				}
 			}]
 		});
@@ -171,7 +184,7 @@ Ext.extend(addorUpdateUser.addorUpdateUserWindow, Ext.Window, {
 				layout:'fit',
 				items : [UserTabs],
 				width : 800,
-				height : 570,
+				height : 370,
 				autoHeight:true,
 				xtype : "window",
 				resizable : false,
@@ -185,7 +198,7 @@ Ext.extend(addorUpdateUser.addorUpdateUserWindow, Ext.Window, {
 				  width:50,
 					text : text,
 					handler : function(button, event) {
-						me.addorUpdateUser(me,formpanel,mainId,parentStore,id,type,isAdd);
+						me.addorUpdateUser(me,formpanel,mainId,parentStore,id,type,isAdd,dsTo);
 					}
 			    },{
 				  width:50,
@@ -214,10 +227,14 @@ Ext.extend(addorUpdateUser.addorUpdateUserWindow, Ext.Window, {
 		
 	},
 
-	addorUpdateUser : function(me,formpanel,mainId,parentStore,id,type,isAdd) {
-		
+	addorUpdateUser : function(me,formpanel,mainId,parentStore,id,type,isAdd,dsTo) {
+		for (var i = 0; i < dsTo.getCount(); i++) {
+			  var record = dsTo.getAt(i);
+			  var roleId = record.get("roleId");
+			 alert(roleId);
+		} 
 	
-		
+		return;
 		var userName =Ext.getCmp(mainId+"userName").getValue().trim();
 		var password =Ext.getCmp(mainId+"password").getValue();
 		var email = Ext.getCmp(mainId+"email").getValue();

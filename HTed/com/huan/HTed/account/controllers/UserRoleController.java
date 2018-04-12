@@ -1,19 +1,26 @@
 package com.huan.HTed.account.controllers;
 
-import org.springframework.stereotype.Controller;
-import com.huan.HTed.system.controllers.BaseController;
-import com.huan.HTed.core.IRequest;
-import com.huan.HTed.system.dto.ResponseData;
-import com.huan.HTed.account.dto.UserRole;
-import com.huan.HTed.account.service.IUserRoleService;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.validation.BindingResult;
-import java.util.List;
+
+import com.huan.HTed.account.dto.UserRole;
+import com.huan.HTed.account.service.IUserRoleService;
+import com.huan.HTed.core.IRequest;
+import com.huan.HTed.system.controllers.BaseController;
+import com.huan.HTed.system.dto.ResponseData;
+
+import cn.huan.kindergarten.bean.ExtAjax;
+import cn.huan.kindergarten.bean.ExtStore;
 
     @Controller
     public class UserRoleController extends BaseController{
@@ -49,4 +56,15 @@ import java.util.List;
         service.batchDelete(dto);
         return new ResponseData();
     }
+    
+    // ========================================后台===================================
+    
+    @RequestMapping(value = "/admin/user/role/submit")
+    @ResponseBody
+	public ExtAjax adminUpdate(@RequestBody List<UserRole> dto, BindingResult result, HttpServletRequest request){
+    	  IRequest requestCtx = createRequestContext(request);
+          List<UserRole> list = service.batchUpdate(requestCtx, dto);
+          return new ExtAjax(true, null);
+    }
+    
     }

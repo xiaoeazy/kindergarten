@@ -6,6 +6,8 @@ import javax.persistence.Id;
 import com.huan.HTed.mybatis.annotation.ExtensionAttribute;
 import org.hibernate.validator.constraints.Length;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import com.huan.HTed.system.dto.BaseDTO;
 @ExtensionAttribute(disable=true)
 @Table(name = "sys_user_role")
@@ -23,9 +25,20 @@ public class UserRole extends BaseDTO {
      private Long userId; //用户ID
 
      private Long roleId; //角色ID
+     
+     @Transient
+     private String roleName; //roleName;
 
 
-     public void setSurId(Long surId){
+     public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+
+	public void setSurId(Long surId){
          this.surId = surId;
      }
 

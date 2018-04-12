@@ -9,5 +9,17 @@
         <result column="ROLE_DESCRIPTION" property="roleDescription" jdbcType="VARCHAR" />
     </resultMap>
 
-
+    
+    <select id="adminqueryNotHave" resultMap="BaseResultMap" parameterType="com.huan.HTed.account.dto.UserRole">
+        select * from sys_role  c where c.ROLE_ID not in (
+        	select b.ROLE_ID from sys_user_role a left join sys_role b
+            on a.ROLE_ID=b.ROLE_ID where a.USER_ID =#{userId}
+            )
+    </select>
+    
+    <select id="adminQueryHave" resultMap="BaseResultMap" parameterType="com.huan.HTed.account.dto.UserRole">
+         select b.* from sys_user_role a left join sys_role b
+            on a.ROLE_ID=b.ROLE_ID where a.USER_ID =#{userId}
+    </select>
+	
 </mapper>

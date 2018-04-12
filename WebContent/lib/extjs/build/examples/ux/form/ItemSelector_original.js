@@ -55,10 +55,10 @@ Ext.define('Ext.ux.form.ItemSelector', {
 
         // bindStore must be called after the fromField has been created because
         // it copies records from our configured Store into the fromField's Store
-//        me.bindStore(me.store);
+        me.bindStore(me.store);
     },
 
-    createList: function(title,store){
+    createList: function(title){
         var me = this;
 
         return Ext.create('Ext.ux.form.MultiSelect', {
@@ -77,7 +77,7 @@ Ext.define('Ext.ux.form.ItemSelector', {
             dropGroup: me.ddGroup,
             title: title,
             store: {
-                model: store.model,
+                model: me.store.model,
                 data: []
             },
             displayField: me.displayField,
@@ -96,8 +96,8 @@ Ext.define('Ext.ux.form.ItemSelector', {
     setupItems: function() {
         var me = this;
 
-        me.fromField = me.createList(me.fromTitle,me.store);
-        me.toField = me.createList(me.toTitle,me.tostore);
+        me.fromField = me.createList(me.fromTitle);
+        me.toField = me.createList(me.toTitle);
 
         return [
             me.fromField,

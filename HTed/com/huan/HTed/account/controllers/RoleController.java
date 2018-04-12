@@ -1,5 +1,6 @@
 package com.huan.HTed.account.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.huan.HTed.account.dto.Role;
+import com.huan.HTed.account.dto.UserRole;
 import com.huan.HTed.account.service.IRoleService;
 import com.huan.HTed.core.IRequest;
 import com.huan.HTed.system.controllers.BaseController;
@@ -20,7 +22,6 @@ import com.huan.HTed.system.dto.ResponseData;
 
 import cn.huan.kindergarten.bean.ExtAjax;
 import cn.huan.kindergarten.bean.ExtStore;
-import cn.huan.kindergarten.dto.KgNews;
 
     @Controller
     public class RoleController extends BaseController{
@@ -59,6 +60,36 @@ import cn.huan.kindergarten.dto.KgNews;
     
     
     // ========================================后台===================================
+    
+    @RequestMapping(value = "/admin/role/queryNotHave")
+    @ResponseBody
+    public List<Role> adminqueryNotHave(Long userId,HttpServletRequest request) {
+    	 IRequest requestContext = createRequestContext(request);
+    	 List<Role> list =  new ArrayList<Role>();
+    	 if(userId!=null) {
+    		 UserRole ur = new UserRole();
+    		 ur.setUserId(userId);
+    		 list=service.adminqueryNotHave(requestContext, ur);
+    	 }else
+    		 list=service.selectAll(requestContext);
+         return list;
+    }
+    
+    @RequestMapping(value = "/admin/role/queryHave")
+    @ResponseBody
+    public List<Role> adminQueryHave(Long userId,HttpServletRequest request) {
+    	 IRequest requestContext = createRequestContext(request);
+    	 List<Role> list =  new ArrayList<Role>();
+    	 if(userId!=null) {
+    		 UserRole ur = new UserRole();
+    		 ur.setUserId(userId);
+    		 list=service.adminQueryHave(requestContext, ur);
+    	 }
+    		 
+         return list;
+    }
+    
+    
     @RequestMapping(value = "/admin/role/query")
     @ResponseBody
     public ExtStore adminQuery(Role dto, @RequestParam(defaultValue = DEFAULT_PAGE) int start,
