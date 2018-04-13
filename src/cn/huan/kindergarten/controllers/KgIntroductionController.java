@@ -55,12 +55,21 @@ import cn.huan.kindergarten.service.IKgIntroductionService;
         service.batchDelete(dto);
         return new ResponseData();
     }
-    
+  //========================================后台===================================
     @RequestMapping(value = "/admin/introduction/submit")
     @ResponseBody
 	public ExtAjax adminUpdate(@RequestBody List<KgIntroduction> dto, BindingResult result, HttpServletRequest request){
     	IRequest requestCtx = createRequestContext(request);
         List<KgIntroduction> list = service.batchUpdate(requestCtx, dto);
         return new ExtAjax(true, null);
+    }
+    
+    @RequestMapping(value = "/admin/introduction/query")
+    @ResponseBody
+    public ExtAjax adminQuery(KgIntroduction dto, @RequestParam(defaultValue = DEFAULT_PAGE) int page,
+        @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int pageSize, HttpServletRequest request) {
+        IRequest requestContext = createRequestContext(request);
+        List<KgIntroduction> list = service.select(requestContext,dto,page,pageSize);
+        return new ExtAjax(true, list.get(0).getIntroduction());
     }
     }

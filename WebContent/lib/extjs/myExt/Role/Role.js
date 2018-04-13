@@ -14,6 +14,7 @@ Ext.extend(Role.RolePanel, Ext.Panel, {
 	
 
 		var store = new Ext.data.Store({
+			pageSize:10,
 			proxy: {
 		        type: 'ajax',
 		        url : appName+ '/admin/role/query',
@@ -41,7 +42,7 @@ Ext.extend(Role.RolePanel, Ext.Panel, {
 	            checkboxSelect :true
 	        },
 	        bbar: new Ext.PagingToolbar({
-			        pageSize:10,
+			       
 			        store: store,
 			        displayInfo: true,
 			        displayMsg: '当前 {0} 到 {1} 共 {2}',

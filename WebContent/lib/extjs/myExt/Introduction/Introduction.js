@@ -25,7 +25,7 @@ Ext.extend(Introduction.IntroductionPanel, Ext.Panel, {
 			  items : [{
 	                xtype: 'ueditor',
 	                fieldLabel: '内  容',
-	                id: mainId+"_content",
+	                id: mainId+"content",
 	                //不要设置高度，否则滚动条出现后工具栏会消失
 	                width: '100%'
 	            }],
@@ -54,7 +54,29 @@ Ext.extend(Introduction.IntroductionPanel, Ext.Panel, {
 			resizable : false,
 			layout:'fit',
 			listeners:{
-				beforeshow:function(){
+				render:function(){
+					  Ext.Ajax.request({
+							url : appName + '/admin/introduction/query',
+				            method : 'post',
+				            headers: {'Content-Type':'application/json'},
+				            params : JSON.stringify([{
+				            	id:'1'
+				            }]),
+				            success : function(response, options) {
+				          	  Ext.getBody().unmask();
+				          	  var responseArray = Ext.util.JSON.decode(response.responseText);
+				                if (responseArray.success == true) {
+				                	var content = responseArray.message;
+				                	Ext.getCmp(mainId+"content").setValue(content);
+				                  }else{
+				                  	ExtError(responseArray.message);
+				                  }
+				            },
+							failure : function() {
+								Ext.getBody().unmask();
+								ExtError();
+							}
+					  });
 				}
 			}
 		 });
@@ -62,7 +84,7 @@ Ext.extend(Introduction.IntroductionPanel, Ext.Panel, {
 
 	saveIntroduction:function(me,formpanel,mainId){
 		//var text = formpanel.getForm().findField("content").getEditor().getContentTxt(); 纯文本
-		 var text = Ext.getCmp(mainId+"_content").getEditor().getContent();
+		 var text = Ext.getCmp(mainId+"content").getEditor().getContent();
 		  Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
 		  var linkobj = [{
 			  id:'1',
@@ -79,7 +101,6 @@ Ext.extend(Introduction.IntroductionPanel, Ext.Panel, {
           	  var responseArray = Ext.util.JSON.decode(response.responseText);
                 if (responseArray.success == true) {
               	    ExtAlert("成功");
-              	    formpanel.reset();
                   }else{
                   	ExtError(responseArray.message);
                   }
@@ -88,7 +109,7 @@ Ext.extend(Introduction.IntroductionPanel, Ext.Panel, {
 				Ext.getBody().unmask();
 				ExtError();
 			}
-      });
+		  });
 		
 		
 	}

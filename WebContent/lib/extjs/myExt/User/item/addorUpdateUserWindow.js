@@ -49,9 +49,9 @@ Ext.extend(addorUpdateUser.addorUpdateUserWindow, Ext.Window, {
 					            maxLength:40  
 				  			},{
 				          		fieldLabel:'密码',
-								allowBlank:false,
+//								allowBlank:false,
 								name: 'password',
-								blankText:'必须填写',
+//								blankText:'必须填写',
 								id:mainId+"password",
 								maxLength:8,
 								regex : /^[\s\S]{0,8}$/,
@@ -65,8 +65,8 @@ Ext.extend(addorUpdateUser.addorUpdateUserWindow, Ext.Window, {
 		                            second : mainId+'confirmPassword'
 		                        },
 		                        vtype : 'confirmPwd',
-		                        allowBlank : false,
-		                        blankText : '确认密码不能为空',
+//		                        allowBlank : false,
+//		                        blankText : '确认密码不能为空',
 		                        maxLength:8,
 		                        regex : /^[\s\S]{0,8}$/,
 		                        regexText : '确认密码长度不能超过8个字符'
@@ -123,14 +123,13 @@ Ext.extend(addorUpdateUser.addorUpdateUserWindow, Ext.Window, {
 	            autoLoad: true,
 	            fields: ['roleId', 'roleName']
 	        });
-	        
 	    	var roleForm = new Ext.form.FormPanel({
 //	            title: '角色',
 	            bodyStyle: 'padding:10px;',
 	            items:[{
 	            	 xtype: 'itemselector',
 	                 name: 'itemselector',
-	                 id: 'itemselector-field',
+	                 id: mainId+"itemselector",
 	                 anchor: '100%',
 //	                 fieldLabel: 'ItemSelector',
 	                 imagePath: '../ux/images/',
@@ -150,6 +149,7 @@ Ext.extend(addorUpdateUser.addorUpdateUserWindow, Ext.Window, {
 //	                        Ext.Msg.alert('Submitted Values', 'The following will be sent to the server: <br />'+
 //	                            isForm.getForm().getValues(true));//这里是获得value的值，取值应该是使用request，名字是itemselector
 //	                    }
+//	                	alert(Ext.getCmp("itemselector-field").getValue());
 //	                }
 //	            }]
 	        });
@@ -198,7 +198,7 @@ Ext.extend(addorUpdateUser.addorUpdateUserWindow, Ext.Window, {
 				  width:50,
 					text : text,
 					handler : function(button, event) {
-						me.addorUpdateUser(me,formpanel,mainId,parentStore,id,type,isAdd,dsTo);
+						me.addorUpdateUser(me,formpanel,mainId,parentStore,id,type,isAdd);
 					}
 			    },{
 				  width:50,
@@ -215,6 +215,7 @@ Ext.extend(addorUpdateUser.addorUpdateUserWindow, Ext.Window, {
 				    		var phone= record.get("phone");
 				    		
 				    		Ext.getCmp(mainId+"userName").setValue(userName);
+				    		Ext.getCmp(mainId+"userName").setDisabled(true);
 				    		Ext.getCmp(mainId+"email").setValue(email);
 				    		Ext.getCmp(mainId+"phone").setValue(phone);
 				    		
@@ -227,16 +228,18 @@ Ext.extend(addorUpdateUser.addorUpdateUserWindow, Ext.Window, {
 		
 	},
 
-	addorUpdateUser : function(me,formpanel,mainId,parentStore,id,type,isAdd,dsTo) {
-		for (var i = 0; i < dsTo.getCount(); i++) {
-			  var record = dsTo.getAt(i);
-			  var roleId = record.get("roleId");
-			 alert(roleId);
-		} 
-	
-		return;
+	addorUpdateUser : function(me,formpanel,mainId,parentStore,id,type,isAdd) {
+		var userRoleList = [];
+		var itemselector = Ext.getCmp(mainId+"itemselector");
+		var allRole = itemselector.getValue();
+		allRole.forEach(function(ele,index){  
+             userRoleList.push({
+            	 roleId:allRole[index]
+             })
+         });  
 		var userName =Ext.getCmp(mainId+"userName").getValue().trim();
 		var password =Ext.getCmp(mainId+"password").getValue();
+		var confirmPassword = Ext.getCmp(mainId+"confirmPassword").getValue();
 		var email = Ext.getCmp(mainId+"email").getValue();
 		var phone =Ext.getCmp(mainId+"phone").getValue().trim();
 		
@@ -244,27 +247,36 @@ Ext.extend(addorUpdateUser.addorUpdateUserWindow, Ext.Window, {
 			Ext.getCmp(mainId+"userName").markInvalid("用户名不能为空！");
 			return;
 		}
-		if(password==null){
-			Ext.getCmp(mainId+"password").markInvalid("密码不能为空！");
-			return;
+		if(type=="add"){
+			if(password==""){
+				Ext.getCmp(mainId+"password").markInvalid("密码不能为空！");
+				return;
+			}
+			if(confirmPassword==""){
+				Ext.getCmp(mainId+"confirmPassword").markInvalid("确认密码不能为空！");
+				return;
+			}
 		}
 		
+		var addOrUpdateUserObj = {
+          	  __status : type,
+        	  userId:id,
+        	  userName:userName,
+        	  passwordEncrypted:password,
+        	  email:email,
+        	  phone : phone
+          };
 		
-	
 		if( formpanel.getForm().isValid()){
 			Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
 			  Ext.Ajax.request({
             	  url : appName + '/admin/user/submit',
                   method : 'post',
                   headers: {'Content-Type':'application/json'},
-                  params : JSON.stringify([{
-                	  __status : type,
-                	  userId:id,
-                	  userName:userName,
-                	  passwordEncrypted:password,
-                	  email:email,
-                	  phone : phone
-                  }]),
+                  params : JSON.stringify({
+                	  user:addOrUpdateUserObj,
+                	  userRoleList:userRoleList
+                  }),
                   success : function(response, options) {
                 	  Ext.getBody().unmask();
                 	  var responseArray = Ext.util.JSON.decode(response.responseText);

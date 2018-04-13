@@ -12,4 +12,8 @@ public interface IRoleService extends IBaseService<Role>, ProxySelf<IRoleService
 	public List<Role> adminqueryNotHave(IRequest request,UserRole userRole);
 	
 	public List<Role> adminQueryHave(IRequest request,UserRole userRole);
+	
+	public int adminQueryCount(IRequest request,Role record);
+	
+	public void adminDelete(IRequest request, List<Role> dto) ;
 }

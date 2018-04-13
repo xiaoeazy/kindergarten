@@ -92,11 +92,12 @@ import cn.huan.kindergarten.bean.ExtStore;
     
     @RequestMapping(value = "/admin/role/query")
     @ResponseBody
-    public ExtStore adminQuery(Role dto, @RequestParam(defaultValue = DEFAULT_PAGE) int start,
+    public ExtStore adminQuery(Role dto, @RequestParam(defaultValue = DEFAULT_PAGE) int page,int start,
         @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit, HttpServletRequest request) {
     	 IRequest requestContext = createRequestContext(request);
-         List<Role> list = service.select(requestContext,dto,1,limit);
-         return new ExtStore(start, limit, list.size(), list);
+         List<Role> list = service.select(requestContext,dto,page,limit);
+         int count = service.adminQueryCount(requestContext, null);
+         return new ExtStore(start, limit, count, list);
     }
 
     @RequestMapping(value = "/admin/role/submit")
@@ -111,7 +112,8 @@ import cn.huan.kindergarten.bean.ExtStore;
     @RequestMapping(value = "/admin/role/remove")
     @ResponseBody
     public ExtAjax adminDelete(HttpServletRequest request,@RequestBody List<Role> dto){
-        service.batchDelete(dto);
+    	IRequest requestContext = createRequestContext(request);
+        service.adminDelete(requestContext, dto);
         return new ExtAjax(true, null);
     }
     

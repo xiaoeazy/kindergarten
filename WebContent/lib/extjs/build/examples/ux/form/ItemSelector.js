@@ -60,7 +60,6 @@ Ext.define('Ext.ux.form.ItemSelector', {
 
     createList: function(title,store){
         var me = this;
-
         return Ext.create('Ext.ux.form.MultiSelect', {
             // We don't want the multiselects themselves to act like fields,
             // so override these methods to prevent them from including
@@ -294,6 +293,19 @@ Ext.define('Ext.ux.form.ItemSelector', {
             });
             return;
         }
+        
+        // Wait for to store to be loaded
+//        alert(me.fromStorePopulated);
+//        alert(me.toStorePopulated);
+        if (!me.toStorePopulated) {
+            me.toField.store.on({
+                load: Ext.Function.bind(me.setValue, me, [value]),
+                single: true
+            });
+            return;
+        }
+        
+        
 
         value = me.setupValue(value);
         me.mixins.field.setValue.call(me, value);
@@ -309,7 +321,9 @@ Ext.define('Ext.ux.form.ItemSelector', {
 
         // Reset fromStore
         me.populateFromStore(me.store);
-
+        // Reset toStore
+        me.populateToStore(me.tostore);
+        
         // Copy selection across to toStore
         Ext.Array.forEach(selected, function(rec){
             // In the from store, move it over
@@ -335,14 +349,24 @@ Ext.define('Ext.ux.form.ItemSelector', {
 
         if (me.fromField) {
             me.fromField.store.removeAll();
-            me.toField.store.removeAll();
+           
 
             // Add everything to the from field as soon as the Store is loaded
             if (store.getCount()) {
+//            	alert("on bindstore fromField");
                 me.populateFromStore(store);
             } else {
                 me.store.on('load', me.populateFromStore, me);
             }
+        }
+        if(me.toField){
+//        	alert("on bindstore tofield");
+        	 me.toField.store.removeAll();
+        	 if (me.tostore.getCount()) {
+                 me.populateToStore(me.tostore);
+             } else {
+                 me.tostore.on('load', me.populateToStore, me);
+             }
         }
     },
 
@@ -356,6 +380,18 @@ Ext.define('Ext.ux.form.ItemSelector', {
 
         // setValue waits for the from Store to be loaded
         fromStore.fireEvent('load', fromStore);
+    },
+    
+    populateToStore: function(store) {
+        var toStore = this.toField.store;
+
+        // Flag set when the fromStore has been loaded
+        this.toStorePopulated = true;
+
+        toStore.add(store.getRange());
+
+        // setValue waits for the from Store to be loaded
+        toStore.fireEvent('load', toStore);
     },
 
     onEnable: function(){
