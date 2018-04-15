@@ -61,11 +61,12 @@ import cn.huan.kindergarten.service.IKgNewsAttributeService;
   //========================================后台===================================
     @RequestMapping(value = "/admin/newsattribute/query")
     @ResponseBody
-    public ExtStore adminQuery(KgNewsAttribute dto, @RequestParam(defaultValue = DEFAULT_PAGE) int start,
+    public ExtStore adminQuery(KgNewsAttribute dto, @RequestParam(defaultValue = DEFAULT_PAGE)int page,int start,
         @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit, HttpServletRequest request) {
     	 IRequest requestContext = createRequestContext(request);
-         List<KgNewsAttribute> list = service.select(requestContext,dto,1,limit);
-        return new ExtStore(start, limit, list.size(), list);
+         List<KgNewsAttribute> list = service.select(requestContext,dto,page,limit);
+         int count = service.adminQueryCount(requestContext, null);
+        return new ExtStore(start, limit, count, list);
     }
 
     @RequestMapping(value = "/admin/newsattribute/submit")

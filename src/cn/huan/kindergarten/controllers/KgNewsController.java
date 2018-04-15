@@ -57,12 +57,13 @@ import java.util.List;
    // ========================================后台===================================
     @RequestMapping(value = "/admin/news/query")
     @ResponseBody
-    public ExtStore adminQuery(KgNews dto, @RequestParam(defaultValue = DEFAULT_PAGE) int start,
+    public ExtStore adminQuery(KgNews dto, @RequestParam(defaultValue = DEFAULT_PAGE) int page,int start,
         @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit, HttpServletRequest request) {
     	 IRequest requestContext = createRequestContext(request);
 //         List<KgNews> list = service.select(requestContext,dto,1,limit);
-    	 List<KgNews> list = service.selectWithOtherInfo(requestContext,dto,1,limit);
-         return new ExtStore(start, limit, list.size(), list);
+    	 List<KgNews> list = service.selectWithOtherInfo(requestContext,dto,page,limit);
+    	 int count = service.adminQueryCount(requestContext, dto);
+    	 return new ExtStore(start, limit, count, list);
     }
 
     @RequestMapping(value = "/admin/news/submit")

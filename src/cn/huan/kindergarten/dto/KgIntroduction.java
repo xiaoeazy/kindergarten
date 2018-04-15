@@ -17,17 +17,17 @@ public class KgIntroduction extends BaseDTO {
 
      @Id
      @GeneratedValue
-     private String id;
+     private Long id;
 
      @Length(max = 65535)
      private String introduction;
 
 
-     public void setId(String id){
+     public void setId(Long id){
          this.id = id;
      }
 
-     public String getId(){
+     public Long getId(){
          return id;
      }
 

@@ -1,0 +1,385 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<title>政采法规_中国政府采购网</title>
+<link href="${base.contextPath}/lib/index/css/channel.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="${base.contextPath}/lib/index/js/jquery-3.2.1.min.js" ></script>
+<script language="javascript">
+
+
+
+function dosearch(e){
+
+
+            document.searchForm.submit();
+            }
+function doreset(){
+                $("#searchparam").val("");
+                $("#filedep").val("");
+                $("#fileyear").val("");
+                $("#filenum").val("");
+                $("#dateissuestart").val("");
+                $("#dateissueend").val("");
+                $("#datematerialstart").val("");
+                $("#datematerialend").val("");
+                $("#issuedep").val("");
+                $("#lawtype").val("");
+                $("#lawlevle").val("");
+                $("#lawvalid").val("");
+                }
+
+$(document).ready(function(){
+    var selval="";
+    $("#lawtype").val(selval);
+
+    var selval2="";
+    $("#lawlevle").val(selval2);
+
+    var selval3="";
+    $("#lawvalid").val(selval3);
+
+    $("#doSearch").click(function(){
+        dosearch(1);
+    });
+    $("#doReset").click(function(){
+        doreset();
+    });
+$("#btn_zcfgsearch").click(function(){
+       $("#vT_bidSearch_o").toggle();
+        if($("#btn_zcfgsearch").attr("src")=="../images/btn_zcfgsearch_on.gif"/*tpa=http://www.ccgp.gov.cn/images/btn_zcfgsearch_on.gif*/)
+         {
+           $("#btn_zcfgsearch").attr("src","../images/btn_zcfgsearch.gif"/*tpa=http://www.ccgp.gov.cn/images/btn_zcfgsearch.gif*/);
+           $("#searchspan20").hide();
+         }
+         else
+         {
+          $("#btn_zcfgsearch").attr("src","../images/btn_zcfgsearch_on.gif"/*tpa=http://www.ccgp.gov.cn/images/btn_zcfgsearch_on.gif*/);
+          $("#searchspan20").show();
+          }
+    });
+
+    $("#dateissuestart").css("cursor","pointer");
+    $("#dateissueend").css("cursor","pointer");
+    $("#datematerialstart").css("cursor","pointer");
+    $("#datematerialend").css("cursor","pointer");
+$("#btn_zcfgsearch").css("cursor","pointer");
+
+    $(".vT_search_sortby li:not(.current)").mouseover(function(){
+        $(this).css("background","#d0d0d0");
+        $(this).css("text-decoration","underline");
+        });
+        $(".vT_search_sortby li:not(.current)").mouseout(function(){
+        $(this).css("background","#ececec");
+        $(this).css("text-decoration","none");
+        });
+
+    })
+</script>
+<script type="text/javascript" src="../../search.ccgp.gov.cn/static/js/laydate/laydate.js" tppabs="http://search.ccgp.gov.cn/static/js/laydate/laydate.js"></script>
+</head>
+<body id="zcfg">
+<link href="${base.contextPath}/lib/index/css/inc.css" rel="stylesheet" type="text/css" />
+<#include "../../include/navigation.html">
+
+
+<div class="main">
+<div class="main_container">
+
+
+
+<div class="main_topic_block mt13">
+<form name="searchForm" id="searchForm" action="http://search.ccgp.gov.cn/zcfgsearch" method="post">
+<input type="hidden" name="page_index" id="page_index" value="1" />
+        <input type="hidden" name="start_time" id="start_time" />
+        <input type="hidden" name="end_time" id="end_time" />
+        <input type="hidden" name="timeType" id="timeType" />
+<style>
+#vT_bidSearch_o {width:1000px;}
+.vT_bidSearch_outsider{width:100%}
+.vT_bidSearch_addon_con{width:100%;border-bottom:1px dotted #eee}
+.vT_bidSearch_addon_block{width:240px;height:50px;float:left;margin-left:30px;}
+.vT_bidSearch_addon_block2{width:80px;height:50px;float:left;margin-left:30px;}
+.vT_bidSearch_addon_block2 p,.vT_bidSearch_addon_block p{width:80px;text-align:right;font-size:14px;font-weight:bolder;color:#6a6a6a;display:block;margin-right:10px;float:left;margin-top:13px;height:30px}
+.vT_bidSearch_addon_block input{font-size:16px;width:130px;line-height:20px;height:21px;margin-top:8px; border:1px solid #c7d8e3;}
+.vT-srch-result-channel-list3 li,.vT-srch-result-channel-list2 li{line-height:20px;margin-left:25px;display:block;float:left;width:90px;height:20px;font-size:14px;color:#6a6a6a;margin-bottom:10px;text-align:center}
+.vT-srch-result-channel-list3 li{width:90px}
+</style>
+<div class="vT_z" id="vT_bidSearch_o">
+    <div class="vT_bidSearch_outsider">
+        <div class="vT_bidSearch_addon_con" style="margin-top:5px">
+
+         <div class="vT_bidSearch_addon_block" style="margin-left:0;width:660px"><p>标　　题</p><input type="text" name="searchparam" id="searchparam" style="width:550px" value="" /></div>
+         <div class="vT_bidSearch_addon_block" style="margin-left:0;width:300px"><p>文号</p><input type="text" name="filedep" id="filedep" style="width:50px" value="" />〔<input type="text" name="fileyear" id="fileyear" style="width:50px" value="" />〕<input type="text" name="filenum" id="filenum" style="width:50px" value="" />号</div>
+         <div style="clear:both"></div></div>
+
+         <div class="vT_bidSearch_addon_con" style="margin-top:5px">
+         <div class="vT_bidSearch_addon_block" style="margin-left:0;width:350px"><p>颁布日期</p><input type="text" name="dateissuestart" id="dateissuestart" style="width:90px" value="" class="laydate-icon" /> 至 <input type="text" name="dateissueend" id="dateissueend" style="width:90px" value="" class="laydate-icon" /></div>
+         <div class="vT_bidSearch_addon_block" style="margin-left:0;width:350px"><p>实施日期</p><input type="text" name="datematerialstart" id="datematerialstart" style="width:90px" value="" class="laydate-icon" /> 至 <input type="text" name="datematerialend" id="datematerialend" style="width:90px" value="" class="laydate-icon" /></div>
+          <div class="vT_bidSearch_addon_block" style="margin-left:0;width:220px"><p>颁布单位</p><select id="issuedep" size=1 name="issuedep" style="margin-top:8px;height:30px;line-height:24px">
+<option value="" >全部</option>
+<option value="1">全国人大</option>
+<option value="2">国务院</option>
+<option value="7">国务院办公厅</option>
+<option value="3">财政部</option>
+<option value="4">其他部委</option>
+<option value="5">集采中心</option>
+<option value="6">地方财政</option>
+</select></div>
+         <div style="clear:both"></div></div>
+
+         <div class="vT_bidSearch_addon_con" style="margin-top:5px">
+         <div class="vT_bidSearch_addon_block" style="margin-left:0;width:350px"><p>条法类别</p><select id="lawtype" size=1 name="lawtype" style="margin-top:8px;height:30px;line-height:24px">
+<option value="" >全部</option>
+<option value="1000">-=采购主体类=-</option>
+<option value="1001">采购人</option>
+<option value="1002">代理机构</option>
+<option value="1003">评审专家</option>
+<option value="1004">供应商</option>
+<option value="2000">-=政策功能类=-</option>
+<option value="2001">节能环保</option>
+<option value="2002">中小企业</option>
+<option value="2099">其他</option>
+<option value="3000">-=交易系统类=-</option>
+<option value="3001">采购计划</option>
+<option value="3002">信息统计</option>
+<option value="3003">项目采购</option>
+<option value="3099">其他</option>
+<option value="4000">-=采购方式类=-</option>
+<option value="4001">公开招标</option>
+<option value="4002">竞争性谈判</option>
+<option value="4003">单一来源</option>
+<option value="4004">非招标采购</option>
+<option value="4099">其他</option>
+<option value="5000">-=其他文件类=-</option>
+<option value="5001">信息公开</option>
+<option value="5006">采购目录</option>
+<option value="5007">信息化建设</option>
+<option value="5002">行政处罚</option>
+<option value="5003">公共资源</option>
+<option value="5004">政府和社会资本合作</option>
+<option value="5001">信息公开</option>
+<option value="5008">政府购买服务</option>
+<option value="5005">会议培训</option>
+<option value="5009">网站建设</option>
+<option value="5099">其他</option>
+</select></div>
+<div class="vT_bidSearch_addon_block" style="margin-left:0;width:350px"><p>法规层次</p><select id="lawlevle" size=1 name="lawlevle" style="margin-top:8px;height:30px;line-height:24px">
+<option value="" >全部</option>
+<option value="财政部规章">财政部规章</option>
+<option value="财政部规范性文件">财政部规范性文件</option>
+<option value="国务院文件" >国务院文件</option>
+<option value="其他部委文件" >其他部委文件</option>
+<option value="采购中心文件" >采购中心文件</option>
+<option value="国家法规" >国家法规</option>
+<option value="地方规章办法" >地方规章办法</option>
+<option value="国际法规" >国际法规</option>
+</select></div>
+<div class="vT_bidSearch_addon_block" style="margin-left:0;width:220px"><p>时 效 性</p>
+<select id="lawvalid" size=1 name="lawvalid" style="margin-top:8px;height:30px;line-height:24px">
+<option value="" >请选择</option>
+<option value="有效">有效</option>
+<option value="失效">失效</option>
+<option value="废止">废止</option>
+</select></div><div style="clear:both"></div></div>
+    <!--选择内容-->
+
+        <!--选择内容-->
+
+        <!--选择内容-->
+
+        <!--选择内容-->
+
+       <!--输入内容-->
+        <div class="vT_bidSearch_addon_con" style="margin-top:10px;margin-bottom:10px;text-align:center">
+            <button class="ui gray button"  id="doSearch" >
+                         检索
+                      </button>
+                      <button class="ui gray button" id="doReset" >
+                         重置
+                      </button>
+            <div style="clear:both"></div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+</div>
+</form>
+</div>
+
+
+
+
+<div class="vF-cht-section-newsblock mt13">
+            <div class="vT-zcfg-cgf-t">
+                <div class="vT-zcfg-cgf-t-pic"><a href="gjfg/201310/t20131029_3587339.htm" tppabs="http://www.ccgp.gov.cn/zcfg/gjfg/201310/t20131029_3587339.htm"><img src="../images/cgf.gif" tppabs="http://www.ccgp.gov.cn/images/cgf.gif" /></a></div>
+                <p class="shuoming">2002年6月29日第九届全国人民代表大会 常务委员会第二十八次会议通过</p>
+            </div>
+            <div class="vT-zcfg-cgf-con">
+                <p>　　第一章 总 则</p>
+               
+            </div>
+        </div>
+
+        <div class="vT-cht-section-picnews mt13">
+
+<a href="mof/201502/t20150227_5029424.htm" tppabs="http://www.ccgp.gov.cn/zcfg/mof/201502/t20150227_5029424.htm" target='_blank'  thumb="" alt="" text="">
+<img src="../img/sstl383by236.gif" tppabs="http://www.ccgp.gov.cn/img/sstl383by236.gif" border='0' alt='中华人民共和国政府采购法实施条例（中华人民共和国国务院令 第658号）' /></a>
+
+</div>
+
+
+
+
+
+    <div class="main_left_block mt13">
+        <div class="wz_block">
+        
+        	<#list typeList as typeList>   
+			    
+			    <div class="newslist_bl_nor">
+	                <div class="newslist">
+			               <div class="vF_t2">
+			                 <div class="vF_t2_r1">
+			                    <div class="vF_tab unit2">
+			                        <div class="vF_title_bar2">
+			                          <h2 class="ui_til4_tab_u current2 word5"><a href="${base.contextPath}/index/newsTypeList?typeid=${typeList.id}" >${typeList.typename}</a></h2>
+			                        </div>
+			                    </div>
+			                 </div>
+			
+			                 <ul class="c_list mt10 mb10 tab-con split" style="display:block">
+			                 	<#list typeList.newsList as newsList>   
+									<li><a href="gwywj/201803/t20180302_9624500.htm" target="_blank" title="11"></a>${newsList.newstitle}</li>
+								</#list>
+		                	 </ul>
+			            </div>
+	                </div><!--newslist-->
+            	</div>
+			    
+    		</#list> 
+    		
+            
+
+
+      
+        </div>
+
+    </div>
+
+    <div class="main_right_block mt13">
+
+        <div class="main_right_cbl">
+            <h2>分类总览</h2>
+                <div class="vT-chs-section-content-con">
+                <ul class="vT-chs-section-content-list">
+                		<#list typeList as typeList> 
+							<li class="sorthead1"><a href="${base.contextPath}/index/newsTypeList?typeid=${typeList.id}"  target="_blank" title="${typeList.typename}">${typeList.typename}</a>(${typeList.count})</li>
+						</#list> 
+                </ul>
+                </div>
+        </div>
+
+        <div class="main_right_cbl mt13">
+            <h2>条法类别</h2>
+            <div class="vT-chs-section-content-con">
+                <ul class="vT-chs-section-content-list w100">
+
+					<li><a href="tflb/cgztl/index.htm" tppabs="http://www.ccgp.gov.cn/zcfg/tflb/cgztl/" target="_blank" title="采购主体类">采购主体类</a>(31)</li>
+
+                </ul>
+                <ul class="vT-chs-section-content-list w100">
+
+					<li><a href="tflb/jzxtp/index.htm" tppabs="http://www.ccgp.gov.cn/zcfg/tflb/jzxtp/" target="_blank" title="竞争性谈判">竞争性谈判</a>(2)</li>
+
+                </ul>
+                </div>
+        </div>
+
+        <div class="main_right_cbl mt13">
+            <h2>法规文件</h2>
+            <div class="vT-chs-section-content-con">
+                <ul class="vT-chs-section-content-list">
+
+						<li><a href="bbdw/qgrd/index.htm" tppabs="http://www.ccgp.gov.cn/zcfg/bbdw/qgrd/" target="_blank" title="全国人大">全国人大</a>(21)</li>
+
+                </ul>
+                </div>
+        </div>
+
+
+    </div>
+</div>
+</div>
+<div class="footer mt13">
+
+    <div class="copyright_bl">
+    <div class="vF_cp">
+
+<p><span>&copy; 1999-<script language="javascript">
+var myDate = new Date();
+document.write(myDate.getFullYear());
+</script></span> 中华人民共和国财政部版权所有 | <a href="../contact.shtml.htm" tppabs="http://www.ccgp.gov.cn/contact.shtml" target="_blank">联系我们</a> | <a href="mailto:feedback@ccgp.gov.cn">意见反馈</a> | <a href="javascript:if(confirm(%27http://www.miibeian.gov.cn/  \n\nThis file was not retrieved by Teleport Ultra, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.miibeian.gov.cn/%27" tppabs="http://www.miibeian.gov.cn/" target="_blank">京<span>ICP</span>备<span>10046031</span>号<span>-10</span></a></p>
+
+</div>
+    </div>
+</div>
+</body>
+<script language="javascript">
+function showd(n)
+{
+var uom = new Date(new Date()-0+n*86400000);
+uom = uom.getFullYear() + "," + (uom.getMonth()+1) + "," + uom.getDate();
+return uom;
+}
+var dayLT=showd(0);
+var gEndT = dayLT.split(",");
+var gEnd=gEndT[0]-0 + "-" + gEndT[1] + "-" +gEndT[2];
+
+laydate({
+  elem: '#dateissuestart',
+  format: 'YYYY-MM-DD', // 分隔符可以任意定义，该例子表示只显示年月
+  festival: false, //显示节日
+  max:gEnd,
+  choose: function(datas){ //选择日期完毕的回调
+    //alert('得到：'+datas);
+  }
+});
+laydate({
+      elem: '#dateissueend',
+      format: 'YYYY-MM-DD', // 分隔符可以任意定义，该例子表示只显示年月
+      festival: false, //显示节日
+      max:gEnd,
+      choose: function(datas){ //选择日期完毕的回调
+        //alert('得到：'+datas);
+      }
+    });
+laydate({
+      elem: '#datematerialstart',
+      format: 'YYYY-MM-DD', // 分隔符可以任意定义，该例子表示只显示年月
+      festival: false, //显示节日
+      choose: function(datas){ //选择日期完毕的回调
+        //alert('得到：'+datas);
+      }
+    });
+laydate({
+      elem: '#datematerialend',
+      format: 'YYYY-MM-DD', // 分隔符可以任意定义，该例子表示只显示年月
+      festival: false, //显示节日
+      choose: function(datas){ //选择日期完毕的回调
+        //alert('得到：'+datas);
+      }
+    });
+
+/*
+laydate({
+  elem: '#hello3',
+  min: laydate.now(-1), //-1代表昨天，-2代表前天，以此类推
+  max: laydate.now(+1) //+1代表明天，+2代表后天，以此类推
+});
+*/
+</script>
+<script language="javascript" src="../js/channel.js" tppabs="http://www.ccgp.gov.cn/js/channel.js"></script>
+</html>

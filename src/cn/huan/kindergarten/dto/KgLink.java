@@ -19,7 +19,7 @@ public class KgLink extends BaseDTO {
 
      @Id
      @GeneratedValue
-     private String id;
+     private Long id;
 
      @NotEmpty
      @Length(max = 45)
@@ -30,11 +30,11 @@ public class KgLink extends BaseDTO {
      private String linkUrl;
 
 
-     public void setId(String id){
+     public void setId(Long id){
          this.id = id;
      }
 
-     public String getId(){
+     public Long getId(){
          return id;
      }
 

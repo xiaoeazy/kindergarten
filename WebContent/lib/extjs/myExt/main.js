@@ -90,7 +90,7 @@ function getNews(){
 	var str = "";
 	str +=addFunc('type1.png','type2.png','newsType');
 	str +=addFunc('source1.png','source2.png','newsSource');
-	str +=addFunc('news1.png','news2.png','news');
+	
 	return addFuncStr(str);
 }
 
@@ -114,7 +114,7 @@ function getManager() {
 //			+ '/resources/images/leftImg/xinxixiugai1.png\'" onclick="addtabs(\'link\')"></td></tr>';
 	
 	str +=addFunc('introduction1.png','introduction2.png','introduction');
-	
+	str +=addFunc('news1.png','news2.png','news');
 	str +=addFunc('user1.png','user2.png','user');
 	str +=addFunc('role1.png','role2.png','role');
 	str += '</table></div>';

@@ -18,18 +18,18 @@ public class KgNewsSource extends BaseDTO {
 
      @Id
      @GeneratedValue
-     private String id;
+     private Long id;
 
      @NotEmpty
      @Length(max = 45)
      private String sourcename;
 
 
-     public void setId(String id){
+     public void setId(Long id){
          this.id = id;
      }
 
-     public String getId(){
+     public Long getId(){
          return id;
      }
 

@@ -60,11 +60,12 @@ import cn.huan.kindergarten.service.IKgNewstypeService;
   //========================================后台===================================
     @RequestMapping(value = "/admin/newstype/query")
     @ResponseBody
-    public ExtStore adminQuery(KgNewstype dto, @RequestParam(defaultValue = DEFAULT_PAGE) int start,
+    public ExtStore adminQuery(KgNewstype dto, @RequestParam(defaultValue = DEFAULT_PAGE)int page,int start,
         @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit, HttpServletRequest request) {
     	 IRequest requestContext = createRequestContext(request);
-         List<KgNewstype> list = service.select(requestContext,dto,1,limit);
-         return new ExtStore(start, limit, list.size(), list);
+         List<KgNewstype> list = service.select(requestContext,dto,page,limit);
+         int count = service.adminQueryCount(requestContext, null);
+         return new ExtStore(start, limit, count, list);
     }
 
     @RequestMapping(value = "/admin/newstype/submit")

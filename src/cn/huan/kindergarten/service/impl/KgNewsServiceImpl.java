@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.PageHelper;
+import com.huan.HTed.account.dto.Role;
 import com.huan.HTed.core.IRequest;
 import com.huan.HTed.system.service.impl.BaseServiceImpl;
 
@@ -25,6 +26,10 @@ public class KgNewsServiceImpl extends BaseServiceImpl<KgNews> implements IKgNew
     @Transactional(propagation = Propagation.SUPPORTS)
     public List<KgNews> selectWithOtherInfo(IRequest request,  KgNews condition ,int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        return kgNewsMapper.selectWithOtherInfo();
+        return kgNewsMapper.selectWithOtherInfo( condition);
     }
+	
+	public int adminQueryCount(IRequest request,KgNews record) {
+		return  kgNewsMapper.adminQueryCount(record);
+	}
 }

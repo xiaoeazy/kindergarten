@@ -31,7 +31,7 @@ public class KgNews extends BaseDTO {
 
      @Id
      @GeneratedValue
-     private String id;
+     private Long id;
 
      private Long typeid;
 
@@ -72,11 +72,11 @@ public class KgNews extends BaseDTO {
 		this.kgNewstype = kgNewstype;
 	}
 
-	public void setId(String id){
+	public void setId(Long id){
          this.id = id;
      }
 
-     public String getId(){
+     public Long getId(){
          return id;
      }
 

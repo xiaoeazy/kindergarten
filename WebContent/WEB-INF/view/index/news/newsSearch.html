@@ -1,0 +1,386 @@
+<!doctype html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>政策法规搜索_中国政府采购网</title>
+	<link href="${base.contextPath}/lib/index/search/static/css/style_law3.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="${base.contextPath}/lib/index/search/static/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="${base.contextPath}/lib/index/search/static/js/laydate/laydate.js"></script>
+	<script language="javascript">
+
+		function gopage(e){
+
+			$("#page_index").val(e);
+			//alert($("#pageindex").val());
+			$("#searchForm").submit();
+		}
+
+		function delHtmlTag(str)
+		{
+			return str.replace(/<[^>]+>/g,"");//去掉所有的html标记
+		}
+
+		function dosearch(e){
+			$("#searchparam").val(delHtmlTag($("#searchparam").val()));
+			document.searchForm.submit();
+
+		}
+		function doreset(){
+			$("#searchparam").val("");
+			$("#dateissuestart").val("");
+			$("#dateissueend").val("");
+			$("#newstype").val("");
+			$("#newssource").val("");
+		}
+
+		$(document).ready(function(){
+			$('#searchparam').bind('blur',function(event){
+				$(this).val(delHtmlTag($(this).val()));
+			});
+
+			$('#searchparam').bind('keypress',function(event){
+				$(this).val(delHtmlTag($(this).val()));
+			});
+			
+
+			var selval = "";
+			$("#newstype").val(selval);
+
+			var selval2 = "";
+			$("#newssource").val(selval2);
+
+
+
+			$("#doSearch").click(function(){
+				var value1 = $("#dateissuestart").val();
+				var value2 = $("#dateissueend").val();
+				if((value1!=="" && value2=="")||(value1=="" && value2!==""))
+				{
+					if(value1==""){alert("请选择颁布日期的起始时间。");}
+					if(value2==""){alert("请选择颁布日期的结束时间。");}
+					return false;
+				}
+				dosearch();
+			});
+			$("#doReset").click(function(){
+				doreset();
+			});
+
+
+			$("#dateissuestart").css("cursor","pointer");
+			$("#dateissueend").css("cursor","pointer");
+
+			$(".vT_search_sortby li:not(.current)").mouseover(function(){
+				$(this).css("background","#d0d0d0");
+				$(this).css("text-decoration","underline");
+			});
+			$(".vT_search_sortby li:not(.current)").mouseout(function(){
+				$(this).css("background","#ececec");
+				$(this).css("text-decoration","none");
+			});
+
+		})
+	</script>
+</head>
+<body style="background:#fff">
+<style>
+	p.pager{float:right;margin-right:10px;margin-top:8px}
+	.pager{margin:12px 12px 0 0; color:#444;border-bottom:1px solid #555; font:14px Verdana,"黑体";border:none;height:30px;}
+	.pager a,.pager span,.pager input{float:left;padding:2px 5px;}
+	.pager a{color:#0088CC; text-decoration:none;border:1px solid #ddd;margin-right:2px}
+	.pager a:hover{border-bottom:2px solid #325594; color:#325594;background:#f5f5f5}
+	.pager .prev,.pager .next,.pager .current{margin:0;;margin-right:2px;}
+	.pager .prev,.pager .next{width:50px}
+	.pager span.prev,.pager span.next{color:#888;}
+	.pager .current{background:#0088cc; color:#fff;border:1px solid #0088cc}
+	.pager input{border:1px solid #aaa;height:18px}
+</style>
+<script type="text/javascript">
+	var page_index=1;
+	function Pager(settings){
+		var extend=function(tgt,src){
+			for(var p in src)
+				tgt[p]=src[p];
+			return tgt;
+		};
+		var cfg=extend({
+			size:1,                                //页数
+			current:0,                            //当前页码
+			beforeEnd:2,                        //首尾最少显示页数
+			visible:5,                            //中间可见页数
+			prevLabel:'上一页',
+			nextLabel:'下一页',
+			ellipsis:'<span></span>',    //省略标记
+			textboxEnabled:true,            //是否显示文本域
+			showAlways:false                //总是显示分页器
+		},settings || {});
+
+		if(!cfg.showAlways && cfg.size==1)
+			return false;
+
+		var prev=(cfg.size==1 || cfg.current==0)?
+		'<span class="prev">'+cfg.prevLabel+'</span>':
+			//'<a href="'+cfg.prefix+(cfg.current==1?'':'_'+(cfg.current-1))+'.'+cfg.suffix+'" class="prev">'+cfg.prevLabel+'</a>';
+		'<a href="javascript:void()" onclick="gopage('+(page_index-1)+')" class="prev">'+ cfg.prevLabel +'</a>';
+		var next=(cfg.size==cfg.current+1)?
+		'<span class="next">'+cfg.nextLabel+'</span>':
+		'<a href="javascript:void()" onclick="gopage('+(page_index+1)+')" class="next">'+ cfg.nextLabel +'</a>';
+		var first=(cfg.current==0)?
+				'<span class="current">1</span>':
+		'<a href="javascript:void()" onclick="gopage(1)">'+'1</a>';
+
+		var p=function(s){
+			document.write(s);
+		};
+
+		p(prev);
+		p(first);
+
+		if(cfg.size>1){
+			var generator=function(begin,end){
+				for(var i=begin;i<end;i++){
+					cfg.current == i?
+							p('<span class="current">'+(i+1)+'</span>'):
+							p('<a href="javascript:void()" onclick="gopage('+ (i+1) + ')">'+ (i+1) +'</a>');
+
+				}
+			};
+
+			//visible定义区间计算
+			var posBegin=Math.max(0,cfg.current-(cfg.visible-Math.ceil(cfg.visible/2)));
+			var posEnd=Math.min(posBegin+cfg.visible,cfg.size);
+			//头部
+			generator(1,Math.min(cfg.beforeEnd,cfg.size));
+			//中间
+			if(cfg.current>=posBegin){
+				if(cfg.beforeEnd<posBegin)        p(cfg.ellipsis);
+				generator(Math.max(posBegin,cfg.beforeEnd),posEnd);
+			};
+			//尾部
+			if( posEnd!=cfg.size ){
+				if(cfg.size-cfg.beforeEnd>posEnd)        p(cfg.ellipsis);
+				generator(Math.max(cfg.size-cfg.beforeEnd,posEnd),cfg.size);
+			}
+		};
+		p(next);
+
+
+	}
+</script>
+<!--宣传登录-->
+<link href="${base.contextPath}/lib/index/css/inc.css" rel="stylesheet" type="text/css" />
+<#include "../../include/navigation.html">
+<!--logo+搜索-->
+<style>
+	.vT_search_sortby li{display:block;width:33.1%;height:30px;background:#ECECEC;border-right:1px solid #DFDFDF;border-bottom:1px solid #DFDFDF;float:left;font-size:14px;line-height:30px;text-align:center;color:#555}
+	.vT_search_sortby li.current{background:#0082d4;color:#fff}
+	.vT_search_sortby li.current a{color:#fff;text-decoration:none}
+	.vT_search_sortby li a{color:#555;text-decoration:none}
+	.zcfg_listheader p{line-height:35px;font-size:14px;font-weight:bolder;}
+	.zcfg_listheader p span.title{width:749px;height:35px;background:#f1f1f1;border-right:1px solid #fff;text-align:center;display:block;float:left;}
+	.zcfg_listheader p span.fwzh{width:119px;height:35px;background:#f1f1f1;border-right:1px solid #fff;text-align:center;display:block;float:left;}
+	.zcfg_listheader p span.bwrq{width:89px;height:35px;background:#f1f1f1;text-align:center;display:block;float:left;}
+
+</style>
+
+<span class="blank37"></span>
+
+<div class="vT_z">
+	<div class="vT-srch-result-top">
+		<div class="vT-srch-result-top-logo n_fl"><img src="${base.contextPath}/lib/index/search/static/images/searchplatform_zcfg.gif" style="border:0"></div>
+	</div>
+</div>
+<span class="blank20"></span>
+
+<!--主导航-->
+<form name="searchForm" id="searchForm" action="newsSearch" method="post">
+
+	<input type="hidden" name="page_index" id="page_index" value="1">
+	<style>
+		#vT_bidSearch_o {width:960px; border:1px solid #ccd;}
+		.vT_bidSearch_outsider{width:100%}
+		.vT_bidSearch_addon_con{width:100%;border-bottom:1px dotted #eee}
+		.vT_bidSearch_addon_block{width:240px;height:50px;float:left;margin-left:30px;}
+		.vT_bidSearch_addon_block2{width:80px;height:50px;float:left;margin-left:30px;}
+		.vT_bidSearch_addon_block2 p,.vT_bidSearch_addon_block p{width:80px;text-align:right;font-size:14px;font-weight:bolder;color:#6a6a6a;display:block;margin-right:10px;float:left;margin-top:13px;height:30px}
+		.vT_bidSearch_addon_block input{font-size:16px;width:130px;line-height:20px;height:21px;margin-top:8px; border:1px solid #c7d8e3;}
+		.vT-srch-result-channel-list3 li,.vT-srch-result-channel-list2 li{line-height:20px;margin-left:25px;display:block;float:left;width:90px;height:20px;font-size:14px;color:#6a6a6a;margin-bottom:10px;text-align:center}
+		.vT-srch-result-channel-list3 li{width:90px}
+	</style>
+	<div class="vT_z" id="vT_bidSearch_o">
+		<div class="vT_bidSearch_outsider">
+			<div class="vT_bidSearch_addon_con" style="margin-top:5px">
+
+				<div class="vT_bidSearch_addon_block" style="margin-left:0;width:660px"><p>标　　题</p><input type="text" name="searchparam" id="searchparam" style="width:550px" value="" /></div>
+				<div style="clear:both"></div></div>
+
+			<div class="vT_bidSearch_addon_con" style="margin-top:5px">
+				<div class="vT_bidSearch_addon_block" style="margin-left:0;width:350px"><p>发布日期</p><input type="text" name="dateissuestart" id="dateissuestart" style="width:90px" value=""  class="laydate-icon"  /> 至 <input type="text" name="dateissueend" id="dateissueend" style="width:90px" value=""  class="laydate-icon" /></div>
+				
+				<div style="clear:both"></div></div>
+
+			<div class="vT_bidSearch_addon_con" style="margin-top:5px">
+				<div class="vT_bidSearch_addon_block" style="margin-left:0;width:350px"><p>咨讯类别</p><select id="newstype" size=1 name="newstype" style="margin-top:8px;height:30px;line-height:24px">
+					<option value="" >全部</option>
+					
+						<#list kgNewstypeList as newstypeList>   
+								    <option value="${newstypeList.id}">${newstypeList.typename}</option>
+					    </#list>   
+					
+				</select></div>
+				<div class="vT_bidSearch_addon_block" style="margin-left:0;width:350px"><p>咨讯来源</p><select id="newssource" size=1 name="newssource" style="margin-top:8px;height:30px;line-height:24px">
+					<option value="" >全部</option>
+					<#list KgNewsSourceList as newsSourceList>   
+								    <option value="${newsSourceList.id}">${newsSourceList.sourcename}</option>
+				    </#list>   
+				</select></div>
+			<div style="clear:both"></div></div>
+			<div class="vT_bidSearch_addon_con" style="margin-top:10px;margin-bottom:10px;text-align:center">
+				<button class="ui gray button"  id="doSearch" >
+					检索
+				</button>
+				<button class="ui gray button" id="doReset" >
+					重置
+				</button>
+				<div style="clear:both"></div>
+			</div>
+			<div style="clear:both"></div>
+		</div>
+	</div>
+</form>
+
+<span class="blank20"></span>
+
+<div class="vT_z">
+	<div style="width:100%;height:30px">
+		<div style="font-size:14px"><p>关键字：
+			<span style="color:#c00000;font-weight:bolder">
+				${newstitle!""}
+			</span>
+			共找到 <span style="color:#c00000">${newsListSize}</span> 条内容</p>
+		</div>
+	</div>
+</div>
+<span class="blank5"></span>
+<!--div class="vT_z">
+	<div class="vT-srch-condition">
+        <p>搜索条件：</p><ul class="vT-srch-condi">
+            <li>北京市</li>
+            <li>丰台区</li>
+        </ul>
+    </div>
+</div-->
+
+<div class="vT_z">
+	<div class="zcfg_listheader"><p>
+	<span class="title">标题</span>
+	<span class="fwzh">发文字号</span>
+	<span class="bwrq">发布日期</span></p>
+	</div>
+</div>
+<span class="blank5"></span>
+<div class="vT_z">
+	<div class="vT-srch-result">
+		<div class="vT-srch-result-list-con">
+			<div class="vT-srch-result-list">
+				<ul class="vT-srch-result-list-nr">
+						
+						<#list newsList as news>   
+								    <li>
+										<a href="${base.contextPath}/index/newsDetail?id=${news.id}" target="_blank">
+											${news.newstitle}
+										</a>
+										<span></span>
+										<em>
+											${news.createdate?string('yyyy-MM-dd')}
+										</em>
+									</li>
+					    </#list>   
+						
+					
+				</ul>
+			</div>
+			<!---->
+
+		</div>
+		
+			<p class="pager">
+				<script language="javascript">Pager({
+					size: ${allPageNum},
+					current: ${page-1},
+					prefix: 'data2',
+					suffix: '.jsp&'
+				});</script>
+			</p>
+		
+	</div>
+	<!---->
+
+</div>
+<div class="vT-srch-result-page-con" style="background:#ac0000;color:white;width:1200px"><div class="pagigation"></div>
+</div>
+</div>
+
+<span class="blank37"></span>
+<div class="vT_nav_cp">
+	<div class="vT_z">
+		<div class="vT_b_c vT_cp"><p><span>&copy; 1999-<script language="javascript">
+			var myDate = new Date();
+			document.write(myDate.getFullYear());
+		</script></span> 中华人民共和国财政部版权所有 | <a href="http://www.ccgp.gov.cn/contact.shtml" target="_blank">联系我们</a> | <a href="mailto:feedback@ccgp.gov.cn">意见反馈</a> | <a href="http://www.miibeian.gov.cn" target="_blank">京<span>ICP</span>备<span>10046031</span>号<span>-10</span></a></p>
+		</div>
+	</div>
+</div>
+<script language="javascript" src="http://www.ccgp.gov.cn/images/sa.js"></script>
+<script type="text/javascript" src="${base.contextPath}/lib/index/search/static/js/fixdiv.js"></script>
+<!--[if IE 6]>
+<script language="javascript" src="/static/js/DD_belatedPNG_0.0.8a-min.js"></script>
+<script>
+	/* EXAMPLE */
+	DD_belatedPNG.fix('.c_list li,.vT_R_clist li');
+
+	/* string argument can be any CSS selector */
+	/* .png_bg example is unnecessary */
+	/* change it to what suits you! */
+</script>
+<![endif]-->
+<script language="javascript">
+	function showd(n)
+	{
+		var uom = new Date(new Date()-0+n*86400000);
+		uom = uom.getFullYear() + "," + (uom.getMonth()+1) + "," + uom.getDate();
+		return uom;
+	}
+	var dayLT=showd(0);
+	var gEndT = dayLT.split(",");
+	var gEnd=gEndT[0]-0 + "-" + gEndT[1] + "-" +gEndT[2];
+
+	laydate({
+		elem: '#dateissuestart',
+		format: 'YYYY-MM-DD', // 分隔符可以任意定义，该例子表示只显示年月
+		festival: false, //显示节日
+		max:gEnd,
+		choose: function(datas){ //选择日期完毕的回调
+			//alert('得到：'+datas);
+		}
+	});
+	laydate({
+		elem: '#dateissueend',
+		format: 'YYYY-MM-DD', // 分隔符可以任意定义，该例子表示只显示年月
+		festival: false, //显示节日
+		max:gEnd,
+		choose: function(datas){ //选择日期完毕的回调
+			//alert('得到：'+datas);
+		}
+	});
+
+	/*
+	 laydate({
+	 elem: '#hello3',
+	 min: laydate.now(-1), //-1代表昨天，-2代表前天，以此类推
+	 max: laydate.now(+1) //+1代表明天，+2代表后天，以此类推
+	 });
+	 */
+</script>
+</body>
+</html>

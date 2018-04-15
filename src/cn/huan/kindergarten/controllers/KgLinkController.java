@@ -61,11 +61,12 @@ import cn.huan.kindergarten.service.IKgLinkService;
     //========================================后台===================================
     @RequestMapping(value = "/admin/link/query")
     @ResponseBody
-    public ExtStore adminQuery(KgLink dto, @RequestParam(defaultValue = DEFAULT_PAGE) int start,
+    public ExtStore adminQuery(KgLink dto, @RequestParam(defaultValue = DEFAULT_PAGE) int page,int start,
         @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit, HttpServletRequest request) {
         IRequest requestContext = createRequestContext(request);
-        List<KgLink> list = service.select(requestContext,dto,1,limit);
-        return new ExtStore(start, limit, list.size(), list);
+        int count = service.adminQueryCount(requestContext, null);
+        List<KgLink> list = service.select(requestContext,dto,page,limit);
+        return new ExtStore(start, limit, count, list);
     }
     
     

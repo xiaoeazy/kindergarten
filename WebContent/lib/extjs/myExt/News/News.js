@@ -10,8 +10,90 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
 	initUIComponents : function() {
 	var me = this;
 	var mainId = me.mainId;
+	//===========================formpanel=========================
 	
+	var typeid_Combo_Store = new Ext.data.Store({
+		proxy: {
+	        type: 'ajax',
+	        url : appName+ '/admin/newstype/query',
+	        reader: {
+	        	root : "results",
+				totalProperty: "totalProperty",
+				successProperty:'success'
+	        }
+	    },
+	    autoLoad : true,
+	    fields: ['id', 'typename']
+	});
+	
+   var typeCombo = new Ext.form.ComboBox({
+	   		fieldLabel:'类型',
+    	    id:mainId+"typeid",
+            store : typeid_Combo_Store,  
+            valueField : "id",  
+            mode : 'remote',  
+            displayField : "typename",  
+            forceSelection : true,  
+            emptyText : '请选择',  
+            editable : false,  
+            triggerAction : 'all',  
+            hiddenName : "typename",  
+            autoShow : true,  
+            selectOnFocus : true,  
+            name : "typeid",
+            listeners:{
+            	afterrender:function(comb){
+            	},
+            	select:function(combo, record, index){
+            	}
+            }
+        }); 
+	
+	var formpanel = new Ext.FormPanel({
+		  region:'north',
+		  labelAlign: "right",
+		  labelWidth :100,
+	      frame: true,
+	      width: '100%',
+	      bodyStyle:'margin: 0px auto',
+	      defaults:{
+             xtype:"textfield",
+             width:'100%',
+             bodyStyle:'padding:10px 0px 10px 0px'
+          },
+		  items : [
+		  			{
+		          		fieldLabel:'标题名',
+						name: 'newstitle',
+						id:mainId+"newstitle",
+			            maxLength:45 ,
+			            width:400
+		  			},
+		  			typeCombo
+		  			],
+		   buttons:[{
+			    width:50,
+				text : '查询',
+				handler : function(button, event) {
+					var newstitle = Ext.getCmp(mainId+"newstitle").getValue().trim();
+					var typeid 	  = Ext.getCmp(mainId+"typeid").getValue();
+					store.proxy.url = appName+ '/admin/news/query';
+					store.proxy.extraParams={
+							page:1,
+							start:0,
+							newstitle:newstitle,
+							typeid:typeid
+					};
+					store.load();  
+				}
+		    }]
+	});
+
+	
+	
+	//==========================grid====================
 		var store = new Ext.data.Store({
+			pageSize:10,
 			proxy: {
 		        type: 'ajax',
 		        url : appName+ '/admin/news/query',
@@ -28,6 +110,7 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
 
     
 	    var grid = new Ext.grid.GridPanel({
+	    	region:'center',
 	  	  	frame:true,
 	  	  	border:true,	
 	  	  	enableHdMenu:false,
@@ -39,7 +122,7 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
 	            checkboxSelect :true
 	        },
 	        bbar: new Ext.PagingToolbar({
-			        pageSize:10,
+			       
 			        store: store,
 			        displayInfo: true,
 			        displayMsg: '当前 {0} 到 {1} 共 {2}',
@@ -86,10 +169,10 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
 		
 		Ext.apply(this, {
 			width:'100%',
-			items : [grid],
+			items : [formpanel,grid],
 			frame:false,
 			resizable : false,
-			layout:'fit',
+			layout:'border',
 			listeners:{
 				beforeshow:function(){
 				}

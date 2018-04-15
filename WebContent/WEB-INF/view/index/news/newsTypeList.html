@@ -11,7 +11,7 @@
 </head>
 <body id="detail">
 <link href="${base.contextPath}/lib/index/css/inc.css" rel="stylesheet" type="text/css" />
-<#include "../include/navigation.html">
+<#include "../../include/navigation.html">
 
 <div class="main">
 <div class="main_container">
@@ -103,7 +103,7 @@ function Pager(c){
 };
 </script>
 <!-- <script language="javascript">Pager({size:25, current:0, prefix:'index',suffix:'htm'});</script></p></div> -->
-<script language="javascript">Pager({size:${pagesize}, current:${page-1}, prefix:'newsList?typeid=10&page=',suffix:''});</script></p></div>
+<script language="javascript">Pager({size:${allPageNum}, current:${page-1}, prefix:'newsList?typeid=${typeid}&page=',suffix:''});</script></p></div>
 </div>
 
 </div>

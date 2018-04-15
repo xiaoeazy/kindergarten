@@ -20,7 +20,7 @@ public class KgConfig extends BaseDTO {
 
      @Id
      @GeneratedValue
-     private String id;
+     private Long id;
 
      @NotEmpty
      @Length(max = 40)
@@ -33,11 +33,11 @@ public class KgConfig extends BaseDTO {
      private String sysvalue;
 
 
-     public void setId(String id){
+     public void setId(Long id){
          this.id = id;
      }
 
-     public String getId(){
+     public Long getId(){
          return id;
      }
 

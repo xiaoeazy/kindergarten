@@ -3,7 +3,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.huan.kindergarten.mapper.KgNewsMapper">
     <resultMap id="BaseResultMap" type="cn.huan.kindergarten.dto.KgNews">
-        <result column="id" property="id" jdbcType="VARCHAR" />
+        <result column="id" property="id" jdbcType="DECIMAL" />
         <result column="typeId" property="typeid" jdbcType="DECIMAL" />
         <result column="sourceId" property="sourceid" jdbcType="DECIMAL" />
         <result column="attributeId" property="attributeid" jdbcType="VARCHAR" />
@@ -17,7 +17,7 @@
     </resultMap>
 
 	 <resultMap  id="OtherResultMap" type="cn.huan.kindergarten.dto.KgNews">
-        <result column="id" property="id" jdbcType="VARCHAR" />
+        <result column="id" property="id" jdbcType="DECIMAL" />
         <result column="typeId" property="typeid" jdbcType="DECIMAL" />
         <result column="sourceId" property="sourceid" jdbcType="DECIMAL" />
         <result column="attributeId" property="attributeid" jdbcType="VARCHAR" />
@@ -34,8 +34,28 @@
         </association>
     </resultMap>
 
-   <select id="selectWithOtherInfo" resultMap="OtherResultMap" >
+   <select id="selectWithOtherInfo" resultMap="OtherResultMap" parameterType="cn.huan.kindergarten.dto.KgNews">
         select a.*,b.typename from kg_news a left join kg_newsType b
             on a.typeid=b.id
+           <where>
+           		<if test="newstitle != null">
+           			AND a.newsTitle  like CONCAT('%',#{newstitle},'%') 
+           		</if>
+           		<if test="typeid != null">
+           			AND a.typeId = #{typeid}
+           		</if>
+           </where>
+    </select>
+    
+   <select id="adminQueryCount" resultType="java.lang.Integer" parameterType="cn.huan.kindergarten.dto.KgNews">
+        select count(1) from kg_news 
+           <where>
+           		<if test="newstitle != null and newstitle !=''">
+           			AND newsTitle  like CONCAT('%',#{newstitle},'%') 
+           		</if>
+           		<if test="typeid != null and typeid !=''">
+           			AND typeId = #{typeid}
+           		</if>
+           </where>
     </select>
 </mapper>
