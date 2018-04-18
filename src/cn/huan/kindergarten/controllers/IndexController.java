@@ -47,6 +47,12 @@ public class IndexController extends BaseController{
         }
         
         mv.addObject("typeList", typeList);
+        
+        List<KgNewstype> kgNewstypeList = iKgNewstypeService.selectAll(requestContext);
+        List<KgNewsSource> KgNewsSourceList = iKgNewsSourceService.selectAll(requestContext);
+        
+        mv.addObject("kgNewstypeList", kgNewstypeList);
+        mv.addObject("KgNewsSourceList", KgNewsSourceList);
        
         return mv;
     }
@@ -63,7 +69,7 @@ public class IndexController extends BaseController{
         if(searchparam!=null&&!("").equals(searchparam)) news.setNewstitle(searchparam);
         if(newstype!=null)   news.setTypeid(newstype);
         if(newssource!=null)   news.setSourceid(newssource);
-        List<KgNews> list = iKgNewsService.select(requestContext, news, page, limit);
+        List<KgNews> list = iKgNewsService.selectWithOtherInfo(requestContext, news, page, limit);
         int count = iKgNewsService.adminQueryCount(requestContext, news);
         int allPageNum = count%limit==0?count/limit:count/limit+1;
         if(count==0) allPageNum=1;

@@ -7,7 +7,9 @@
 <meta http-equiv="expires" content="0">
 <title>政府采购动态 - 中国政府采购网</title>
 <link href="${base.contextPath}/lib/index/css/detail.css" rel="stylesheet" type="text/css" />
-<script language="javascript" src="${base.contextPath}/lib/index/js/jquery-3.2.1.min.js" ></script>
+<link type="text/css" rel="stylesheet" href="http://cdn.staticfile.org/twitter-bootstrap/3.1.1/css/bootstrap.min.css"/>
+<script language="javascript" src="${base.contextPath}/lib/jquery/jquery.min.js" ></script>
+<script language="javascript" src="${base.contextPath}/lib/jqPaginator/jqpaginator.min.js" ></script>
 </head>
 <body id="detail">
 <link href="${base.contextPath}/lib/index/css/inc.css" rel="stylesheet" type="text/css" />
@@ -17,96 +19,52 @@
 <div class="main_container">
 
 
-
 <div class="main_left_block mt13">
-<div class="wz_block">
-    <div class="vF_deail_currentloc">
-        <p>当前位置：<a href="../index.htm"  title="首页" class="CurrChnlCls">首页</a>
-        &nbsp;&raquo;&nbsp;<a href="index.htm" title="政府采购动态" class="CurrChnlCls">资讯中心</a>
-        &nbsp;&raquo;&nbsp;<a href="${base.contextPath}/index/newsList?typeid=${typeid}" title="${kgNewstype.typename}" class="CurrChnlCls">${kgNewstype.typename}</a> 列表页</p>
-    </div>
-
-    <div class="vF_detail_relcontent mt13">
-    <h2><p>${kgNewstype.typename}</p></h2>
-    <div class="vF_detail_relcontent_lst">
-        <ul class="c_list_tat">
-
-
-
-	<#list newsList as news>   
-               <li><a href="${base.contextPath}/index/newsDetail?id=${news.id}"  title="${news.newstitle}">${news.newstitle}</a>
-     				 <span> ${news.createdate?string('yyyy-MM-dd HH:mm:ss')} </span>
-			    </li> 
-    </#list>   
-
-        </ul>
-    </div>
-    <div class="pagigation"><style>
-p.pager{float:right;margin-right:10px;margin-top:8px}
-.pager{margin:12px 12px 0 0; color:#444;border-bottom:1px solid #555; font:14px Verdana,"黑体";border:none;height:30px;}
-.pager a,
-.pager span,
-.pager input{float:left;padding:2px 5px;}
-.pager a{color:#0088CC; text-decoration:none;border:1px solid #ddd;margin-right:2px;width:17px}
-.pager a:hover{border-bottom:2px solid #325594; color:#325594;background:#f5f5f5}
-.pager .prev,
-.pager .next,
-.pager .current{margin:0;;margin-right:2px;width:17px}
-.pager .prev,
-.pager .next{width:50px}
-.pager span.prev,
-.pager span.next{color:#888;}
-.pager .current{background:#0088cc; color:#fff;border:1px solid #0088cc}
-.pager input{border:1px solid #aaa;height:18px}
-</style>
-
-<p class="pager">
-<script language="javascript">
-// function Pager(c){var d=function(a,b){for(var p in b)a[p]=b[p];return a};var e=d({size:1,current:0,beforeEnd:2,visible:5,prevLabel:'上一页',nextLabel:'下一页',ellipsis:'<span>...</span>',textboxEnabled:true,showAlways:false},c||{});if(!e.showAlways&&e.size==1)return false;var f=(e.size==1||e.current==0)?'<span class="prev">'+e.prevLabel+'</span>':'<a href="'+e.prefix+(e.current==1?'':'_'+(e.current-1))+'.'+e.suffix+'" class="prev">'+e.prevLabel+'</a>';var g=(e.size==e.current+1)?'<span class="next">'+e.nextLabel+'</span>':'<a href="'+e.prefix+'_'+(e.current+1)+'.'+e.suffix+'" class="next">'+e.nextLabel+'</a>';var h=(e.current==0)?'<span class="current">1</span>':'<a href="'+e.prefix+'.'+e.suffix+'">1</a>';var p=function(s){document.write(s)};p(f);p(h);if(e.size>1){var j=function(a,b){for(var i=a;i<b;i++){e.current==i?p('<span class="current">'+(i+1)+'</span>'):p('<a href="'+e.prefix+'_'+i+'.'+e.suffix+'">'+(i+1)+'</a>')}};var k=Math.max(0,e.current-(e.visible-Math.ceil(e.visible/2)));var l=Math.min(k+e.visible,e.size);j(1,Math.min(e.beforeEnd,e.size));if(e.current>=k){if(e.beforeEnd<k)p(e.ellipsis);j(Math.max(k,e.beforeEnd),l)};if(l!=e.size){if(e.size-e.beforeEnd>l)p(e.ellipsis);j(Math.max(e.size-e.beforeEnd,l),e.size)}};p(g);if(e.textboxEnabled&&e.size>e.beforeEnd*2+e.visible){jump="if(event.keyCode==13){var num=this.value;if(isNaN(num)||num<1||num>"+e.size+")alert('非法页码参数');else{num=num==1?'':'_'+(num-1);location.href='"+e.prefix+"'+num+'"+"."+e.suffix+"';}}";p('<input type="text" size="1" title="输入页码敲击回车键!" onkeypress="'+jump+'" />')}};
-function Pager(c){
-			var d=function(a,b){
-			for(var p in b)
-				a[p]=b[p];
-				return a
-			};
-			var e=d({size:1,current:0,beforeEnd:2,visible:5,prevLabel:'上一页',nextLabel:'下一页',ellipsis:'<span>...</span>',textboxEnabled:true,showAlways:false},c||{});
-			if(!e.showAlways&&e.size==1)return false;
-			var f=(e.size==1||e.current==0)?'<span class="prev">'+e.prevLabel+'</span>':'<a href="'+e.prefix+(e.current==1?'':(e.current))+'" class="prev">'+e.prevLabel+'</a>';
-			var g=(e.size==e.current+1)?'<span class="next">'+e.nextLabel+'</span>':'<a href="'+e.prefix+(e.current+2)+'" class="next">'+e.nextLabel+'</a>';
-			var h=(e.current==0)?'<span class="current">1</span>':'<a href="'+e.prefix+'">1</a>';
-			var p=function(s){document.write(s)};p(f);p(h);
-			if(e.size>1){
-						var j=function(a,b){
-							for(var i=a;i<b;i++){
-								e.current==i?p('<span class="current">'+(i+1)+'</span>'):p('<a href="'+e.prefix+(i+1)+'">'+(i+1)+'</a>')
-							}
-						};
-						var k=Math.max(0,e.current-(e.visible-Math.ceil(e.visible/2)));
-						var l=Math.min(k+e.visible,e.size);
-						j(1,Math.min(e.beforeEnd,e.size));
-						if(e.current>=k){
-						if(e.beforeEnd<k)
-							p(e.ellipsis);
-							j(Math.max(k,e.beforeEnd),l)
-						};
-						if(l!=e.size){
-							if(e.size-e.beforeEnd>l)
-								p(e.ellipsis);
-							j(Math.max(e.size-e.beforeEnd,l),e.size)
-						}
-				};
-				p(g);
-				if(e.textboxEnabled&&e.size>e.beforeEnd*2+e.visible){
-						jump="if(event.keyCode==13){var num=this.value;if(isNaN(num)||num<1||num>"+e.size+")alert('非法页码参数');else{num=num==1?'':(num);location.href='"+e.prefix+"'+num+'';}}";
-						p('<input type="text" size="1" title="输入页码敲击回车键!" onkeypress="'+jump+'" />')
-				}
-};
-</script>
-<!-- <script language="javascript">Pager({size:25, current:0, prefix:'index',suffix:'htm'});</script></p></div> -->
-<script language="javascript">Pager({size:${allPageNum}, current:${page-1}, prefix:'newsList?typeid=${typeid}&page=',suffix:''});</script></p></div>
-</div>
-
-</div>
+	<div class="wz_block">
+	    <div class="vF_deail_currentloc">
+	        <p>当前位置：<a href="../index.htm"  title="首页" class="CurrChnlCls">首页</a>
+	        &nbsp;&raquo;&nbsp;<a href="index.htm" title="政府采购动态" class="CurrChnlCls">资讯中心</a>
+	        &nbsp;&raquo;&nbsp;<a href="${base.contextPath}/index/newsList?typeid=${typeid}" title="${kgNewstype.typename}" class="CurrChnlCls">${kgNewstype.typename}</a> 列表页</p>
+	    </div>
+	
+	    <div class="vF_detail_relcontent mt13">
+		    <h2><p>${kgNewstype.typename}</p></h2>
+		    <div class="vF_detail_relcontent_lst">
+		        <ul class="c_list_tat">
+		
+		
+		
+			<#list newsList as news>   
+		               <li><a href="${base.contextPath}/index/newsDetail?id=${news.id}"  title="${news.newstitle}">${news.newstitle}</a>
+		     				 <span> ${news.createdate?string('yyyy-MM-dd HH:mm:ss')} </span>
+					    </li> 
+		    </#list>   
+		
+		        </ul>
+		    </div>
+		    <div class="pagigation" style="text-align:right">
+					 <ul class="pagination" id="pagination2"></ul>
+			</div>
+		</div>
+		<script type="text/javascript">
+		$.jqPaginator('#pagination2', {
+	        totalPages: ${allPageNum},
+	        visiblePages: 10,
+	        currentPage: ${page},
+	        first: '<li class="prev"><a href="javascript:;">首页</a></li>',  
+	        prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',  
+	        next: '<li class="next"><a href="javascript:;">下一页</a></li>',  
+	        last: '<li class="prev"><a href="javascript:;">末页</a></li>',  
+	        page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',  
+	        onPageChange: function (num, type) {
+	        	if(type=="change"){
+	 	            var path ="newsTypeList?typeid=${typeid}&page="+num;
+	 	            window.location.href=path;
+	        	}
+	        }
+	    });
+	   </script>
+	</div>
 </div>
 
     <div class="main_right_block" style="margin-top:43px">

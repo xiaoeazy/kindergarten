@@ -6,11 +6,13 @@
 	<link href="${base.contextPath}/lib/index/search/static/css/style_law3.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="${base.contextPath}/lib/index/search/static/js/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="${base.contextPath}/lib/index/search/static/js/laydate/laydate.js"></script>
+	<link type="text/css" rel="stylesheet" href="http://cdn.staticfile.org/twitter-bootstrap/3.1.1/css/bootstrap.min.css"/>
+	<script language="javascript" src="${base.contextPath}/lib/jqPaginator/jqpaginator.min.js" ></script>
 	<script language="javascript">
 
 		function gopage(e){
 
-			$("#page_index").val(e);
+			$("#page").val(e);
 			//alert($("#pageindex").val());
 			$("#searchForm").submit();
 		}
@@ -83,90 +85,7 @@
 	</script>
 </head>
 <body style="background:#fff">
-<style>
-	p.pager{float:right;margin-right:10px;margin-top:8px}
-	.pager{margin:12px 12px 0 0; color:#444;border-bottom:1px solid #555; font:14px Verdana,"黑体";border:none;height:30px;}
-	.pager a,.pager span,.pager input{float:left;padding:2px 5px;}
-	.pager a{color:#0088CC; text-decoration:none;border:1px solid #ddd;margin-right:2px}
-	.pager a:hover{border-bottom:2px solid #325594; color:#325594;background:#f5f5f5}
-	.pager .prev,.pager .next,.pager .current{margin:0;;margin-right:2px;}
-	.pager .prev,.pager .next{width:50px}
-	.pager span.prev,.pager span.next{color:#888;}
-	.pager .current{background:#0088cc; color:#fff;border:1px solid #0088cc}
-	.pager input{border:1px solid #aaa;height:18px}
-</style>
-<script type="text/javascript">
-	var page_index=1;
-	function Pager(settings){
-		var extend=function(tgt,src){
-			for(var p in src)
-				tgt[p]=src[p];
-			return tgt;
-		};
-		var cfg=extend({
-			size:1,                                //页数
-			current:0,                            //当前页码
-			beforeEnd:2,                        //首尾最少显示页数
-			visible:5,                            //中间可见页数
-			prevLabel:'上一页',
-			nextLabel:'下一页',
-			ellipsis:'<span></span>',    //省略标记
-			textboxEnabled:true,            //是否显示文本域
-			showAlways:false                //总是显示分页器
-		},settings || {});
 
-		if(!cfg.showAlways && cfg.size==1)
-			return false;
-
-		var prev=(cfg.size==1 || cfg.current==0)?
-		'<span class="prev">'+cfg.prevLabel+'</span>':
-			//'<a href="'+cfg.prefix+(cfg.current==1?'':'_'+(cfg.current-1))+'.'+cfg.suffix+'" class="prev">'+cfg.prevLabel+'</a>';
-		'<a href="javascript:void()" onclick="gopage('+(page_index-1)+')" class="prev">'+ cfg.prevLabel +'</a>';
-		var next=(cfg.size==cfg.current+1)?
-		'<span class="next">'+cfg.nextLabel+'</span>':
-		'<a href="javascript:void()" onclick="gopage('+(page_index+1)+')" class="next">'+ cfg.nextLabel +'</a>';
-		var first=(cfg.current==0)?
-				'<span class="current">1</span>':
-		'<a href="javascript:void()" onclick="gopage(1)">'+'1</a>';
-
-		var p=function(s){
-			document.write(s);
-		};
-
-		p(prev);
-		p(first);
-
-		if(cfg.size>1){
-			var generator=function(begin,end){
-				for(var i=begin;i<end;i++){
-					cfg.current == i?
-							p('<span class="current">'+(i+1)+'</span>'):
-							p('<a href="javascript:void()" onclick="gopage('+ (i+1) + ')">'+ (i+1) +'</a>');
-
-				}
-			};
-
-			//visible定义区间计算
-			var posBegin=Math.max(0,cfg.current-(cfg.visible-Math.ceil(cfg.visible/2)));
-			var posEnd=Math.min(posBegin+cfg.visible,cfg.size);
-			//头部
-			generator(1,Math.min(cfg.beforeEnd,cfg.size));
-			//中间
-			if(cfg.current>=posBegin){
-				if(cfg.beforeEnd<posBegin)        p(cfg.ellipsis);
-				generator(Math.max(posBegin,cfg.beforeEnd),posEnd);
-			};
-			//尾部
-			if( posEnd!=cfg.size ){
-				if(cfg.size-cfg.beforeEnd>posEnd)        p(cfg.ellipsis);
-				generator(Math.max(cfg.size-cfg.beforeEnd,posEnd),cfg.size);
-			}
-		};
-		p(next);
-
-
-	}
-</script>
 <!--宣传登录-->
 <link href="${base.contextPath}/lib/index/css/inc.css" rel="stylesheet" type="text/css" />
 <#include "../../include/navigation.html">
@@ -195,7 +114,7 @@
 <!--主导航-->
 <form name="searchForm" id="searchForm" action="newsSearch" method="post">
 
-	<input type="hidden" name="page_index" id="page_index" value="1">
+	<input type="hidden" name="page" id="page" value="1">
 	<style>
 		#vT_bidSearch_o {width:960px; border:1px solid #ccd;}
 		.vT_bidSearch_outsider{width:100%}
@@ -304,14 +223,26 @@
 
 		</div>
 		
-			<p class="pager">
-				<script language="javascript">Pager({
-					size: ${allPageNum},
-					current: ${page-1},
-					prefix: 'data2',
-					suffix: '.jsp&'
-				});</script>
-			</p>
+		<div class="pagigation" style="text-align:right">
+				 <ul class="pagination" id="pagination2"></ul>
+		</div>
+		<script type="text/javascript">
+			$.jqPaginator('#pagination2', {
+		        totalPages: ${allPageNum},
+		        visiblePages: 10,
+		        currentPage: ${page},
+		        first: '<li class="prev"><a href="javascript:;">首页</a></li>',  
+		        prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',  
+		        next: '<li class="next"><a href="javascript:;">下一页</a></li>',  
+		        last: '<li class="prev"><a href="javascript:;">末页</a></li>',  
+		        page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',  
+		        onPageChange: function (num, type) {
+		        	if(type=="change"){
+		        		gopage(num);
+		        	}
+		        }
+		    });
+		   </script>
 		
 	</div>
 	<!---->

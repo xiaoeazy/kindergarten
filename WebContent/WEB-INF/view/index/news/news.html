@@ -48,7 +48,7 @@ $(document).ready(function(){
     $("#doReset").click(function(){
         doreset();
     });
-$("#btn_zcfgsearch").click(function(){
+	$("#btn_zcfgsearch").click(function(){
        $("#vT_bidSearch_o").toggle();
         if($("#btn_zcfgsearch").attr("src")=="../images/btn_zcfgsearch_on.gif"/*tpa=http://www.ccgp.gov.cn/images/btn_zcfgsearch_on.gif*/)
          {
@@ -66,7 +66,7 @@ $("#btn_zcfgsearch").click(function(){
     $("#dateissueend").css("cursor","pointer");
     $("#datematerialstart").css("cursor","pointer");
     $("#datematerialend").css("cursor","pointer");
-$("#btn_zcfgsearch").css("cursor","pointer");
+	$("#btn_zcfgsearch").css("cursor","pointer");
 
     $(".vT_search_sortby li:not(.current)").mouseover(function(){
         $(this).css("background","#d0d0d0");
@@ -79,7 +79,7 @@ $("#btn_zcfgsearch").css("cursor","pointer");
 
     })
 </script>
-<script type="text/javascript" src="../../search.ccgp.gov.cn/static/js/laydate/laydate.js" tppabs="http://search.ccgp.gov.cn/static/js/laydate/laydate.js"></script>
+<script type="text/javascript" src="${base.contextPath}/lib/index/search/static/js/laydate/laydate.js" ></script>
 </head>
 <body id="zcfg">
 <link href="${base.contextPath}/lib/index/css/inc.css" rel="stylesheet" type="text/css" />
@@ -92,11 +92,8 @@ $("#btn_zcfgsearch").css("cursor","pointer");
 
 
 <div class="main_topic_block mt13">
-<form name="searchForm" id="searchForm" action="http://search.ccgp.gov.cn/zcfgsearch" method="post">
+<form name="searchForm" id="searchForm" action="newsSearch" method="post">
 <input type="hidden" name="page_index" id="page_index" value="1" />
-        <input type="hidden" name="start_time" id="start_time" />
-        <input type="hidden" name="end_time" id="end_time" />
-        <input type="hidden" name="timeType" id="timeType" />
 <style>
 #vT_bidSearch_o {width:1000px;}
 .vT_bidSearch_outsider{width:100%}
@@ -113,86 +110,31 @@ $("#btn_zcfgsearch").css("cursor","pointer");
         <div class="vT_bidSearch_addon_con" style="margin-top:5px">
 
          <div class="vT_bidSearch_addon_block" style="margin-left:0;width:660px"><p>标　　题</p><input type="text" name="searchparam" id="searchparam" style="width:550px" value="" /></div>
-         <div class="vT_bidSearch_addon_block" style="margin-left:0;width:300px"><p>文号</p><input type="text" name="filedep" id="filedep" style="width:50px" value="" />〔<input type="text" name="fileyear" id="fileyear" style="width:50px" value="" />〕<input type="text" name="filenum" id="filenum" style="width:50px" value="" />号</div>
          <div style="clear:both"></div></div>
 
          <div class="vT_bidSearch_addon_con" style="margin-top:5px">
-         <div class="vT_bidSearch_addon_block" style="margin-left:0;width:350px"><p>颁布日期</p><input type="text" name="dateissuestart" id="dateissuestart" style="width:90px" value="" class="laydate-icon" /> 至 <input type="text" name="dateissueend" id="dateissueend" style="width:90px" value="" class="laydate-icon" /></div>
-         <div class="vT_bidSearch_addon_block" style="margin-left:0;width:350px"><p>实施日期</p><input type="text" name="datematerialstart" id="datematerialstart" style="width:90px" value="" class="laydate-icon" /> 至 <input type="text" name="datematerialend" id="datematerialend" style="width:90px" value="" class="laydate-icon" /></div>
-          <div class="vT_bidSearch_addon_block" style="margin-left:0;width:220px"><p>颁布单位</p><select id="issuedep" size=1 name="issuedep" style="margin-top:8px;height:30px;line-height:24px">
-<option value="" >全部</option>
-<option value="1">全国人大</option>
-<option value="2">国务院</option>
-<option value="7">国务院办公厅</option>
-<option value="3">财政部</option>
-<option value="4">其他部委</option>
-<option value="5">集采中心</option>
-<option value="6">地方财政</option>
-</select></div>
+         <div class="vT_bidSearch_addon_block" style="margin-left:0;width:350px"><p>发布日期</p><input type="text" name="dateissuestart" id="dateissuestart" style="width:90px" value="" class="laydate-icon" /> 至 <input type="text" name="dateissueend" id="dateissueend" style="width:90px" value="" class="laydate-icon" /></div>
+        
          <div style="clear:both"></div></div>
 
-         <div class="vT_bidSearch_addon_con" style="margin-top:5px">
-         <div class="vT_bidSearch_addon_block" style="margin-left:0;width:350px"><p>条法类别</p><select id="lawtype" size=1 name="lawtype" style="margin-top:8px;height:30px;line-height:24px">
-<option value="" >全部</option>
-<option value="1000">-=采购主体类=-</option>
-<option value="1001">采购人</option>
-<option value="1002">代理机构</option>
-<option value="1003">评审专家</option>
-<option value="1004">供应商</option>
-<option value="2000">-=政策功能类=-</option>
-<option value="2001">节能环保</option>
-<option value="2002">中小企业</option>
-<option value="2099">其他</option>
-<option value="3000">-=交易系统类=-</option>
-<option value="3001">采购计划</option>
-<option value="3002">信息统计</option>
-<option value="3003">项目采购</option>
-<option value="3099">其他</option>
-<option value="4000">-=采购方式类=-</option>
-<option value="4001">公开招标</option>
-<option value="4002">竞争性谈判</option>
-<option value="4003">单一来源</option>
-<option value="4004">非招标采购</option>
-<option value="4099">其他</option>
-<option value="5000">-=其他文件类=-</option>
-<option value="5001">信息公开</option>
-<option value="5006">采购目录</option>
-<option value="5007">信息化建设</option>
-<option value="5002">行政处罚</option>
-<option value="5003">公共资源</option>
-<option value="5004">政府和社会资本合作</option>
-<option value="5001">信息公开</option>
-<option value="5008">政府购买服务</option>
-<option value="5005">会议培训</option>
-<option value="5009">网站建设</option>
-<option value="5099">其他</option>
-</select></div>
-<div class="vT_bidSearch_addon_block" style="margin-left:0;width:350px"><p>法规层次</p><select id="lawlevle" size=1 name="lawlevle" style="margin-top:8px;height:30px;line-height:24px">
-<option value="" >全部</option>
-<option value="财政部规章">财政部规章</option>
-<option value="财政部规范性文件">财政部规范性文件</option>
-<option value="国务院文件" >国务院文件</option>
-<option value="其他部委文件" >其他部委文件</option>
-<option value="采购中心文件" >采购中心文件</option>
-<option value="国家法规" >国家法规</option>
-<option value="地方规章办法" >地方规章办法</option>
-<option value="国际法规" >国际法规</option>
-</select></div>
-<div class="vT_bidSearch_addon_block" style="margin-left:0;width:220px"><p>时 效 性</p>
-<select id="lawvalid" size=1 name="lawvalid" style="margin-top:8px;height:30px;line-height:24px">
-<option value="" >请选择</option>
-<option value="有效">有效</option>
-<option value="失效">失效</option>
-<option value="废止">废止</option>
-</select></div><div style="clear:both"></div></div>
-    <!--选择内容-->
-
+   
         <!--选择内容-->
-
-        <!--选择内容-->
-
-        <!--选择内容-->
-
+		<div class="vT_bidSearch_addon_con" style="margin-top:5px">
+				<div class="vT_bidSearch_addon_block" style="margin-left:0;width:350px"><p>咨讯类别</p><select id="newstype" size=1 name="newstype" style="margin-top:8px;height:30px;line-height:24px">
+					<option value="" >全部</option>
+					
+						<#list kgNewstypeList as newstypeList>   
+								    <option value="${newstypeList.id}">${newstypeList.typename}</option>
+					    </#list>   
+					
+				</select></div>
+				<div class="vT_bidSearch_addon_block" style="margin-left:0;width:350px"><p>咨讯来源</p><select id="newssource" size=1 name="newssource" style="margin-top:8px;height:30px;line-height:24px">
+					<option value="" >全部</option>
+					<#list KgNewsSourceList as newsSourceList>   
+								    <option value="${newsSourceList.id}">${newsSourceList.sourcename}</option>
+				    </#list>   
+				</select></div>
+			<div style="clear:both"></div></div>
        <!--输入内容-->
         <div class="vT_bidSearch_addon_con" style="margin-top:10px;margin-bottom:10px;text-align:center">
             <button class="ui gray button"  id="doSearch" >
@@ -252,7 +194,7 @@ $("#btn_zcfgsearch").css("cursor","pointer");
 			
 			                 <ul class="c_list mt10 mb10 tab-con split" style="display:block">
 			                 	<#list typeList.newsList as newsList>   
-									<li><a href="gwywj/201803/t20180302_9624500.htm" target="_blank" title="11"></a>${newsList.newstitle}</li>
+									<li><a href="${base.contextPath}/index/newsDetail?id=${newsList.id}" target="_blank" title="11"></a>${newsList.newstitle}</li>
 								</#list>
 		                	 </ul>
 			            </div>
@@ -381,5 +323,5 @@ laydate({
 });
 */
 </script>
-<script language="javascript" src="../js/channel.js" tppabs="http://www.ccgp.gov.cn/js/channel.js"></script>
+<script language="javascript" src="${base.contextPath}/lib/index/js/channel.js"></script>
 </html>
