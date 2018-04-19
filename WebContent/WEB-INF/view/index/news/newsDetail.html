@@ -22,14 +22,17 @@
 <div class="main_left_block mt13">
 <div class="wz_block">
     <div class="vF_deail_currentloc">
-        <p>当前位置：<a href="../../index.htm"  title="首页" main.htm class="CurrChnlCls">首页</a>&nbsp;&raquo;&nbsp;
-        <a href="${base.contextPath}/index/newsList?typeid=${newsInfo.typeid}" title="政府采购动态" main.htm class="CurrChnlCls">政府采购动态</a></p>
+        <p>当前位置：<a href="../../index.htm"  title="首页" main.htm class="CurrChnlCls">首页</a>
+          &nbsp;&raquo;&nbsp;<a href="${base.contextPath}/index/news" title="政府采购动态" class="CurrChnlCls">资讯中心</a>
+          &nbsp;&raquo;&nbsp;<a href="${base.contextPath}/index/newsTypeList?typeid=${kgNewstype.id}" title="${kgNewstype.typename}" class="CurrChnlCls">${kgNewstype.typename}</a>
+           &nbsp;&raquo;&nbsp;${newsInfo.newstitle}
+        </p>
     </div>
     <div class="vF_deail_maincontent">
 
 <div class="vF_detail_main">
             <div class="vF_detail_header"><h2 class="tc">${newsInfo.newstitle};</h2>
-            <p class="tc"><span id="pubTime">${newsInfo.createdate?string('yyyy-MM-dd HH:mm:ss')}</span> 来源：<span id="sourceName">财政部</span> 【<span id="printBtn">打印</span>】 <span id="shareTo" style=""></span><img src="../../../pub.ccgp.gov.cn/common/images/2tqr.jpg" tppabs="http://pub.ccgp.gov.cn/common/images/2tqr.jpg" id="imgqrshow" style="postion: relative;vertical-align:middle" /><div id="qrcode" style="display:none;position: absolute;margin-left:527px;margin-top:-15px;"></div></p></div>
+            <p class="tc"><span id="pubTime">${newsInfo.createdate?string('yyyy-MM-dd HH:mm:ss')}</span> 来源：<span id="sourceName">发布部</span> 【<span id="printBtn">打印</span>】 <span id="shareTo" style=""></span><img src="../../../pub.ccgp.gov.cn/common/images/2tqr.jpg" tppabs="http://pub.ccgp.gov.cn/common/images/2tqr.jpg" id="imgqrshow" style="postion: relative;vertical-align:middle" /><div id="qrcode" style="display:none;position: absolute;margin-left:527px;margin-top:-15px;"></div></p></div>
             <div class="vF_detail_content">
                 ${newsInfo.content};
             </div>
@@ -57,39 +60,35 @@
 
 
 <!--OTsidebar-->
-        <div class="main_right_cbl" style="margin-top:4px">
-            <h2 class="mt10 mb10"><a href="../../news/index.htm" tppabs="http://www.ccgp.gov.cn/news/">采购头条</a></h2>
+	<#list rightAttributeList as rightAttributeList>
+		<#if rightAttributeList_index = 0>
+			<div class="main_right_cbl " style="margin-top:4px">
+            	<h2 class="mt10 mb10"><a href="#" >${rightAttributeList.attributename}</a></h2>
                 <div class="vT-chs-section-content-con">
                 <ul class="vT-chs-section-content-list mb10">
-
-<li><a href="../../news/201803/t20180313_9657154.htm" target="_blank" title="聚力增效护航高质量发展 代表委员审查讨论计划报告和预算报告">聚力增效护航高质量发展 代表委员审查...</a></li>
-
-                </ul>
+                	<#list rightAttributeList.newsList as newsList>
+                		<li><a href="${base.contextPath}/index/newsDetail?id=${newsList.id}" target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
+                	</#list>
+				 </ul>
                 </div>
-        </div>
-
-        <div class="main_right_cbl mt13">
-            <h2 class="mt10 mb10"><a href="../index.htm" tppabs="http://www.ccgp.gov.cn/zcdt/">政采动态</a></h2>
+       		 </div>
+		<#else>
+			<div class="main_right_cbl mt13">
+          		<h2 class="mt10 mb10"><a href="#" >${rightAttributeList.attributename}</a></h2>
                 <div class="vT-chs-section-content-con">
                 <ul class="vT-chs-section-content-list mb10">
-
-<li><a href="t20180313_9658339.htm" target="_blank" title="关于废止国际金融组织和外国政府贷款赠款项目采购管理相关规范性文件的通知">关于废止国际金融组织和外国政府贷款...</a></li>
-
+					<#list rightAttributeList.newsList as newsList>
+						<li><a href="${base.contextPath}/index/newsDetail?id=${newsList.id}"  target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
+					</#list>
                 </ul>
                 </div>
-        </div>
+        	</div>
+		</#if>
+	</#list>
+        
 
-        <div class="main_right_cbl mt13">
-            <h2 class="mt10 mb10"><a href="../../gpsr/index.htm" tppabs="http://www.ccgp.gov.cn/gpsr/">购买服务</a></h2>
-                <div class="vT-chs-section-content-con">
-                <ul class="vT-chs-section-content-list mb10">
-
-<li><a href="../../gpsr/zhxx/df/201803/t20180315_9665607.htm"  target="_blank" title="内蒙古西乌旗积极推进社会养老服务体系建设">内蒙古西乌旗积极推进社会养老服务体...</a></li>
-
-                </ul>
-                </div>
-        </div>
-         <!--OTsidebar-->
+        
+<!--OTsidebar-->
         </div>
     </div>
 </div>

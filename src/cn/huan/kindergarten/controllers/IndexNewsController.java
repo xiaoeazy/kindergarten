@@ -137,6 +137,11 @@ public class IndexNewsController extends BaseController{
         KgNews newsInfo = iKgNewsService.selectByPrimaryKey(requestContext, news);
         mv.addObject("newsInfo", newsInfo);
         
+        KgNewstype newsType = new KgNewstype();
+        newsType.setId(newsInfo.getTypeid());
+        KgNewstype kgNewstype = iKgNewstypeService.selectByPrimaryKey(requestContext, newsType);
+        
+        mv.addObject("kgNewstype", kgNewstype);
         loadNavigation(mv, requestContext,CH_ZXZX);
         loadAttriteNews(mv, requestContext,3);
         return mv;

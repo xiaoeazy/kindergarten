@@ -24,7 +24,7 @@
 	    <div class="vF_deail_currentloc">
 	        <p>当前位置：<a href="../index.htm"  title="首页" class="CurrChnlCls">首页</a>
 	        &nbsp;&raquo;&nbsp;<a href="${base.contextPath}/index/news" title="政府采购动态" class="CurrChnlCls">资讯中心</a>
-	        &nbsp;&raquo;&nbsp;<a href="${base.contextPath}/index/newsTypeList?typeid=${typeid}" title="${kgNewstype.typename}" class="CurrChnlCls">${kgNewstype.typename}</a> 列表页</p>
+	        &nbsp;&raquo;&nbsp;${kgNewstype.typename} 列表页</p>
 	    </div>
 	
 	    <div class="vF_detail_relcontent mt13">
@@ -73,7 +73,7 @@
 <!--OTsidebar-->
 	<#list rightAttributeList as rightAttributeList>
 		<#if rightAttributeList_index = 0>
-			<div class="main_right_cbl mt13" style="margin-top:4px">
+			<div class="main_right_cbl " style="margin-top:4px">
             	<h2 class="mt10 mb10"><a href="#" >${rightAttributeList.attributename}</a></h2>
                 <div class="vT-chs-section-content-con">
                 <ul class="vT-chs-section-content-list mb10">
