@@ -62,9 +62,20 @@ public class KgNews extends BaseDTO {
      
      @Transient
      private KgNewstype kgNewstype;
+     @Transient
+     private String newsSimpleTitle;
 
+     
 
-     public KgNewstype getKgNewstype() {
+     public String getNewsSimpleTitle() {
+		return newsSimpleTitle;
+	}
+
+	public void setNewsSimpleTitle(String newsSimpleTitle) {
+		this.newsSimpleTitle = newsSimpleTitle;
+	}
+
+	public KgNewstype getKgNewstype() {
 		return kgNewstype;
 	}
 

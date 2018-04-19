@@ -14,22 +14,35 @@ import org.springframework.web.servlet.ModelAndView;
 import com.huan.HTed.core.IRequest;
 import com.huan.HTed.system.controllers.BaseController;
 
+import cn.huan.kindergarten.dto.KgConfig;
 import cn.huan.kindergarten.dto.KgNews;
+import cn.huan.kindergarten.dto.KgNewsAttribute;
 import cn.huan.kindergarten.dto.KgNewsSource;
 import cn.huan.kindergarten.dto.KgNewstype;
+import cn.huan.kindergarten.service.IKgConfigService;
+import cn.huan.kindergarten.service.IKgNewsAttributeService;
 import cn.huan.kindergarten.service.IKgNewsService;
 import cn.huan.kindergarten.service.IKgNewsSourceService;
 import cn.huan.kindergarten.service.IKgNewstypeService;
 
 @Controller
-public class IndexController extends BaseController{
-
+public class IndexNewsController extends BaseController{
+	public static final String  CH_INDEX = "CH_INDEX";//首页
+	public static final String  CH_XHJJ = "CH_XHJJ";//协会简介
+	public static final String  CH_ZXZX = "CH_ZXZX";//资讯中心
+	public static final String  CH_XHGZ = "CH_XHGZ";//协会工作
+	public static final String  CH_LXWM = "CH_LXWM";//联系我们
+	public static final String  SUSPENSION_POINTS = "...";
 	@Autowired
 	private IKgNewsService iKgNewsService;
 	@Autowired
 	private IKgNewstypeService iKgNewstypeService;
 	@Autowired
 	private IKgNewsSourceService iKgNewsSourceService;
+	@Autowired
+	private IKgConfigService iKgConfigService;
+	@Autowired
+	private IKgNewsAttributeService iKgNewsAttributeService;
 	
 	@RequestMapping(value = "/index/news")
     @ResponseBody
@@ -42,17 +55,13 @@ public class IndexController extends BaseController{
         	news.setTypeid(kn.getId());
         	int count = iKgNewsService.adminQueryCount(requestContext, news);
         	kn.setCount(count);
-        	List<KgNews> newsList = iKgNewsService.select(requestContext, news, 1, 6);
+        	List<KgNews> newsList = iKgNewsService.selectWithOtherInfo(requestContext, news, 1, 6);
         	kn.setNewsList(newsList);
         }
         
         mv.addObject("typeList", typeList);
-        
-        List<KgNewstype> kgNewstypeList = iKgNewstypeService.selectAll(requestContext);
-        List<KgNewsSource> KgNewsSourceList = iKgNewsSourceService.selectAll(requestContext);
-        
-        mv.addObject("kgNewstypeList", kgNewstypeList);
-        mv.addObject("KgNewsSourceList", KgNewsSourceList);
+        loadNavigation(mv, requestContext,CH_ZXZX);
+        loadAttriteNews(mv, requestContext,2);
        
         return mv;
     }
@@ -81,11 +90,7 @@ public class IndexController extends BaseController{
         mv.addObject("allPageNum",allPageNum);
         
         
-        List<KgNewstype> kgNewstypeList = iKgNewstypeService.selectAll(requestContext);
-        List<KgNewsSource> KgNewsSourceList = iKgNewsSourceService.selectAll(requestContext);
-        
-        mv.addObject("kgNewstypeList", kgNewstypeList);
-        mv.addObject("KgNewsSourceList", KgNewsSourceList);
+        loadNavigation(mv, requestContext,CH_ZXZX);
         
        
         return mv;
@@ -102,7 +107,7 @@ public class IndexController extends BaseController{
 	        int count = iKgNewsService.adminQueryCount(requestContext, news);
 	        int allPageNum = count%limit==0?count/limit:count/limit+1;
 	        if(count==0) allPageNum=1;
-	        List<KgNews> list = iKgNewsService.select(requestContext, news, page, limit);
+	        List<KgNews> list = iKgNewsService.selectWithOtherInfo(requestContext, news, page, limit);
 	        KgNewstype newsType = new KgNewstype();
 	        newsType.setId(typeid);
 	        KgNewstype kgNewstype = iKgNewstypeService.selectByPrimaryKey(requestContext, newsType);
@@ -111,6 +116,12 @@ public class IndexController extends BaseController{
 	        mv.addObject("allPageNum",allPageNum);
 	        mv.addObject("kgNewstype", kgNewstype);
 	        mv.addObject("typeid", typeid);
+	        
+	        
+	       
+	        
+	        loadNavigation(mv, requestContext,CH_ZXZX);
+	        loadAttriteNews(mv, requestContext,3);
 	        return mv;
 	    }
 
@@ -126,9 +137,60 @@ public class IndexController extends BaseController{
         KgNews newsInfo = iKgNewsService.selectByPrimaryKey(requestContext, news);
         mv.addObject("newsInfo", newsInfo);
         
+        loadNavigation(mv, requestContext,CH_ZXZX);
+        loadAttriteNews(mv, requestContext,3);
         return mv;
     }
-
     
+    
+    private void loadNavigation(ModelAndView mv,IRequest requestContext,String chanel  ) {
+    	  List<KgNewstype> kgNewstypeList = iKgNewstypeService.selectAll(requestContext);
+          List<KgNewsSource> KgNewsSourceList = iKgNewsSourceService.selectAll(requestContext);
+          
+          mv.addObject("kgNewstypeList", kgNewstypeList);
+          mv.addObject("KgNewsSourceList", KgNewsSourceList);
+          mv.addObject("chanel", chanel);
+          
+          List<KgConfig> kgConfigList= iKgConfigService.selectAll(requestContext);
+          for(KgConfig cf:kgConfigList) {
+        	  if(("copyright").equals(cf.getSyskey())) {
+        		  mv.addObject("copyright", cf.getSysvalue());continue;
+        	  }
+        	  if(("ICPlicense").equals(cf.getSyskey())) {
+        		  mv.addObject("ICPlicense", cf.getSysvalue());continue;
+        	  }
+        	  if(("keyword").equals(cf.getSyskey())) {
+        		  mv.addObject("keyword", cf.getSysvalue());continue;
+        	  }
+        	  if(("webdesc").equals(cf.getSyskey())) {
+        		  mv.addObject("webdesc", cf.getSysvalue());continue;
+        	  }
+          }
+    }
+
+    private void loadAttriteNews(ModelAndView mv,IRequest requestContext,int attributeSize) {
+    	 	List<KgNewsAttribute> rightAttributeList =  iKgNewsAttributeService.select(requestContext, null, 1, attributeSize);
+	        for(KgNewsAttribute ka :rightAttributeList){
+	        	KgNews kn = new KgNews();
+	        	kn.setAttributeid(ka.getId()+"");
+	        	List<KgNews> newsList=iKgNewsService.selectWithOtherInfo(requestContext, kn, 1, 5);
+	        	judgeTitleLength(newsList);
+	        	ka.setNewsList(newsList);
+	        	
+	        }
+	        mv.addObject("rightAttributeList",rightAttributeList);
+    }
+    
+    private void judgeTitleLength(List<KgNews> news) {
+    	for(KgNews kg :news) {
+    		String title =kg.getNewstitle();
+    		if(title.length()>17) {
+    			title=kg.getNewstitle().substring(0, 17)+SUSPENSION_POINTS;
+    			kg.setNewsSimpleTitle(title);
+    		}else {
+    			kg.setNewsSimpleTitle(title);
+    		}
+    	}
+    }
    
 }

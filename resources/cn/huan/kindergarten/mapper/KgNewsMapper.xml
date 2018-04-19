@@ -36,7 +36,7 @@
 
    <select id="selectWithOtherInfo" resultMap="OtherResultMap" parameterType="cn.huan.kindergarten.dto.KgNews">
         select a.*,b.typename from kg_news a left join kg_newsType b
-            on a.typeid=b.id
+            on a.typeid=b.id 
            <where>
            		<if test="newstitle != null">
            			AND a.newsTitle  like CONCAT('%',#{newstitle},'%') 
@@ -44,7 +44,11 @@
            		<if test="typeid != null">
            			AND a.typeId = #{typeid}
            		</if>
+           		<if test="attributeid != null">
+           		 	AND FIND_IN_SET(#{attributeid},a.attributeId) 
+           		</if>
            </where>
+           ORDER BY a.createDate DESC
     </select>
     
    <select id="adminQueryCount" resultType="java.lang.Integer" parameterType="cn.huan.kindergarten.dto.KgNews">

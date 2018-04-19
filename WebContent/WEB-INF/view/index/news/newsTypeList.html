@@ -5,7 +5,7 @@
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
-<title>政府采购动态 - 中国政府采购网</title>
+<title>${kgNewstype.typename}_上海市托幼协会</title>
 <link href="${base.contextPath}/lib/index/css/detail.css" rel="stylesheet" type="text/css" />
 <link type="text/css" rel="stylesheet" href="http://cdn.staticfile.org/twitter-bootstrap/3.1.1/css/bootstrap.min.css"/>
 <script language="javascript" src="${base.contextPath}/lib/jquery/jquery.min.js" ></script>
@@ -23,8 +23,8 @@
 	<div class="wz_block">
 	    <div class="vF_deail_currentloc">
 	        <p>当前位置：<a href="../index.htm"  title="首页" class="CurrChnlCls">首页</a>
-	        &nbsp;&raquo;&nbsp;<a href="index.htm" title="政府采购动态" class="CurrChnlCls">资讯中心</a>
-	        &nbsp;&raquo;&nbsp;<a href="${base.contextPath}/index/newsList?typeid=${typeid}" title="${kgNewstype.typename}" class="CurrChnlCls">${kgNewstype.typename}</a> 列表页</p>
+	        &nbsp;&raquo;&nbsp;<a href="${base.contextPath}/index/news" title="政府采购动态" class="CurrChnlCls">资讯中心</a>
+	        &nbsp;&raquo;&nbsp;<a href="${base.contextPath}/index/newsTypeList?typeid=${typeid}" title="${kgNewstype.typename}" class="CurrChnlCls">${kgNewstype.typename}</a> 列表页</p>
 	    </div>
 	
 	    <div class="vF_detail_relcontent mt13">
@@ -71,54 +71,40 @@
 
 
 <!--OTsidebar-->
-        <div class="main_right_cbl" style="margin-top:4px">
-            <h2 class="mt10 mb10"><a href="../news/index.htm" >采购头条</a></h2>
+	<#list rightAttributeList as rightAttributeList>
+		<#if rightAttributeList_index = 0>
+			<div class="main_right_cbl mt13" style="margin-top:4px">
+            	<h2 class="mt10 mb10"><a href="#" >${rightAttributeList.attributename}</a></h2>
                 <div class="vT-chs-section-content-con">
                 <ul class="vT-chs-section-content-list mb10">
-						<li><a href="../news/201803/t20180313_9657154.htm" target="_blank" title="聚力增效护航高质量发展 代表委员审查讨论计划报告和预算报告">聚力增效护航高质量发展 代表委员审查...</a></li>
+                	<#list rightAttributeList.newsList as newsList>
+                		<li><a href="${base.contextPath}/index/newsDetail?id=${newsList.id}" target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
+                	</#list>
 				 </ul>
                 </div>
-        </div>
-
-        <div class="main_right_cbl mt13">
-            <h2 class="mt10 mb10"><a href="index.htm" >政采动态</a></h2>
+       		 </div>
+		<#else>
+			<div class="main_right_cbl mt13">
+          		<h2 class="mt10 mb10"><a href="#" >${rightAttributeList.attributename}</a></h2>
                 <div class="vT-chs-section-content-con">
                 <ul class="vT-chs-section-content-list mb10">
-
-						<li><a href="201803/t20180313_9658339.htm"  target="_blank" title="关于废止国际金融组织和外国政府贷款赠款项目采购管理相关规范性文件的通知">关于废止国际金融组织和外国政府贷款...</a></li>
-
+					<#list rightAttributeList.newsList as newsList>
+						<li><a href="${base.contextPath}/index/newsDetail?id=${newsList.id}"  target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
+					</#list>
                 </ul>
                 </div>
-        </div>
+        	</div>
+		</#if>
+	</#list>
+        
 
-        <div class="main_right_cbl mt13">
-            <h2 class="mt10 mb10"><a href="../gpsr/index.htm" >购买服务</a></h2>
-                <div class="vT-chs-section-content-con">
-                <ul class="vT-chs-section-content-list mb10">
-
-						<li><a href="../gpsr/zhxx/df/201803/t20180315_9665607.htm"  target="_blank" title="内蒙古西乌旗积极推进社会养老服务体系建设">内蒙古西乌旗积极推进社会养老服务体...</a></li>
-	
-                </ul>
-                </div>
-        </div>
-         <!--OTsidebar-->
+        
+<!--OTsidebar-->
         </div>
     </div>
 </div>
 </div>
-<div class="footer mt13">
-
-    <div class="copyright_bl">
-    <div class="vF_cp">
-
-<p><span>&copy; 1999-<script language="javascript">
-var myDate = new Date();
-document.write(myDate.getFullYear());
-</script></span> 中华人民共和国财政部版权所有 | <a href="../contact.shtml.htm" tppabs="http://www.ccgp.gov.cn/contact.shtml" target="_blank">联系我们</a> | <a href="mailto:feedback@ccgp.gov.cn">意见反馈</a> | <a href="javascript:if(confirm(%27http://www.miibeian.gov.cn/  \n\nThis file was not retrieved by Teleport Ultra, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.miibeian.gov.cn/%27" tppabs="http://www.miibeian.gov.cn/" target="_blank">京<span>ICP</span>备<span>10046031</span>号<span>-10</span></a></p>
-
-</div>
-    </div>
-</div>
+<#include "../../include/footer.html">
 </body>
 <script language="javascript" src="../js/detailaddon.js" tppabs="http://www.ccgp.gov.cn/js/detailaddon.js"></script>
 </html>

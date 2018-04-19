@@ -23,10 +23,23 @@
     <div class="v4incheadertop_nav_block">
         <div class="v4incheadertop_nav">
             <ul class="v4incheadertop_nav_ls">
-                <li class="fst" id="ch_index"><a href="../../index.htm" >首页</a></li>
-                <li id="ch_xhjj"><a href="../../zcfg/index.htm" >协会简介</a></li>
-                <li id="ch_zxzx"><a href="${base.contextPath}/index/news" >资讯中心</a></li>
-                <li id="ch_xhgz"><a href="../../jdjc/index.htm" >协会工作</a></li>
+                <li class="fst" id="ch_index" <#if chanel =='CH_INDEX'> class="actv" </#if>><a href="../../index.htm" >首页</a></li>
+                <li id="ch_xhjj" <#if chanel =='CH_XHJJ'> class="actv" </#if>><a href="../../zcfg/index.htm" >协会简介</a></li>
+                <li id="ch_zxzx" <#if chanel =='CH_ZXZX'> class="actv" </#if>><a href="${base.contextPath}/index/news" >资讯中心</a>
+                <ul>
+                	<#list kgNewstypeList as typeList>   
+							<li><a href="${base.contextPath}/index/newsTypeList?typeid=${typeList.id}">${typeList.typename}</a></li> 
+					</#list>
+					
+                </ul>
+                </li>
+                <li id="ch_xhgz" <#if chanel =='CH_XHGZ'> class="actv" </#if>><a href="../../jdjc/index.htm" >协会工作</a>
+                <ul>
+               		 <li><a href="#">评选评估</a></li> 
+               		 <li><a href="#">在线报告</a></li> 
+                </ul>
+                </li>
+                <li id="ch_lxwm" <#if chanel =='CH_LXWM'> class="actv" </#if>><a href="${base.contextPath}/index/contact" >联系我们</a></li>
             </ul>
         </div>
     </div>
