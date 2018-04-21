@@ -86,8 +86,24 @@ function addFuncStr(func){
 	return str;
 }
 
+
+function getManager() {
+	var str = "";
+	str += "<div style='width:100%;height:100%;overflow-y:auto;overflow-x:auto;'>";
+	str += "<table width='100%' border='0' cellpadding='0' cellspacing='0'>";
+	
+	str +=addFunc('introduction1.png','introduction2.png','introduction');
+	
+	str +=addFunc('assessmentType1.png','assessmentType2.png','assessmentType');
+	str +=addFunc('assessmentActivity1.png','assessmentActivity2.png','assessmentActivity');
+	
+	str += '</table></div>';
+	return str;
+}
+
 function getNews(){
 	var str = "";
+	str +=addFunc('news1.png','news2.png','news');
 	str +=addFunc('type1.png','type2.png','newsType');
 	str +=addFunc('source1.png','source2.png','newsSource');
 	
@@ -99,27 +115,11 @@ function getConfig(){
 	str +=addFunc('link1.png','link2.png','link');
 	str +=addFunc('config1.png','config2.png','config');
 	str +=addFunc('attribute1.png','attribute2.png','newsAttribute');
-	return addFuncStr(str);
-}
-function getManager() {
-	var str = "";
-	str += "<div style='width:100%;height:100%;overflow-y:auto;overflow-x:auto;'>";
-	str += "<table width='100%' border='0' cellpadding='0' cellspacing='0'>";
-//	str += '<tr><td  align="center"><img src="'
-//			+ _basePath
-//			+ '/resources/images/leftImg/xinxixiugai1.png" onmouseover="this.src=\''
-//			+ _basePath
-//			+ '/resources/images/leftImg/xinxixiugai2.png\';this.style.cursor=\'pointer\'" onmouseout="this.src=\''
-//			+ _basePath
-//			+ '/resources/images/leftImg/xinxixiugai1.png\'" onclick="addtabs(\'link\')"></td></tr>';
-	
-	str +=addFunc('introduction1.png','introduction2.png','introduction');
-	str +=addFunc('news1.png','news2.png','news');
 	str +=addFunc('user1.png','user2.png','user');
 	str +=addFunc('role1.png','role2.png','role');
-	str += '</table></div>';
-	return str;
+	return addFuncStr(str);
 }
+
 function addFunc(png1,png2,tabName){
 	str = '<tr><td  align="center"><img src="'
 		+ _basePath
@@ -177,6 +177,16 @@ function addtabs(us) {
 			mainId: us
 		});
 		addTabFuns(us,panel,'角色配置');
+	}else if (us == "assessmentType") {
+		var panel=  new AssessmentType.AssessmentTypePanel({
+			mainId: us
+		});
+		addTabFuns(us,panel,'评估任务类别');
+	}else if (us == "assessmentActivity") {
+		var panel=  new AssessmentActivity.AssessmentActivityPanel({
+			mainId: us
+		});
+		addTabFuns(us,panel,'评估任务');
 	}
 }
 

@@ -22,6 +22,143 @@ CREATE DATABASE IF NOT EXISTS kindergarten_dev;
 USE kindergarten_dev;
 
 --
+-- Definition of table `kg_assessment_activity`
+--
+
+DROP TABLE IF EXISTS `kg_assessment_activity`;
+CREATE TABLE `kg_assessment_activity` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `assessment_type_id` bigint(20) unsigned NOT NULL,
+  `assessment_activity_name` varchar(45) NOT NULL,
+  `assessment_activity_content` text,
+  `createDate` datetime DEFAULT CURRENT_TIMESTAMP,
+  `OBJECT_VERSION_NUMBER` bigint(20) DEFAULT '1',
+  `REQUEST_ID` bigint(20) DEFAULT '-1',
+  `PROGRAM_ID` bigint(20) DEFAULT '-1',
+  `CREATED_BY` bigint(20) DEFAULT '-1',
+  `CREATION_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATED_BY` bigint(20) DEFAULT '-1',
+  `LAST_UPDATE_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATE_LOGIN` bigint(20) DEFAULT '-1',
+  `CERTIFICATE_TYPE` varchar(240) DEFAULT 'ID' COMMENT '证件类型',
+  `EFFECTIVE_START_DATE` date DEFAULT NULL COMMENT '有效日期从',
+  `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
+  `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kg_assessment_activity`
+--
+
+/*!40000 ALTER TABLE `kg_assessment_activity` DISABLE KEYS */;
+/*!40000 ALTER TABLE `kg_assessment_activity` ENABLE KEYS */;
+
+
+--
+-- Definition of table `kg_assessment_activity_user_progress`
+--
+
+DROP TABLE IF EXISTS `kg_assessment_activity_user_progress`;
+CREATE TABLE `kg_assessment_activity_user_progress` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `assessment_activity_id` bigint(20) unsigned NOT NULL,
+  `upload_user_id` bigint(20) unsigned NOT NULL,
+  `admin_suggestion` text,
+  `expert_user_id` bigint(20) unsigned NOT NULL,
+  `expert_suggestion` text,
+  `state` varchar(240) DEFAULT 'UPLOAD',
+  `OBJECT_VERSION_NUMBER` bigint(20) DEFAULT '1',
+  `REQUEST_ID` bigint(20) DEFAULT '-1',
+  `PROGRAM_ID` bigint(20) DEFAULT '-1',
+  `CREATED_BY` bigint(20) DEFAULT '-1',
+  `CREATION_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATED_BY` bigint(20) DEFAULT '-1',
+  `LAST_UPDATE_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATE_LOGIN` bigint(20) DEFAULT '-1',
+  `CERTIFICATE_TYPE` varchar(240) DEFAULT 'ID' COMMENT '证件类型',
+  `EFFECTIVE_START_DATE` date DEFAULT NULL COMMENT '有效日期从',
+  `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
+  `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kg_assessment_activity_user_progress`
+--
+
+/*!40000 ALTER TABLE `kg_assessment_activity_user_progress` DISABLE KEYS */;
+/*!40000 ALTER TABLE `kg_assessment_activity_user_progress` ENABLE KEYS */;
+
+
+--
+-- Definition of table `kg_assessment_activity_user_upload`
+--
+
+DROP TABLE IF EXISTS `kg_assessment_activity_user_upload`;
+CREATE TABLE `kg_assessment_activity_user_upload` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `upload_user_id` bigint(20) unsigned NOT NULL,
+  `assessment_activity_id` bigint(20) unsigned NOT NULL,
+  `file_path` varchar(240) DEFAULT NULL,
+  `OBJECT_VERSION_NUMBER` bigint(20) DEFAULT '1',
+  `REQUEST_ID` bigint(20) DEFAULT '-1',
+  `PROGRAM_ID` bigint(20) DEFAULT '-1',
+  `CREATED_BY` bigint(20) DEFAULT '-1',
+  `CREATION_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATED_BY` bigint(20) DEFAULT '-1',
+  `LAST_UPDATE_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATE_LOGIN` bigint(20) DEFAULT '-1',
+  `CERTIFICATE_TYPE` varchar(240) DEFAULT 'ID' COMMENT '证件类型',
+  `EFFECTIVE_START_DATE` date DEFAULT NULL COMMENT '有效日期从',
+  `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
+  `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kg_assessment_activity_user_upload`
+--
+
+/*!40000 ALTER TABLE `kg_assessment_activity_user_upload` DISABLE KEYS */;
+/*!40000 ALTER TABLE `kg_assessment_activity_user_upload` ENABLE KEYS */;
+
+
+--
+-- Definition of table `kg_assessment_type`
+--
+
+DROP TABLE IF EXISTS `kg_assessment_type`;
+CREATE TABLE `kg_assessment_type` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `assessment_type_name` varchar(45) NOT NULL,
+  `OBJECT_VERSION_NUMBER` bigint(20) DEFAULT '1',
+  `REQUEST_ID` bigint(20) DEFAULT '-1',
+  `PROGRAM_ID` bigint(20) DEFAULT '-1',
+  `CREATED_BY` bigint(20) DEFAULT '-1',
+  `CREATION_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATED_BY` bigint(20) DEFAULT '-1',
+  `LAST_UPDATE_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATE_LOGIN` bigint(20) DEFAULT '-1',
+  `CERTIFICATE_TYPE` varchar(240) DEFAULT 'ID' COMMENT '证件类型',
+  `EFFECTIVE_START_DATE` date DEFAULT NULL COMMENT '有效日期从',
+  `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
+  `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kg_assessment_type`
+--
+
+/*!40000 ALTER TABLE `kg_assessment_type` DISABLE KEYS */;
+INSERT INTO `kg_assessment_type` (`id`,`assessment_type_name`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
+ (16,'学校评估',1,-1,-1,-1,'2018-04-20 11:30:02',-1,'2018-04-20 11:30:02',-1,'ID',NULL,NULL,NULL),
+ (17,'优秀教师评估',3,-1,-1,-1,'2018-04-20 11:30:10',-1,'2018-04-20 11:30:34',-1,'ID',NULL,NULL,NULL);
+/*!40000 ALTER TABLE `kg_assessment_type` ENABLE KEYS */;
+
+
+--
 -- Definition of table `kg_config`
 --
 
