@@ -45,13 +45,17 @@ CREATE TABLE `kg_assessment_activity` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_assessment_activity`
 --
 
 /*!40000 ALTER TABLE `kg_assessment_activity` DISABLE KEYS */;
+INSERT INTO `kg_assessment_activity` (`id`,`assessment_type_id`,`assessment_activity_name`,`assessment_activity_content`,`createDate`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
+ (3,16,'111','<p>111</p>','2018-04-23 10:59:19',1,-1,-1,-1,'2018-04-23 10:59:19',-1,'2018-04-23 10:59:19',-1,'ID',NULL,NULL,NULL),
+ (4,17,'222','<p>222</p>','2018-04-23 10:59:24',1,-1,-1,-1,'2018-04-23 10:59:24',-1,'2018-04-23 10:59:24',-1,'ID',NULL,NULL,NULL),
+ (5,16,'333','<p>333</p>','2018-04-23 10:59:29',1,-1,-1,-1,'2018-04-23 10:59:29',-1,'2018-04-23 10:59:29',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_assessment_activity` ENABLE KEYS */;
 
 

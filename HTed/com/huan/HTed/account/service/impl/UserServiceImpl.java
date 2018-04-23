@@ -56,4 +56,11 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements IUserServi
 	public int adminQueryCount(IRequest request,User record) {
 		return  mapper.selectCount(record);
 	}
+	
+	@Override
+	public User selectOne(IRequest request,User record) {
+		if(record.getUserName()!=null)
+			return mapper.selectOne(record);
+		return null;
+	}
 }

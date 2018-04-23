@@ -109,4 +109,17 @@
 	<!-- 自动扫描controller包下的所有类，使其认为是spring mvc的控制器 路径即为类路径 -->
 	<context:annotation-config/>
 	<context:component-scan base-package="**.controllers" />
+	
+	
+	
+	<mvc:interceptors>
+	    <mvc:interceptor>
+	        <mvc:mapping path="/admin/**"/>
+	        <mvc:exclude-mapping path="/admin/login.html"/>    <!-- 不拦截登录请求 -->
+	        <mvc:exclude-mapping path="/admin/login"/> 
+	        <mvc:exclude-mapping path="/admin/logout"/>    <!-- 不拦截注销请求 -->
+	        <bean class="cn.huan.kindergarten.interceptor.SessionInterceptor"></bean>
+	    </mvc:interceptor>
+	</mvc:interceptors>
+	
 </beans>

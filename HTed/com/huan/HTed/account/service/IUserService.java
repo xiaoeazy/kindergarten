@@ -13,4 +13,5 @@ public interface IUserService extends IBaseService<User>, ProxySelf<IUserService
 	public void adminUpdate(IRequest request ,User user,List<UserRole>  userRoleList);
 	public void adminDelete(IRequest request ,List<User> list);
 	public int adminQueryCount(IRequest request,User record);
+	public User selectOne(IRequest request, User record);
 }

@@ -140,29 +140,7 @@ Ext.extend(Header.HeaderPanel, Ext.form.FormPanel , {
 function loginOut(){
 	  Ext.MessageBox.confirm("提示","是否要退出",function(btn){
 		  if (btn == 'yes')  {
-			  window.location.href=appName+"/pc/toLoginPage.action";
-			 
-			 // Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
-			 /* Ext.Ajax.request({
-            	  url : appName + '/pc/common_LoginAction_logout.action',
-                  method : 'post',
-                  success : function(response, options) {
-                	//Ext.getBody().unmask();
-                	var responseArray = Ext.util.JSON.decode(response.responseText);
-                    if (responseArray.success == true) {
-                    	 window.location.href=appName+"/pc/toLoginPage.action";
-                    }else{
-                       Ext.Msg.alert("提示",responseArray.data.msg);
-                    }
-                  },
-				failure : function() {
-					//Ext.getBody().unmask();
-  					Ext.MessageBox.alert("提示","连接服务器发生异常！");
-  				}
-                });*/
-			  
-			  
-			 
+			  window.location.href=appName+"/admin/logout";
 	   }
 	  });
 		 

@@ -81,11 +81,11 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 					  			text:''
 				  			},
 				  			{
-				          		fieldLabel:'标题名',
+				          		fieldLabel:'评估任务名称',
 								allowBlank:false,
-								name: 'newstitle',
+								name: 'assessmentActivityName',
 								blankText:'必须填写',
-								id:mainId+"newstitle",
+								id:mainId+"assessmentActivityName",
 					            maxLength:45  
 				  			},
 				  			typeCombo
@@ -105,7 +105,7 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 					items : [{
 		                xtype: 'ueditor',
 		                fieldLabel: '内  容',
-		                id: mainId+"content",
+		                id: mainId+"assessmentActivityContent",
 		                //不要设置高度，否则滚动条出现后工具栏会消失
 		                width: '100%'
 		            } ],
@@ -113,8 +113,8 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 					listeners:{
 						afterrender:function(){
 							if(record!=null){
-								var content= record.get("content");
-					    		Ext.getCmp(mainId+"content").setValue(content);
+								var assessmentActivityContent= record.get("assessmentActivityContent");
+					    		Ext.getCmp(mainId+"assessmentActivityContent").setValue(assessmentActivityContent);
 					    	}
 						}
 					}
@@ -146,22 +146,12 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 				listeners:{
 					show:function(){
 						if(record!=null){
-				    		var newstitle= record.get("newstitle");
-				    		var typeid = record.get("typeid");
-				    		var thumbnail= record.get("thumbnail");
-				    		var summary= record.get("summary");
-				    		var content= record.get("content");
-				    		Ext.getCmp(mainId+"newstitle").setValue(newstitle);
-				    		typeCombo.setValue(typeid);
+				    		var assessmentActivityName= record.get("assessmentActivityName");
+				    		var assessmentTypeId = record.get("assessmentTypeId");
 				    		
-				    		Ext.getCmp(mainId+"imageUrl").setValue(thumbnail);
-				    		if(thumbnail!=null){
-				    			Ext.getCmp(mainId+"showPict").getEl().dom.src=appName+thumbnail;
-				    		}
-				    		Ext.getCmp(mainId+"summary").setValue(summary);
+				    		Ext.getCmp(mainId+"assessmentActivityName").setValue(assessmentActivityName);
+				    		typeCombo.setValue(assessmentTypeId);
 				    		
-//				    		Ext.getCmp(mainId+"content").setValue(content);
-//				    		Ext.getCmp(mainId+"content").getEditor().setContent(content);
 				    	}
 					}
 				}
@@ -169,107 +159,34 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 		);
 		
 	},
-	LoadingAttribute1:function(me,formpanel,store,mainId){
-		  var checkboxgroup = Ext.getCmp(mainId+"attribute");
-		  for (var i = 0; i < store.getCount(); i++) {
-			  var record = store.getAt(i);
-			  var id = record.get("id");
-			  var checkbox = new Ext.form.Checkbox(
-		                 {
-		                     boxLabel: record.get("attributename"),
-//		                     name: record[i].OperationCode,
-		                     inputValue:id,
-		                     checked: false
-		                 });
-		          checkboxgroup.items.add(checkbox);
-		  }
-		  formpanel.doLayout();
-		 
-	},
-	LoadingAttribute2:function(me,infoRecord,formpanel,store,mainId){
-		  var checkboxgroup = Ext.getCmp(mainId+"attribute");
-		  var attribute = infoRecord.get("attributeid");
-		  var attributeArray = [];
-		  if(attribute!=null){
-			  attributeArray = attribute.split(",")
-		  }
-		  for (var i = 0; i < store.getCount(); i++) {
-			  var record = store.getAt(i);
-			  var id = record.get("id");
-			  var index = attributeArray.indexOf(id);
-			  var checked = true;
-			  if(index<0){
-				  checked = false;
-			  }
-			  var checkbox = new Ext.form.Checkbox(
-		                 {
-		                     boxLabel: record.get("attributename"),
-//		                     name: record[i].OperationCode,
-		                     inputValue:id,
-		                     checked: checked
-		                 });
-		          checkboxgroup.items.add(checkbox);
-		  }
-		  formpanel.doLayout();
-		 
-	},
 	
 	addorUpdateAssessmentActivity : function(me,formpanel,mainId,parentStore,id,type,isAdd) {
 		
-		var attributeValue = Ext.getCmp(mainId+'attribute').getChecked();
-		var attributeid="";
-		Ext.Array.each(attributeValue, function(item){
-//			attributeid +=  item.boxLabel+",";
-			attributeid +=  item.inputValue+",";
-		});
-		if(attributeid!="")
-			attributeid=attributeid.substring(0,attributeid.length-1);
 		
-		var newstitle =Ext.getCmp(mainId+"newstitle").getValue().trim();
-		var typeid =Ext.getCmp(mainId+"typeid").getValue();
-		var sourceid = Ext.getCmp(mainId+"sourceid").getValue();
-		var summary =Ext.getCmp(mainId+"summary").getValue().trim();
-		var thumbnail =Ext.getCmp(mainId+"imageUrl").getValue().trim();
-		var content = Ext.getCmp(mainId+"content").getEditor().getContent();
-		if(newstitle==""){
-			Ext.getCmp(mainId+"newstitle").markInvalid("咨讯标题不能为空！");
-			return;
-		}
-		if(typeid==null){
-			Ext.getCmp(mainId+"typeid").markInvalid("类型不能为空！");
-			return;
-		}
-		if(sourceid==null){
-			Ext.getCmp(mainId+"sourceid").markInvalid("来源不能为空！");
-			return;
-		}
-		if(summary==""){
-			Ext.getCmp(mainId+"summary").markInvalid("咨讯简介不能为空！");
-			return;
-		}
-		if(content==""){
-			Ext.getCmp(mainId+"content").markInvalid("主体内容不能为空！");
+		var assessmentActivityName =Ext.getCmp(mainId+"assessmentActivityName").getValue().trim();
+		var assessmentTypeId =Ext.getCmp(mainId+"assessmentTypeId").getValue();
+		var assessmentActivityContent = Ext.getCmp(mainId+"assessmentActivityContent").getEditor().getContent();
+		if(assessmentActivityName==""){
+			Ext.getCmp(mainId+"assessmentActivityName").markInvalid("评估标题不能为空！");
 			return;
 		}
 		
-	
+		if(assessmentActivityContent==""){
+			Ext.getCmp(mainId+"assessmentActivityContent").markInvalid("主体内容不能为空！");
+			return;
+		}
 		
-	
 		if( formpanel.getForm().isValid()){
 			Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
 			  Ext.Ajax.request({
-            	  url : appName + '/admin/news/submit',
+            	  url : appName + '/admin/assessment/activity/submit',
                   method : 'post',
                   headers: {'Content-Type':'application/json'},
                   params : JSON.stringify([{
                 	  __status : type,
-                	  typeid:typeid,
-                	  attributeid:attributeid,
-                	  sourceid:sourceid,
-                	  newstitle : newstitle,
-                	  thumbnail : thumbnail,
-                	  summary:summary,
-                	  content:content,
+                	  assessmentActivityName:assessmentActivityName,
+                	  assessmentTypeId:assessmentTypeId,
+                	  assessmentActivityContent:assessmentActivityContent,
                 	  id : id
                   }]),
                   success : function(response, options) {

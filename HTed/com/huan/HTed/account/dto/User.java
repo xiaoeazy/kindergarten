@@ -6,6 +6,8 @@ import javax.persistence.Id;
 import com.huan.HTed.mybatis.annotation.ExtensionAttribute;
 import org.hibernate.validator.constraints.Length;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import com.huan.HTed.system.dto.BaseDTO;
 import java.util.Date;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -37,6 +39,9 @@ public class User extends BaseDTO {
 
      @Length(max = 80)
      private String passwordEncrypted; //加密过的密码
+     
+     @Transient
+     private String newPasswordEncrypted; //用于修改密码
 
      @Length(max = 150)
      private String email; //邮箱地址
@@ -52,7 +57,15 @@ public class User extends BaseDTO {
      private String status; //状态
 
 
-     public void setUserId(Long userId){
+     public String getNewPasswordEncrypted() {
+		return newPasswordEncrypted;
+	}
+
+	public void setNewPasswordEncrypted(String newPasswordEncrypted) {
+		this.newPasswordEncrypted = newPasswordEncrypted;
+	}
+
+	public void setUserId(Long userId){
          this.userId = userId;
      }
 

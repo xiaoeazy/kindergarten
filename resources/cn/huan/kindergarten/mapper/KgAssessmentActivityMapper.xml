@@ -29,7 +29,7 @@
            		<if test="assessmentActivityName != null">
            			AND a.assessment_activity_name  like CONCAT('%',#{assessmentActivityName},'%') 
            		</if>
-           		<if test="assessmentActivityName != null">
+           		<if test="assessmentTypeId != null">
            			AND a.assessment_type_id = #{assessmentTypeId}
            		</if>
            </where>
@@ -37,12 +37,12 @@
     </select>
     
    <select id="adminQueryCount" resultType="java.lang.Integer" parameterType="cn.huan.kindergarten.dto.KgNews">
-        select count(1) from kg_assessment_activity 
+        select count(1) from kg_assessment_activity a
            <where>
            		<if test="assessmentActivityName != null">
            			AND a.assessment_activity_name  like CONCAT('%',#{assessmentActivityName},'%') 
            		</if>
-           		<if test="assessmentActivityName != null">
+           		<if test="assessmentTypeId != null">
            			AND a.assessment_type_id = #{assessmentTypeId}
            		</if>
            </where>

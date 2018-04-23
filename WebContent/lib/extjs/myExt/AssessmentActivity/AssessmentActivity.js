@@ -77,7 +77,7 @@ Ext.extend(AssessmentActivity.AssessmentActivityPanel, Ext.Panel, {
 				handler : function(button, event) {
 					var assessmentActivityName = Ext.getCmp(mainId+"assessmentActivityName").getValue().trim();
 					var assessmentTypeId 	  = Ext.getCmp(mainId+"assessmentTypeId").getValue();
-					store.proxy.url = appName+ '/admin/news/query';
+					store.proxy.url = appName+ '/admin/assessment/activity/query';
 					store.proxy.extraParams={
 							page:1,
 							start:0,
@@ -104,7 +104,7 @@ Ext.extend(AssessmentActivity.AssessmentActivityPanel, Ext.Panel, {
 		        }
 		    },
 		    autoLoad : true,
-		    fields: ['id', 'newstitle']
+		    fields: ['id', 'assessmentActivityName']
 		});
 		
 
@@ -155,11 +155,11 @@ Ext.extend(AssessmentActivity.AssessmentActivityPanel, Ext.Panel, {
 					}
 				}],
 	        columns: [
-	            {header: "评估任务名称",  width:50,sortable: true,  dataIndex: 'newstitle',align:'center'},
+	            {header: "评估任务名称",  width:50,sortable: true,  dataIndex: 'assessmentActivityName',align:'center'},
 	            {header: "咨讯类别",  width:50,sortable: true,  dataIndex: 'kgNewstype.typename',align:'center'}
 	        ],
 	        width:'100%',
-	        autoExpandColumn: 'summary',
+	        autoExpandColumn: 'assessmentActivityName',
 	        viewConfig:{forceFit: true}
 	    });
 		
@@ -207,7 +207,7 @@ Ext.extend(AssessmentActivity.AssessmentActivityPanel, Ext.Panel, {
 			  linkobj.push({"id":id});
 		  }
 		  Ext.Ajax.request({
-			url : appName + '/admin/AssessmentActivity/remove',
+			url : appName + '/admin/assessment/activity/remove',
             method : 'post',
             headers: {'Content-Type':'application/json'},
             params : JSON.stringify(linkobj),
