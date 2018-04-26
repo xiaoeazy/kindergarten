@@ -24,10 +24,9 @@ public class KgAssessmentActivity extends BaseDTO {
 
      @Id
      @GeneratedValue
-     private String id;
+     private Long id;
 
-     @Length(max = 19)
-     private String assessmentTypeId;
+     private Long assessmentTypeId;
 
      @NotEmpty
      @Length(max = 45)
@@ -60,19 +59,19 @@ public class KgAssessmentActivity extends BaseDTO {
 		this.kgAssessmentType = kgAssessmentType;
 	 }
 
-	public void setId(String id){
+	public void setId(Long id){
          this.id = id;
      }
 
-     public String getId(){
+     public Long getId(){
          return id;
      }
 
-     public void setAssessmentTypeId(String assessmentTypeId){
+     public void setAssessmentTypeId(Long assessmentTypeId){
          this.assessmentTypeId = assessmentTypeId;
      }
 
-     public String getAssessmentTypeId(){
+     public Long getAssessmentTypeId(){
          return assessmentTypeId;
      }
 

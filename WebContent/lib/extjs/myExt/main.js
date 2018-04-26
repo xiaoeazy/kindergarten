@@ -96,6 +96,7 @@ function getManager() {
 	
 	str +=addFunc('assessmentType1.png','assessmentType2.png','assessmentType');
 	str +=addFunc('assessmentActivity1.png','assessmentActivity2.png','assessmentActivity');
+	str +=addFunc('assessmentUserProgress1.png','assessmentUserProgress2.png','assessmentUserProgress');
 	
 	str += '</table></div>';
 	return str;
@@ -187,6 +188,11 @@ function addtabs(us) {
 			mainId: us
 		});
 		addTabFuns(us,panel,'评估任务');
+	}else if (us == "assessmentUserProgress") {
+		var panel=  new AssessmentUserProcess.AssessmentUserProcessPanel({
+			mainId: us
+		});
+		addTabFuns(us,panel,'评估任务进度');
 	}
 }
 
