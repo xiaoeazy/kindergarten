@@ -12,10 +12,11 @@ Ext.extend(AssessmentUserProcess.AssessmentUserProcessPanel, Ext.Panel, {
 	var mainId = me.mainId;
 	//===========================formpanel=========================
 	
-	var typeid_Combo_Store = new Ext.data.Store({
+	var assessmentActivity_Combo_Store = new Ext.data.Store({
+		pageSize:0,
 		proxy: {
 	        type: 'ajax',
-	        url : appName+ '/admin/assessment/type/query',
+	        url : appName+ '/admin/assessment/activity/queryAll',
 	        reader: {
 	        	root : "results",
 				totalProperty: "totalProperty",
@@ -23,24 +24,63 @@ Ext.extend(AssessmentUserProcess.AssessmentUserProcessPanel, Ext.Panel, {
 	        }
 	    },
 	    autoLoad : true,
-	    fields: ['id', 'assessmentTypeName']
+	    fields: ['id', 'assessmentActivityName']
 	});
 	
-   var typeCombo = new Ext.form.ComboBox({
-	   		fieldLabel:'评估任务类型',
-    	    id:mainId+"assessmentTypeId",
-            store : typeid_Combo_Store,  
+   var assessmentActivityCombo = new Ext.form.ComboBox({
+	   		fieldLabel:'评估任务',
+    	    id:mainId+"assessmentActivityId",
+            store : assessmentActivity_Combo_Store,  
             valueField : "id",  
             mode : 'remote',  
-            displayField : "assessmentTypeName",  
+            displayField : "assessmentActivityName",  
             forceSelection : true,  
             emptyText : '请选择',  
             editable : false,  
             triggerAction : 'all',  
-            hiddenName : "assessmentTypeName",  
+            hiddenName : "assessmentActivityName",  
             autoShow : true,  
             selectOnFocus : true,  
-            name : "assessmentTypeId",
+            name : "assessmentActivityId",
+            listeners:{
+            	afterrender:function(comb){
+            	},
+            	select:function(combo, record, index){
+            	}
+            }
+        }); 
+   
+   //======user=====
+	var user_Combo_Store = new Ext.data.Store({
+		pageSize:0,
+		proxy: {
+	        type: 'ajax',
+	        url : appName+ '/admin/user/queryAll',
+	        reader: {
+	        	root : "results",
+				totalProperty: "totalProperty",
+				successProperty:'success'
+	        }
+	    },
+	    autoLoad : true,
+	    fields: ['userName']
+	});
+	
+   var uploadUserCombo = new Ext.form.ComboBox({
+	   		fieldLabel:'上传用户',
+    	    id:mainId+"uploadUserId",
+            store : user_Combo_Store,  
+            valueField : "id",  
+            mode : 'remote',  
+            displayField : "userName",  
+            forceSelection : true,  
+            emptyText : '请选择',  
+            editable : false,  
+            triggerAction : 'all',  
+            hiddenName : "userName",  
+            autoShow : true,  
+            selectOnFocus : true,  
+            name : "uploadUserId",
             listeners:{
             	afterrender:function(comb){
             	},
@@ -62,27 +102,21 @@ Ext.extend(AssessmentUserProcess.AssessmentUserProcessPanel, Ext.Panel, {
              bodyStyle:'padding:10px 0px 10px 0px'
           },
 		  items : [
-		  			{
-		          		fieldLabel:'评估任务名',
-						name: 'AssessmentUserProcessName',
-						id:mainId+"AssessmentUserProcessName",
-			            maxLength:45 ,
-			            width:400
-		  			},
-		  			typeCombo
+			  assessmentActivityCombo,
+			  uploadUserCombo
 		  			],
 		   buttons:[{
 			    width:50,
 				text : '查询',
 				handler : function(button, event) {
-					var AssessmentUserProcessName = Ext.getCmp(mainId+"AssessmentUserProcessName").getValue().trim();
-					var assessmentTypeId 	  = Ext.getCmp(mainId+"assessmentTypeId").getValue();
-					store.proxy.url = appName+ '/admin/assessment/activity/query';
+					var uploadUserId = Ext.getCmp(mainId+"uploadUserId").getValue();
+					var assessmentActivityId 	  = Ext.getCmp(mainId+"assessmentActivityId").getValue();
+					store.proxy.url = appName+ '/admin/assessment/activity/user/progress/query';
 					store.proxy.extraParams={
 							page:1,
 							start:0,
-							AssessmentUserProcessName:AssessmentUserProcessName,
-							assessmentTypeId:assessmentTypeId
+							assessmentActivityId:assessmentActivityId,
+							uploadUserId:uploadUserId
 					};
 					store.load();  
 				}
@@ -96,7 +130,7 @@ Ext.extend(AssessmentUserProcess.AssessmentUserProcessPanel, Ext.Panel, {
 			pageSize:10,
 			proxy: {
 		        type: 'ajax',
-		        url : appName+ '/admin/assessment/activity/query',
+		        url : appName+ '/admin/assessment/activity/user/progress/query',
 		        reader: {
 		        	root : "results",
 					totalProperty: "totalProperty",
@@ -104,7 +138,7 @@ Ext.extend(AssessmentUserProcess.AssessmentUserProcessPanel, Ext.Panel, {
 		        }
 		    },
 		    autoLoad : true,
-		    fields: ['id', 'AssessmentUserProcessName']
+		    fields: ['id', 'assessmentActivityId', 'uploadUserId', 'adminSuggestion', 'expertUserId', 'expertSuggestion', 'state']
 		});
 		
 
@@ -129,14 +163,8 @@ Ext.extend(AssessmentUserProcess.AssessmentUserProcessPanel, Ext.Panel, {
 			        emptyMsg: "没有数据返回"
 	        }),
 	        tbar:[{
-					icon : _basePath+'/resources/images/icon/add.png',
-					text : '添加咨讯',
-					handler : function() {
-						me.addAssessmentUserProcess(store,mainId);
-					}
-				},'-',{
 					icon : _basePath+'/resources/images/icon/edit.png',
-					text : '修改咨讯',
+					text : '建议',
 					handler : function() {
 						var records=getRecords(grid);
 						if(records==-1)
@@ -146,7 +174,16 @@ Ext.extend(AssessmentUserProcess.AssessmentUserProcessPanel, Ext.Panel, {
 					}
 				},'-',{
 					icon : _basePath+'/resources/images/icon/cancel.png',
-					text : '删除咨讯',
+					text : '转送专家',
+					handler : function() {
+						var records=getDeleteRecords(grid);
+						if(records==-1)
+							return;
+						me.deleteAssessmentUserProcess(records,store,mainId);
+					}
+				},'-',{
+					icon : _basePath+'/resources/images/icon/cancel.png',
+					text : '查看专家评论',
 					handler : function() {
 						var records=getDeleteRecords(grid);
 						if(records==-1)
@@ -156,7 +193,11 @@ Ext.extend(AssessmentUserProcess.AssessmentUserProcessPanel, Ext.Panel, {
 				}],
 	        columns: [
 	            {header: "评估任务名称",  width:50,sortable: true,  dataIndex: 'AssessmentUserProcessName',align:'center'},
-	            {header: "咨讯类别",  width:50,sortable: true,  dataIndex: 'kgNewstype.typename',align:'center'}
+	            {header: "上传用户",  width:50,sortable: true,  dataIndex: 'uploadUserId',align:'center'},
+	            {header: "管理员建议",  width:50,sortable: true,  dataIndex: 'adminSuggestion',align:'center'},
+	            {header: "专家用户",  width:50,sortable: true,  dataIndex: 'expertUserId',align:'center'},
+	            {header: "状态",  width:50,sortable: true,  dataIndex: 'state',align:'center'},
+	            {header: "操作",  width:50,sortable: true, align:'center'}
 	        ],
 	        width:'100%',
 	        autoExpandColumn: 'AssessmentUserProcessName',

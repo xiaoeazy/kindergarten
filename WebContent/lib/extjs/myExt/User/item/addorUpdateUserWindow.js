@@ -87,6 +87,7 @@ Ext.extend(addorUpdateUser.addorUpdateUserWindow, Ext.Window, {
 	     
 	    	//=====================role=========================================
 	        var dsFrom = Ext.create('Ext.data.ArrayStore', {
+	        	pageSize:0,
 	            proxy: {
 	                type: 'ajax',
 	                url : appName+ '/admin/role/queryNotHave',
@@ -108,6 +109,7 @@ Ext.extend(addorUpdateUser.addorUpdateUserWindow, Ext.Window, {
 	        });
 	        
 	        var dsTo = Ext.create('Ext.data.ArrayStore', {
+	        	pageSize:0,
 	            proxy: {
 	                type: 'ajax',
 	                url : appName+ '/admin/role/queryHave',

@@ -67,6 +67,15 @@ import cn.huan.kindergarten.service.IKgNewstypeService;
          int count = service.adminQueryCount(requestContext, null);
          return new ExtStore(start, limit, count, list);
     }
+    
+    @RequestMapping(value = "/admin/newstype/queryAll")
+    @ResponseBody
+    public ExtStore adminQueryAll(KgNewstype dto, HttpServletRequest request) {
+    	 IRequest requestContext = createRequestContext(request);
+         List<KgNewstype> list = service.select(requestContext,dto);
+         int count = service.adminQueryCount(requestContext, null);
+         return new ExtStore(null, null, count, list);
+    }
 
     @RequestMapping(value = "/admin/newstype/submit")
     @ResponseBody

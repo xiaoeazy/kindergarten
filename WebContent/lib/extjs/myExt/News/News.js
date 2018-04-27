@@ -13,9 +13,10 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
 	//===========================formpanel=========================
 	
 	var typeid_Combo_Store = new Ext.data.Store({
+		pageSize:0,
 		proxy: {
 	        type: 'ajax',
-	        url : appName+ '/admin/newstype/query',
+	        url : appName+ '/admin/newstype/queryAll',
 	        reader: {
 	        	root : "results",
 				totalProperty: "totalProperty",

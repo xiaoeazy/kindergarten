@@ -26,9 +26,10 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 	    	
 	    	
 	    	var typeid_Combo_Store = new Ext.data.Store({
+	    		pageSize:0,
 	    		proxy: {
 			        type: 'ajax',
-			        url : appName+ '/admin/newstype/query',
+			        url : appName+ '/admin/newstype/queryAll',
 			        reader: {
 			        	root : "results",
 						totalProperty: "totalProperty",
@@ -71,9 +72,10 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 	       
 	       //=====================source=========================================
 	    	var sourceid_Combo_Store = new Ext.data.Store({
+	    		pageSize:0,
 	    		proxy: {
 			        type: 'ajax',
-			        url : appName+ '/admin/newssource/query',
+			        url : appName+ '/admin/newssource/queryAll',
 			        reader: {
 			        	root : "results",
 						totalProperty: "totalProperty",
@@ -112,9 +114,10 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 		        });  
 	       //=====================attribute=========================================
 	       var attribute_Combo_Store = new Ext.data.Store({
+	    	   pageSize:0,
 	    		proxy: {
 			        type: 'ajax',
-			        url : appName+ '/admin/newsattribute/query',
+			        url : appName+ '/admin/newsattribute/queryAll',
 			        reader: {
 			        	root : "results",
 						totalProperty: "totalProperty",

@@ -78,6 +78,23 @@ import cn.huan.kindergarten.bean.ExtStore;
         	}
          return new ExtStore(start, limit, count-1, list);
     }
+    
+    @RequestMapping(value = "/admin/user/queryAll")
+    @ResponseBody
+    public ExtStore adminqueryAll(User dto, HttpServletRequest request) {
+    	 IRequest requestContext = createRequestContext(request);
+         List<User> list = service.select(requestContext,dto);
+         int count  =  service.adminQueryCount(requestContext, null);
+         Iterator<User> it = list.iterator();
+         while(it.hasNext()){
+        	  User user = it.next();
+        	   if(("admin").equals(user.getUserName())) {
+        		   it.remove();
+         	  }
+        	}
+         return new ExtStore(null, null, count-1, list);
+    }
+    
 
 //    @RequestMapping(value = "/admin/user/submit")
 //    @ResponseBody

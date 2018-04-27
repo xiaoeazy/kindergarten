@@ -65,6 +65,15 @@ import java.util.List;
     	 int count = service.adminQueryCount(requestContext, dto);
     	 return new ExtStore(start, limit, count, list);
     }
+    
+    @RequestMapping(value = "/admin/assessment/activity/queryAll")
+    @ResponseBody
+    public ExtStore adminQueryAll(KgAssessmentActivity dto,HttpServletRequest request) {
+    	 IRequest requestContext = createRequestContext(request);
+    	 List<KgAssessmentActivity> list = service.selectWithOtherInfo(requestContext,dto,null,null);
+    	 int count = service.adminQueryCount(requestContext, dto);
+    	 return new ExtStore(null, null, count, list);
+    }
 
     @RequestMapping(value = "/admin/assessment/activity/submit")
     @ResponseBody

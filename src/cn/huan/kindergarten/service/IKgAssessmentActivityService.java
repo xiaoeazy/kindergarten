@@ -9,7 +9,7 @@ import cn.huan.kindergarten.dto.KgAssessmentActivity;
 
 public interface IKgAssessmentActivityService extends IBaseService<KgAssessmentActivity>, ProxySelf<IKgAssessmentActivityService>{
 
-	public List<KgAssessmentActivity> selectWithOtherInfo(IRequest request, KgAssessmentActivity condition, int pageNum,int pageSize);
+	public List<KgAssessmentActivity> selectWithOtherInfo(IRequest request, KgAssessmentActivity condition, Integer pageNum,Integer pageSize);
 
 	public int adminQueryCount(IRequest request, KgAssessmentActivity record);
 

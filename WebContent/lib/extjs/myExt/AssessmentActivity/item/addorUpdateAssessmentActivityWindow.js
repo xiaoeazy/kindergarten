@@ -26,9 +26,10 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 	    	
 	    	
 	    	var typeid_Combo_Store = new Ext.data.Store({
+	    		pageSize:0,
 	    		proxy: {
 			        type: 'ajax',
-			        url : appName+ '/admin/assessment/type/query',
+			        url : appName+ '/admin/assessment/type/queryAll',
 			        reader: {
 			        	root : "results",
 						totalProperty: "totalProperty",
