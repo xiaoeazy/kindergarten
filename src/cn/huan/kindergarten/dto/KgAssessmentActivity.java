@@ -18,6 +18,7 @@ public class KgAssessmentActivity extends BaseDTO {
 
      public static final String FIELD_ID = "id";
      public static final String FIELD_ASSESSMENT_TYPE_ID = "assessmentTypeId";
+     public static final String FIELD_ATTRIBUTEID = "attributeid";
      public static final String FIELD_ASSESSMENT_ACTIVITY_NAME = "assessmentActivityName";
      public static final String FIELD_ASSESSMENT_ACTIVITY_CONTENT = "assessmentActivityContent";
 
@@ -27,6 +28,8 @@ public class KgAssessmentActivity extends BaseDTO {
      private Long id;
 
      private Long assessmentTypeId;
+     
+     private String attributeid;
 
      @NotEmpty
      @Length(max = 45)
@@ -43,7 +46,15 @@ public class KgAssessmentActivity extends BaseDTO {
      
      
      
-     public Date getCreatedate() {
+     public String getAttributeid() {
+		return attributeid;
+	}
+
+	public void setAttributeid(String attributeid) {
+		this.attributeid = attributeid;
+	}
+
+	public Date getCreatedate() {
 		return createdate;
 	}
 

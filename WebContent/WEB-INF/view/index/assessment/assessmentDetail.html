@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<title>${assessmentInfo.assessmentActivityName}_上海市托幼协会</title>
+<link href="${base.contextPath}/lib/index/css/detail.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="${base.contextPath}/lib/index/js/jquery-3.2.1.min.js" ></script>
+</head>
+<body id="detail">
+<link href="${base.contextPath}/lib/index/css/inc.css" rel="stylesheet" type="text/css" />
+<#include "../../include/navigation.html">
+
+
+<div class="main">
+<div class="main_container">
+
+
+
+<div class="main_left_block mt13">
+<div class="wz_block">
+    <div class="vF_deail_currentloc">
+        <p>当前位置：<a href="../../index.htm"  title="首页" main.htm class="CurrChnlCls">首页</a>
+          &nbsp;&raquo;&nbsp;<a href="${base.contextPath}/index/news" title="政府采购动态" class="CurrChnlCls">资讯中心</a>
+          &nbsp;&raquo;&nbsp;<a href="${base.contextPath}/index/assessmentTypeList?typeid=${assessmentType.id}" title="${assessmentType.assessmentTypeName}" class="CurrChnlCls">${assessmentType.assessmentTypeName}</a>
+           &nbsp;&raquo;&nbsp;${assessmentInfo.assessmentActivityName}
+        </p>
+    </div>
+    <div class="vF_deail_maincontent">
+
+<div class="vF_detail_main">
+            <div class="vF_detail_header"><h2 class="tc">${assessmentInfo.assessmentActivityName};</h2>
+            <p class="tc"><span id="pubTime">${assessmentInfo.createdate?string('yyyy-MM-dd HH:mm:ss')}</span> 来源：<span id="sourceName">发布部</span> 【<span id="printBtn">打印</span>】 <span id="shareTo" style=""></span><img src="../../../pub.ccgp.gov.cn/common/images/2tqr.jpg" tppabs="http://pub.ccgp.gov.cn/common/images/2tqr.jpg" id="imgqrshow" style="postion: relative;vertical-align:middle" /><div id="qrcode" style="display:none;position: absolute;margin-left:527px;margin-top:-15px;"></div></p></div>
+            <div class="vF_detail_content">
+                ${assessmentInfo.assessmentActivityContent};
+            </div>
+        </div>
+
+
+
+
+    </div>
+    <div class="vF_detail_relcontent mt13">
+    <h2><p>相关文章</p></h2>
+    <div class="vF_detail_relcontent_lst">
+        <ul class="c_list_tat">
+
+        </ul>
+    </div>
+</div>
+
+</div>
+</div>
+
+    <div class="main_right_block" style="margin-top:43px">
+
+
+
+
+<!--OTsidebar-->
+	<#list rightAttributeList as rightAttributeList>
+		<#if rightAttributeList_index = 0>
+			<div class="main_right_cbl " style="margin-top:4px">
+            	<h2 class="mt10 mb10"><a href="#" >${rightAttributeList.attributename}</a></h2>
+                <div class="vT-chs-section-content-con">
+                <ul class="vT-chs-section-content-list mb10">
+                	<#list rightAttributeList.assessmentActivityList as assessmentActivityList>
+                		<li><a href="${base.contextPath}/index/newsDetail?id=${assessmentActivityList.id}" target="_blank" title="${assessmentActivityList.assessmentActivityName}">${assessmentActivityList.assessmentActivityName}</a></li>
+                	</#list>
+				 </ul>
+                </div>
+       		 </div>
+		<#else>
+			<div class="main_right_cbl mt13">
+          		<h2 class="mt10 mb10"><a href="#" >${rightAttributeList.attributename}</a></h2>
+                <div class="vT-chs-section-content-con">
+                <ul class="vT-chs-section-content-list mb10">
+					<#list rightAttributeList.assessmentActivityList as assessmentActivityList>
+						<li><a href="${base.contextPath}/index/newsDetail?id=${assessmentActivityList.id}"  target="_blank" title="${assessmentActivityList.assessmentActivityName}">${assessmentActivityList.assessmentActivityName}</a></li>
+					</#list>
+                </ul>
+                </div>
+        	</div>
+		</#if>
+	</#list>
+        
+
+        
+<!--OTsidebar-->
+        </div>
+    </div>
+</div>
+</div>
+<#include "../../include/footer.html">
+</body>
+<script language="javascript" src="../../js/detailaddon.js" tppabs="http://www.ccgp.gov.cn/js/detailaddon.js"></script>
+</html>

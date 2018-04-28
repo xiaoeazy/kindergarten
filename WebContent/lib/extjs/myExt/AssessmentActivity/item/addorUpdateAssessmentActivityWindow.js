@@ -64,6 +64,30 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 		            	}
 		            }
 		        }); 
+	       //=====================attribute=========================================
+	       var attribute_Combo_Store = new Ext.data.Store({
+	    	   pageSize:0,
+	    		proxy: {
+			        type: 'ajax',
+			        url : appName+ '/admin/newsattribute/queryAll',
+			        reader: {
+			        	root : "results",
+						totalProperty: "totalProperty",
+						successProperty:'success'
+			        }
+			    },
+			    autoLoad : true,
+			    fields: ['id', 'attributename'],
+			    listeners:{
+			    	load:function(){
+			    		if(record==null){
+			    			me.LoadingAttribute1(me,formpanel,attribute_Combo_Store,mainId);
+			    		}else{
+			    			me.LoadingAttribute2(me,record,formpanel,attribute_Combo_Store,mainId);
+			    		}
+			    	}
+			    }
+			});
 	       //=====================formpanel=========================================
 	    	var formpanel = new Ext.FormPanel({
 	    		  region:'north',
@@ -89,7 +113,24 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 								id:mainId+"assessmentActivityName",
 					            maxLength:45  
 				  			},
-				  			typeCombo
+				  			typeCombo,
+				  			{
+		                        xtype: 'checkboxgroup',
+		                        id: mainId+"attribute",
+		                        name: 'attribute',
+		                        columns: 4,
+		                        fieldLabel: '自定义属性',
+		                        labelWidth: 100,
+		                        width: 750,
+		                        align: 'left',
+		                        border: true,
+		                        anchor: '100%', flex: 1,
+		                        listeners: {
+		                            render: function (view, opt) {
+		                            	
+		                            }
+		                        }
+		                    },
 				  			]
 		});
 	     
@@ -161,8 +202,61 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 		
 	},
 	
+	LoadingAttribute1:function(me,formpanel,store,mainId){
+		  var checkboxgroup = Ext.getCmp(mainId+"attribute");
+		  for (var i = 0; i < store.getCount(); i++) {
+			  var record = store.getAt(i);
+			  var id = record.get("id");
+			  var checkbox = new Ext.form.Checkbox(
+		                 {
+		                     boxLabel: record.get("attributename"),
+//		                     name: record[i].OperationCode,
+		                     inputValue:id,
+		                     checked: false
+		                 });
+		          checkboxgroup.items.add(checkbox);
+		  }
+		  formpanel.doLayout();
+		 
+	},
+	LoadingAttribute2:function(me,infoRecord,formpanel,store,mainId){
+		  var checkboxgroup = Ext.getCmp(mainId+"attribute");
+		  var attribute = infoRecord.get("attributeid");
+		  var attributeArray = [];
+		  if(attribute!=null){
+			  attributeArray = attribute.split(",")
+		  }
+		  for (var i = 0; i < store.getCount(); i++) {
+			  var record = store.getAt(i);
+			  var id = record.get("id");
+			  var index = attributeArray.indexOf(id);
+			  var checked = true;
+			  if(index<0){
+				  checked = false;
+			  }
+			  var checkbox = new Ext.form.Checkbox(
+		                 {
+		                     boxLabel: record.get("attributename"),
+//		                     name: record[i].OperationCode,
+		                     inputValue:id,
+		                     checked: checked
+		                 });
+		          checkboxgroup.items.add(checkbox);
+		  }
+		  formpanel.doLayout();
+		 
+	},
+	
+	
 	addorUpdateAssessmentActivity : function(me,formpanel,mainId,parentStore,id,type,isAdd) {
-		
+		var attributeValue = Ext.getCmp(mainId+'attribute').getChecked();
+		var attributeid="";
+		Ext.Array.each(attributeValue, function(item){
+//			attributeid +=  item.boxLabel+",";
+			attributeid +=  item.inputValue+",";
+		});
+		if(attributeid!="")
+			attributeid=attributeid.substring(0,attributeid.length-1);
 		
 		var assessmentActivityName =Ext.getCmp(mainId+"assessmentActivityName").getValue().trim();
 		var assessmentTypeId =Ext.getCmp(mainId+"assessmentTypeId").getValue();
@@ -185,6 +279,7 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
                   headers: {'Content-Type':'application/json'},
                   params : JSON.stringify([{
                 	  __status : type,
+                	  attributeid:attributeid,
                 	  assessmentActivityName:assessmentActivityName,
                 	  assessmentTypeId:assessmentTypeId,
                 	  assessmentActivityContent:assessmentActivityContent,

@@ -29,6 +29,7 @@ DROP TABLE IF EXISTS `kg_assessment_activity`;
 CREATE TABLE `kg_assessment_activity` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `assessment_type_id` bigint(20) unsigned NOT NULL,
+  `attributeId` varchar(200) DEFAULT '-1',
   `assessment_activity_name` varchar(45) NOT NULL,
   `assessment_activity_content` text,
   `createDate` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -45,17 +46,18 @@ CREATE TABLE `kg_assessment_activity` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_assessment_activity`
 --
 
 /*!40000 ALTER TABLE `kg_assessment_activity` DISABLE KEYS */;
-INSERT INTO `kg_assessment_activity` (`id`,`assessment_type_id`,`assessment_activity_name`,`assessment_activity_content`,`createDate`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (3,16,'111','<p>111</p>','2018-04-23 10:59:19',1,-1,-1,-1,'2018-04-23 10:59:19',-1,'2018-04-23 10:59:19',-1,'ID',NULL,NULL,NULL),
- (4,17,'222','<p>222</p>','2018-04-23 10:59:24',1,-1,-1,-1,'2018-04-23 10:59:24',-1,'2018-04-23 10:59:24',-1,'ID',NULL,NULL,NULL),
- (5,16,'333','<p>333</p>','2018-04-23 10:59:29',1,-1,-1,-1,'2018-04-23 10:59:29',-1,'2018-04-23 10:59:29',-1,'ID',NULL,NULL,NULL);
+INSERT INTO `kg_assessment_activity` (`id`,`assessment_type_id`,`attributeId`,`assessment_activity_name`,`assessment_activity_content`,`createDate`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
+ (3,16,'-1','111','<p>111</p>','2018-04-23 10:59:19',1,-1,-1,-1,'2018-04-23 10:59:19',-1,'2018-04-23 10:59:19',-1,'ID',NULL,NULL,NULL),
+ (4,17,'-1','222','<p>222</p>','2018-04-23 10:59:24',1,-1,-1,-1,'2018-04-23 10:59:24',-1,'2018-04-23 10:59:24',-1,'ID',NULL,NULL,NULL),
+ (5,16,'12','333','<p>333</p>','2018-04-23 10:59:29',3,-1,-1,-1,'2018-04-23 10:59:29',-1,'2018-04-28 15:51:05',-1,'ID',NULL,NULL,NULL),
+ (6,16,'12,14','334','<p>4</p>','2018-04-28 15:51:30',2,-1,-1,-1,'2018-04-28 15:51:30',-1,'2018-04-28 16:10:24',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_assessment_activity` ENABLE KEYS */;
 
 
@@ -69,7 +71,7 @@ CREATE TABLE `kg_assessment_activity_user_progress` (
   `assessment_activity_id` bigint(20) unsigned NOT NULL,
   `upload_user_id` bigint(20) unsigned NOT NULL,
   `admin_suggestion` text,
-  `expert_user_id` bigint(20) unsigned NOT NULL,
+  `expert_user_id` bigint(20) unsigned DEFAULT NULL,
   `expert_suggestion` text,
   `state` varchar(240) DEFAULT 'UPLOAD',
   `OBJECT_VERSION_NUMBER` bigint(20) DEFAULT '1',
@@ -85,13 +87,16 @@ CREATE TABLE `kg_assessment_activity_user_progress` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_assessment_activity_user_progress`
 --
 
 /*!40000 ALTER TABLE `kg_assessment_activity_user_progress` DISABLE KEYS */;
+INSERT INTO `kg_assessment_activity_user_progress` (`id`,`assessment_activity_id`,`upload_user_id`,`admin_suggestion`,`expert_user_id`,`expert_suggestion`,`state`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
+ (1,3,10014,NULL,NULL,NULL,'UPLOAD',1,-1,-1,-1,'2018-04-26 15:58:24',-1,'2018-04-26 15:58:24',-1,'ID',NULL,NULL,NULL),
+ (2,3,10014,NULL,NULL,NULL,'UPLOAD',1,-1,-1,-1,'2018-04-26 15:58:40',-1,'2018-04-26 15:58:40',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_assessment_activity_user_progress` ENABLE KEYS */;
 
 
@@ -103,8 +108,9 @@ DROP TABLE IF EXISTS `kg_assessment_activity_user_upload`;
 CREATE TABLE `kg_assessment_activity_user_upload` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `upload_user_id` bigint(20) unsigned NOT NULL,
-  `assessment_activity_id` bigint(20) unsigned NOT NULL,
+  `progress_id` bigint(20) unsigned NOT NULL,
   `file_path` varchar(240) DEFAULT NULL,
+  `createDate` datetime DEFAULT CURRENT_TIMESTAMP,
   `OBJECT_VERSION_NUMBER` bigint(20) DEFAULT '1',
   `REQUEST_ID` bigint(20) DEFAULT '-1',
   `PROGRAM_ID` bigint(20) DEFAULT '-1',
@@ -117,14 +123,16 @@ CREATE TABLE `kg_assessment_activity_user_upload` (
   `EFFECTIVE_START_DATE` date DEFAULT NULL COMMENT '有效日期从',
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_assessment_activity_user_upload`
 --
 
 /*!40000 ALTER TABLE `kg_assessment_activity_user_upload` DISABLE KEYS */;
+INSERT INTO `kg_assessment_activity_user_upload` (`id`,`upload_user_id`,`progress_id`,`file_path`,`createDate`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
+ (1,10014,3,'/resources/upload/1.png','2018-04-27 09:07:05',1,-1,-1,-1,'2018-04-26 16:00:03',-1,'2018-04-26 16:00:03',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_assessment_activity_user_upload` ENABLE KEYS */;
 
 
@@ -262,7 +270,7 @@ CREATE TABLE `kg_introduction` (
 
 /*!40000 ALTER TABLE `kg_introduction` DISABLE KEYS */;
 INSERT INTO `kg_introduction` (`id`,`introduction`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (1,'<p><span style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; background-color: rgb(255, 255, 255);\">5上海市托幼协会是经上海市教育委员会同意，上海市社会团体管理局核准登记，取得法人资格的行业性、自律性的非营利性社会组织。</span><br style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; background-color: rgb(255, 255, 255);\">　　上海市托幼协会是为适应政府职能转变，适应上海学前教育事业发展的需要，更好地为本市各级各类学前教育机构服务，进一步推动本市托幼事业的发展而建立的。它的宗旨是：坚持四项基本原则, 遵守宪法、法律、法规, 贯彻党和政府的方针、政策, 团结全市各级各类学前教育机构和广大学前教育工作者，开展有关学前教育的理论、政策和实际问题等方面的研究, 协助政府加强学前教育管理，保护会员的合法权益，提高学前教育队伍的整体素质，推进托幼事业的发展。协会是会员的服务机构，协会是会员的自律组织，协会是会员的代表，协会也是行业的协调组织。</span><br style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; background-color: rgb(255, 255, 255);\">　　上海市托幼协会自2002年成立以来，得到了市各有关部门及领导的关心与支持。原市人大教科文委主任夏秀蓉、市教委副主任张民生任名誉会长，原市人大常委会副主任胡正昌、华师大潘洁教授、市教委基教处何幼华副处长任顾问，市卫生局、市妇联委派相关领导担任协会副会长参与协会的领导工作，现市人大常委、市政府参事瞿钧任会长。</span><br style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; background-color: rgb(255, 255, 255);\">　　协会的业务范围是：信息咨询，内外协调，业务培训，交流研讨、资质审核等。</span><br style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; background-color: rgb(255, 255, 255);\">　　协会的具体工作职责如下：</span><br style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; background-color: rgb(255, 255, 255);\">　　（一）积极宣传、贯策党和国家有关学前教育的方针、政策，宣传学前教育的地位、作用，团结、依靠社会各方面的力量，关心、支持学前教育工作。</span><br style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; background-color: rgb(255, 255, 255);\">　　（二）开展学前教育业务培训、保教业务咨询、保教人才交流等服务工作。</span><br style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; background-color: rgb(255, 255, 255);\">　　（三）开展国内外学前教育的合作与交流，推广研究成果和经验。</span><br style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; background-color: rgb(255, 255, 255);\">　　（四）就学前教育事业发展过程中存在的问题开展调研，参与有关学前教育发展、改革以及与托、幼园所利益相关的政府决策论证，提出事业发展中有关政策和立法的建议，并为政府提供决策依据。</span><br style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; background-color: rgb(255, 255, 255);\">　　（五）推进依法办园办所，创导良好的行风。对参与不正当竞争，有损事业整体形象的会员，协会采取警告、批评、开除会员资格等惩戒措施，也可建议有关行政机构依法对非会员单位的违法活动进行处理。</span><br style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; background-color: rgb(255, 255, 255);\">　　（六）依据学前教育有关法规，制定本市托幼保教质量规范，服务标准。</span><br style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; background-color: rgb(255, 255, 255);\">　　（七）接受政府有关职能部门委托，依法开展与学前教育发展相关的工作，如统计、调查、发布信息、公信证明、收费价格协调、资质审核等。</span><br style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; background-color: rgb(255, 255, 255);\">　　（八）协调会员与会员，会员与非会员，会员与幼儿家长、保教人员，会员与其它单位及社会组织的关系并维护其合法权益。</span><br style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; background-color: rgb(255, 255, 255);\">　　协会建立后将首先接受上海市教育委员会的委托开展对一级幼儿园、托儿所的认定、发证工作，上海市教委与上海市卫生局还在研究有关其他工作的委托。同时协会将充分发挥本市教育资源及人才资源的优势，开展学前教育培训、保教业务咨询、保教人才交流等服务工作。协会还将创造条件开展国内外学前教育的合作与交流，还将就多元化办园体制等问题开展调查、研究，总结经验，建立必要的行业规范，并为政府提供决策依据。</span><br style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; background-color: rgb(255, 255, 255);\">　　协会由单位会员和个人会员组成，凡经本市教育行政部门批准从事学前教育的机构和研究单位及在学前教育研究上有显著成绩或对学前教育事业发展有较大贡献的个人，承认本团体的章程，有加入本团体的愿望，填写入会申请，经理事会讨论通过均能成为本协会的单位会员和个人会员，会员享有参加本团体的活动，优先获得本团体服务的权利，并享有选举权、被选举权和表决权，同时还有对本团体工作的批评建议权和监督权。会员也应履行执行本团体决议，完成团体交代的工作及按时交纳会费的义务。</span><br style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; background-color: rgb(255, 255, 255);\">　　协会愿与所有会员单位共同努力，为上海托幼事业的发展作出贡献。</span><br style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; background-color: rgb(255, 255, 255);\">　　</span><br style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; background-color: rgb(255, 255, 255);\">　　</span><br style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; background-color: rgb(255, 255, 255);\">　　</span><br style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; background-color: rgb(255, 255, 255);\">　　 上海市托幼协会</span><br style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; background-color: rgb(255, 255, 255);\">　　</span><br style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; background-color: rgb(255, 255, 255);\">　　</span><br style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; background-color: rgb(255, 255, 255);\">　　</span><br style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; background-color: rgb(255, 255, 255);\">　　 上海市托幼协会地址：石门二路199弄1号404室</span><br style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; background-color: rgb(255, 255, 255);\">　　&nbsp;</span><br style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: medium; background-color: rgb(255, 255, 255);\">　　邮编：200041 电话：62671784</span></p>',20,-1,-1,-1,'2018-04-07 09:18:47',-1,'2018-04-13 10:50:52',-1,'ID',NULL,NULL,NULL);
+ (1,'<p>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上海市托幼协会是经上海市教育委员会同意，上海市社会团体管理局核准登记，取得法人资格的行业性、自律性的非营利性社会组织。</p><p>　　上海市托幼协会是为适应政府职能转变，适应上海学前教育事业发展的需要，更好地为本市各级各类学前教育机构服务，进一步推动本市托幼事业的发展而建立的。它的宗旨是：坚持四项基本原则, 遵守宪法、法律、法规, 贯彻党和政府的方针、政策, 团结全市各级各类学前教育机构和广大学前教育工作者，开展有关学前教育的理论、政策和实际问题等方面的研究, 协助政府加强学前教育管理，保护会员的合法权益，提高学前教育队伍的整体素质，推进托幼事业的发展。协会是会员的服务机构，协会是会员的自律组织，协会是会员的代表，协会也是行业的协调组织。</p><p>　　上海市托幼协会自2002年成立以来，得到了市各有关部门及领导的关心与支持。原市人大教科文委主任夏秀蓉、市教委副主任张民生任名誉会长，原市人大常委会副主任胡正昌、华师大潘洁教授、市教委基教处何幼华副处长任顾问，市卫生局、市妇联委派相关领导担任协会副会长参与协会的领导工作，现市人大常委、市政府参事瞿钧任会长。</p><p>　　协会的业务范围是：信息咨询，内外协调，业务培训，交流研讨、资质审核等。</p><p>　　协会的具体工作职责如下：</p><p>　　（一）积极宣传、贯策党和国家有关学前教育的方针、政策，宣传学前教育的地位、作用，团结、依靠社会各方面的力量，关心、支持学前教育工作。</p><p>　　（二）开展学前教育业务培训、保教业务咨询、保教人才交流等服务工作。</p><p>　　（三）开展国内外学前教育的合作与交流，推广研究成果和经验。</p><p>　　（四）就学前教育事业发展过程中存在的问题开展调研，参与有关学前教育发展、改革以及与托、幼园所利益相关的政府决策论证，提出事业发展中有关政策和立法的建议，并为政府提供决策依据。</p><p>　　（五）推进依法办园办所，创导良好的行风。对参与不正当竞争，有损事业整体形象的会员，协会采取警告、批评、开除会员资格等惩戒措施，也可建议有关行政机构依法对非会员单位的违法活动进行处理。</p><p>　　（六）依据学前教育有关法规，制定本市托幼保教质量规范，服务标准。</p><p>　　（七）接受政府有关职能部门委托，依法开展与学前教育发展相关的工作，如统计、调查、发布信息、公信证明、收费价格协调、资质审核等。</p><p>　　（八）协调会员与会员，会员与非会员，会员与幼儿家长、保教人员，会员与其它单位及社会组织的关系并维护其合法权益。</p><p>　　协会建立后将首先接受上海市教育委员会的委托开展对一级幼儿园、托儿所的认定、发证工作，上海市教委与上海市卫生局还在研究有关其他工作的委托。同时协会将充分发挥本市教育资源及人才资源的优势，开展学前教育培训、保教业务咨询、保教人才交流等服务工作。协会还将创造条件开展国内外学前教育的合作与交流，还将就多元化办园体制等问题开展调查、研究，总结经验，建立必要的行业规范，并为政府提供决策依据。</p><p>　　协会由单位会员和个人会员组成，凡经本市教育行政部门批准从事学前教育的机构和研究单位及在学前教育研究上有显著成绩或对学前教育事业发展有较大贡献的个人，承认本团体的章程，有加入本团体的愿望，填写入会申请，经理事会讨论通过均能成为本协会的单位会员和个人会员，会员享有参加本团体的活动，优先获得本团体服务的权利，并享有选举权、被选举权和表决权，同时还有对本团体工作的批评建议权和监督权。会员也应履行执行本团体决议，完成团体交代的工作及按时交纳会费的义务。</p><p>　　协会愿与所有会员单位共同努力，为上海托幼事业的发展作出贡献。</p><p>　　</p><p>　　</p><p>　　</p><p>　　 上海市托幼协会</p><p>　　</p><p>　　</p><p>　　</p><p>　　 上海市托幼协会地址：石门二路199弄1号404室</p><p>　　&nbsp;</p><p>　　邮编：200041 电话：62671784</p><p><br/></p>',23,-1,-1,-1,'2018-04-07 09:18:47',-1,'2018-04-28 15:08:11',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_introduction` ENABLE KEYS */;
 
 
@@ -353,7 +361,7 @@ INSERT INTO `kg_news` (`id`,`typeId`,`sourceId`,`attributeId`,`newsTitle`,`summa
  (32,8,1,'','幼儿园工作1','幼儿园工作1','',NULL,'<p style=\"margin-top: 0px; margin-bottom: 15px; padding: 0px; text-indent: 2em; word-wrap: break-word; line-height: 2em; color: rgb(49, 49, 49); font-family: 宋体, simsun, Tahoma, Verdana, Arial; white-space: normal; text-align: center;\"><strong style=\"margin: 0px; padding: 0px;\"><span style=\"margin: 0px; padding: 0px; color: rgb(255, 0, 0);\">中华人民共和国教育部令第39号</span></strong></p><p style=\"margin-top: 0px; margin-bottom: 15px; padding: 0px; text-indent: 2em; word-wrap: break-word; line-height: 2em; color: rgb(49, 49, 49); font-family: 宋体, simsun, Tahoma, Verdana, Arial; text-align: justify; white-space: normal;\">《幼儿园工作规程》已经2015年12月14日第48次部长办公会议审议通过，现予公布，自2016年3月1日起施行。　　　　　　　　　　</p><p style=\"margin-top: 0px; margin-bottom: 15px; padding: 0px; text-indent: 2em; word-wrap: break-word; line-height: 2em; color: rgb(49, 49, 49); font-family: 宋体, simsun, Tahoma, Verdana, Arial; white-space: normal; text-align: right;\">教育部部长</p><p style=\"margin-top: 0px; margin-bottom: 15px; padding: 0px; text-indent: 2em; word-wrap: break-word; line-height: 2em; color: rgb(49, 49, 49); font-family: 宋体, simsun, Tahoma, Verdana, Arial; white-space: normal; text-align: right;\">2016年1月5日</p><p style=\"margin-top: 0px; margin-bottom: 15px; padding: 0px; text-indent: 2em; word-wrap: break-word; line-height: 2em; color: rgb(49, 49, 49); font-family: 宋体, simsun, Tahoma, Verdana, Arial; white-space: normal; text-align: center;\"><strong style=\"margin: 0px; padding: 0px;\">幼儿园工作规程</strong></p><p style=\"margin-top: 0px; margin-bottom: 15px; padding: 0px; text-indent: 2em; word-wrap: break-word; line-height: 2em; color: rgb(49, 49, 49); font-family: 宋体, simsun, Tahoma, Verdana, Arial; text-align: justify; white-space: normal;\"><strong style=\"margin: 0px; padding: 0px;\">第一章　总则</strong></p><p style=\"margin-top: 0px; margin-bottom: 15px; padding: 0px; text-indent: 2em; word-wrap: break-word; line-height: 2em; color: rgb(49, 49, 49); font-family: 宋体, simsun, Tahoma, Verdana, Arial; text-align: justify; white-space: normal;\">第一条　为了加强幼儿园的科学管理，规范办园行为，提高保育和教育质量，促进幼儿身心健康，依据《中华人民共和国教育法》等法律法规，制定本规程。</p><p style=\"margin-top: 0px; margin-bottom: 15px; padding: 0px; text-indent: 2em; word-wrap: break-word; line-height: 2em; color: rgb(49, 49, 49); font-family: 宋体, simsun, Tahoma, Verdana, Arial; text-align: justify; white-space: normal;\">第二条　幼儿园是对3周岁以上学龄前幼儿实施保育和教育的机构。幼儿园教育是基础教育的重要组成部分，是学校教育制度的基础阶段。</p><p style=\"margin-top: 0px; margin-bottom: 15px; padding: 0px; text-indent: 2em; word-wrap: break-word; line-height: 2em; color: rgb(49, 49, 49); font-family: 宋体, simsun, Tahoma, Verdana, Arial; text-align: justify; white-space: normal;\">第三条　幼儿园的任务是：贯彻国家的教育方针，按照保育与教育相结合的原则，遵循幼儿身心发展特点和规律，实施德、智、体、美等方面全面发展的教育，促进幼儿身心和谐发展。</p><p><br/></p>','2018-04-14 13:39:53',0,1,-1,-1,-1,'2018-04-14 13:39:53',-1,'2018-04-14 13:39:53',-1,'ID',NULL,NULL,NULL);
 INSERT INTO `kg_news` (`id`,`typeId`,`sourceId`,`attributeId`,`newsTitle`,`summary`,`thumbnail`,`author`,`content`,`createDate`,`viewsCount`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
  (33,8,1,'12,14','幼儿园工作2','幼儿园工作2','',NULL,'<p>幼儿园工作2</p>','2018-04-14 13:40:31',0,2,-1,-1,-1,'2018-04-14 13:40:31',-1,'2018-04-19 13:59:02',-1,'ID',NULL,NULL,NULL),
- (34,8,1,'','幼儿园工作3','幼儿园工作3','',NULL,'<p>幼儿园工作2</p>','2018-04-14 13:40:46',0,1,-1,-1,-1,'2018-04-14 13:40:46',-1,'2018-04-14 13:40:46',-1,'ID',NULL,NULL,NULL);
+ (34,8,1,'12','幼儿园工作3','幼儿园工作3','',NULL,'<p>幼儿园工作2</p>','2018-04-14 13:40:46',0,2,-1,-1,-1,'2018-04-14 13:40:46',-1,'2018-04-28 15:52:58',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_news` ENABLE KEYS */;
 
 

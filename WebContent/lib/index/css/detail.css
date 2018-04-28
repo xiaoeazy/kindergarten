@@ -89,6 +89,10 @@ body{background:#f0f0f0;}
 
 .main_left_block{width:698px;float:left;}
 .main_right_block{width:292px;margin-left:10px;float:left}
+
+.mainLeft_left_block{width:292px;float:left;}
+.mainLeft_right_block{width:698px;margin-left:10px;float:left}
+
 .wz_block,.banner_block{width:100%;float:left}
 
 .vF_deail_currentloc{width:100%;float:left;}

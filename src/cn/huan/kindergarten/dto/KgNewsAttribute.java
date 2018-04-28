@@ -31,9 +31,22 @@ public class KgNewsAttribute extends BaseDTO {
      
      @Transient
      private List<KgNews> newsList;
+     
+     @Transient
+     private List<KgAssessmentActivity> assessmentActivityList;
+     
+     
 
 
-     public List<KgNews> getNewsList() {
+     public List<KgAssessmentActivity> getAssessmentActivityList() {
+		return assessmentActivityList;
+	}
+
+	public void setAssessmentActivityList(List<KgAssessmentActivity> assessmentActivityList) {
+		this.assessmentActivityList = assessmentActivityList;
+	}
+
+	public List<KgNews> getNewsList() {
 		return newsList;
 	}
 
