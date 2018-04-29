@@ -2,6 +2,7 @@ var appName = _basePath;
 var tabs;
 var _panel2;
 var _panel3;
+var nonePic = _basePath +"/resources/images/none/none.jpg";
 
 Ext.onReady(function() {
 	//	Ext.QuickTips.init();//QuickTips的作用是读取标签中的ext:qtip属性，并为它赋予显示提示的动作。
@@ -97,6 +98,7 @@ function getManager() {
 	str +=addFunc('assessmentType1.png','assessmentType2.png','assessmentType');
 	str +=addFunc('assessmentActivity1.png','assessmentActivity2.png','assessmentActivity');
 	str +=addFunc('assessmentUserProgress1.png','assessmentUserProgress2.png','assessmentUserProgress');
+	str +=addFunc('carousel1.png','carousel2.png','carousel');
 	
 	str += '</table></div>';
 	return str;
@@ -193,6 +195,11 @@ function addtabs(us) {
 			mainId: us
 		});
 		addTabFuns(us,panel,'评估任务进度');
+	}else if (us == "carousel") {
+		var panel=  new Carousel.CarouselPanel({
+			mainId: us
+		});
+		addTabFuns(us,panel,'轮播图');
 	}
 }
 

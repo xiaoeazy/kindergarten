@@ -10,7 +10,7 @@ import cn.huan.kindergarten.dto.KgNews;
 import cn.huan.kindergarten.dto.KgNewstype;
 
 public interface IKgNewsService extends IBaseService<KgNews>, ProxySelf<IKgNewsService>{
-	 public List<KgNews> selectWithOtherInfo(IRequest request,  KgNews condition, int pageNum, int pageSize);
+	 public List<KgNews> selectWithOtherInfo(IRequest request,  KgNews condition, Integer pageNum, Integer pageSize);
 	 
 	 public int adminQueryCount(IRequest request,KgNews record);
 }

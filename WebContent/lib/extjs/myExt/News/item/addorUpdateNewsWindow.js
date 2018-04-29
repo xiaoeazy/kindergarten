@@ -190,7 +190,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 									width:200,
 								 	height:100,
 									tag : 'img',
-									src :'',
+									src :nonePic,
 									style : 'filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);',
 									complete : 'off'
 								}
@@ -213,7 +213,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 									text : '撤销图片',
 									handler:function(){
 										Ext.getCmp(mainId+"imageUrl").setValue("");
-							    		Ext.getCmp(mainId+"showPict").getEl().dom.src="";
+							    		Ext.getCmp(mainId+"showPict").getEl().dom.src=nonePic;
 									}
 							 	}]
 							},{ 

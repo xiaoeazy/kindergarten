@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.validation.BindingResult;
+
+import java.util.ArrayList;
 import java.util.List;
 
     @Controller
@@ -70,8 +72,13 @@ import java.util.List;
     @ResponseBody
     public ExtStore adminQueryAll(KgAssessmentActivity dto,HttpServletRequest request) {
     	 IRequest requestContext = createRequestContext(request);
-    	 List<KgAssessmentActivity> list = service.selectWithOtherInfo(requestContext,dto,null,null);
-    	 int count = service.adminQueryCount(requestContext, dto);
+    	 List<KgAssessmentActivity> list = new ArrayList<KgAssessmentActivity>();
+    	 KgAssessmentActivity kn = new KgAssessmentActivity();
+    	 kn.setId(-1l);
+    	 kn.setAssessmentActivityName("请选择");
+    	 list.add(kn);
+    	 list.addAll(service.selectAll(requestContext)) ;
+    	 int count = list.size();
     	 return new ExtStore(null, null, count, list);
     }
 

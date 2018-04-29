@@ -24,8 +24,8 @@ public class KgNewsServiceImpl extends BaseServiceImpl<KgNews> implements IKgNew
 
 	@Override
     @Transactional(propagation = Propagation.SUPPORTS)
-    public List<KgNews> selectWithOtherInfo(IRequest request,  KgNews condition ,int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
+    public List<KgNews> selectWithOtherInfo(IRequest request,  KgNews condition ,Integer pageNum, Integer pageSize) {
+		PageHelper.startPage(pageNum, pageSize);
         return kgNewsMapper.selectWithOtherInfo( condition);
     }
 	

@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.validation.BindingResult;
+
+import java.util.ArrayList;
 import java.util.List;
 
     @Controller
@@ -64,6 +66,20 @@ import java.util.List;
     	 List<KgNews> list = service.selectWithOtherInfo(requestContext,dto,page,limit);
     	 int count = service.adminQueryCount(requestContext, dto);
     	 return new ExtStore(start, limit, count, list);
+    }
+    
+    @RequestMapping(value = "/admin/news/queryAll")
+    @ResponseBody
+    public ExtStore adminQueryAll(KgNews dto,HttpServletRequest request) {
+    	 IRequest requestContext = createRequestContext(request);
+    	 List<KgNews> list = new ArrayList<KgNews>();
+    	 KgNews kn = new KgNews();
+    	 kn.setId(-1l);
+    	 kn.setNewstitle("请选择");
+    	 list.add(kn);
+    	 list.addAll(service.selectAll(requestContext)) ;
+    	 int count = list.size();
+    	 return new ExtStore(null, null, count, list);
     }
 
     @RequestMapping(value = "/admin/news/submit")

@@ -171,6 +171,46 @@ INSERT INTO `kg_assessment_type` (`id`,`assessment_type_name`,`OBJECT_VERSION_NU
 
 
 --
+-- Definition of table `kg_carousel`
+--
+
+DROP TABLE IF EXISTS `kg_carousel`;
+CREATE TABLE `kg_carousel` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `file_path` varchar(200) NOT NULL,
+  `sequence` bigint(20) unsigned DEFAULT '0',
+  `urltype` bigint(20) unsigned DEFAULT '0' COMMENT '0:weburl , 1:activity ,2 :news',
+  `web_url` varchar(200) DEFAULT NULL,
+  `activity_id` bigint(20) DEFAULT '-1',
+  `news_id` bigint(20) DEFAULT '-1',
+  `OBJECT_VERSION_NUMBER` bigint(20) DEFAULT '1',
+  `REQUEST_ID` bigint(20) DEFAULT '-1',
+  `PROGRAM_ID` bigint(20) DEFAULT '-1',
+  `CREATED_BY` bigint(20) DEFAULT '-1',
+  `CREATION_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATED_BY` bigint(20) DEFAULT '-1',
+  `LAST_UPDATE_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATE_LOGIN` bigint(20) DEFAULT '-1',
+  `CERTIFICATE_TYPE` varchar(240) DEFAULT 'ID' COMMENT '证件类型',
+  `EFFECTIVE_START_DATE` date DEFAULT NULL COMMENT '有效日期从',
+  `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
+  `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kg_carousel`
+--
+
+/*!40000 ALTER TABLE `kg_carousel` DISABLE KEYS */;
+INSERT INTO `kg_carousel` (`id`,`file_path`,`sequence`,`urltype`,`web_url`,`activity_id`,`news_id`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
+ (7,'/resources/upload/33.jpg',0,2,'',5,-1,2,-1,-1,-1,'2018-04-29 21:15:32',-1,'2018-04-29 21:54:39',-1,'ID',NULL,NULL,NULL),
+ (9,'/resources/upload/44.jpg',3,0,'11',-1,-1,3,-1,-1,-1,'2018-04-29 21:28:27',-1,'2018-04-29 21:54:16',-1,'ID',NULL,NULL,NULL),
+ (10,'/resources/upload/44.jpg',1,1,'',-1,24,4,-1,-1,-1,'2018-04-29 21:38:59',-1,'2018-04-29 21:54:48',-1,'ID',NULL,NULL,NULL);
+/*!40000 ALTER TABLE `kg_carousel` ENABLE KEYS */;
+
+
+--
 -- Definition of table `kg_config`
 --
 
@@ -239,6 +279,39 @@ CREATE TABLE `kg_demo` (
 
 /*!40000 ALTER TABLE `kg_demo` DISABLE KEYS */;
 /*!40000 ALTER TABLE `kg_demo` ENABLE KEYS */;
+
+
+--
+-- Definition of table `kg_download`
+--
+
+DROP TABLE IF EXISTS `kg_download`;
+CREATE TABLE `kg_download` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `file_title` varchar(200) NOT NULL,
+  `file_path` varchar(200) NOT NULL,
+  `summary` varchar(200) DEFAULT NULL,
+  `OBJECT_VERSION_NUMBER` bigint(20) DEFAULT '1',
+  `REQUEST_ID` bigint(20) DEFAULT '-1',
+  `PROGRAM_ID` bigint(20) DEFAULT '-1',
+  `CREATED_BY` bigint(20) DEFAULT '-1',
+  `CREATION_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATED_BY` bigint(20) DEFAULT '-1',
+  `LAST_UPDATE_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATE_LOGIN` bigint(20) DEFAULT '-1',
+  `CERTIFICATE_TYPE` varchar(240) DEFAULT 'ID' COMMENT '证件类型',
+  `EFFECTIVE_START_DATE` date DEFAULT NULL COMMENT '有效日期从',
+  `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
+  `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kg_download`
+--
+
+/*!40000 ALTER TABLE `kg_download` DISABLE KEYS */;
+/*!40000 ALTER TABLE `kg_download` ENABLE KEYS */;
 
 
 --
