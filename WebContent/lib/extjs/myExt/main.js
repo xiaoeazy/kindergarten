@@ -99,6 +99,7 @@ function getManager() {
 	str +=addFunc('assessmentActivity1.png','assessmentActivity2.png','assessmentActivity');
 	str +=addFunc('assessmentUserProgress1.png','assessmentUserProgress2.png','assessmentUserProgress');
 	str +=addFunc('carousel1.png','carousel2.png','carousel');
+	str +=addFunc('download1.png','download2.png','download');
 	
 	str += '</table></div>';
 	return str;
@@ -200,6 +201,11 @@ function addtabs(us) {
 			mainId: us
 		});
 		addTabFuns(us,panel,'轮播图');
+	}else if (us == "download") {
+		var panel=  new Download.DownloadPanel({
+			mainId: us
+		});
+		addTabFuns(us,panel,'文档下载');
 	}
 }
 

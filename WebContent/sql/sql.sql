@@ -196,7 +196,7 @@ CREATE TABLE `kg_carousel` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_carousel`
@@ -291,6 +291,7 @@ CREATE TABLE `kg_download` (
   `file_title` varchar(200) NOT NULL,
   `file_path` varchar(200) NOT NULL,
   `summary` varchar(200) DEFAULT NULL,
+  `createDate` datetime DEFAULT CURRENT_TIMESTAMP,
   `OBJECT_VERSION_NUMBER` bigint(20) DEFAULT '1',
   `REQUEST_ID` bigint(20) DEFAULT '-1',
   `PROGRAM_ID` bigint(20) DEFAULT '-1',
@@ -304,7 +305,7 @@ CREATE TABLE `kg_download` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_download`
@@ -434,7 +435,7 @@ INSERT INTO `kg_news` (`id`,`typeId`,`sourceId`,`attributeId`,`newsTitle`,`summa
  (32,8,1,'','幼儿园工作1','幼儿园工作1','',NULL,'<p style=\"margin-top: 0px; margin-bottom: 15px; padding: 0px; text-indent: 2em; word-wrap: break-word; line-height: 2em; color: rgb(49, 49, 49); font-family: 宋体, simsun, Tahoma, Verdana, Arial; white-space: normal; text-align: center;\"><strong style=\"margin: 0px; padding: 0px;\"><span style=\"margin: 0px; padding: 0px; color: rgb(255, 0, 0);\">中华人民共和国教育部令第39号</span></strong></p><p style=\"margin-top: 0px; margin-bottom: 15px; padding: 0px; text-indent: 2em; word-wrap: break-word; line-height: 2em; color: rgb(49, 49, 49); font-family: 宋体, simsun, Tahoma, Verdana, Arial; text-align: justify; white-space: normal;\">《幼儿园工作规程》已经2015年12月14日第48次部长办公会议审议通过，现予公布，自2016年3月1日起施行。　　　　　　　　　　</p><p style=\"margin-top: 0px; margin-bottom: 15px; padding: 0px; text-indent: 2em; word-wrap: break-word; line-height: 2em; color: rgb(49, 49, 49); font-family: 宋体, simsun, Tahoma, Verdana, Arial; white-space: normal; text-align: right;\">教育部部长</p><p style=\"margin-top: 0px; margin-bottom: 15px; padding: 0px; text-indent: 2em; word-wrap: break-word; line-height: 2em; color: rgb(49, 49, 49); font-family: 宋体, simsun, Tahoma, Verdana, Arial; white-space: normal; text-align: right;\">2016年1月5日</p><p style=\"margin-top: 0px; margin-bottom: 15px; padding: 0px; text-indent: 2em; word-wrap: break-word; line-height: 2em; color: rgb(49, 49, 49); font-family: 宋体, simsun, Tahoma, Verdana, Arial; white-space: normal; text-align: center;\"><strong style=\"margin: 0px; padding: 0px;\">幼儿园工作规程</strong></p><p style=\"margin-top: 0px; margin-bottom: 15px; padding: 0px; text-indent: 2em; word-wrap: break-word; line-height: 2em; color: rgb(49, 49, 49); font-family: 宋体, simsun, Tahoma, Verdana, Arial; text-align: justify; white-space: normal;\"><strong style=\"margin: 0px; padding: 0px;\">第一章　总则</strong></p><p style=\"margin-top: 0px; margin-bottom: 15px; padding: 0px; text-indent: 2em; word-wrap: break-word; line-height: 2em; color: rgb(49, 49, 49); font-family: 宋体, simsun, Tahoma, Verdana, Arial; text-align: justify; white-space: normal;\">第一条　为了加强幼儿园的科学管理，规范办园行为，提高保育和教育质量，促进幼儿身心健康，依据《中华人民共和国教育法》等法律法规，制定本规程。</p><p style=\"margin-top: 0px; margin-bottom: 15px; padding: 0px; text-indent: 2em; word-wrap: break-word; line-height: 2em; color: rgb(49, 49, 49); font-family: 宋体, simsun, Tahoma, Verdana, Arial; text-align: justify; white-space: normal;\">第二条　幼儿园是对3周岁以上学龄前幼儿实施保育和教育的机构。幼儿园教育是基础教育的重要组成部分，是学校教育制度的基础阶段。</p><p style=\"margin-top: 0px; margin-bottom: 15px; padding: 0px; text-indent: 2em; word-wrap: break-word; line-height: 2em; color: rgb(49, 49, 49); font-family: 宋体, simsun, Tahoma, Verdana, Arial; text-align: justify; white-space: normal;\">第三条　幼儿园的任务是：贯彻国家的教育方针，按照保育与教育相结合的原则，遵循幼儿身心发展特点和规律，实施德、智、体、美等方面全面发展的教育，促进幼儿身心和谐发展。</p><p><br/></p>','2018-04-14 13:39:53',0,1,-1,-1,-1,'2018-04-14 13:39:53',-1,'2018-04-14 13:39:53',-1,'ID',NULL,NULL,NULL);
 INSERT INTO `kg_news` (`id`,`typeId`,`sourceId`,`attributeId`,`newsTitle`,`summary`,`thumbnail`,`author`,`content`,`createDate`,`viewsCount`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
  (33,8,1,'12,14','幼儿园工作2','幼儿园工作2','',NULL,'<p>幼儿园工作2</p>','2018-04-14 13:40:31',0,2,-1,-1,-1,'2018-04-14 13:40:31',-1,'2018-04-19 13:59:02',-1,'ID',NULL,NULL,NULL),
- (34,8,1,'12','幼儿园工作3','幼儿园工作3','',NULL,'<p>幼儿园工作2</p>','2018-04-14 13:40:46',0,2,-1,-1,-1,'2018-04-14 13:40:46',-1,'2018-04-28 15:52:58',-1,'ID',NULL,NULL,NULL);
+ (34,7,1,'','幼儿园工作3','幼儿园工作3','',NULL,'<p>幼儿园工作2</p>','2018-04-14 13:40:46',0,3,-1,-1,-1,'2018-04-14 13:40:46',-1,'2018-04-30 11:22:37',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_news` ENABLE KEYS */;
 
 

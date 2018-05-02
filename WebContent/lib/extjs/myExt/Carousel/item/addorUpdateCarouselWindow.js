@@ -265,8 +265,8 @@ Ext.extend(addorUpdateCarousel.addorUpdateCarouselWindow, Ext.Window, {
 				      	     }
 				             me.inputValueToSet(me,mainId,urltype,newsCombo,assessmentCombo);
 				             Ext.getCmp(mainId+"webUrl").setValue(webUrl);
-					    	 newsCombo.setValue(activityId);
-					    	 assessmentCombo.setValue(newsId);
+					    	 newsCombo.setValue(newsId);
+					    	 assessmentCombo.setValue(activityId);
 					    	 Ext.getCmp(mainId+"sequence").setValue(sequence);
 				    	}else{
 				    		Ext.getCmp(mainId+'activeds').items.get(0).setValue(true);
