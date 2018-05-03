@@ -27,26 +27,51 @@ Ext.extend(addorUpdateDownload.addorUpdateDownloadWindow, Ext.Window, {
 	    		  labelWidth :100,
 			      frame: true,
 			      width: '100%',
+			      fileUpload:true,
 			      bodyStyle:'margin: 0px auto',
 			      defaults:{
 		               xtype:"textfield",
 		               width:'100%',
 		               bodyStyle:'padding:10px 0px 10px 0px'
 		            },
-				  items : [ {
-					  			xtype:'label',
-					  			text:''
-				  			},
-				  			{
-				  				 xtype: 'textfield',
-		                         id: mainId+'file',
-		                         name: 'file',
-		                         allowBlank:false,
-		                         inputType: "file",
-		                         labelWidth: 60,
-		                         fieldLabel: '上传文件'
-				  			},
-				  			{
+				  items : [ 
+//				  			{
+//				  				 xtype: 'textfield',
+//				  				 id: mainId+'__status',
+//				  				 name: 'dto.__status',
+//				  				 value:''
+//				  			},{
+//				  				 xtype: 'textfield',
+//				  				 id: mainId+'id',
+//				  				 name: 'dto.id',
+//				  				 value:''
+//				  			},
+					  		{
+								xtype:'container',
+								fieldLabel : '上传',
+								style:'padding:0 0 5px 0',
+								items:[{
+									xtype : 'button',
+									width : 150,
+									text : '上传',
+									handler:function(){
+										var win = new uploadImageBase.uploadImageBaseWin({the_hidden_image_url:mainId+"filePath",the_image_show:null,type:'download'});
+										win.show();
+									}
+							 	},{
+									xtype : 'button',
+									width : 150,
+									text : '撤销',
+									handler:function(){
+										Ext.getCmp(mainId+"filePath").setValue("");
+									}
+							 	}]
+							},{ 
+				             	id:mainId+"filePath",
+				                xtype:"textfield",  
+				                readOnly:true,
+								fieldLabel : '文件'
+			                },{
 				  				xtype:'textarea',
 				          		fieldLabel:'下载文档简介',
 								allowBlank:true,
@@ -61,7 +86,7 @@ Ext.extend(addorUpdateDownload.addorUpdateDownloadWindow, Ext.Window, {
 					  width:50,
 						text : text,
 						handler : function(button, event) {
-							me.addorUpdateType(me,formpanel,mainId,parentStore,id,type,isAdd);
+							me.addorUpdateDown(me,formpanel,mainId,parentStore,id,type,isAdd);
 						}
 				  },{
 					  width:50,
@@ -78,11 +103,11 @@ Ext.extend(addorUpdateDownload.addorUpdateDownloadWindow, Ext.Window, {
 
 		
 		Ext.apply(this, {
-				title : text+'类型',
+				title : text+'文档下载',
 				layout:'fit',
 				items : [formpanel],
 				width : 450,
-				height : 280,
+				height : 380,
 				xtype : "window",
 				resizable : false,
 				constrain:true,
@@ -94,7 +119,9 @@ Ext.extend(addorUpdateDownload.addorUpdateDownloadWindow, Ext.Window, {
 					show:function(){
 						if(record!=null){
 				    		var summary= record.get("summary");
+				    		var filePath= record.get("filePath");
 				    		Ext.getCmp(mainId+"summary").setValue(summary);
+				    		Ext.getCmp(mainId+"filePath").setValue(filePath);
 				    	}
 					}
 				}
@@ -104,59 +131,43 @@ Ext.extend(addorUpdateDownload.addorUpdateDownloadWindow, Ext.Window, {
 	},
 	
 	
-	addorUpdateType : function(me,formpanel,mainId,parentStore,id,type,isAdd) {
-		var summary =Ext.getCmp(mainId+"summary").getValue().trim();
-	
-		if( formpanel.getForm().isValid()){
-				formpanel.getForm().submit({
-			         waitMsg: '正在提交数据',
-			         waitTitle: '提示',
-			         url: appName + '/admin/download/submit',
-			         method: 'POST',
-			         success: function(form, action) {
-			        	 var responseArray = action.result;  
-                         if (responseArray.success == true) {  
-                        	 parentStore.reload();
-                        	 Ext.Msg.alert('提示', '保存成功');
-                         } else {  
-                        	 ExtError(responseArray.message);
-                         }  
-			        	 
-			         },
-			         failure: function(form, action) {
-			        	 ExtError();
-			         }
-			    });
+	addorUpdateDown : function(me,formpanel,mainId,parentStore,id,type,isAdd) {
+	 
+		var filePath =Ext.getCmp(mainId+"filePath").getValue().trim();
+		if(filePath==""){
+			ExtError("请上传文件");
+			return;
 		}
+		var summary = Ext.getCmp(mainId+"summary").getValue();
 		
-		
-//		if( formpanel.getForm().isValid()){
-//			Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
-//			  Ext.Ajax.request({
-//            	  url : appName + '/admin/download/submit',
-//                  method : 'post',
-//                  headers: {'Content-Type':'application/json'},
-//                  params : JSON.stringify([{
-//                	  __status : type,
-//                	  summary : summary,
-//                	  id : id
-//                  }]),
-//                  success : function(response, options) {
-//                	  Ext.getBody().unmask();
-//                	  var responseArray = Ext.util.JSON.decode(response.responseText);
-//	                  if (responseArray.success == true) {
-//	                	    parentStore.reload();
-//	                    	me.close();
-//	                    }else{
-//	                    	ExtError(responseArray.message);
-//	                    }
-//                  },
-//				failure : function() {
-//					Ext.getBody().unmask();
-//					ExtError();
-//  				}
-//            });
-//		}
+		if( formpanel.getForm().isValid()){
+			Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
+			  Ext.Ajax.request({
+            	  url : appName + '/admin/download/submit',
+                  method : 'post',
+                  headers: {'Content-Type':'application/json'},
+                  params : JSON.stringify([{
+                	  __status : type,
+	               	  summary : summary,
+	               	  filePath:filePath,
+	               	  id : id
+                  }]),
+                  success : function(response, options) {
+                	  Ext.getBody().unmask();
+                	  var responseArray = Ext.util.JSON.decode(response.responseText);
+	                  if (responseArray.success == true) {
+	                	    parentStore.reload();
+	                    	me.close();
+	                    }else{
+	                    	ExtError(responseArray.message);
+	                    }
+                  },
+				failure : function() {
+					Ext.getBody().unmask();
+					ExtError();
+  				}
+            });
+		}
 		
 	}
 	

@@ -204,7 +204,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 									//name : 'imgupload',
 									text : '上传图片',
 									handler:function(){
-										var win = new uploadImageBase.uploadImageBaseWin({the_hidden_image_url:mainId+"imageUrl",the_image_show:mainId+"showPict",type:'configcolor'});
+										var win = new uploadImageBase.uploadImageBaseWin({the_hidden_image_url:mainId+"imageUrl",the_image_show:mainId+"showPict",type:'news'});
 										win.show();
 									}
 							 	},{

@@ -75,7 +75,7 @@ Ext.extend(Carousel.CarouselPanel, Ext.Panel, {
 				}],
 	        columns: [
 	            {header: "轮播图",  sortable: true,  dataIndex: 'filePath',align:'center',renderer:showCarousel},
-	            {header: "序号",  sortable: true,  dataIndex: 'sequence',align:'center'}
+	            {header: "权重",  sortable: true,  dataIndex: 'sequence',align:'center'}
 	            
 	        ],
 	        width:'100%',

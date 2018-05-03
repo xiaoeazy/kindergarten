@@ -13,11 +13,15 @@ import org.springframework.web.servlet.ModelAndView;
 import com.huan.HTed.core.IRequest;
 import com.huan.HTed.system.controllers.BaseController;
 
+import cn.huan.kindergarten.dto.KgCarousel;
 import cn.huan.kindergarten.dto.KgConfig;
+import cn.huan.kindergarten.dto.KgDownload;
 import cn.huan.kindergarten.dto.KgIntroduction;
 import cn.huan.kindergarten.dto.KgNewsSource;
 import cn.huan.kindergarten.dto.KgNewstype;
+import cn.huan.kindergarten.service.IKgCarouselService;
 import cn.huan.kindergarten.service.IKgConfigService;
+import cn.huan.kindergarten.service.IKgDownloadService;
 import cn.huan.kindergarten.service.IKgNewsSourceService;
 import cn.huan.kindergarten.service.IKgNewstypeService;
 
@@ -29,6 +33,10 @@ public class IndexController extends BaseController{
 	private IKgNewstypeService iKgNewstypeService;
 	@Autowired
 	private IKgNewsSourceService iKgNewsSourceService;
+	@Autowired
+	private IKgDownloadService iKgDownloadService;
+	@Autowired
+	private IKgCarouselService iKgCarouselService;
 	
 	
 	@RequestMapping(value = "/")
@@ -38,6 +46,10 @@ public class IndexController extends BaseController{
     	 IRequest requestContext = createRequestContext(request);
     	 KgIntroduction ki = new KgIntroduction();
     	 ki.setId(1l);
+    	 List<KgDownload> downloadList = iKgDownloadService.select(requestContext, null, 1, 4);
+    	 mv.addObject("downloadList",downloadList);
+    	 List<KgCarousel> carouselList =iKgCarouselService.select(requestContext, null, 1, 5);
+    	 mv.addObject("carouselList",carouselList);
     	 loadNavigation(mv, requestContext, IndexNewsController.CH_INDEX);
          return mv;
     }

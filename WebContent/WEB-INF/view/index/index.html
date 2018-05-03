@@ -22,35 +22,14 @@
 	<div class="js-sCont">
         <ul>
                                     
-            <li>
-                <a href="http://www.milan-bride.com/content-35-23-1.html"  title="520活动爆款" target="_blank">
-                    <img src="http://www.milan-bride.com/uploadfile/2018/0428/20180428040039675.jpg"  alt="" width="1920" height="675" title="520活动爆款" />
-                </a>
-            </li>
-                        
-            <li>
-                <a href="http://www.milan-bride.com/content-27-70-1.html"  title="秘境" target="_blank">
-                    <img src="http://www.milan-bride.com/uploadfile/2018/0403/20180403034442322.jpg"  alt="" width="1920" height="675" title="秘境" />
-                </a>
-            </li>
-                        
-            <li>
-                <a href="http://www.milan-bride.com/content-35-24-1.html"  title="梦幻星空" target="_blank">
-                    <img src="http://www.milan-bride.com/uploadfile/2017/1031/20171031103627956.jpg"  alt="" width="1920" height="675" title="梦幻星空" />
-                </a>
-            </li>
-                        
-            <li>
-                <a href="http://www.milan-bride.com/content-38-6-1.html"  title="雅致美学馆" target="_blank">
-                    <img src="http://www.milan-bride.com/uploadfile/2018/0202/20180202021748552.jpg"  alt="" width="1920" height="675" title="雅致美学馆" />
-                </a>
-            </li>
-                        
-            <li>
-                <a href="http://www.milan-bride.com/content-39-10-1.html"  title="拉斐特城堡" target="_blank">
-                    <img src="http://www.milan-bride.com/uploadfile/2017/0927/20170927113640140.jpg"  alt="" width="1920" height="675" title="拉斐特城堡" />
-                </a>
-            </li>
+           
+              <#list carouselList as carouselList>   
+           			 <li>
+			             <a href="#"  title="" target="_blank">
+			                 <img src="${base.contextPath}${carouselList.filePath}"  alt="" width="1920" height="675" title="" />
+			             </a>
+			         </li>
+              </#list>          
                                 </ul>
 	</div>
   	<div class="js-sDot"><ul></ul></div>
@@ -312,10 +291,9 @@
         <div class="main_right_cbl ">
             <h2>资料下载</h2>
             <ul class="xzzqlinks mb15">
-                <li class="xzzqlinks sys1"><p><a href="jiekou/index.htm" tppabs="http://www.ccgp.gov.cn/jiekou/" target="_blank">中国政府采购网数据接口规范</a></p></li>
-                <li class="xzzqlinks sys2"><p><a href="mofgpjhgl/index.htm" tppabs="http://www.ccgp.gov.cn/mofgpjhgl/" target="_blank">财政部采购计划管理系统<br />部门单机版下载</a></p></li>
-<li class="xzzqlinks sys3"><p><a href="javascript:if(confirm(%27http://download.ccgp.gov.cn/2018/tousushufanben.zip  \n\nThis file was not retrieved by Teleport Ultra, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?%27))window.location=%27http://download.ccgp.gov.cn/2018/tousushufanben.zip%27" tppabs="http://download.ccgp.gov.cn/2018/tousushufanben.zip" target="_blank">政府采购供应商投诉书范本</a></p></li>
-<li class="xzzqlinks sys3"><p><a href="javascript:if(confirm(%27http://download.ccgp.gov.cn/2018/zhiyihanfanben.zip  \n\nThis file was not retrieved by Teleport Ultra, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?%27))window.location=%27http://download.ccgp.gov.cn/2018/zhiyihanfanben.zip%27" tppabs="http://download.ccgp.gov.cn/2018/zhiyihanfanben.zip" target="_blank">政府采购供应商质疑函范本</a></p></li>
+            	<#list downloadList as downloadList>   
+				   	<li class="xzzqlinks sys1"><p><a href="${base.contextPath}${downloadList.filePath}"  target="_blank">${downloadList.fileTitle}</a></p></li>
+			    </#list> 
             </ul>
         </div>
 

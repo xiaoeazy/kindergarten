@@ -141,13 +141,13 @@ Ext.extend(addorUpdateCarousel.addorUpdateCarouselWindow, Ext.Window, {
 									//name : 'imgupload',
 									text : '上传(1920*765)',
 									handler:function(){
-										var win = new uploadImageBase.uploadImageBaseWin({the_hidden_image_url:mainId+"imageUrl",the_image_show:mainId+"showPict",type:'configcolor'});
+										var win = new uploadImageBase.uploadImageBaseWin({the_hidden_image_url:mainId+"imageUrl",the_image_show:mainId+"showPict",type:'carousel'});
 										win.show();
 									}
 							 	},{
 									xtype : 'button',
 									width : 150,
-									text : '撤销图片',
+									text : '撤销文件',
 									handler:function(){
 										Ext.getCmp(mainId+"imageUrl").setValue("");
 							    		Ext.getCmp(mainId+"showPict").getEl().dom.src=nonePic;

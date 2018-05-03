@@ -196,7 +196,7 @@ CREATE TABLE `kg_carousel` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_carousel`
@@ -206,7 +206,9 @@ CREATE TABLE `kg_carousel` (
 INSERT INTO `kg_carousel` (`id`,`file_path`,`sequence`,`urltype`,`web_url`,`activity_id`,`news_id`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
  (7,'/resources/upload/33.jpg',0,2,'',5,-1,2,-1,-1,-1,'2018-04-29 21:15:32',-1,'2018-04-29 21:54:39',-1,'ID',NULL,NULL,NULL),
  (9,'/resources/upload/44.jpg',3,0,'11',-1,-1,3,-1,-1,-1,'2018-04-29 21:28:27',-1,'2018-04-29 21:54:16',-1,'ID',NULL,NULL,NULL),
- (10,'/resources/upload/44.jpg',1,1,'',-1,24,4,-1,-1,-1,'2018-04-29 21:38:59',-1,'2018-04-29 21:54:48',-1,'ID',NULL,NULL,NULL);
+ (10,'/resources/upload/44.jpg',1,1,'',-1,24,4,-1,-1,-1,'2018-04-29 21:38:59',-1,'2018-04-29 21:54:48',-1,'ID',NULL,NULL,NULL),
+ (14,'/resources/upload/carousel/121222.jpg',0,1,'',-1,23,1,-1,-1,-1,'2018-05-03 16:03:04',-1,'2018-05-03 16:03:04',-1,'ID',NULL,NULL,NULL),
+ (15,'/resources/upload/carousel/20180428040039675.jpg',0,2,'',3,-1,1,-1,-1,-1,'2018-05-03 16:03:39',-1,'2018-05-03 16:03:39',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_carousel` ENABLE KEYS */;
 
 
@@ -305,13 +307,16 @@ CREATE TABLE `kg_download` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_download`
 --
 
 /*!40000 ALTER TABLE `kg_download` DISABLE KEYS */;
+INSERT INTO `kg_download` (`id`,`file_title`,`file_path`,`summary`,`createDate`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
+ (1,'aaa','/resources/upload/download/aaa.txt','11','2018-05-03 15:15:57',2,-1,-1,-1,'2018-05-03 15:15:57',-1,'2018-05-03 15:16:49',-1,'ID',NULL,NULL,NULL),
+ (2,'112','/resources/upload/download/112.xml','','2018-05-03 15:17:35',1,-1,-1,-1,'2018-05-03 15:17:35',-1,'2018-05-03 15:17:35',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_download` ENABLE KEYS */;
 
 
