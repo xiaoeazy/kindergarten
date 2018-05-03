@@ -52,8 +52,11 @@ Ext.extend(uploadImageBase.uploadImageBaseWin, Ext.Window, {
 		        text: 'Save',
 		        handler: function(){
 		            if(fp.getForm().isValid()){
+		            	var url = appName+"/sys/config/upload?type="+type;
+		            	if(type=="download")
+		            		url=  appName+"/sys/config/file/upload?type="+type;
 		                fp.getForm().submit({
-		                    url: appName+"/sys/config/upload?type="+type,
+		                    url: url,
 		                    waitMsg: '文件上传中,请耐心等待......',
 		                    method : 'post',  
 		                    success: function(form, o){
