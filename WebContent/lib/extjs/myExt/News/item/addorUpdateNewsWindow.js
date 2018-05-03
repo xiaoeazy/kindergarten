@@ -229,6 +229,15 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 								blankText:'必须填写',
 								id:mainId+"summary",
 								 maxLength:200  
+				  			},
+				  			{
+				  				width:276,
+				  				xtype:'numberfield',
+				  				fieldLabel:'权重',
+				  				name:'sequence',
+				  				id:mainId+"sequence",
+				  				minValue:0,
+				  				value:0
 				  			}
 				  			
 				  			]
@@ -307,6 +316,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 				    		var typeid = record.get("typeid");
 				    		var thumbnail= record.get("thumbnail");
 				    		var summary= record.get("summary");
+				    		var sequence = record.get("sequence");
 				    		var content= record.get("content");
 				    		Ext.getCmp(mainId+"newstitle").setValue(newstitle);
 				    		typeCombo.setValue(typeid);
@@ -316,7 +326,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 				    			Ext.getCmp(mainId+"showPict").getEl().dom.src=appName+thumbnail;
 				    		}
 				    		Ext.getCmp(mainId+"summary").setValue(summary);
-				    		
+				    		 Ext.getCmp(mainId+"sequence").setValue(sequence);
 //				    		Ext.getCmp(mainId+"content").setValue(content);
 //				    		Ext.getCmp(mainId+"content").getEditor().setContent(content);
 				    	}
@@ -388,6 +398,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 		var summary =Ext.getCmp(mainId+"summary").getValue().trim();
 		var thumbnail =Ext.getCmp(mainId+"imageUrl").getValue().trim();
 		var content = Ext.getCmp(mainId+"content").getEditor().getContent();
+		var sequence = Ext.getCmp(mainId+"sequence").getValue();
 		if(newstitle==""){
 			Ext.getCmp(mainId+"newstitle").markInvalid("咨讯标题不能为空！");
 			return;
@@ -427,6 +438,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
                 	  thumbnail : thumbnail,
                 	  summary:summary,
                 	  content:content,
+                	  sequence:sequence,
                 	  id : id
                   }]),
                   success : function(response, options) {

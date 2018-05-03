@@ -69,40 +69,28 @@
 </div>
 </div>
         <div class="txtnews">
-            <div class="txtnews_topic"><p>
-<a href="news/201803/t20180313_9657154.htm" tppabs="http://www.ccgp.gov.cn/news/201803/t20180313_9657154.htm" target="_blank" title="聚力增效护航高质量发展&lt;br&gt;代表委员审查讨论计划报告和预算报告">聚力增效护航高质量发展<br>代表委员审查讨论计划报告和预算报告</a>
-</p></div>
+            <div class="txtnews_topic">
+            	<p>
+            		<#list newsList1 as newsList1>  
+                 		<#if newsList1_index ==0>
+							<a href="${base.contextPath}/index/newsDetail?id=${newsList1.id}"  target="_blank" title="${newsList1.newstitle}">${newsList1.newsSimpleTitle}</a>
+						</#if> 
+					</#list>
+				</p>
+			</div>
             <div class="txtnews_list_contianer">
                 <ul class="txtnews_list">
-
-<li><a href="news/201803/t20180309_9646059.htm" tppabs="http://www.ccgp.gov.cn/news/201803/t20180309_9646059.htm" target="_blank" title="肖捷：运用政府采购政策支持中小微企业发展">肖捷：运用政府采购政策支持中小微企...</a></li>
-
-<li><a href="news/201803/t20180307_9638224.htm" tppabs="http://www.ccgp.gov.cn/news/201803/t20180307_9638224.htm" target="_blank" title="九三学社：建议政府采购加强标准化管理 加强中国政府采购网建设">九三学社：建议政府采购加强标准化管...</a></li>
-
-<li><a href="news/201803/t20180307_9638181.htm" tppabs="http://www.ccgp.gov.cn/news/201803/t20180307_9638181.htm" target="_blank" title="关于2017年中央和地方预算执行情况与2018年中央和地方预算草案的报告（摘要）">关于2017年中央和地方预算执行情况与2...</a></li>
-
-<li><a href="news/201802/t20180226_9608832.htm" tppabs="http://www.ccgp.gov.cn/news/201802/t20180226_9608832.htm" target="_blank" title="关于做好政府采购代理机构名录登记有关工作的通知">关于做好政府采购代理机构名录登记有...</a></li>
-
-<li><a href="news/201802/t20180223_9603852.htm" tppabs="http://www.ccgp.gov.cn/news/201802/t20180223_9603852.htm" target="_blank" title="财政部进一步完善国有金融企业集中采购管理">财政部进一步完善国有金融企业集中采...</a></li>
-
-<li><a href="news/201802/t20180208_9569737.htm" tppabs="http://www.ccgp.gov.cn/news/201802/t20180208_9569737.htm" target="_blank" title="贾康：政府购买服务是政采重要组成部分">贾康：政府购买服务是政采重要组成部分</a></li>
-
-                </ul>
+                 	<#list newsList1 as newsList1>  
+                 		<#if newsList1_index !=0>
+							<li><a href="${base.contextPath}/index/newsDetail?id=${newsList1.id}"  target="_blank" title="${newsList1.newstitle}">${newsList1.newsSimpleTitle}</a></li>
+						</#if> 
+					</#list>
+            	</ul>
                 <ul class="txtnews_list">
-
-<li><a href="news/201801/t20180126_9524280.htm" tppabs="http://www.ccgp.gov.cn/news/201801/t20180126_9524280.htm" target="_blank" title="财政部2017年财政收支情况新闻发布会实录">财政部2017年财政收支情况新闻发布会实录</a></li>
-
-<li><a href="news/201801/t20180126_9524279.htm" tppabs="http://www.ccgp.gov.cn/news/201801/t20180126_9524279.htm" target="_blank" title="财政部公布2017年财政收支情况">财政部公布2017年财政收支情况</a></li>
-
-<li><a href="news/201801/t20180110_9459477.htm" tppabs="http://www.ccgp.gov.cn/news/201801/t20180110_9459477.htm" target="_blank" title="财政部有关负责人就修订《政府采购供应商投诉处理办法》答记者问">财政部有关负责人就修订《政府采购供...</a></li>
-
-<li><a href="news/201801/t20180103_9430152.htm" tppabs="http://www.ccgp.gov.cn/news/201801/t20180103_9430152.htm" target="_blank" title="中华人民共和国财政部令第94号--政府采购质疑和投诉办法">中华人民共和国财政部令第94号--政府...</a></li>
-
-<li><a href="news/201801/t20180102_9425011.htm" tppabs="http://www.ccgp.gov.cn/news/201801/t20180102_9425011.htm" target="_blank" title="财政部关于印发《政务信息系统政府采购管理暂行办法》的通知">财政部关于印发《政务信息系统政府采...</a></li>
-
-<li><a href="news/201801/t20180102_9424418.htm" tppabs="http://www.ccgp.gov.cn/news/201801/t20180102_9424418.htm" target="_blank" title="国务院办公厅关于推进公共资源配置领域政府信息公开的意见">国务院办公厅关于推进公共资源配置领...</a></li>
-
-                </ul>
+                	 <#list newsList2 as newsList2>   
+						<li><a href="${base.contextPath}/index/newsDetail?id=${newsList2.id}"  target="_blank" title="${newsList2.newstitle}">${newsList2.newsSimpleTitle}</a></li>
+					 </#list>
+				</ul>
             </div>
         </div>
     </div>

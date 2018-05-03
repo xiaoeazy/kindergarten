@@ -74,7 +74,9 @@ Ext.extend(Download.DownloadPanel, Ext.Panel, {
 					}
 				}],
 	        columns: [
-	            {header: "下载文档名称",  sortable: true,  dataIndex: 'fileTitle',align:'center'}
+	            {header: "下载文档名称",  sortable: true,  dataIndex: 'fileTitle',align:'center'},
+	            {header: "密码",  sortable: true,  dataIndex: 'password',align:'center'},
+	            {header: "查看文件",  sortable: true, align:'center'}
 	            
 	        ],
 	        width:'100%',

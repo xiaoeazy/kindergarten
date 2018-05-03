@@ -35,6 +35,10 @@ public class KgDownload extends BaseDTO {
 
      @Length(max = 200)
      private String summary;
+     
+     @Length(max=200)
+     private String password;
+     
 
      private Date createdate;
 
@@ -76,6 +80,14 @@ public class KgDownload extends BaseDTO {
 
 	public void setCreatedate(Date createdate) {
 		this.createdate = createdate;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
      
      

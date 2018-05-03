@@ -1,5 +1,6 @@
 package cn.huan.kindergarten.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,7 @@ import com.huan.HTed.system.dto.ResponseData;
 
 import cn.huan.kindergarten.bean.ExtAjax;
 import cn.huan.kindergarten.bean.ExtStore;
+import cn.huan.kindergarten.dto.KgNews;
 import cn.huan.kindergarten.dto.KgNewstype;
 import cn.huan.kindergarten.service.IKgNewstypeService;
 
@@ -72,8 +74,9 @@ import cn.huan.kindergarten.service.IKgNewstypeService;
     @ResponseBody
     public ExtStore adminQueryAll(KgNewstype dto, HttpServletRequest request) {
     	 IRequest requestContext = createRequestContext(request);
-         List<KgNewstype> list = service.select(requestContext,dto);
-         int count = service.adminQueryCount(requestContext, null);
+         
+         List<KgNewstype> list =service.selectAll(requestContext);
+         int count = list.size();
          return new ExtStore(null, null, count, list);
     }
 

@@ -72,12 +72,7 @@ import java.util.List;
     @ResponseBody
     public ExtStore adminQueryAll(KgNews dto,HttpServletRequest request) {
     	 IRequest requestContext = createRequestContext(request);
-    	 List<KgNews> list = new ArrayList<KgNews>();
-    	 KgNews kn = new KgNews();
-    	 kn.setId(-1l);
-    	 kn.setNewstitle("请选择");
-    	 list.add(kn);
-    	 list.addAll(service.selectAll(requestContext)) ;
+    	 List<KgNews> list = service.selectAll(requestContext);
     	 int count = list.size();
     	 return new ExtStore(null, null, count, list);
     }

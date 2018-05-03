@@ -55,6 +55,8 @@ public class KgNews extends BaseDTO {
 
      @Length(max = 65535)
      private String content;
+     
+     private Long sequence;
 
      private Date createdate;
 
@@ -171,5 +173,14 @@ public class KgNews extends BaseDTO {
      public Long getViewscount(){
          return viewscount;
      }
+
+	public Long getSequence() {
+		return sequence;
+	}
+
+	public void setSequence(Long sequence) {
+		this.sequence = sequence;
+	}
+     
 
      }

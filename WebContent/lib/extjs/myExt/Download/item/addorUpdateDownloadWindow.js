@@ -50,34 +50,47 @@ Ext.extend(addorUpdateDownload.addorUpdateDownloadWindow, Ext.Window, {
 								xtype:'container',
 								fieldLabel : '上传',
 								style:'padding:0 0 5px 0',
-								items:[{
+								layout:'column',
+								items:[{ 
+									 columnWidth:.6,
+					             	id:mainId+"filePath",
+					                xtype:"textfield",  
+					                readOnly:true,
+									fieldLabel : '文件'
+				                },{
+				                	columnWidth:.2,
 									xtype : 'button',
-									width : 150,
+									style:'margin-left:10px',
+									width : 100,
 									text : '上传',
 									handler:function(){
 										var win = new uploadImageBase.uploadImageBaseWin({the_hidden_image_url:mainId+"filePath",the_image_show:null,type:'download'});
 										win.show();
 									}
 							 	},{
+							 		columnWidth:.2,
 									xtype : 'button',
-									width : 150,
+									style:'margin-left:10px',
+									width : 100,
 									text : '撤销',
 									handler:function(){
 										Ext.getCmp(mainId+"filePath").setValue("");
 									}
 							 	}]
-							},{ 
-				             	id:mainId+"filePath",
-				                xtype:"textfield",  
-				                readOnly:true,
-								fieldLabel : '文件'
-			                },{
+							},{
 				  				xtype:'textarea',
 				          		fieldLabel:'下载文档简介',
 								allowBlank:true,
 								height:150,
 								name: 'summary',
 								id:mainId+"summary",
+					            maxLength:200  
+				  			},{
+				  				xtype:'textfield',
+				          		fieldLabel:'下载密码',
+								allowBlank:true,
+								name: 'password',
+								id:mainId+"password",
 					            maxLength:200  
 				  			}
 				  			],
@@ -120,8 +133,10 @@ Ext.extend(addorUpdateDownload.addorUpdateDownloadWindow, Ext.Window, {
 						if(record!=null){
 				    		var summary= record.get("summary");
 				    		var filePath= record.get("filePath");
+				    		var password= record.get("password");
 				    		Ext.getCmp(mainId+"summary").setValue(summary);
 				    		Ext.getCmp(mainId+"filePath").setValue(filePath);
+				    		Ext.getCmp(mainId+"password").setValue(password);
 				    	}
 					}
 				}
@@ -139,7 +154,7 @@ Ext.extend(addorUpdateDownload.addorUpdateDownloadWindow, Ext.Window, {
 			return;
 		}
 		var summary = Ext.getCmp(mainId+"summary").getValue();
-		
+		var password = Ext.getCmp(mainId+"password").getValue();
 		if( formpanel.getForm().isValid()){
 			Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
 			  Ext.Ajax.request({
@@ -150,6 +165,7 @@ Ext.extend(addorUpdateDownload.addorUpdateDownloadWindow, Ext.Window, {
                 	  __status : type,
 	               	  summary : summary,
 	               	  filePath:filePath,
+	               	  password:password,
 	               	  id : id
                   }]),
                   success : function(response, options) {

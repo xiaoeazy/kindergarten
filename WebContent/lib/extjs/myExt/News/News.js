@@ -23,8 +23,12 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
 				successProperty:'success'
 	        }
 	    },
-	    autoLoad : true,
-	    fields: ['id', 'typename']
+	    fields: ['id', 'typename'],
+	    listeners:{
+	    	'load': function(store, records, options) {
+	    		 store.insert(0,{id:'-1',typename:'请选择'});
+	    	}
+	    }
 	});
 	
    var typeCombo = new Ext.form.ComboBox({
@@ -78,6 +82,9 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
 				handler : function(button, event) {
 					var newstitle = Ext.getCmp(mainId+"newstitle").getValue().trim();
 					var typeid 	  = Ext.getCmp(mainId+"typeid").getValue();
+					if(typeid==-1){
+						typeid="";
+					}
 					store.proxy.url = appName+ '/admin/news/query';
 					store.proxy.extraParams={
 							page:1,

@@ -24,6 +24,7 @@ import cn.huan.kindergarten.service.IKgNewsAttributeService;
 import cn.huan.kindergarten.service.IKgNewsService;
 import cn.huan.kindergarten.service.IKgNewsSourceService;
 import cn.huan.kindergarten.service.IKgNewstypeService;
+import cn.huan.kindergarten.utils.CommonUtil;
 
 @Controller
 public class IndexNewsController extends BaseController{
@@ -32,7 +33,7 @@ public class IndexNewsController extends BaseController{
 	public static final String  CH_ZXZX = "CH_ZXZX";//资讯中心
 	public static final String  CH_XHGZ = "CH_XHGZ";//协会工作
 	public static final String  CH_LXWM = "CH_LXWM";//联系我们
-	public static final String  SUSPENSION_POINTS = "...";
+	
 	@Autowired
 	private IKgNewsService iKgNewsService;
 	@Autowired
@@ -61,7 +62,7 @@ public class IndexNewsController extends BaseController{
         
         mv.addObject("typeList", typeList);
         loadNavigation(mv, requestContext,CH_ZXZX);
-        loadAttriteNews(mv, requestContext,2);
+        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,2);
        
         return mv;
     }
@@ -117,11 +118,8 @@ public class IndexNewsController extends BaseController{
 	        mv.addObject("kgNewstype", kgNewstype);
 	        mv.addObject("typeid", typeid);
 	        
-	        
-	       
-	        
 	        loadNavigation(mv, requestContext,CH_ZXZX);
-	        loadAttriteNews(mv, requestContext,3);
+	        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,3);
 	        return mv;
 	    }
 
@@ -143,7 +141,7 @@ public class IndexNewsController extends BaseController{
         
         mv.addObject("kgNewstype", kgNewstype);
         loadNavigation(mv, requestContext,CH_ZXZX);
-        loadAttriteNews(mv, requestContext,3);
+        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,3);
         return mv;
     }
     
@@ -173,29 +171,7 @@ public class IndexNewsController extends BaseController{
           }
     }
 
-    private void loadAttriteNews(ModelAndView mv,IRequest requestContext,int attributeSize) {
-    	 	List<KgNewsAttribute> rightAttributeList =  iKgNewsAttributeService.select(requestContext, null, 1, attributeSize);
-	        for(KgNewsAttribute ka :rightAttributeList){
-	        	KgNews kn = new KgNews();
-	        	kn.setAttributeid(ka.getId()+"");
-	        	List<KgNews> newsList=iKgNewsService.selectWithOtherInfo(requestContext, kn, 1, 5);
-	        	judgeTitleLength(newsList);
-	        	ka.setNewsList(newsList);
-	        	
-	        }
-	        mv.addObject("rightAttributeList",rightAttributeList);
-    }
     
-    private void judgeTitleLength(List<KgNews> news) {
-    	for(KgNews kg :news) {
-    		String title =kg.getNewstitle();
-    		if(title.length()>17) {
-    			title=kg.getNewstitle().substring(0, 17)+SUSPENSION_POINTS;
-    			kg.setNewsSimpleTitle(title);
-    		}else {
-    			kg.setNewsSimpleTitle(title);
-    		}
-    	}
-    }
+ 
    
 }

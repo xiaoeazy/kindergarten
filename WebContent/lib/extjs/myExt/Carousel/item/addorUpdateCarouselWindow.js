@@ -36,8 +36,12 @@ Ext.extend(addorUpdateCarousel.addorUpdateCarouselWindow, Ext.Window, {
 						successProperty:'success'
 			        }
 			    },
-			    autoLoad : true,
-			    fields: ['id', 'assessmentActivityName']
+			    fields: ['id', 'assessmentActivityName'],
+			    listeners:{
+			    	'load': function(store, records, options) {
+			    		 store.insert(0,{id:'-1',assessmentActivityName:'请选择'});
+			    	}
+			    }
 			});
 	    	
 	       var assessmentCombo = new Ext.form.ComboBox({
@@ -77,8 +81,12 @@ Ext.extend(addorUpdateCarousel.addorUpdateCarouselWindow, Ext.Window, {
 						successProperty:'success'
 			        }
 			    },
-			    autoLoad : true,
-			    fields: ['id', 'newstitle']
+			    fields: ['id', 'newstitle'],
+			    listeners:{
+			    	'load': function(store, records, options) {
+			    		 store.insert(0,{id:'-1',newstitle:'请选择'});
+			    	}
+			    }
 			});
 	    	
 	       var newsCombo = new Ext.form.ComboBox({

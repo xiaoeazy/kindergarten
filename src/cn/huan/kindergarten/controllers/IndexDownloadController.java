@@ -7,64 +7,56 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.huan.HTed.core.IRequest;
 import com.huan.HTed.system.controllers.BaseController;
 
-import cn.huan.kindergarten.dto.KgCarousel;
 import cn.huan.kindergarten.dto.KgConfig;
 import cn.huan.kindergarten.dto.KgDownload;
 import cn.huan.kindergarten.dto.KgIntroduction;
 import cn.huan.kindergarten.dto.KgNews;
 import cn.huan.kindergarten.dto.KgNewsSource;
 import cn.huan.kindergarten.dto.KgNewstype;
-import cn.huan.kindergarten.service.IKgCarouselService;
 import cn.huan.kindergarten.service.IKgConfigService;
 import cn.huan.kindergarten.service.IKgDownloadService;
-import cn.huan.kindergarten.service.IKgNewsService;
+import cn.huan.kindergarten.service.IKgIntroductionService;
+import cn.huan.kindergarten.service.IKgNewsAttributeService;
 import cn.huan.kindergarten.service.IKgNewsSourceService;
 import cn.huan.kindergarten.service.IKgNewstypeService;
-import cn.huan.kindergarten.utils.CommonUtil;
 
 @Controller
-public class IndexController extends BaseController{
+public class IndexDownloadController extends BaseController{
 	@Autowired
 	private IKgConfigService iKgConfigService;
 	@Autowired
 	private IKgNewstypeService iKgNewstypeService;
 	@Autowired
 	private IKgNewsSourceService iKgNewsSourceService;
+	
 	@Autowired
 	private IKgDownloadService iKgDownloadService;
 	@Autowired
-	private IKgCarouselService iKgCarouselService;
-	@Autowired
-	private IKgNewsService iKgNewsService;
+	private IKgNewsAttributeService iKgNewsAttributeService;
 	
-	@RequestMapping(value = "/")
+	@RequestMapping(value = "/index/download")
     @ResponseBody
-    public ModelAndView about(HttpServletRequest request) {
-    	ModelAndView mv = new ModelAndView(getViewPath() + "/index/index");
+    public ModelAndView download( @RequestParam(defaultValue = DEFAULT_PAGE) int page,@RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit,
+    		HttpServletRequest request) {
+    	ModelAndView mv = new ModelAndView(getViewPath() + "/index/about/about");
     	 IRequest requestContext = createRequestContext(request);
-    	 KgIntroduction ki = new KgIntroduction();
-    	 ki.setId(1l);
-    	 List<KgDownload> downloadList = iKgDownloadService.select(requestContext, null, 1, 4);
-    	 List<KgCarousel> carouselList =iKgCarouselService.select(requestContext, null, 1, 5);
-    	
-    	 List<KgNews> newsList1 =iKgNewsService.select(requestContext, null, 1, 7);
-    	 CommonUtil.judgeTitleLength(newsList1);
-    	 
-    	 List<KgNews> newsList2 =iKgNewsService.select(requestContext, null, 2, 6);
-    	 CommonUtil.judgeTitleLength(newsList2);
-    	 
-    	 mv.addObject("downloadList",downloadList);
-    	 mv.addObject("carouselList",carouselList);
-    	 mv.addObject("newsList1",newsList1);
-    	 mv.addObject("newsList2",newsList2);
-    	 
-    	 loadNavigation(mv, requestContext, IndexNewsController.CH_INDEX);
+    	 List<KgDownload> list =iKgDownloadService.select(requestContext, null, page, limit);
+    	 int count = iKgDownloadService.adminQueryCount(requestContext, null);
+    	 int allPageNum = count%limit==0?count/limit:count/limit+1;
+	     if(count==0) allPageNum=1;
+    	 loadNavigation(mv, requestContext, IndexNewsController.CH_XHJJ);
+    	 mv.addObject("downloadList",list);
+    	 mv.addObject("page", page);
+         mv.addObject("allPageNum",allPageNum);
+         
+         iKgNewsAttributeService.loadAttriteNews(mv, requestContext,3);
          return mv;
     }
 	
