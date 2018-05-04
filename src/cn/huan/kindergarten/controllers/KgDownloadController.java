@@ -94,9 +94,9 @@ import cn.huan.kindergarten.service.IKgDownloadService;
     	 
     	 IRequest requestCtx = createRequestContext(request);
     	 for(KgDownload KgDownload:dto) {
-    		 String imgName =  KgDownload.getFilePath().substring(KgDownload.getFilePath().lastIndexOf("/")+1);
-        	 String fileTitle = imgName.substring(0,imgName.lastIndexOf("."));
-        	 KgDownload.setFileTitle(fileTitle);
+    		 String fileName =  KgDownload.getFilePath().substring(KgDownload.getFilePath().lastIndexOf("/")+1);
+//        	 String fileTitle = imgName.substring(0,imgName.lastIndexOf("."));
+        	 KgDownload.setFileTitle(fileName);
     	 }
          List<KgDownload> list = service.batchUpdate(requestCtx, dto);
          return new ExtAjax(true, null);

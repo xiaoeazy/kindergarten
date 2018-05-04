@@ -43,7 +43,7 @@ public class IndexAboutController extends BaseController{
     	 ki.setId(1l);
     	 List<KgIntroduction> list =iKgIntroductionService.select(requestContext, ki);
     	 KgIntroduction result = list.get(0);
-    	 loadNavigation(mv, requestContext, IndexNewsController.CH_XHJJ);
+    	 loadNavigation(mv, requestContext, IndexController.CH_XHJJ);
     	 mv.addObject("about",result.getIntroduction());
          return mv;
     }

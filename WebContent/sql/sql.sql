@@ -308,7 +308,7 @@ CREATE TABLE `kg_download` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_download`
@@ -316,8 +316,10 @@ CREATE TABLE `kg_download` (
 
 /*!40000 ALTER TABLE `kg_download` DISABLE KEYS */;
 INSERT INTO `kg_download` (`id`,`file_title`,`file_path`,`summary`,`password`,`createDate`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (1,'aaa','/resources/upload/download/aaa.txt','11','22','2018-05-03 15:15:57',3,-1,-1,-1,'2018-05-03 15:15:57',-1,'2018-05-03 21:17:29',-1,'ID',NULL,NULL,NULL),
- (2,'112','/resources/upload/download/112.xml','','11','2018-05-03 15:17:35',2,-1,-1,-1,'2018-05-03 15:17:35',-1,'2018-05-03 21:17:25',-1,'ID',NULL,NULL,NULL);
+ (1,'aaa.txt','/resources/upload/download/aaa.txt','11','22','2018-05-03 15:15:57',3,-1,-1,-1,'2018-05-03 15:15:57',-1,'2018-05-03 21:17:29',-1,'ID',NULL,NULL,NULL),
+ (2,'112.xml','/resources/upload/download/112.xml','','11','2018-05-03 15:17:35',2,-1,-1,-1,'2018-05-03 15:17:35',-1,'2018-05-03 21:17:25',-1,'ID',NULL,NULL,NULL),
+ (3,'bbb.txt','/resources/upload/download/bbb.txt','bb','','2018-05-04 10:07:29',1,-1,-1,-1,'2018-05-04 10:07:29',-1,'2018-05-04 10:07:29',-1,'ID',NULL,NULL,NULL),
+ (4,'aaa.txt','/resources/upload/download/aaa.txt','11','','2018-05-04 10:07:41',1,-1,-1,-1,'2018-05-04 10:07:41',-1,'2018-05-04 10:07:41',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_download` ENABLE KEYS */;
 
 

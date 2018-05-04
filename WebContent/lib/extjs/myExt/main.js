@@ -98,16 +98,16 @@ function getManager() {
 	str +=addFunc('assessmentType1.png','assessmentType2.png','assessmentType');
 	str +=addFunc('assessmentActivity1.png','assessmentActivity2.png','assessmentActivity');
 	str +=addFunc('assessmentUserProgress1.png','assessmentUserProgress2.png','assessmentUserProgress');
-	str +=addFunc('carousel1.png','carousel2.png','carousel');
-	str +=addFunc('download1.png','download2.png','download');
 	
+	str +=addFunc('download1.png','download2.png','download');
+	str +=addFunc('news1.png','news2.png','news');
 	str += '</table></div>';
 	return str;
 }
 
 function getNews(){
 	var str = "";
-	str +=addFunc('news1.png','news2.png','news');
+	
 	str +=addFunc('type1.png','type2.png','newsType');
 	str +=addFunc('source1.png','source2.png','newsSource');
 	
@@ -121,6 +121,7 @@ function getConfig(){
 	str +=addFunc('attribute1.png','attribute2.png','newsAttribute');
 	str +=addFunc('user1.png','user2.png','user');
 	str +=addFunc('role1.png','role2.png','role');
+	str +=addFunc('carousel1.png','carousel2.png','carousel');
 	return addFuncStr(str);
 }
 
@@ -160,7 +161,7 @@ function addtabs(us) {
 		var panel=  new NewsAttribute.NewsAttributePanel({
 			mainId: us
 		});
-		addTabFuns(us,panel,'自定义文档属性配置');
+		addTabFuns(us,panel,'自定义属性配置');
 	}else if (us == "news") {
 		var panel=  new News.NewsPanel({
 			mainId: us

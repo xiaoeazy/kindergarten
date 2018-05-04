@@ -23,6 +23,10 @@ public final class RequestUtil {
         String xr = request.getHeader(X_REQUESTED_WIDTH);
         return (xr != null && XML_HTTP_REQUEST.equalsIgnoreCase(xr));
     }
+    
+    public static boolean isAPIRequest(HttpServletRequest request) {
+        return request.getRequestURI().contains("/api/");
+    }
 
     public static String getCookieValue(HttpServletRequest request, String name) {
         Cookie[] cookies = request.getCookies();

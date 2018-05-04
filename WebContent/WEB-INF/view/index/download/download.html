@@ -6,145 +6,108 @@
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
-<title>中央公告_中国政府采购网</title>
-<link href="/css/detail.css" rel="stylesheet" type="text/css" />
-<script language="javascript" src="/js/jquery-3.2.1.min.js"></script>
+<title>资料下载_中国政府采购网</title>
+<link href="${base.contextPath}/lib/index/css/detail.css" rel="stylesheet" type="text/css" />
+<link type="text/css" rel="stylesheet" href="http://cdn.staticfile.org/twitter-bootstrap/3.1.1/css/bootstrap.min.css"/>
+<script language="javascript" src="${base.contextPath}/lib/jquery/jquery.min.js" ></script>
+<script language="javascript" src="${base.contextPath}/lib/jqPaginator/jqpaginator.min.js" ></script>
 </head>
 <body id="bid_lst">
 <link href="${base.contextPath}/lib/index/css/inc.css" rel="stylesheet" type="text/css" />
-<#include "../include/navigation.html">
-
-<div class="main">
-<div class="main_container">
-
-
-
-<div class="main_left_block mt13">
-<div class="wz_block">
-    <div class="vF_deail_currentloc">
-        <p>当前位置：<a href="../../" title="首页" class="CurrChnlCls">首页</a>&nbsp;&raquo;&nbsp;
-                <a href="../" title="政采公告" class="CurrChnlCls">政采公告</a>&nbsp;&raquo;&nbsp;<a href="./" title="中央公告" class="CurrChnlCls">中央公告</a></p>
-    </div>
-
-    <div class="vF_detail_relcontent mt13">
-    <h2><p>中央公告</p></h2>
-    <div class="vF_detail_relcontent_lst">
-        <ul class="c_list_bid">
-
-			<li>   
-				<a href="./zbgg/201805/t20180503_9872498.htm" target="_blank" title="中国科学院高能物理研究所2018-2021年职工健康体检（重新招标）中标公告">中国科学院高能物理研究所2018-2021年职工健康体检（重新招标）中标公告</a>
-		    	<em rel="bxlx">982</em> 发布时间：<em>2018-05-03 19:30</em> 地域：<em>北京</em> 采购人：<em>中国科学院高能物理研究所</em>
-		    </li>
-
-        </ul>
-    </div>
-    <div class="pagigation" style="background:red"><style>
-p.pager{float:right;margin-right:10px;margin-top:8px}
-.pager{margin:12px 12px 0 0; color:#444;border-bottom:1px solid #555; font:14px Verdana,"黑体";border:none;height:30px;}
-.pager a,
-.pager span,
-.pager input{float:left;padding:2px 5px;}
-.pager a{color:#0088CC; text-decoration:none;border:1px solid #ddd;margin-right:2px;width:17px}
-.pager a:hover{border-bottom:2px solid #325594; color:#325594;background:#f5f5f5}
-.pager .prev,
-.pager .next,
-.pager .current{margin:0;;margin-right:2px;width:17px}
-.pager .prev,
-.pager .next{width:50px}
-.pager span.prev,
-.pager span.next{color:#888;}
-.pager .current{background:#0088cc; color:#fff;border:1px solid #0088cc}
-.pager input{border:1px solid #aaa;height:18px}
-</style>
-
-<p class="pager">
-<script language="javascript">
-function Pager(c){var d=function(a,b){for(var p in b)a[p]=b[p];return a};var e=d({size:1,current:0,beforeEnd:2,visible:5,prevLabel:'上一页',nextLabel:'下一页',ellipsis:'<span>...</span>',textboxEnabled:true,showAlways:false},c||{});if(!e.showAlways&&e.size==1)return false;var f=(e.size==1||e.current==0)?'<span class="prev">'+e.prevLabel+'</span>':'<a href="'+e.prefix+(e.current==1?'':'_'+(e.current-1))+'.'+e.suffix+'" class="prev">'+e.prevLabel+'</a>';var g=(e.size==e.current+1)?'<span class="next">'+e.nextLabel+'</span>':'<a href="'+e.prefix+'_'+(e.current+1)+'.'+e.suffix+'" class="next">'+e.nextLabel+'</a>';var h=(e.current==0)?'<span class="current">1</span>':'<a href="'+e.prefix+'.'+e.suffix+'">1</a>';var p=function(s){document.write(s)};p(f);p(h);if(e.size>1){var j=function(a,b){for(var i=a;i<b;i++){e.current==i?p('<span class="current">'+(i+1)+'</span>'):p('<a href="'+e.prefix+'_'+i+'.'+e.suffix+'">'+(i+1)+'</a>')}};var k=Math.max(0,e.current-(e.visible-Math.ceil(e.visible/2)));var l=Math.min(k+e.visible,e.size);j(1,Math.min(e.beforeEnd,e.size));if(e.current>=k){if(e.beforeEnd<k)p(e.ellipsis);j(Math.max(k,e.beforeEnd),l)};if(l!=e.size){if(e.size-e.beforeEnd>l)p(e.ellipsis);j(Math.max(e.size-e.beforeEnd,l),e.size)}};p(g);if(e.textboxEnabled&&e.size>e.beforeEnd*2+e.visible){jump="if(event.keyCode==13){var num=this.value;if(isNaN(num)||num<1||num>"+e.size+")alert('非法页码参数');else{num=num==1?'':'_'+(num-1);location.href='"+e.prefix+"'+num+'"+"."+e.suffix+"';}}";p('<input type="text" size="1" title="输入页码敲击回车键!" onkeypress="'+jump+'" />')}};
+<#include "../../include/navigation.html">
+<script type="text/javascript">
+	function download(fileId,itemId){
+		var password = $("#download_"+itemId).val();
+		window.location="${base.contextPath}/index/file/download?fileId="+fileId+"&password="+password; 
+		$("#download_"+itemId).val("");
+	}
 </script>
-<script language="javascript">Pager({size:25, current:0, prefix:'index',suffix:'htm'});</script></p></div>
-</div>
+<div class="main">
+	<div class="main_container">
+		<div class="main_left_block mt13">
+			<div class="wz_block">
+			    <div class="vF_deail_currentloc">
+			        <p>当前位置：<a href="${base.contextPath}" title="首页" class="CurrChnlCls">首页</a>&nbsp;&raquo;&nbsp;
+			                <a href="#" title="资料下载" class="CurrChnlCls">资料下载</a>&nbsp;&raquo;&nbsp;</p>
+			    </div>
+			
+			    <div class="vF_detail_relcontent mt13">
+				    <h2><p>资料下载</p></h2>
+				    <div class="vF_detail_relcontent_lst">
+				        <ul class="c_list_bid">
+				        	<#list downloadList as downloadList>
+				        		<li>   
+									<#if downloadList.password!="">
+								    	 <a href="#"  title="${downloadList.fileTitle}">${downloadList.fileTitle}</a>
+								    	  发布时间：<em>${downloadList.createdate?string('yyyy-MM-dd HH:mm:ss')}</em> 
+							    	 	   密码：<em><input type="text" id="download_${downloadList_index}" value=''/>&nbsp;&nbsp;<button onclick="download('${downloadList.id}','${downloadList_index}')">下载</button></em> 
+							    	 <#else>
+							    	 	 <a href="${base.contextPath}/index/file/download?fileId=${downloadList.id}" target="_blank" title="${downloadList.fileTitle}">${downloadList.fileTitle}</a>
+								    	  发布时间：<em>${downloadList.createdate?string('yyyy-MM-dd HH:mm:ss')}</em> 
+							    	 </#if>
+						    	</li>
+				        	</#list>
+				        </ul>
+				    </div>
+				</div>
+				<div class="pagigation" style="text-align:right">
+					 <ul class="pagination" id="pagination2"></ul>
+				</div>
+			
+				<script type="text/javascript">
+					$.jqPaginator('#pagination2', {
+				        totalPages: ${allPageNum},
+				        visiblePages: 10,
+				        currentPage: ${page},
+				        first: '<li class="prev"><a href="javascript:;">首页</a></li>',  
+				        prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',  
+				        next: '<li class="next"><a href="javascript:;">下一页</a></li>',  
+				        last: '<li class="prev"><a href="javascript:;">末页</a></li>',  
+				        page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',  
+				        onPageChange: function (num, type) {
+				        	if(type=="change"){
+				 	            var path ="download?page="+num;
+				 	            window.location.href=path;
+				        	}
+				        }
+				    });
+				   </script>
+			</div>
+		</div>
 
-</div>
-</div>
-
-    <div class="main_right_block" style="margin-top:43px">
-
-
-<!--OTsidebar-->
-        <div class="main_right_cbl" style="margin-top:4px">
-            <h2 class="mt10 mb10"><a href="/news/">采购头条</a></h2>
-                <div class="vT-chs-section-content-con">
-                <ul class="vT-chs-section-content-list mb10">
-
-<li><a href="http://www.ccgp.gov.cn/news/201804/t20180424_9827124.htm" target="_blank" title="福建“数字政采”助力数字中国建设峰会">福建“数字政采”助力数字中国建设峰会</a></li>
-
-<li><a href="http://www.ccgp.gov.cn/news/201804/t20180423_9819600.htm" target="_blank" title="习近平：加速推动信息领域核心技术突破">习近平：加速推动信息领域核心技术突破</a></li>
-
-<li><a href="http://www.ccgp.gov.cn/news/201804/t20180419_9806489.htm" target="_blank" title="落实习近平主席讲话 加快加入《政府采购协定》进程">落实习近平主席讲话 加快加入《政府采...</a></li>
-
-<li><a href="http://www.ccgp.gov.cn/news/201804/t20180419_9806352.htm" target="_blank" title="财政部2018年一季度财政收支情况新闻发布会实录">财政部2018年一季度财政收支情况新闻...</a></li>
-
-<li><a href="http://www.ccgp.gov.cn/news/201804/t20180419_9806351.htm" target="_blank" title="财政部公布2018年一季度财政收支情况">财政部公布2018年一季度财政收支情况</a></li>
-
-                </ul>
-                </div>
-        </div>
-
-        <div class="main_right_cbl mt13">
-            <h2 class="mt10 mb10"><a href="/zcdt/">政采动态</a></h2>
-                <div class="vT-chs-section-content-con">
-                <ul class="vT-chs-section-content-list mb10">
-
-<li><a href="http://www.ccgp.gov.cn/zcdt/201805/t20180502_9861301.htm" target="_blank" title="浙江省四举措力推政府采购信息公开全流程标准化 规范化">浙江省四举措力推政府采购信息公开全...</a></li>
-
-<li><a href="http://www.ccgp.gov.cn/zcdt/201804/t20180427_9846272.htm" target="_blank" title="商务部：中国将尽快加入世贸组织《政府采购协定》">商务部：中国将尽快加入世贸组织《政...</a></li>
-
-<li><a href="http://www.ccgp.gov.cn/zcdt/201804/t20180427_9846245.htm" target="_blank" title="重庆：6家政府采购代理机构被行政处罚">重庆：6家政府采购代理机构被行政处罚</a></li>
-
-<li><a href="http://www.ccgp.gov.cn/zcdt/201804/t20180427_9846026.htm" target="_blank" title="江苏做好政府购买服务重点项目">江苏做好政府购买服务重点项目</a></li>
-
-<li><a href="http://www.ccgp.gov.cn/zcdt/201804/t20180427_9846025.htm" target="_blank" title="四川出台政府集中采购目录实施方案">四川出台政府集中采购目录实施方案</a></li>
-
-                </ul>
-                </div>
-        </div>
-
-        <div class="main_right_cbl mt13">
-            <h2 class="mt10 mb10"><a href="/gpsr/">购买服务</a></h2>
-                <div class="vT-chs-section-content-con">
-                <ul class="vT-chs-section-content-list mb10">
-
-<li><a href="http://www.ccgp.gov.cn/gpsr/zhxx/df/201805/t20180503_9867216.htm" target="_blank" title="政府招标买服务 河南安阳千架无人机施药200万亩小麦">政府招标买服务 河南安阳千架无人机施...</a></li>
-
-<li><a href="http://www.ccgp.gov.cn/gpsr/zhxx/df/201805/t20180503_9867215.htm" target="_blank" title="杨浦区社团局召开政府购买社会组织服务绩效评审工作座谈会">杨浦区社团局召开政府购买社会组织服...</a></li>
-
-<li><a href="http://www.ccgp.gov.cn/gpsr/zhxx/df/201805/t20180503_9867177.htm" target="_blank" title="惠州：社区服务转为政府主导及志愿组织等多元参与治理格局">惠州：社区服务转为政府主导及志愿组...</a></li>
-
-<li><a href="http://www.ccgp.gov.cn/gpsr/zhxx/df/201805/t20180502_9861094.htm" target="_blank" title="柳州政府购买居家养老服务">柳州政府购买居家养老服务</a></li>
-
-<li><a href="http://www.ccgp.gov.cn/gpsr/zhxx/df/201805/t20180502_9861093.htm" target="_blank" title="建德市民政局加快推进养老服务体系建设">建德市民政局加快推进养老服务体系建设</a></li>
-
-                </ul>
-                </div>
-        </div>
-         <!--OTsidebar-->
-        </div>
+	    <div class="main_right_block" style="margin-top:43px">
+				<!--OTsidebar-->
+					<#list rightAttributeList as rightAttributeList>
+						<#if rightAttributeList_index = 0>
+							<div class="main_right_cbl " style="margin-top:4px">
+				            	<h2 class="mt10 mb10"><a href="#" >${rightAttributeList.attributename}</a></h2>
+				                <div class="vT-chs-section-content-con">
+				                <ul class="vT-chs-section-content-list mb10">
+				                	<#list rightAttributeList.newsList as newsList>
+				                		<li><a href="${base.contextPath}/index/newsDetail?id=${newsList.id}" target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
+				                	</#list>
+								 </ul>
+				                </div>
+				       		 </div>
+						<#else>
+							<div class="main_right_cbl mt13">
+				          		<h2 class="mt10 mb10"><a href="#" >${rightAttributeList.attributename}</a></h2>
+				                <div class="vT-chs-section-content-con">
+				                <ul class="vT-chs-section-content-list mb10">
+									<#list rightAttributeList.newsList as newsList>
+										<li><a href="${base.contextPath}/index/newsDetail?id=${newsList.id}"  target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
+									</#list>
+				                </ul>
+				                </div>
+				        	</div>
+						</#if>
+					</#list>
+				        
+				<!--OTsidebar-->
+	        </div>
     </div>
 </div>
-</div>
-<div class="footer mt13">
-
-    <div class="copyright_bl">
-    <div class="vF_cp">
-
-<p><span>&copy; 1999-<script language="javascript">
-var myDate = new Date();
-document.write(myDate.getFullYear());
-</script></span> 中华人民共和国财政部版权所有 | <a href="/contact.shtml" target="_blank">联系我们</a> | <a href="mailto:feedback@ccgp.gov.cn">意见反馈</a> | <a href="http://www.miibeian.gov.cn" target="_blank">京<span>ICP</span>备<span>10046031</span>号<span>-10</span></a></p>
-
-</div>
-    </div>
-</div>
+<#include "../../include/footer.html">
 </body>
 <script language="javascript" src="/js/detailaddon.js"></script>
 </html>

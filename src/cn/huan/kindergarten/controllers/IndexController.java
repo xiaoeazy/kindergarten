@@ -30,6 +30,11 @@ import cn.huan.kindergarten.utils.CommonUtil;
 
 @Controller
 public class IndexController extends BaseController{
+	public static final String  CH_INDEX = "CH_INDEX";//首页
+	public static final String  CH_XHJJ = "CH_XHJJ";//协会简介
+	public static final String  CH_ZXZX = "CH_ZXZX";//资讯中心
+	public static final String  CH_XHGZ = "CH_XHGZ";//协会工作
+	public static final String  CH_LXWM = "CH_LXWM";//联系我们
 	@Autowired
 	private IKgConfigService iKgConfigService;
 	@Autowired
@@ -64,7 +69,7 @@ public class IndexController extends BaseController{
     	 mv.addObject("newsList1",newsList1);
     	 mv.addObject("newsList2",newsList2);
     	 
-    	 loadNavigation(mv, requestContext, IndexNewsController.CH_INDEX);
+    	 loadNavigation(mv, requestContext, CH_INDEX);
          return mv;
     }
 	

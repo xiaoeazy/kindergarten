@@ -7,6 +7,7 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.ibatis.ognl.OgnlException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -158,8 +159,8 @@ public class BaseController {
     @ExceptionHandler(value = { Exception.class })
     public Object exceptionHandler(Exception exception, HttpServletRequest request) {
         logger.error(exception.getMessage(), exception);
-        if (RequestUtil.isAjaxRequest(request)) {
-            Throwable thr = getRootCause(exception);
+        Throwable thr = getRootCause(exception);
+        if (RequestUtil.isAjaxRequest(request) || RequestUtil.isAPIRequest(request) || ServletFileUpload.isMultipartContent(request)) {
             ResponseData res = new ResponseData(false);
             if (thr instanceof BaseException) {
                 BaseException be = (BaseException) thr;
@@ -169,11 +170,19 @@ public class BaseController {
                 res.setCode(be.getCode());
                 res.setMessage(message);
             } else {
-                res.setMessage(thr.getMessage());
+                res.setMessage(thr.toString());
             }
             return res;
         } else {
-            return new ModelAndView("500");
+            ModelAndView view = new ModelAndView("500");
+            if (thr instanceof BaseException) {
+                BaseException be = (BaseException) thr;
+                Locale locale = RequestContextUtils.getLocale(request);
+                String messageKey = be.getDescriptionKey();
+                String message = messageSource.getMessage(messageKey, be.getParameters(), messageKey, locale);
+                view.addObject("message", message);
+            }
+            return view;
         }
     }
 

@@ -35,21 +35,14 @@ Ext.extend(addorUpdateDownload.addorUpdateDownloadWindow, Ext.Window, {
 		               bodyStyle:'padding:10px 0px 10px 0px'
 		            },
 				  items : [ 
-//				  			{
-//				  				 xtype: 'textfield',
-//				  				 id: mainId+'__status',
-//				  				 name: 'dto.__status',
-//				  				 value:''
-//				  			},{
-//				  				 xtype: 'textfield',
-//				  				 id: mainId+'id',
-//				  				 name: 'dto.id',
-//				  				 value:''
-//				  			},
+						  	{
+					  			xtype:'label',
+					  			text:''
+				  			},
 					  		{
 								xtype:'container',
 								fieldLabel : '上传',
-								style:'padding:0 0 5px 0',
+								style:'padding:5px 0 5px 0',
 								layout:'column',
 								items:[{ 
 									 columnWidth:.6,

@@ -34,7 +34,7 @@ public class IndexContactController extends BaseController{
     public ModelAndView contact(HttpServletRequest request) {
     	ModelAndView mv = new ModelAndView(getViewPath() + "/index/contact/contact");
     	 IRequest requestContext = createRequestContext(request);
-    	loadNavigation(mv, requestContext, IndexNewsController.CH_LXWM);
+    	loadNavigation(mv, requestContext, IndexController.CH_LXWM);
         return mv;
     }
 	

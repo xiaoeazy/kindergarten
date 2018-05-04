@@ -28,11 +28,7 @@ import cn.huan.kindergarten.utils.CommonUtil;
 
 @Controller
 public class IndexNewsController extends BaseController{
-	public static final String  CH_INDEX = "CH_INDEX";//首页
-	public static final String  CH_XHJJ = "CH_XHJJ";//协会简介
-	public static final String  CH_ZXZX = "CH_ZXZX";//资讯中心
-	public static final String  CH_XHGZ = "CH_XHGZ";//协会工作
-	public static final String  CH_LXWM = "CH_LXWM";//联系我们
+	
 	
 	@Autowired
 	private IKgNewsService iKgNewsService;
@@ -61,7 +57,7 @@ public class IndexNewsController extends BaseController{
         }
         
         mv.addObject("typeList", typeList);
-        loadNavigation(mv, requestContext,CH_ZXZX);
+        loadNavigation(mv, requestContext,IndexController.CH_ZXZX);
         iKgNewsAttributeService.loadAttriteNews(mv, requestContext,2);
        
         return mv;
@@ -91,7 +87,7 @@ public class IndexNewsController extends BaseController{
         mv.addObject("allPageNum",allPageNum);
         
         
-        loadNavigation(mv, requestContext,CH_ZXZX);
+        loadNavigation(mv, requestContext,IndexController.CH_ZXZX);
         
        
         return mv;
@@ -118,7 +114,7 @@ public class IndexNewsController extends BaseController{
 	        mv.addObject("kgNewstype", kgNewstype);
 	        mv.addObject("typeid", typeid);
 	        
-	        loadNavigation(mv, requestContext,CH_ZXZX);
+	        loadNavigation(mv, requestContext,IndexController.CH_ZXZX);
 	        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,3);
 	        return mv;
 	    }
@@ -140,7 +136,7 @@ public class IndexNewsController extends BaseController{
         KgNewstype kgNewstype = iKgNewstypeService.selectByPrimaryKey(requestContext, newsType);
         
         mv.addObject("kgNewstype", kgNewstype);
-        loadNavigation(mv, requestContext,CH_ZXZX);
+        loadNavigation(mv, requestContext,IndexController.CH_ZXZX);
         iKgNewsAttributeService.loadAttriteNews(mv, requestContext,3);
         return mv;
     }
