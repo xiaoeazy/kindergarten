@@ -136,13 +136,41 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 			    	}
 			    }
 			});
-	       
+	       //=====================是否前台显示=========================================
+	       var indexShowCombo = new Ext.form.ComboBox({
+   	   			fieldLabel:'是否前台展示图片',
+	    	    id:mainId+"indexshow",
+	    	    model:'local',
+	            store:new Ext.data.SimpleStore({  //填充的数据
+                    fields : ['text', 'value'],
+                    data : [['否', 'N'], ['是', 'Y']]
+            	}),
+	            valueField : "value",  
+	            displayField : "text",  
+	            forceSelection : true,  
+	            blankText : '请选择',  
+	            emptyText : '请选择',  
+	            editable : false,  
+	            triggerAction : 'all',  
+	            allowBlank : false,  
+	            hiddenName : "text",  
+	            autoShow : true,  
+	            selectOnFocus : true,  
+	            name : "indexshow",
+	            listeners:{
+	            	afterrender:function(comb){
+	            	},
+	            	select:function(combo, record, index){
+	            	}
+	            }
+	        });  
 	       //=====================formpanel=========================================
 	    	var formpanel = new Ext.FormPanel({
 	    		  labelAlign: "right",
 	    		  labelWidth :100,
 			      frame: true,
 			      width: '100%',
+			      autoScroll:true,
 			      bodyStyle:'margin: 0px auto',
 			      defaults:{
 		               xtype:"textfield",
@@ -180,36 +208,39 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 		                            }
 		                        }
 		                    },
+		                    indexShowCombo,
 				  			{
-							 	width:200,
-							 	height:100,
-							 	fieldLabel : '显示',
-								xtype : 'box',
-								id :mainId+"showPict",
-								autoEl : {
-									width:200,
-								 	height:100,
-									tag : 'img',
-									src :nonePic,
-									style : 'filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);',
-									complete : 'off'
-								}
-							},{
 								xtype:'container',
 								fieldLabel : '上传',
-								style:'padding:0 0 5px 0',
+								style:'padding:0 0 5px 20px',
 								items:[{
+								 	width:390,
+								 	height:285,
+								 	fieldLabel : '显示',
+									xtype : 'box',
+									id :mainId+"showPict",
+									autoEl : {
+										width:390,
+									 	height:285,
+										tag : 'img',
+										src :nonePic,
+										style : 'filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);',
+										complete : 'off'
+									}
+								},{
 									xtype : 'button',
-									width : 100,
+									width : 150,
+									style : 'margin-left:10px',
 									//name : 'imgupload',
-									text : '上传图片',
+									text : '上传（390*285）',
 									handler:function(){
 										var win = new uploadImageBase.uploadImageBaseWin({the_hidden_image_url:mainId+"imageUrl",the_image_show:mainId+"showPict",type:'news'});
 										win.show();
 									}
 							 	},{
 									xtype : 'button',
-									width : 100,
+									width : 150,
+									style : 'margin-left:10px',
 									text : '撤销图片',
 									handler:function(){
 										Ext.getCmp(mainId+"imageUrl").setValue("");
@@ -318,15 +349,17 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 				    		var summary= record.get("summary");
 				    		var sequence = record.get("sequence");
 				    		var content= record.get("content");
+				    		var indexshow = record.get("indexshow");
 				    		Ext.getCmp(mainId+"newstitle").setValue(newstitle);
 				    		typeCombo.setValue(typeid);
 				    		
 				    		Ext.getCmp(mainId+"imageUrl").setValue(thumbnail);
-				    		if(thumbnail!=null){
+				    		if(thumbnail!=null&&thumbnail!=""){
 				    			Ext.getCmp(mainId+"showPict").getEl().dom.src=appName+thumbnail;
 				    		}
 				    		Ext.getCmp(mainId+"summary").setValue(summary);
 				    		 Ext.getCmp(mainId+"sequence").setValue(sequence);
+				    		 Ext.getCmp(mainId+"indexshow").setValue(indexshow);
 //				    		Ext.getCmp(mainId+"content").setValue(content);
 //				    		Ext.getCmp(mainId+"content").getEditor().setContent(content);
 				    	}
@@ -399,6 +432,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 		var thumbnail =Ext.getCmp(mainId+"imageUrl").getValue().trim();
 		var content = Ext.getCmp(mainId+"content").getEditor().getContent();
 		var sequence = Ext.getCmp(mainId+"sequence").getValue();
+		var indexshow = Ext.getCmp(mainId+"indexshow").getValue();
 		if(newstitle==""){
 			Ext.getCmp(mainId+"newstitle").markInvalid("咨讯标题不能为空！");
 			return;
@@ -419,6 +453,10 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 			Ext.getCmp(mainId+"content").markInvalid("主体内容不能为空！");
 			return;
 		}
+		if(indexshow==""){
+			Ext.getCmp(mainId+"indexshow").markInvalid("是否首页显示不能为空！");
+			return;
+		}
 		
 	
 		
@@ -432,6 +470,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
                   params : JSON.stringify([{
                 	  __status : type,
                 	  typeid:typeid,
+                	  indexshow:indexshow,
                 	  attributeid:attributeid,
                 	  sourceid:sourceid,
                 	  newstitle : newstitle,

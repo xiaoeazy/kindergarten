@@ -29,7 +29,7 @@ public class KgCarousel extends BaseDTO {
      
      private Long sequence;
      
-     private Long urltype; //0:weburl , 1:activity ,2 :news
+     private Long urltype; //0:weburl,1 :news , 2:activity 
 
      @Length(max = 200)
      private String webUrl;

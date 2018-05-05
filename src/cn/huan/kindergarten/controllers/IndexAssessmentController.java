@@ -1,26 +1,33 @@
 package cn.huan.kindergarten.controllers;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.fileupload.FileUploadException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.huan.HTed.attachment.exception.StoragePathNotExsitException;
+import com.huan.HTed.attachment.exception.UniqueFileMutiException;
+import com.huan.HTed.bean.UploadImgAjax;
 import com.huan.HTed.core.IRequest;
 import com.huan.HTed.system.controllers.BaseController;
 
+import cn.huan.kindergarten.bean.FileInfo;
 import cn.huan.kindergarten.dto.KgAssessmentActivity;
 import cn.huan.kindergarten.dto.KgAssessmentType;
 import cn.huan.kindergarten.dto.KgConfig;
-import cn.huan.kindergarten.dto.KgNews;
 import cn.huan.kindergarten.dto.KgNewsAttribute;
 import cn.huan.kindergarten.dto.KgNewsSource;
 import cn.huan.kindergarten.dto.KgNewstype;
+import cn.huan.kindergarten.service.IIndexAssessmentService;
 import cn.huan.kindergarten.service.IKgAssessmentActivityService;
 import cn.huan.kindergarten.service.IKgAssessmentTypeService;
 import cn.huan.kindergarten.service.IKgConfigService;
@@ -49,6 +56,8 @@ public class IndexAssessmentController extends BaseController{
     private IKgAssessmentActivityService iKgAssessmentActivityService;
     @Autowired
     private IKgNewsAttributeService iKgNewsAttributeService;
+    @Autowired
+    private IIndexAssessmentService iIndexAssessmentService;
     //======================================评估========================================
     @RequestMapping(value = "/index/assessmentTypeList")
     @ResponseBody
@@ -109,6 +118,22 @@ public class IndexAssessmentController extends BaseController{
         loadAttriteAssessment(mv, requestContext,3);
         return mv;
     }
+    
+    
+    @RequestMapping(value = "/index/assessment/upload", method = RequestMethod.POST, produces = "text/html")
+    @ResponseBody
+    public UploadImgAjax fileupload(HttpServletRequest request)
+            throws StoragePathNotExsitException, UniqueFileMutiException, IOException, FileUploadException {
+    	IRequest requestContext = createRequestContext(request);
+    	Long assessmentActivityId = Long.parseLong(request.getParameter("assessmentActivityId"));
+    	if(assessmentActivityId==null)
+    		throw new  FileUploadException("参数错误");
+    	
+    	List<FileInfo> list = iIndexAssessmentService.assessmentUpload(requestContext, request, assessmentActivityId);
+//        return "<script>window.parent.showUploadSucessLogo()</script>";
+    	return new UploadImgAjax(true,null, "");
+    }
+    
     
     //===================================other======================================
     private void loadNavigation(ModelAndView mv,IRequest requestContext,String chanel  ) {

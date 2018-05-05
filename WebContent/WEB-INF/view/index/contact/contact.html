@@ -65,32 +65,32 @@
 							联系方法
 						</h3>
 						<h4>
-							上海市托幼协会 
+							${contactMap['title']}
 						</h4>
 					</div>
 					<div class="cont" style="float:left;margin-right:50px">
 						<ul>
 							<li>
-								联系电话：021-62671784
+								联系电话：${contactMap['tel']}
 							</li>
 							<li>
-								图文传真：021-32100660
-							</li>
-						</ul>
-						<ul>
-							<li>
-								办公地址：石门二路 199弄 1号 404 
-							</li>
-							<li>
-								邮件编码：200041
+								图文传真：${contactMap['fax']}
 							</li>
 						</ul>
 						<ul>
 							<li>
-								业务合作：aaa@163.com
+								办公地址：${contactMap['address']}
 							</li>
 							<li>
-								人事邮箱：aaa@163.com
+								邮件编码：${contactMap['zipcode']}
+							</li>
+						</ul>
+						<ul>
+							<li>
+								业务合作：${contactMap['business']}
+							</li>
+							<li>
+								人事邮箱：${contactMap['hremail']}
 							</li>
 						</ul>
 					</div>
@@ -135,8 +135,10 @@
 		    }
 		    
 		    //标注点数组
-		    var markerArr = [{title:"石门二路&nbsp;199弄&nbsp;1号&nbsp;404",content:"上海市托幼协会，&nbsp;石门二路&nbsp;199弄&nbsp;1号&nbsp;404&nbsp;，欢迎您！",point:"121.467142|31.239651",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
-				 ];
+// 		    var markerArr = [{title:"石门二路&nbsp;199弄&nbsp;1号&nbsp;404",content:"上海市托幼协会，&nbsp;石门二路&nbsp;199弄&nbsp;1号&nbsp;404&nbsp;，欢迎您！",point:"121.467142|31.239651",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
+// 				 ];
+		    var markerArr = [{title:"${contactMap['mapTitle']}",content:"${contactMap['mapContent']}",point:"${contactMap['mapPoint']}",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
+			 ];
 		    //创建marker
 		    function addMarker(){
 		        for(var i=0;i<markerArr.length;i++){

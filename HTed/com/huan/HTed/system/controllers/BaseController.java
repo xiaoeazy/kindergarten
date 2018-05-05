@@ -39,7 +39,9 @@ import com.huan.HTed.system.dto.ResponseData;
  */
 @RestController
 public class BaseController {
-
+	// 跳转
+    protected static final String REDIRECT = "redirect:";
+    
     protected static final String DEFAULT_PAGE = "1";
     protected static final String DEFAULT_PAGE_SIZE = "10";
 
@@ -174,13 +176,18 @@ public class BaseController {
             }
             return res;
         } else {
-            ModelAndView view = new ModelAndView("500");
+            ModelAndView view = new ModelAndView("error");
             if (thr instanceof BaseException) {
                 BaseException be = (BaseException) thr;
                 Locale locale = RequestContextUtils.getLocale(request);
                 String messageKey = be.getDescriptionKey();
                 String message = messageSource.getMessage(messageKey, be.getParameters(), messageKey, locale);
                 view.addObject("message", message);
+                return view;
+            }
+            if (thr instanceof Exception) {
+            	 view = new ModelAndView("500");
+                view.addObject("message", thr.getMessage());
             }
             return view;
         }

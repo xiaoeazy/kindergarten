@@ -100,14 +100,16 @@ function getManager() {
 	str +=addFunc('assessmentUserProgress1.png','assessmentUserProgress2.png','assessmentUserProgress');
 	
 	str +=addFunc('download1.png','download2.png','download');
-	str +=addFunc('news1.png','news2.png','news');
+	
+	str +=addFunc('config1.png','config2.png','config');
+	
 	str += '</table></div>';
 	return str;
 }
 
 function getNews(){
 	var str = "";
-	
+	str +=addFunc('news1.png','news2.png','news');
 	str +=addFunc('type1.png','type2.png','newsType');
 	str +=addFunc('source1.png','source2.png','newsSource');
 	
@@ -122,6 +124,7 @@ function getConfig(){
 	str +=addFunc('user1.png','user2.png','user');
 	str +=addFunc('role1.png','role2.png','role');
 	str +=addFunc('carousel1.png','carousel2.png','carousel');
+	str +=addFunc('config1.png','config2.png','contact');
 	return addFuncStr(str);
 }
 
@@ -204,6 +207,11 @@ function addtabs(us) {
 		addTabFuns(us,panel,'轮播图');
 	}else if (us == "download") {
 		var panel=  new Download.DownloadPanel({
+			mainId: us
+		});
+		addTabFuns(us,panel,'文档下载');
+	}else if (us == "contact"){
+		var panel=  new Contact.ContactPanel({
 			mainId: us
 		});
 		addTabFuns(us,panel,'文档下载');

@@ -6,6 +6,7 @@
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
 <title>中国政府采购网</title>
+<link rel="shortcut icon" href="${base.contextPath}/favicon.ico" />
 <link href="${base.contextPath}/lib/index/css/banner.css" rel="stylesheet" type="text/css" />
 <link href="${base.contextPath}/lib/index/css/indexonly.css" rel="stylesheet" type="text/css" />
 <script  type="text/javascript" src="${base.contextPath}/lib/index/search/static/js/jquery-1.11.1.min.js"></script>
@@ -25,7 +26,14 @@
            
               <#list carouselList as carouselList>   
            			 <li>
-			             <a href="#"  title="" target="_blank">
+           			 	<#if carouselList.urltype ==0>
+           			 		<a href="${carouselList.webUrl}"  title="" target="_blank">
+           			 	<#elseif  carouselList.urltype ==1>
+           			 		<a href="${base.contextPath}/index/newsDetail?id=${carouselList.newsId}"  title="" target="_blank">
+           			 	<#else>
+           			 		<a href="${base.contextPath}/index/assessmentDetail?id=${carouselList.activityId}"  title="" target="_blank">
+           			 	</#if>
+			                 
 			                 <img src="${base.contextPath}${carouselList.filePath}"  alt="" width="1920" height="675" title="" />
 			             </a>
 			         </li>
@@ -52,11 +60,13 @@
         <div class="picnews">
 				<div class="vT_t1 picnews flexslider" id="demo02">
 					<ul class="slides">
-						<li><div class="word_bg"><p title="两会声音：做好财政收支加减法">两会声音：做好财政收支加减法</p></div><div class="img"><a href="gjdt/201803/t20180312_9652142.htm" tppabs="http://www.ccgp.gov.cn/gjdt/201803/t20180312_9652142.htm" target='_blank'  thumb="" alt="" text=""><img src="pnews/201803/W020180312338559251923.jpg" tppabs="http://www.ccgp.gov.cn/pnews/201803/W020180312338559251923.jpg" border='0' width="390px" height="285px" alt='两会声音：做好财政收支加减法' title='两会声音：做好财政收支加减法' /></a></div></li>
-						<li style="display:none"><div class="word_bg"><p title="两会：财政部部长肖捷等就“财税改革和财政工作”答问">两会：财政部部长肖捷等就“财税改革和财政工作”答问</p></div><div class="img"><a href="gjdt/201803/t20180308_9642494.htm" tppabs="http://www.ccgp.gov.cn/gjdt/201803/t20180308_9642494.htm" target='_blank'  thumb="" alt="" text=""><img src="pnews/201803/W020180308414963594198.jpg" tppabs="http://www.ccgp.gov.cn/pnews/201803/W020180308414963594198.jpg" border='0' width="390px" height="285px" alt='两会：财政部部长肖捷等就“财税改革和财政工作”答问' title='两会：财政部部长肖捷等就“财税改革和财政工作”答问' /></a></div></li>
-						<li style="display:none"><div class="word_bg"><p title="国务院总理李克强《政府工作报告》（文字实录）">国务院总理李克强《政府工作报告》（文字实录）</p></div><div class="img"><a href="gjdt/201803/t20180306_9634153.htm" tppabs="http://www.ccgp.gov.cn/gjdt/201803/t20180306_9634153.htm" target='_blank'  thumb="" alt="" text=""><img src="pnews/201803/W020180306329680486801.jpg" tppabs="http://www.ccgp.gov.cn/pnews/201803/W020180306329680486801.jpg" border='0' width="390px" height="285px" alt='国务院总理李克强《政府工作报告》（文字实录）' title='国务院总理李克强《政府工作报告》（文字实录）' /></a></div></li>
-						<li style="display:none"><div class="word_bg"><p title="全国政协十三届一次会议新闻发布会举行">全国政协十三届一次会议新闻发布会举行</p></div><div class="img"><a href="gjdt/201803/t20180302_9627086.htm" tppabs="http://www.ccgp.gov.cn/gjdt/201803/t20180302_9627086.htm" target='_blank'  thumb="" alt="" text=""><img src="pnews/201803/W020180302608861076654.jpg" tppabs="http://www.ccgp.gov.cn/pnews/201803/W020180302608861076654.jpg" border='0' width="390px" height="285px" alt='全国政协十三届一次会议新闻发布会举行' title='全国政协十三届一次会议新闻发布会举行' /></a></div></li>
-						<li style="display:none"><div class="word_bg"><p title="六部门鼓励PPP等模式支持国家农业科技园区发展">六部门鼓励PPP等模式支持国家农业科技园区发展</p></div><div class="img"><a href="ppp/zx/zy/201802/t20180224_9605161.htm" tppabs="http://www.ccgp.gov.cn/ppp/zx/zy/201802/t20180224_9605161.htm" target='_blank'  thumb="" alt="" text=""><img src="pnews/201802/W020180227332236795475.jpg" tppabs="http://www.ccgp.gov.cn/pnews/201802/W020180227332236795475.jpg" border='0' width="390px" height="285px" alt='六部门鼓励PPP等模式支持国家农业科技园区发展' title='六部门鼓励PPP等模式支持国家农业科技园区发展' /></a></div></li>
+						<#list newsThumbNailList as newsThumbNailList>  
+	                 		<#if newsThumbNailList_index ==0>
+								<li><div class="word_bg"><p title="${newsThumbNailList.newstitle}">${newsThumbNailList.newstitle}</p></div><div class="img"><a href="${base.contextPath}/index/newsDetail?id=${newsThumbNailList.id}" target='_blank'  thumb="" alt="" text=""><img src="${base.contextPath}${newsThumbNailList.thumbnail}"  border='0' width="390px" height="285px" alt='${newsThumbNailList.newstitle}' title='${newsThumbNailList.newstitle}' /></a></div></li>
+							<#else>
+								<li style="display:none"><div class="word_bg"><p title="${newsThumbNailList.newstitle}">${newsThumbNailList.newstitle}</p></div><div class="img"><a href="${base.contextPath}/index/newsDetail?id=${newsThumbNailList.id}"  target='_blank'  thumb="" alt="" text=""><img src="${base.contextPath}${newsThumbNailList.thumbnail}"  border='0' width="390px" height="285px" alt='${newsThumbNailList.newstitle}' title='${newsThumbNailList.newstitle}' /></a></div></li>					
+							</#if> 
+						</#list>
 					</ul>
 				</div>
 		</div>
@@ -92,7 +102,7 @@
             <div class="vF_banner bx_log">
                 <p class="ml92 dlzc"><a href="http://localhost:8080/kindergarten/index/newsSearch" >内容检索</a></p>
                 <p class="ml67 dlzc"></p>
-                <p class="ml92 dlzc"><a href="gzdt/201603/t20160301_8123933.htm"  target="_blank">登录</a> | <a href="javascript:if(confirm(%27http://pub.ccgp.gov.cn/loginx/  \n\nThis file was not retrieved by Teleport Ultra, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?%27))window.location=%27http://pub.ccgp.gov.cn/loginx/%27" tppabs="http://pub.ccgp.gov.cn/loginx/">注册</a></p>
+                <p class="ml92 dlzc"><a href="${base.contextPath}/index/login"  >登录</a> | <a href="javascript:if(confirm(%27http://pub.ccgp.gov.cn/loginx/  \n\nThis file was not retrieved by Teleport Ultra, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?%27))window.location=%27http://pub.ccgp.gov.cn/loginx/%27" tppabs="http://pub.ccgp.gov.cn/loginx/">注册</a></p>
             </div>
         </div>
 
@@ -312,7 +322,17 @@
 
 <#include "../include/footer.html">
 </body>
-<script language="javascript" src="js/indexonly.js" tppabs="http://www.ccgp.gov.cn/js/indexonly.js"></script>
-<script type="text/javascript" src="js/slider.js" tppabs="http://www.ccgp.gov.cn/js/slider.js"></script>
+<!-- <script type="text/javascript" src="${base.contextPath}/lib/index/js/indexonly.js" ></script> -->
+<script type="text/javascript">
+$(function(){
+	$('#demo02').flexslider({
+	    animation: "fade",
+	    direction:"horizontal",
+	    easing:"swing",
+	    slideshowSpeed: 10000
+	})
+});
+</script>
+<script type="text/javascript" src="${base.contextPath}/lib/index/js/slider.js" ></script>
 <script language="javascript" src="images/vr.js" tppabs="http://www.ccgp.gov.cn/images/vr.js"></script>
 </html>

@@ -58,6 +58,8 @@ public class KgNews extends BaseDTO {
      
      private Long sequence;
 
+     private String indexshow;
+     
      private Date createdate;
 
      private Long viewscount;
@@ -181,6 +183,18 @@ public class KgNews extends BaseDTO {
 	public void setSequence(Long sequence) {
 		this.sequence = sequence;
 	}
+
+	public String getIndexshow() {
+		return indexshow;
+	}
+
+	public void setIndexshow(String indexshow) {
+		this.indexshow = indexshow;
+	}
+
+
+	
+	
      
 
      }

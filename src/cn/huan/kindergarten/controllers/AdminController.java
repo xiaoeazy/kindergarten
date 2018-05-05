@@ -31,8 +31,7 @@ import cn.huan.kindergarten.bean.ExtAjax;
 
 @Controller
 public class AdminController extends BaseController {
-	// 跳转
-    protected static final String REDIRECT = "redirect:";
+	
 	// 默认的登录页
     private static final String VIEW_LOGIN = "/admin/login";
  // 默认的登录页

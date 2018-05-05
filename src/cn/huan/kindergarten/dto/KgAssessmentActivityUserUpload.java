@@ -27,6 +27,9 @@ public class KgAssessmentActivityUserUpload extends BaseDTO {
 
      @Length(max = 19)
      private Long progressId;
+     
+     @Length(max = 240)
+     private String fileName;
 
      @Length(max = 240)
      private String filePath;
@@ -76,5 +79,15 @@ public class KgAssessmentActivityUserUpload extends BaseDTO {
      public String getFilePath(){
          return filePath;
      }
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+     
+     
 
      }

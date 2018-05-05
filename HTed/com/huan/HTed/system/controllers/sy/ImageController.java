@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,6 +15,8 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,8 +26,15 @@ import com.huan.HTed.attachment.exception.StoragePathNotExsitException;
 import com.huan.HTed.attachment.exception.UniqueFileMutiException;
 import com.huan.HTed.bean.UploadImgAjax;
 
+import cn.huan.kindergarten.exception.FileReadIOException;
+import cn.huan.kindergarten.utils.CommonUtil;
+import net.coobird.thumbnailator.Thumbnails;
+
 @Controller
 public class ImageController {
+	  /** 日志记录. **/
+    private static Logger logger = LoggerFactory.getLogger(ImageController.class);
+    
 	private final String CAROUSEL_PAGE="carousel";
 	private final String DOWNLOAD_PAGE="download";
 	private final String NEWS_PAGE="news";
@@ -40,15 +50,18 @@ public class ImageController {
      *             附件不唯一异常
      * @throws IOException
      * @throws FileUploadException
+	 * @throws FileReadIOException 
      */
     @RequestMapping(value = "/sys/config/upload", method = RequestMethod.POST, produces = "text/html")
     @ResponseBody
     public UploadImgAjax upload(HttpServletRequest request)
-            throws StoragePathNotExsitException, UniqueFileMutiException, IOException, FileUploadException {
+            throws StoragePathNotExsitException, UniqueFileMutiException, IOException, FileUploadException, FileReadIOException {
     	String type = request.getParameter("type");
     	String fileResourcesPath="";
     	if(type.equals(CAROUSEL_PAGE)) {
     		fileResourcesPath= "/resources/upload/carousel";
+    	}else if(type.equals(NEWS_PAGE))  {
+    		fileResourcesPath= "/resources/upload/news";
     	}else {
     		fileResourcesPath= "/resources/upload";
     	}
@@ -61,22 +74,22 @@ public class ImageController {
         ServletFileUpload upload = new ServletFileUpload(factory);
         List<FileItem> items = upload.parseRequest(request);
         String imgName ="";
+        String ext = "";
+        String returnPath ="";
         for (FileItem fi : items) {
             if (fi.isFormField()) {
                 fi.getFieldName();
                 fi.getString();
             } else {
-            	
 //                String imgName = fi.getName();//
             	imgName = fi.getName();
-                File tempFile = new File(file_path+'/'+imgName);
                 if (imgName == null) {
 //                    return "<script>window.parent.showUploadError('NO_FILE')</script>";
                 	return new UploadImgAjax(false, "NO_FILE",null);
                 } else {
                     int idx = imgName.lastIndexOf(".");
                     if (idx != -1) {
-                        String ext = imgName.substring(idx + 1).toUpperCase();
+                    	ext= imgName.substring(idx + 1).toUpperCase();
                         ext = ext.toLowerCase();
                         if (!ext.equals("jpg") && !ext.equals("png") && !ext.equals("jpeg") && !ext.equals("gif")) {
                             // 错误信息
@@ -89,14 +102,24 @@ public class ImageController {
                     	return new UploadImgAjax(false, "FILE_NO_SUFFIX",null);
                     }
                 }
+                String randomName = CommonUtil.loadNowTime14();
+                File tempFile = new File(file_path+'/'+randomName+"."+ext);
                 try (InputStream is = fi.getInputStream(); OutputStream os = new FileOutputStream(tempFile)) {
                     IOUtils.copyLarge(is, os);
                 }
-
+                
+                if(type.equals(CAROUSEL_PAGE)) {
+                	returnPath=genCompressImg(fileResourcesPath,file_path+'/'+randomName,ext, 1920, 765);
+                }else  if(type.equals(NEWS_PAGE)) {
+                	returnPath=genCompressImg(fileResourcesPath,file_path+'/'+randomName,ext, 390, 285);
+                }else {
+                	returnPath=fileResourcesPath+'/'+randomName+"."+ext;
+                }
+                	
             }
         }
 //        return "<script>window.parent.showUploadSucessLogo()</script>";
-    	return new UploadImgAjax(true,null, fileResourcesPath+"/"+imgName);
+    	return new UploadImgAjax(true,null, returnPath);
     }
     
     
@@ -147,5 +170,45 @@ public class ImageController {
         }
 //        return "<script>window.parent.showUploadSucessLogo()</script>";
     	return new UploadImgAjax(true,null, fileResourcesPath+"/"+imgName);
+    }
+    
+    
+    
+    /**
+     * 压缩图片
+     * 
+     * @param f
+     *            图片文件
+     * @param wigth
+     *            宽
+     * @param height
+     *            高
+     * @throws FileReadIOException
+     *             IOException
+     */
+    private String genCompressImg(String fileResourcesPath,String fileName,String ext, int wigth, int height) throws FileReadIOException {
+    	String filePath = fileName + "_" + wigth + "_" + height+"."+ext;
+    	String name = filePath.substring(filePath.lastIndexOf("/")+1);
+        File newFile = new File(filePath);
+        FileOutputStream os = null;
+        try {
+            os = new FileOutputStream(newFile);
+            Thumbnails.of(fileName+"."+ext).forceSize(wigth, height).toOutputStream(os);
+        } catch (IOException e) {
+            if (logger.isErrorEnabled()) {
+                logger.error(e.getMessage(), e);
+            }
+            throw new FileReadIOException();
+        } finally {
+            try {
+                os.close();
+            } catch (IOException e) {
+                if (logger.isErrorEnabled()) {
+                    logger.error(e.getMessage(), e);
+                }
+                throw new FileReadIOException();
+            }
+        }
+        return fileResourcesPath+"/"+name;
     }
 }
