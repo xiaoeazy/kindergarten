@@ -51,5 +51,10 @@
            		</if>
            </where>
     </select>
+    
+    <select id="countLockTable" resultType="java.lang.Integer" parameterType="cn.huan.kindergarten.dto.KgAssessmentActivityUserProgress">
+        select count(1) from kg_assessment_activity_user_progress a  for update
+    </select>
+    
 
 </mapper>

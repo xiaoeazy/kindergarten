@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import cn.huan.kindergarten.dto.KgAssessmentActivity;
 import cn.huan.kindergarten.dto.KgNews;
 
 public class CommonUtil {
@@ -13,10 +14,21 @@ public class CommonUtil {
 	    	for(KgNews kg :news) {
 	    		String title =kg.getNewstitle();
 	    		if(title.length()>17) {
-	    			title=kg.getNewstitle().substring(0, 17)+SUSPENSION_POINTS;
+	    			title=kg.getNewstitle().substring(0)+SUSPENSION_POINTS;
 	    			kg.setNewsSimpleTitle(title);
 	    		}else {
 	    			kg.setNewsSimpleTitle(title);
+	    		}
+	    	}
+	    }
+	   public static void judgeTitleLength(List<KgAssessmentActivity> assessmentActivityList,int length) {
+	    	for(KgAssessmentActivity kg :assessmentActivityList) {
+	    		String title =kg.getAssessmentActivityName();
+	    		if(title.length()>17) {
+	    			title=kg.getAssessmentActivityName().substring(0, 22)+SUSPENSION_POINTS;
+	    			kg.setNewsSimpleAssessmentActivityName(title);
+	    		}else {
+	    			kg.setNewsSimpleAssessmentActivityName(title);
 	    		}
 	    	}
 	    }

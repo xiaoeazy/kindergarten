@@ -70,10 +70,23 @@ public class IndexAssessmentServiceImpl  implements IIndexAssessmentService{
 	        }
 	        //更新
 	        Long userid = (Long)request.getSession().getAttribute(IRequest.FIELD_USER_ID);
-	        KgAssessmentActivityUserProgress kaup = new KgAssessmentActivityUserProgress();
-	        kaup.setAssessmentActivityId(assessmentActivityId);
-	        kaup.setUploadUserId(userid);
-	        KgAssessmentActivityUserProgress insertBean=iKgAssessmentActivityUserProgressService.insert(requestContext, kaup);
+//	        int lockTable = iKgAssessmentActivityUserProgressService.countLockTable(requestContext);
+	        KgAssessmentActivityUserProgress isExistHaveUploadQuery = new KgAssessmentActivityUserProgress();
+	        isExistHaveUploadQuery.setUploadUserId(userid);
+	        isExistHaveUploadQuery.setAssessmentActivityId(assessmentActivityId);
+	        List<KgAssessmentActivityUserProgress> isExistHaveUploadResult = iKgAssessmentActivityUserProgressService.select(requestContext, isExistHaveUploadQuery);
+	        KgAssessmentActivityUserProgress insertBean = null;
+	        System.out.println("长度:"+isExistHaveUploadResult.size());
+	        if(isExistHaveUploadResult.size()==0) {
+	        	    KgAssessmentActivityUserProgress kaup = new KgAssessmentActivityUserProgress();
+		   	        kaup.setAssessmentActivityId(assessmentActivityId);
+		   	        kaup.setUploadUserId(userid);
+		   	        insertBean=iKgAssessmentActivityUserProgressService.insert(requestContext, kaup);
+	        }else {
+	        		insertBean = isExistHaveUploadResult.get(0);
+	        }
+	        
+	     
 	        for(FileInfo fi :allFilePath) {
         	    KgAssessmentActivityUserUpload kauu = new KgAssessmentActivityUserUpload();
   	        	kauu.setUploadUserId(userid);

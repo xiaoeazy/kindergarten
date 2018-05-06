@@ -51,9 +51,19 @@
 	    	<input type="file" multiple id="ssi-upload2"/>
 	    </h2>
 	    <div class="vF_detail_relcontent_lst">
-	       	  <ul class="c_list_tat">
-					
-        	 </ul>
+	    	 
+<!-- 	       	  <ul class="c_list_tat"> -->
+<!--         	 </ul> -->
+        	 <table tyle="width:100%;border:1;margin:0;padding:0;height:100%;">
+        	 		<caption align="top">上传文件列表：</caption>
+        	 		<tr><td>序号</td><td>文件名</td></tr>
+        	 		<#list userUploadList as userUploadList>
+						<tr>
+							<td>#{userUploadList_index+1}</td>
+							<td><a href="#"  target="_blank" >${userUploadList.fileName}</a></td>
+						</tr>
+					</#list>
+        	 </table>
 	    </div>
 	</div>
 	</#if>

@@ -43,8 +43,8 @@ public class KgAssessmentActivity extends BaseDTO {
      @Transient
      private KgAssessmentType kgAssessmentType;
      
-     
-     
+     @Transient
+     private String newsSimpleAssessmentActivityName;
      
      public String getAttributeid() {
 		return attributeid;
@@ -101,5 +101,15 @@ public class KgAssessmentActivity extends BaseDTO {
      public String getAssessmentActivityContent(){
          return assessmentActivityContent;
      }
+
+	public String getNewsSimpleAssessmentActivityName() {
+		return newsSimpleAssessmentActivityName;
+	}
+
+	public void setNewsSimpleAssessmentActivityName(String newsSimpleAssessmentActivityName) {
+		this.newsSimpleAssessmentActivityName = newsSimpleAssessmentActivityName;
+	}
+     
+     
 
      }

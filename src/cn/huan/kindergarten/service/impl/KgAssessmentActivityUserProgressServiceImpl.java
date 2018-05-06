@@ -35,4 +35,9 @@ public class KgAssessmentActivityUserProgressServiceImpl extends BaseServiceImpl
 	public int adminQueryCount(IRequest request,KgAssessmentActivityUserProgress record) {
 		return  kgAssessmentActivityUserProgressMapper.adminQueryCount(record);
 	}
+	
+	@Override 
+	public int countLockTable(IRequest request) {
+		return  kgAssessmentActivityUserProgressMapper.countLockTable();
+	}
 }

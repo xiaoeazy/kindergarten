@@ -14,5 +14,7 @@ public interface IKgAssessmentActivityUserProgressService extends IBaseService<K
 	public List<KgAssessmentActivityUserProgress> selectWithOtherInfo(IRequest request, KgAssessmentActivityUserProgress condition, int pageNum,int pageSize);
 
 	public int adminQueryCount(IRequest request, KgAssessmentActivityUserProgress record);
+	
+	public int countLockTable(IRequest request);
 
 }

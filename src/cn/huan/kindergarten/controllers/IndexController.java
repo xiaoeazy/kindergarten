@@ -21,40 +21,22 @@ import com.huan.HTed.account.service.IRoleService;
 import com.huan.HTed.account.service.IUserService;
 import com.huan.HTed.core.IRequest;
 import com.huan.HTed.core.impl.RequestHelper;
-import com.huan.HTed.system.controllers.BaseController;
 
+import cn.huan.kindergarten.dto.KgAssessmentActivity;
 import cn.huan.kindergarten.dto.KgCarousel;
-import cn.huan.kindergarten.dto.KgConfig;
 import cn.huan.kindergarten.dto.KgDownload;
 import cn.huan.kindergarten.dto.KgIntroduction;
 import cn.huan.kindergarten.dto.KgNews;
-import cn.huan.kindergarten.dto.KgNewsSource;
-import cn.huan.kindergarten.dto.KgNewstype;
+import cn.huan.kindergarten.service.IKgAssessmentActivityService;
 import cn.huan.kindergarten.service.IKgCarouselService;
-import cn.huan.kindergarten.service.IKgConfigService;
 import cn.huan.kindergarten.service.IKgDownloadService;
 import cn.huan.kindergarten.service.IKgNewsService;
-import cn.huan.kindergarten.service.IKgNewsSourceService;
-import cn.huan.kindergarten.service.IKgNewstypeService;
 import cn.huan.kindergarten.utils.CommonUtil;
 
 @Controller
-public class IndexController extends BaseController{
+public class IndexController extends IndexBaseController{
 	
-	// 默认的登录页
-    private static final String VIEW_LOGIN = "/index/login";
-    
-	public static final String  CH_INDEX = "CH_INDEX";//首页
-	public static final String  CH_XHJJ = "CH_XHJJ";//协会简介
-	public static final String  CH_ZXZX = "CH_ZXZX";//资讯中心
-	public static final String  CH_XHGZ = "CH_XHGZ";//协会工作
-	public static final String  CH_LXWM = "CH_LXWM";//联系我们
-	@Autowired
-	private IKgConfigService iKgConfigService;
-	@Autowired
-	private IKgNewstypeService iKgNewstypeService;
-	@Autowired
-	private IKgNewsSourceService iKgNewsSourceService;
+	
 	@Autowired
 	private IKgDownloadService iKgDownloadService;
 	@Autowired
@@ -65,6 +47,8 @@ public class IndexController extends BaseController{
 	private IUserService userService;
 	@Autowired
 	private IRoleService roleService;
+	@Autowired
+	private IKgAssessmentActivityService iKgAssessmentActivityService;
 	
 	@RequestMapping(value = "/")
     @ResponseBody
@@ -93,6 +77,9 @@ public class IndexController extends BaseController{
     	 mv.addObject("newsList2",newsList2);
     	 mv.addObject("newsThumbNailList",newsThumbNailList);
     	 
+    	 List<KgAssessmentActivity> assessmentList = iKgAssessmentActivityService.select(requestContext, null, 1, 10);
+    	 CommonUtil.judgeTitleLength(assessmentList,22);
+    	 mv.addObject("assessmentList",assessmentList);
     	 loadNavigation(mv, requestContext, CH_INDEX);
          return mv;
     }
@@ -100,7 +87,7 @@ public class IndexController extends BaseController{
 	@RequestMapping(value = "/index/login")
     @ResponseBody
     public ModelAndView login(HttpServletRequest request) {
-    	ModelAndView mv = new ModelAndView(getViewPath() + "/index/login");
+    	 ModelAndView mv = new ModelAndView(getViewPath() + "/index/login");
     	 IRequest requestContext = createRequestContext(request);
     	 loadNavigation(mv, requestContext, CH_INDEX);
          return mv;
@@ -154,29 +141,6 @@ public class IndexController extends BaseController{
 		session.setAttribute(IRequest.FIELD_ROLE_ID, roles.get(0).getRoleId());
 	}
 	
-    private void loadNavigation(ModelAndView mv,IRequest requestContext,String chanel  ) {
-  	  List<KgNewstype> kgNewstypeList = iKgNewstypeService.selectAll(requestContext);
-        List<KgNewsSource> KgNewsSourceList = iKgNewsSourceService.selectAll(requestContext);
-        
-        mv.addObject("kgNewstypeList", kgNewstypeList);
-        mv.addObject("KgNewsSourceList", KgNewsSourceList);
-        mv.addObject("chanel", chanel);
-        
-        List<KgConfig> kgConfigList= iKgConfigService.selectAll(requestContext);
-        for(KgConfig cf:kgConfigList) {
-      	  if(("copyright").equals(cf.getSyskey())) {
-      		  mv.addObject("copyright", cf.getSysvalue());continue;
-      	  }
-      	  if(("ICPlicense").equals(cf.getSyskey())) {
-      		  mv.addObject("ICPlicense", cf.getSysvalue());continue;
-      	  }
-      	  if(("keyword").equals(cf.getSyskey())) {
-      		  mv.addObject("keyword", cf.getSysvalue());continue;
-      	  }
-      	  if(("webdesc").equals(cf.getSyskey())) {
-      		  mv.addObject("webdesc", cf.getSysvalue());continue;
-      	  }
-        }
-  }
+    
    
 }

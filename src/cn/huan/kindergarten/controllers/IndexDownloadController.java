@@ -5,13 +5,16 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.FileUploadException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +38,7 @@ import cn.huan.kindergarten.service.IKgNewsSourceService;
 import cn.huan.kindergarten.service.IKgNewstypeService;
 
 @Controller
-public class IndexDownloadController extends BaseController{
+public class IndexDownloadController extends IndexBaseController{
 	/**
      * 文件下载默认编码.
      */
@@ -44,13 +47,6 @@ public class IndexDownloadController extends BaseController{
      * buffer 大小.
      */
     private static final Integer BUFFER_SIZE = 1024;
-    
-	@Autowired
-	private IKgConfigService iKgConfigService;
-	@Autowired
-	private IKgNewstypeService iKgNewstypeService;
-	@Autowired
-	private IKgNewsSourceService iKgNewsSourceService;
 	
 	@Autowired
 	private IKgDownloadService iKgDownloadService;
@@ -61,6 +57,10 @@ public class IndexDownloadController extends BaseController{
     @ResponseBody
     public ModelAndView download( @RequestParam(defaultValue = DEFAULT_PAGE) int page,@RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit,
     		HttpServletRequest request) {
+		 HttpSession session = request.getSession(false);
+         if(session==null) {
+        	 return new ModelAndView(REDIRECT + IndexController.VIEW_LOGIN);
+         }
 		limit=20;
     	ModelAndView mv = new ModelAndView(getViewPath() + "/index/download/download");
     	 IRequest requestContext = createRequestContext(request);
@@ -85,10 +85,18 @@ public class IndexDownloadController extends BaseController{
      * @param request  HttpServletRequest
      * @param response HttpServletResponse
      * @param fileId   文件id
+     * @throws KgFileException 
+     * @throws IOException 
+     * @throws FileNotFoundException 
+     * @throws Exception 
      * @throws FileReadIOException 文件读取IO异常
      */
     @RequestMapping(value = {"/index/file/download","/index/file/download"})
-    public void detail(HttpServletRequest request, HttpServletResponse response, String fileId,String password) throws Exception {
+    public void detail(HttpServletRequest request, HttpServletResponse response, String fileId,String password) throws KgFileException, FileNotFoundException, IOException{
+    	 HttpSession session = request.getSession(false);
+         if(session==null) {
+        	 throw new KgFileException(null, "请先登陆！", null);
+         }
         IRequest requestContext = createRequestContext(request);
         KgDownload kg = new KgDownload();
         kg.setId(fileId);
@@ -123,7 +131,7 @@ public class IndexDownloadController extends BaseController{
      * @throws FileNotFoundException 找不到文件异常
      * @throws IOException           IO异常
      */
-    private void writeFileToResp(HttpServletResponse response, File file) throws Exception {
+    private void writeFileToResp(HttpServletResponse response, File file) throws FileNotFoundException, IOException  {
         byte[] buf = new byte[BUFFER_SIZE];
         try (InputStream inStream = new FileInputStream(file);
              ServletOutputStream outputStream = response.getOutputStream()) {
@@ -136,29 +144,6 @@ public class IndexDownloadController extends BaseController{
         }
     }
 	
-    private void loadNavigation(ModelAndView mv,IRequest requestContext,String chanel  ) {
-  	  List<KgNewstype> kgNewstypeList = iKgNewstypeService.selectAll(requestContext);
-        List<KgNewsSource> KgNewsSourceList = iKgNewsSourceService.selectAll(requestContext);
-        
-        mv.addObject("kgNewstypeList", kgNewstypeList);
-        mv.addObject("KgNewsSourceList", KgNewsSourceList);
-        mv.addObject("chanel", chanel);
-        
-        List<KgConfig> kgConfigList= iKgConfigService.selectAll(requestContext);
-        for(KgConfig cf:kgConfigList) {
-      	  if(("copyright").equals(cf.getSyskey())) {
-      		  mv.addObject("copyright", cf.getSysvalue());continue;
-      	  }
-      	  if(("ICPlicense").equals(cf.getSyskey())) {
-      		  mv.addObject("ICPlicense", cf.getSysvalue());continue;
-      	  }
-      	  if(("keyword").equals(cf.getSyskey())) {
-      		  mv.addObject("keyword", cf.getSysvalue());continue;
-      	  }
-      	  if(("webdesc").equals(cf.getSyskey())) {
-      		  mv.addObject("webdesc", cf.getSysvalue());continue;
-      	  }
-        }
-  }
+
    
 }

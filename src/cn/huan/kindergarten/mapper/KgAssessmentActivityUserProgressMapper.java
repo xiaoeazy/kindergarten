@@ -11,4 +11,8 @@ public interface KgAssessmentActivityUserProgressMapper extends Mapper<KgAssessm
 	 public List<KgAssessmentActivityUserProgress> selectWithOtherInfo(KgAssessmentActivityUserProgress condition);
 	 
 	 public int adminQueryCount(KgAssessmentActivityUserProgress record);
+	 
+	 public int countLockTable();
+	 
+	 
 }

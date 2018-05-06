@@ -1,9 +1,11 @@
 package cn.huan.kindergarten.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileUploadException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ import com.huan.HTed.system.controllers.BaseController;
 
 import cn.huan.kindergarten.bean.FileInfo;
 import cn.huan.kindergarten.dto.KgAssessmentActivity;
+import cn.huan.kindergarten.dto.KgAssessmentActivityUserProgress;
+import cn.huan.kindergarten.dto.KgAssessmentActivityUserUpload;
 import cn.huan.kindergarten.dto.KgAssessmentType;
 import cn.huan.kindergarten.dto.KgConfig;
 import cn.huan.kindergarten.dto.KgNewsAttribute;
@@ -29,6 +33,7 @@ import cn.huan.kindergarten.dto.KgNewsSource;
 import cn.huan.kindergarten.dto.KgNewstype;
 import cn.huan.kindergarten.service.IIndexAssessmentService;
 import cn.huan.kindergarten.service.IKgAssessmentActivityService;
+import cn.huan.kindergarten.service.IKgAssessmentActivityUserUploadService;
 import cn.huan.kindergarten.service.IKgAssessmentTypeService;
 import cn.huan.kindergarten.service.IKgConfigService;
 import cn.huan.kindergarten.service.IKgNewsAttributeService;
@@ -36,20 +41,9 @@ import cn.huan.kindergarten.service.IKgNewsSourceService;
 import cn.huan.kindergarten.service.IKgNewstypeService;
 
 @Controller
-public class IndexAssessmentController extends BaseController{
-	public static final String  CH_INDEX = "CH_INDEX";//首页
-	public static final String  CH_XHJJ = "CH_XHJJ";//协会简介
-	public static final String  CH_ZXZX = "CH_ZXZX";//资讯中心
-	public static final String  CH_XHGZ = "CH_XHGZ";//协会工作
-	public static final String  CH_LXWM = "CH_LXWM";//联系我们
+public class IndexAssessmentController extends IndexBaseController{
 	public static final String  SUSPENSION_POINTS = "...";
 	
-    @Autowired
-    private IKgNewstypeService iKgNewstypeService;
-    @Autowired
-    private IKgNewsSourceService iKgNewsSourceService;
-    @Autowired
-    private IKgConfigService iKgConfigService;
     @Autowired
     private IKgAssessmentTypeService iKgAssessmentTypeService;
     @Autowired
@@ -58,6 +52,8 @@ public class IndexAssessmentController extends BaseController{
     private IKgNewsAttributeService iKgNewsAttributeService;
     @Autowired
     private IIndexAssessmentService iIndexAssessmentService;
+    @Autowired
+    private IKgAssessmentActivityUserUploadService iKgAssessmentActivityUserUploadService;
     //======================================评估========================================
     @RequestMapping(value = "/index/assessmentTypeList")
     @ResponseBody
@@ -113,7 +109,19 @@ public class IndexAssessmentController extends BaseController{
         requestKT.setId(kaa.getAssessmentTypeId());
         KgAssessmentType kgNewstype = iKgAssessmentTypeService.selectByPrimaryKey(requestContext, requestKT);
         
+        List<KgAssessmentActivityUserUpload> userUploadList = new ArrayList<KgAssessmentActivityUserUpload>();
+        HttpSession session = request.getSession(false);
+        if(session!=null) {
+        	  Long userid = (Long)session.getAttribute(IRequest.FIELD_USER_ID);
+              KgAssessmentActivityUserProgress userProgress = new KgAssessmentActivityUserProgress();
+              userProgress.setUploadUserId(userid);
+              userProgress.setAssessmentActivityId(id);
+              userUploadList.addAll(iKgAssessmentActivityUserUploadService.loadUserUploadList(requestContext,userProgress ));
+        }
+      
+        
         mv.addObject("assessmentType", kgNewstype);
+        mv.addObject("userUploadList",userUploadList);
         loadNavigation(mv, requestContext,CH_ZXZX);
         loadAttriteAssessment(mv, requestContext,3);
         return mv;
@@ -124,6 +132,10 @@ public class IndexAssessmentController extends BaseController{
     @ResponseBody
     public UploadImgAjax fileupload(HttpServletRequest request)
             throws StoragePathNotExsitException, UniqueFileMutiException, IOException, FileUploadException {
+    	 HttpSession session = request.getSession(false);
+         if(session==null) {
+        	 throw new FileUploadException("需要登陆");
+         }
     	IRequest requestContext = createRequestContext(request);
     	Long assessmentActivityId = Long.parseLong(request.getParameter("assessmentActivityId"));
     	if(assessmentActivityId==null)
@@ -136,30 +148,7 @@ public class IndexAssessmentController extends BaseController{
     
     
     //===================================other======================================
-    private void loadNavigation(ModelAndView mv,IRequest requestContext,String chanel  ) {
-    	  List<KgNewstype> kgNewstypeList = iKgNewstypeService.selectAll(requestContext);
-          List<KgNewsSource> KgNewsSourceList = iKgNewsSourceService.selectAll(requestContext);
-          
-          mv.addObject("kgNewstypeList", kgNewstypeList);
-          mv.addObject("KgNewsSourceList", KgNewsSourceList);
-          mv.addObject("chanel", chanel);
-          
-          List<KgConfig> kgConfigList= iKgConfigService.selectAll(requestContext);
-          for(KgConfig cf:kgConfigList) {
-        	  if(("copyright").equals(cf.getSyskey())) {
-        		  mv.addObject("copyright", cf.getSysvalue());continue;
-        	  }
-        	  if(("ICPlicense").equals(cf.getSyskey())) {
-        		  mv.addObject("ICPlicense", cf.getSysvalue());continue;
-        	  }
-        	  if(("keyword").equals(cf.getSyskey())) {
-        		  mv.addObject("keyword", cf.getSysvalue());continue;
-        	  }
-        	  if(("webdesc").equals(cf.getSyskey())) {
-        		  mv.addObject("webdesc", cf.getSysvalue());continue;
-        	  }
-          }
-    }
+   
 
  
     private void judgeTitleLength(List<KgAssessmentActivity> assessmentActivityList) {

@@ -46,7 +46,7 @@ CREATE TABLE `kg_assessment_activity` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_assessment_activity`
@@ -54,10 +54,17 @@ CREATE TABLE `kg_assessment_activity` (
 
 /*!40000 ALTER TABLE `kg_assessment_activity` DISABLE KEYS */;
 INSERT INTO `kg_assessment_activity` (`id`,`assessment_type_id`,`attributeId`,`assessment_activity_name`,`assessment_activity_content`,`createDate`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (3,16,'-1','111','<p>111</p>','2018-04-23 10:59:19',1,-1,-1,-1,'2018-04-23 10:59:19',-1,'2018-04-23 10:59:19',-1,'ID',NULL,NULL,NULL),
- (4,17,'-1','222','<p>222</p>','2018-04-23 10:59:24',1,-1,-1,-1,'2018-04-23 10:59:24',-1,'2018-04-23 10:59:24',-1,'ID',NULL,NULL,NULL),
- (5,16,'12','333','<p>333</p>','2018-04-23 10:59:29',3,-1,-1,-1,'2018-04-23 10:59:29',-1,'2018-04-28 15:51:05',-1,'ID',NULL,NULL,NULL),
- (6,16,'12,14','334','<p>4</p>','2018-04-28 15:51:30',2,-1,-1,-1,'2018-04-28 15:51:30',-1,'2018-04-28 16:10:24',-1,'ID',NULL,NULL,NULL);
+ (3,16,'','评估任务4','<p>111</p>','2018-04-23 10:59:19',2,-1,-1,-1,'2018-04-23 10:59:19',-1,'2018-05-06 13:57:37',-1,'ID',NULL,NULL,NULL),
+ (4,17,'','评估任务3','<p>222</p>','2018-04-23 10:59:24',2,-1,-1,-1,'2018-04-23 10:59:24',-1,'2018-05-06 13:57:32',-1,'ID',NULL,NULL,NULL),
+ (5,16,'','评估任务2','<p>333</p>','2018-04-23 10:59:29',4,-1,-1,-1,'2018-04-23 10:59:29',-1,'2018-05-06 13:57:27',-1,'ID',NULL,NULL,NULL),
+ (6,16,'','评估任务1','<p>4</p>','2018-04-28 15:51:30',3,-1,-1,-1,'2018-04-28 15:51:30',-1,'2018-05-06 13:57:22',-1,'ID',NULL,NULL,NULL),
+ (7,16,'12','评估任务5','<p>评估任务1</p>','2018-05-06 13:57:47',1,-1,-1,-1,'2018-05-06 13:57:47',-1,'2018-05-06 13:57:47',-1,'ID',NULL,NULL,NULL),
+ (8,16,'','评估任务6','<p>评估任务1</p>','2018-05-06 13:57:54',1,-1,-1,-1,'2018-05-06 13:57:54',-1,'2018-05-06 13:57:54',-1,'ID',NULL,NULL,NULL),
+ (9,16,'','评估任务7','<p>11</p>','2018-05-06 13:58:01',1,-1,-1,-1,'2018-05-06 13:58:01',-1,'2018-05-06 13:58:01',-1,'ID',NULL,NULL,NULL),
+ (10,16,'','评估任务8','<p>评估任务8</p>','2018-05-06 14:09:03',1,-1,-1,-1,'2018-05-06 14:09:03',-1,'2018-05-06 14:09:03',-1,'ID',NULL,NULL,NULL),
+ (11,16,'','评估任务9','<p>评估任务9</p>','2018-05-06 14:09:10',1,-1,-1,-1,'2018-05-06 14:09:10',-1,'2018-05-06 14:09:10',-1,'ID',NULL,NULL,NULL),
+ (12,16,'','评估任务10','<p>评估任务10</p>','2018-05-06 14:09:19',1,-1,-1,-1,'2018-05-06 14:09:19',-1,'2018-05-06 14:09:19',-1,'ID',NULL,NULL,NULL),
+ (13,16,'','评估任务11','<p>评估任务11</p>','2018-05-06 14:09:26',1,-1,-1,-1,'2018-05-06 14:09:26',-1,'2018-05-06 14:09:26',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_assessment_activity` ENABLE KEYS */;
 
 
@@ -86,8 +93,8 @@ CREATE TABLE `kg_assessment_activity_user_progress` (
   `EFFECTIVE_START_DATE` date DEFAULT NULL COMMENT '有效日期从',
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`,`assessment_activity_id`,`upload_user_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_assessment_activity_user_progress`
@@ -95,8 +102,7 @@ CREATE TABLE `kg_assessment_activity_user_progress` (
 
 /*!40000 ALTER TABLE `kg_assessment_activity_user_progress` DISABLE KEYS */;
 INSERT INTO `kg_assessment_activity_user_progress` (`id`,`assessment_activity_id`,`upload_user_id`,`admin_suggestion`,`expert_user_id`,`expert_suggestion`,`state`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (3,3,10013,NULL,NULL,NULL,NULL,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
- (4,3,10013,NULL,NULL,NULL,NULL,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL);
+ (12,3,10013,NULL,NULL,NULL,NULL,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_assessment_activity_user_progress` ENABLE KEYS */;
 
 
@@ -125,7 +131,7 @@ CREATE TABLE `kg_assessment_activity_user_upload` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_assessment_activity_user_upload`
@@ -133,8 +139,8 @@ CREATE TABLE `kg_assessment_activity_user_upload` (
 
 /*!40000 ALTER TABLE `kg_assessment_activity_user_upload` DISABLE KEYS */;
 INSERT INTO `kg_assessment_activity_user_upload` (`id`,`upload_user_id`,`progress_id`,`file_name`,`file_path`,`createDate`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (2,10013,3,'44 (2).jpg','/resources/upload/assessment/44 (2).jpg',NULL,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
- (3,10013,4,'44.jpg','/resources/upload/assessment/44.jpg',NULL,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL);
+ (15,10013,12,'44.jpg','/resources/upload/assessment/44.jpg',NULL,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
+ (16,10013,12,'none2.jpg','/resources/upload/assessment/none2.jpg',NULL,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_assessment_activity_user_upload` ENABLE KEYS */;
 
 
