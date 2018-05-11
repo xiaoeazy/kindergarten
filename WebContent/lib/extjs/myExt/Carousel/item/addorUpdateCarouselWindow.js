@@ -10,7 +10,6 @@ Ext.extend(addorUpdateCarousel.addorUpdateCarouselWindow, Ext.Window, {
 	initUIComponents : function() {
 		    var me  = this ; 
 		    
-		    
 	    	var mainId=me.mainId+"_Carouselwindow";
 	    	var type = me.type;
 	    	var record = me.record;
@@ -239,7 +238,7 @@ Ext.extend(addorUpdateCarousel.addorUpdateCarouselWindow, Ext.Window, {
 
 		
 		Ext.apply(this, {
-				title : text+'类型',
+				title : text+'轮播图',
 				layout:'fit',
 				items : [formpanel],
 				width : 650,
@@ -254,6 +253,7 @@ Ext.extend(addorUpdateCarousel.addorUpdateCarouselWindow, Ext.Window, {
 				listeners:{
 					show:function(){
 						if(record!=null){
+							
 				    		var filePath= record.get("filePath");
 				    		var webUrl= record.get("webUrl");
 				    		var activityId= record.get("activityId");

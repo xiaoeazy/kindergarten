@@ -80,7 +80,7 @@ CREATE TABLE `kg_assessment_activity_user_progress` (
   `admin_suggestion` text,
   `expert_user_id` bigint(20) unsigned DEFAULT NULL,
   `expert_suggestion` text,
-  `state` varchar(240) DEFAULT 'UPLOAD',
+  `state` varchar(20) NOT NULL DEFAULT 'UPLOAD',
   `OBJECT_VERSION_NUMBER` bigint(20) DEFAULT '1',
   `REQUEST_ID` bigint(20) DEFAULT '-1',
   `PROGRAM_ID` bigint(20) DEFAULT '-1',
@@ -93,7 +93,8 @@ CREATE TABLE `kg_assessment_activity_user_progress` (
   `EFFECTIVE_START_DATE` date DEFAULT NULL COMMENT '有效日期从',
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
-  PRIMARY KEY (`id`,`assessment_activity_id`,`upload_user_id`) USING BTREE
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `Index_2` (`assessment_activity_id`,`upload_user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
@@ -102,7 +103,7 @@ CREATE TABLE `kg_assessment_activity_user_progress` (
 
 /*!40000 ALTER TABLE `kg_assessment_activity_user_progress` DISABLE KEYS */;
 INSERT INTO `kg_assessment_activity_user_progress` (`id`,`assessment_activity_id`,`upload_user_id`,`admin_suggestion`,`expert_user_id`,`expert_suggestion`,`state`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (12,3,10013,NULL,NULL,NULL,NULL,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL);
+ (12,3,10013,'通过',10014,'通过a','EXPERTPASS',NULL,-1,-1,NULL,NULL,NULL,'2018-05-11 20:52:30',NULL,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_assessment_activity_user_progress` ENABLE KEYS */;
 
 
@@ -131,7 +132,7 @@ CREATE TABLE `kg_assessment_activity_user_upload` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_assessment_activity_user_upload`
@@ -140,7 +141,9 @@ CREATE TABLE `kg_assessment_activity_user_upload` (
 /*!40000 ALTER TABLE `kg_assessment_activity_user_upload` DISABLE KEYS */;
 INSERT INTO `kg_assessment_activity_user_upload` (`id`,`upload_user_id`,`progress_id`,`file_name`,`file_path`,`createDate`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
  (15,10013,12,'44.jpg','/resources/upload/assessment/44.jpg',NULL,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
- (16,10013,12,'none2.jpg','/resources/upload/assessment/none2.jpg',NULL,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL);
+ (16,10013,12,'none2.jpg','/resources/upload/assessment/none2.jpg',NULL,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
+ (17,10013,12,'44.jpg','/resources/upload/assessment/44.jpg',NULL,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
+ (18,10013,12,'44 (2).jpg','/resources/upload/assessment/44 (2).jpg',NULL,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_assessment_activity_user_upload` ENABLE KEYS */;
 
 
@@ -212,7 +215,7 @@ CREATE TABLE `kg_carousel` (
 
 /*!40000 ALTER TABLE `kg_carousel` DISABLE KEYS */;
 INSERT INTO `kg_carousel` (`id`,`file_path`,`sequence`,`urltype`,`web_url`,`activity_id`,`news_id`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (7,'/resources/upload/33.jpg',0,2,'',5,-1,2,-1,-1,-1,'2018-04-29 21:15:32',-1,'2018-04-29 21:54:39',-1,'ID',NULL,NULL,NULL),
+ (7,'/resources/upload/33.jpg',0,2,'',3,-1,6,-1,-1,-1,'2018-04-29 21:15:32',-1,'2018-05-10 20:22:14',-1,'ID',NULL,NULL,NULL),
  (9,'/resources/upload/44.jpg',3,0,'http://www.baidu.com',-1,-1,3,-1,-1,-1,'2018-04-29 21:28:27',-1,'2018-04-29 21:54:16',-1,'ID',NULL,NULL,NULL),
  (10,'/resources/upload/44.jpg',1,1,'',-1,24,4,-1,-1,-1,'2018-04-29 21:38:59',-1,'2018-04-29 21:54:48',-1,'ID',NULL,NULL,NULL),
  (14,'/resources/upload/carousel/121222.jpg',0,1,'',-1,23,1,-1,-1,-1,'2018-05-03 16:03:04',-1,'2018-05-03 16:03:04',-1,'ID',NULL,NULL,NULL),
@@ -752,7 +755,7 @@ CREATE TABLE `sys_user` (
 
 /*!40000 ALTER TABLE `sys_user` DISABLE KEYS */;
 INSERT INTO `sys_user` (`USER_ID`,`USER_TYPE`,`USER_NAME`,`PASSWORD_ENCRYPTED`,`EMAIL`,`PHONE`,`START_ACTIVE_DATE`,`END_ACTIVE_DATE`,`STATUS`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (10013,NULL,'admin','21232f297a57a5a743894a0e4a801fc3','','',NULL,NULL,NULL,1,-1,-1,-1,'2018-04-11 14:16:39',-1,'2018-04-11 14:16:39',-1,'ID',NULL,NULL,NULL),
+ (10013,NULL,'admin','202cb962ac59075b964b07152d234b70','','',NULL,NULL,NULL,2,-1,-1,-1,'2018-04-11 14:16:39',-1,'2018-05-11 21:33:33',-1,'ID',NULL,NULL,NULL),
  (10014,NULL,'hh','d41d8cd98f00b204e9800998ecf8427e','','',NULL,NULL,NULL,7,-1,-1,-1,'2018-04-12 13:38:12',-1,'2018-04-13 13:05:30',-1,'ID',NULL,NULL,NULL),
  (10032,NULL,'0','cfcd208495d565ef66e7dff9f98764da','','',NULL,NULL,NULL,1,-1,-1,-1,'2018-04-13 14:32:16',-1,'2018-04-13 14:32:16',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `sys_user` ENABLE KEYS */;
@@ -789,7 +792,7 @@ CREATE TABLE `sys_user_role` (
 
 /*!40000 ALTER TABLE `sys_user_role` DISABLE KEYS */;
 INSERT INTO `sys_user_role` (`SUR_ID`,`USER_ID`,`ROLE_ID`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (10001,10013,10003,1,-1,-1,-1,'2018-04-12 16:15:33',-1,'2018-04-12 16:15:33',-1,'ID',NULL,NULL,NULL),
+ (10001,10013,10003,1,-1,-1,-1,'2018-05-11 21:36:00',-1,'2018-05-11 21:36:00',-1,'ID',NULL,NULL,NULL),
  (10016,10014,10003,1,-1,-1,-1,'2018-04-13 13:05:30',-1,'2018-04-13 13:05:30',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `sys_user_role` ENABLE KEYS */;
 

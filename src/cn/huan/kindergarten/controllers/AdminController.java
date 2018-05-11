@@ -66,6 +66,7 @@ public class AdminController extends BaseController {
 		} else {
 			session = request.getSession();
 			session.setAttribute(IRequest.FIELD_USER_ID, user.getUserId());
+			session.setAttribute("userName", user.getUserName());
 			setRoleInfo(request, session, user);
 		}
 		return view;

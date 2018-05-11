@@ -28,16 +28,19 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements IUserServi
 		 
 		 UserRole dr = new UserRole(); //这里先删除原先的角色 在添加新的
 		 dr.setUserId(list.get(0).getUserId());
-		 List<UserRole> orignalRole = userRoleService.select(request, dr);
-		 for(UserRole ur :orignalRole) {
-			 ur.set__status(DTOStatus.DELETE);
+		 if(userRole!=null) {
+			 List<UserRole> orignalRole = userRoleService.select(request, dr);
+			 for(UserRole ur :orignalRole) {
+				 ur.set__status(DTOStatus.DELETE);
+			 }
+			 userRoleService.batchUpdate(request, orignalRole);
+		
+			 for(UserRole ur :userRole) {
+				 ur.setUserId(list.get(0).getUserId());
+				 ur.set__status(DTOStatus.ADD);
+			 }
+			 userRoleService.batchUpdate(request, userRole);
 		 }
-		 userRoleService.batchUpdate(request, orignalRole);
-		 for(UserRole ur :userRole) {
-			 ur.setUserId(list.get(0).getUserId());
-			 ur.set__status(DTOStatus.ADD);
-		 }
-		 userRoleService.batchUpdate(request, userRole);
 	}
 	
 	public void adminDelete(IRequest request ,List<User> list) {

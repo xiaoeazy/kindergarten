@@ -78,10 +78,12 @@
 	<script src="${base.contextPath}/lib/extjs/myExt/AssessmentType/item/addorUpdateAssessmentTypeWindow.js"></script>
 	<!-- 评估任务 -->
 	<script src="${base.contextPath}/lib/extjs/myExt/AssessmentActivity/AssessmentActivity.js"></script>
-	<script src="${base.contextPath}/lib/extjs/myExt/AssessmentActivity/item/addorUpdateAssessmentActivityWindow.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/AssessmentActivity/item/addorUpdateAdminAssessmentUserProcess.js"></script>
 	<!-- 评估用户任务 -->
 	<script src="${base.contextPath}/lib/extjs/myExt/AssessmentUserProcess/AssessmentUserProcess.js"></script>
-	<script src="${base.contextPath}/lib/extjs/myExt/AssessmentUserProcess/item/addorUpdateAssessmentUserProcessWindow.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/AssessmentUserProcess/item/addorUpdateAdminAssessmentUserProcess.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/AssessmentUserProcess/item/assessmentUserToExpert.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/AssessmentUserProcess/item/showAssessmentUserExpertSuggest.js"></script>
 	<!-- 轮播图 -->
 	<script src="${base.contextPath}/lib/extjs/myExt/Carousel/Carousel.js"></script>
 	<script src="${base.contextPath}/lib/extjs/myExt/Carousel/item/addorUpdateCarouselWindow.js"></script>
@@ -91,12 +93,8 @@
 	
 	
 		<script type="text/javascript">
-				var theLoginUserName;
-				var theLoginUserId;
-				function aa(){
-					theLoginUserId=document.getElementById("theLoginUserId").value;
-					theLoginUserName=document.getElementById("theLoginUserName").value;
-				} 
+				var theLoginUserName = ' ${Session["userName"]}';
+				var theLoginUserId = ' ${Session["userId"]}';
 			
 		</script>
 	
@@ -105,7 +103,6 @@
 
 
 <input type="hidden" id="theVersion" value="0.0.0" />
-<input type="hidden" id="theLoginUserId" value="admin" /> 
 <input type="hidden" id="theLoginUserName" value="admin" />  
 </body>
 </html>

@@ -170,7 +170,7 @@ Ext.extend(AssessmentUserProcess.AssessmentUserProcessPanel, Ext.Panel, {
 						if(records==-1)
 							return;
 						var record = records[0];
-						me.editAssessmentUserProcess(record,store,mainId);
+						me.editAdminAssessmentUserProcess(record,store,mainId);
 					}
 				},'-',{
 					icon : _basePath+'/resources/images/icon/cancel.png',
@@ -179,7 +179,7 @@ Ext.extend(AssessmentUserProcess.AssessmentUserProcessPanel, Ext.Panel, {
 						var records=getDeleteRecords(grid);
 						if(records==-1)
 							return;
-						me.deleteAssessmentUserProcess(records,store,mainId);
+						me.assessmentUserToExpert(records,store,mainId);
 					}
 				},'-',{
 					icon : _basePath+'/resources/images/icon/cancel.png',
@@ -188,7 +188,8 @@ Ext.extend(AssessmentUserProcess.AssessmentUserProcessPanel, Ext.Panel, {
 						var records=getDeleteRecords(grid);
 						if(records==-1)
 							return;
-						me.deleteAssessmentUserProcess(records,store,mainId);
+						var record = records[0];
+						me.showAssessmentUserExpertSuggest(record,store,mainId);
 					}
 				}],
 	        columns: [
@@ -220,18 +221,8 @@ Ext.extend(AssessmentUserProcess.AssessmentUserProcessPanel, Ext.Panel, {
 		 });
 	},
 
-	addAssessmentUserProcess:function(store,mainId){
-		var win = new addorUpdateAssessmentUserProcess.addorUpdateAssessmentUserProcessWindow ({
-			mainId:mainId,
-			type:'add',
-			record:null,
-			parentStore:store
-		});
-		win.show();
-	},
-	editAssessmentUserProcess:function(record,store,mainId){
-		var id = record.get("id");
-		var win = new addorUpdateAssessmentUserProcess.addorUpdateAssessmentUserProcessWindow ({
+	editAdminAssessmentUserProcess:function(records,store,mainId){
+		var win = new addorUpdateAdminAssessmentUserProcess.addorUpdateAdminAssessmentUserProcessWindow ({
 			mainId:mainId,
 			type:'update',
 			record:record,
@@ -239,34 +230,26 @@ Ext.extend(AssessmentUserProcess.AssessmentUserProcessPanel, Ext.Panel, {
 		});
 		win.show();
 	},
-	deleteAssessmentUserProcess:function(records,store,mainId){
-		  Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
-		  var linkobj = [];
-		  for(var i=0;i<records.length;i++){
-			  var record = records[i];
-			  var id = record.get("id");
-			  linkobj.push({"id":id});
-		  }
-		  Ext.Ajax.request({
-			url : appName + '/admin/assessment/activity/remove',
-            method : 'post',
-            headers: {'Content-Type':'application/json'},
-            params : JSON.stringify(linkobj),
-            success : function(response, options) {
-          	  Ext.getBody().unmask();
-          	  var responseArray = Ext.util.JSON.decode(response.responseText);
-                if (responseArray.success == true) {
-              	    ExtAlert("成功");
-              	    store.reload();
-                  }else{
-                  	ExtError(responseArray.message);
-                  }
-            },
-			failure : function() {
-				Ext.getBody().unmask();
-				ExtError();
-			}
-      });
+	
+	assessmentUserToExpert:function(records,store,mainId){
+		var win = new assessmentUserToExpert.assessmentUserToExpertWindow ({
+			mainId:mainId,
+			type:'update',
+			records:records,
+			parentStore:store
+		});
+		win.show();
+	},
+	showAssessmentUserExpertSuggest:function(record,store,mainId){
+		var win = new showAssessmentUserExpertSuggest.showAssessmentUserExpertSuggestWindow ({
+			mainId:mainId,
+			type:'update',
+			record:record,
+			parentStore:store
+		});
+		win.show();
 	}
+	
+
 });
 
