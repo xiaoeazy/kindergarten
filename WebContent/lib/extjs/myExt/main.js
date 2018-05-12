@@ -100,8 +100,8 @@ function getManager() {
 	str +=addFunc('assessmentUserProgress1.png','assessmentUserProgress2.png','assessmentUserProgress');
 	
 	str +=addFunc('download1.png','download2.png','download');
+	str +=addFunc('news1.png','news2.png','news');
 	
-	str +=addFunc('config1.png','config2.png','config');
 	
 	str += '</table></div>';
 	return str;
@@ -109,7 +109,7 @@ function getManager() {
 
 function getNews(){
 	var str = "";
-	str +=addFunc('news1.png','news2.png','news');
+
 	str +=addFunc('type1.png','type2.png','newsType');
 	str +=addFunc('source1.png','source2.png','newsSource');
 	

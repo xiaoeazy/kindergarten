@@ -36,6 +36,11 @@ public class User extends BaseDTO {
      @NotEmpty
      @Length(max = 40)
      private String userName; //用户名
+     
+     @NotEmpty
+     @Length(max = 40)
+     private String realName; //用户名
+     
 
      @Length(max = 80)
      private String passwordEncrypted; //加密过的密码
@@ -137,4 +142,13 @@ public class User extends BaseDTO {
          return status;
      }
 
+	public String getRealName() {
+		return realName;
+	}
+
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
+
+     
      }

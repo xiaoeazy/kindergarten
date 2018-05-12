@@ -55,6 +55,8 @@ Ext.extend(uploadImageBase.uploadImageBaseWin, Ext.Window, {
 		            	var url = appName+"/sys/config/upload?type="+type;
 		            	if(type=="download")
 		            		url=  appName+"/sys/config/file/upload?type="+type;
+		            	if(type=="logo"||type =="ico")
+		            		url=  appName+"/sys/config/uploadImagePath?type="+type;
 		                fp.getForm().submit({
 		                    url: url,
 		                    waitMsg: '文件上传中,请耐心等待......',

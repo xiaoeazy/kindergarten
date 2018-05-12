@@ -149,15 +149,6 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 									var win = new uploadImageBase.uploadImageBaseWin({the_hidden_image_url:mainId+"webLogo",the_image_show:mainId+"showWebLogoPict",type:'logo'});
 									win.show();
 								}
-						 	},{
-								xtype : 'button',
-								width : 150,
-								style : 'margin-left:10px',
-								text : '撤销图片',
-								handler:function(){
-									Ext.getCmp(mainId+"webLogo").setValue("");
-						    		Ext.getCmp(mainId+"showWebLogoPict").getEl().dom.src=nonePic;
-								}
 						 	},{ 
 				             	id:mainId+"webLogo",
 				                xtype:"textfield",  
@@ -191,15 +182,6 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 								handler:function(){
 									var win = new uploadImageBase.uploadImageBaseWin({the_hidden_image_url:mainId+"webIco",the_image_show:mainId+"showWebIcoPict",type:'ico'});
 									win.show();
-								}
-						 	},{
-								xtype : 'button',
-								width : 150,
-								style : 'margin-left:10px',
-								text : '撤销图片',
-								handler:function(){
-									Ext.getCmp(mainId+"webIco").setValue("");
-						    		Ext.getCmp(mainId+"showWebIcoPict").getEl().dom.src=nonePic;
 								}
 						 	},{ 
 				             	id:mainId+"webIco",

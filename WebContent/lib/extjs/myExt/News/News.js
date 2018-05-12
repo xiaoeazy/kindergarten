@@ -26,7 +26,7 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
 	    fields: ['id', 'typename'],
 	    listeners:{
 	    	'load': function(store, records, options) {
-	    		 store.insert(0,{id:'-1',typename:'请选择'});
+	    		 store.insert(0,{id:'-1',typename:'所有'});
 	    	}
 	    }
 	});
@@ -164,7 +164,7 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
 				}],
 	        columns: [
 	            {header: "咨讯名称",  width:50,sortable: true,  dataIndex: 'newstitle',align:'center'},
-	            {header: "咨讯类别",  width:50,sortable: true,  dataIndex: 'kgNewstype.typename',align:'center'},
+	            {header: "咨讯类别",  width:50,sortable: true,  dataIndex: 'kgNewstype',align:'center',renderer:me.typeNameRander},
 	            {header: "咨讯简介",  sortable: true,  dataIndex: 'summary',align:'center'}
 	        ],
 	        width:'100%',
@@ -187,7 +187,9 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
 			}
 		 });
 	},
-
+	typeNameRander:function(value){
+		return value.typename;
+	},
 	addNews:function(store,mainId){
 		var win = new addorUpdateNews.addorUpdateNewsWindow ({
 			mainId:mainId,

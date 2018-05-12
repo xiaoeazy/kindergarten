@@ -89,10 +89,10 @@ Ext.extend(showAssessmentUserExpertSuggest.showAssessmentUserExpertSuggestWindow
 						if(record!=null){
 				    		var expertSuggestion= record.get("expertSuggestion");
 				    		var state = record.get("state");
-				    		if(state =="EXPERTPASS"){
+				    		if(state =="50"){
 				    			rg.setValue({pass: "Y"});
 				    		}
-				    		if(state =="EXPERTFAILED"){
+				    		if(state =="60"){
 				    			rg.setValue({pass: "N"});
 				    		}
 				    		if(expertSuggestion!=null&&expertSuggestion!="")

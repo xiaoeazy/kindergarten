@@ -24,7 +24,12 @@ Ext.extend(AssessmentUserProcess.AssessmentUserProcessPanel, Ext.Panel, {
 	        }
 	    },
 	    autoLoad : true,
-	    fields: ['id', 'assessmentActivityName']
+	    fields: ['id', 'assessmentActivityName'],
+	    listeners:{
+        	'load': function(store, records, options) {
+        		assessmentActivity_Combo_Store.insert(0,{id:'-1',assessmentActivityName:'所有'});
+	    	}
+        }
 	});
 	
    var assessmentActivityCombo = new Ext.form.ComboBox({
@@ -63,21 +68,26 @@ Ext.extend(AssessmentUserProcess.AssessmentUserProcessPanel, Ext.Panel, {
 	        }
 	    },
 	    autoLoad : true,
-	    fields: ['userName']
+	    fields: ['userName','realName'],
+	    listeners:{
+        	'load': function(store, records, options) {
+        		user_Combo_Store.insert(0,{userName:'-1',realName:'所有'});
+	    	}
+        }
 	});
 	
    var uploadUserCombo = new Ext.form.ComboBox({
 	   		fieldLabel:'上传用户',
     	    id:mainId+"uploadUserId",
             store : user_Combo_Store,  
-            valueField : "id",  
+            valueField : "userName",  
             mode : 'remote',  
-            displayField : "userName",  
+            displayField : "realName",  
             forceSelection : true,  
             emptyText : '请选择',  
             editable : false,  
             triggerAction : 'all',  
-            hiddenName : "userName",  
+            hiddenName : "realName",  
             autoShow : true,  
             selectOnFocus : true,  
             name : "uploadUserId",
@@ -193,12 +203,11 @@ Ext.extend(AssessmentUserProcess.AssessmentUserProcessPanel, Ext.Panel, {
 					}
 				}],
 	        columns: [
-	            {header: "评估任务名称",  width:50,sortable: true,  dataIndex: 'AssessmentUserProcessName',align:'center'},
+	            {header: "评估任务名称",  width:50,sortable: true,  dataIndex: 'kgAssessmentActivity',align:'center',renderer:me.assessmentNameRender},
 	            {header: "上传用户",  width:50,sortable: true,  dataIndex: 'uploadUserId',align:'center'},
 	            {header: "管理员建议",  width:50,sortable: true,  dataIndex: 'adminSuggestion',align:'center'},
 	            {header: "专家用户",  width:50,sortable: true,  dataIndex: 'expertUserId',align:'center'},
-	            {header: "状态",  width:50,sortable: true,  dataIndex: 'state',align:'center'},
-	            {header: "操作",  width:50,sortable: true, align:'center'}
+	            {header: "状态",  width:50,sortable: true,  dataIndex: 'state',align:'center',renderer:me.stateRender}
 	        ],
 	        width:'100%',
 	        autoExpandColumn: 'AssessmentUserProcessName',
@@ -220,27 +229,69 @@ Ext.extend(AssessmentUserProcess.AssessmentUserProcessPanel, Ext.Panel, {
 			}
 		 });
 	},
-
-	editAdminAssessmentUserProcess:function(records,store,mainId){
-		var win = new addorUpdateAdminAssessmentUserProcess.addorUpdateAdminAssessmentUserProcessWindow ({
-			mainId:mainId,
-			type:'update',
-			record:record,
-			parentStore:store
-		});
+	assessmentNameRender:function(value){
+		return value.assessmentActivityName;
+	},
+	stateRender:function(value){
+		if(value==10){
+			return "已上传";
+		}else if(value==20){
+			return "管理员通过";
+		}else if(value==30){
+			return "管理员未通过";
+		}else if(value==40){
+			return "已转移专家";
+		}else if(value==50){
+			return "专家通过";
+		}else if(value==50){
+			return "专家未通过";
+		}
+	},
+	editAdminAssessmentUserProcess:function(record,store,mainId){
+		var state = record.get("state");
+		if(state<50){
+			var win = new addorUpdateAdminAssessmentUserProcess.addorUpdateAdminAssessmentUserProcessWindow ({
+				mainId:mainId,
+				type:'update',
+				record:record,
+				parentStore:store
+			});
+		}else{
+			ExtError("专家已经评论 ，管理员不能再评论");
+		}
 		win.show();
 	},
 	
 	assessmentUserToExpert:function(records,store,mainId){
-		var win = new assessmentUserToExpert.assessmentUserToExpertWindow ({
-			mainId:mainId,
-			type:'update',
-			records:records,
-			parentStore:store
-		});
+		var toContinue=true;
+		for(var i=0;i<records.length;i++){
+			var state = records[i].get("state");
+			var assessmentActivityName = records[i].get("kgAssessmentActivity").assessmentActivityName;
+			if(state>=40){
+				ExtError("评估任务 ："+assessmentActivityName +" ，已经推送了专家!");
+				toContinue=false;
+			}
+			if(state ==30){
+				ExtError("评估任务 ："+assessmentActivityName +" ，未通过管理员!");
+				toContinue=false;
+			}
+		}
+		if(toContinue){
+			var win = new assessmentUserToExpert.assessmentUserToExpertWindow ({
+				mainId:mainId,
+				type:'update',
+				records:records,
+				parentStore:store
+			});
+		}
 		win.show();
 	},
 	showAssessmentUserExpertSuggest:function(record,store,mainId){
+		var state = record.get("state");
+		if(state<40){
+			ExtError("请先移送指定专家!");
+			return;
+		}
 		var win = new showAssessmentUserExpertSuggest.showAssessmentUserExpertSuggestWindow ({
 			mainId:mainId,
 			type:'update',

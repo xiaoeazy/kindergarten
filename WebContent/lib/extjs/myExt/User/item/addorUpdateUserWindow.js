@@ -48,6 +48,13 @@ Ext.extend(addorUpdateUser.addorUpdateUserWindow, Ext.Window, {
 								id:mainId+"userName",
 					            maxLength:40  
 				  			},{
+				          		fieldLabel:'真实姓名',
+								allowBlank:false,
+								name: 'realName',
+								blankText:'姓名',
+								id:mainId+"realName",
+					            maxLength:40  
+				  			},{
 				          		fieldLabel:'密码',
 //								allowBlank:false,
 								name: 'password',
@@ -158,6 +165,7 @@ Ext.extend(addorUpdateUser.addorUpdateUserWindow, Ext.Window, {
 
 //==============tabs========================================================
     	var UserTabs = new Ext.TabPanel({
+    		deferredRender:false,
 			enableTabScroll : true,
 			border : false,
 			activeTab : 0,
@@ -213,11 +221,14 @@ Ext.extend(addorUpdateUser.addorUpdateUserWindow, Ext.Window, {
 					show:function(){
 						if(record!=null){
 				    		var userName= record.get("userName");
+				    		var realName = record.get("realName");
 				    		var email= record.get("email");
 				    		var phone= record.get("phone");
 				    		
 				    		Ext.getCmp(mainId+"userName").setValue(userName);
 				    		Ext.getCmp(mainId+"userName").setDisabled(true);
+				    		
+				    		Ext.getCmp(mainId+"realName").setValue(realName);
 				    		Ext.getCmp(mainId+"email").setValue(email);
 				    		Ext.getCmp(mainId+"phone").setValue(phone);
 				    		
@@ -240,6 +251,7 @@ Ext.extend(addorUpdateUser.addorUpdateUserWindow, Ext.Window, {
              })
          });  
 		var userName =Ext.getCmp(mainId+"userName").getValue().trim();
+		var realName = Ext.getCmp(mainId+"realName").getValue().trim();
 		var password =Ext.getCmp(mainId+"password").getValue();
 		var confirmPassword = Ext.getCmp(mainId+"confirmPassword").getValue();
 		var email = Ext.getCmp(mainId+"email").getValue();
@@ -264,6 +276,7 @@ Ext.extend(addorUpdateUser.addorUpdateUserWindow, Ext.Window, {
           	  __status : type,
         	  userId:id,
         	  userName:userName,
+        	  realName:realName,
         	  passwordEncrypted:password,
         	  email:email,
         	  phone : phone

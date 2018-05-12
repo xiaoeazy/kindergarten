@@ -73,6 +73,7 @@ Ext.extend(User.UserPanel, Ext.Panel, {
 				}],
 	        columns: [
 	            {header: "用户名",  width:50,sortable: true,  dataIndex: 'userName',align:'center'},
+	            {header: "真实姓名",  width:50,sortable: true,  dataIndex: 'realName',align:'center'},
 	            {header: "email",  width:50,sortable: true,  dataIndex: 'email',align:'center'},
 	            {header: "电话号码",  sortable: true,  dataIndex: 'phone',align:'center'}
 	        ],

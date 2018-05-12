@@ -43,13 +43,13 @@ Ext.extend(addorUpdateLink.addorUpdateLinkWindow, Ext.Window, {
 								name: 'linkName',
 								blankText:'必须填写',
 								id:mainId+"linkName",
-					            maxLength:20  
+					            maxLength:45  
 				  			},{
 				          		fieldLabel:'网址地址',
 								allowBlank:true,
 								name: 'linkUrl',
 								id:mainId+"linkUrl",
-					            maxLength:20  
+					            maxLength:200  
 				  			}
 				  			],
 				  buttonAlign : "center",

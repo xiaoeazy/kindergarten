@@ -37,7 +37,12 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 			        }
 			    },
 			    autoLoad : true,
-			    fields: ['id', 'assessmentTypeName']
+			    fields: ['id', 'assessmentTypeName'],
+			    listeners:{
+			    	'load': function(store, records, options) {
+			    		 store.insert(0,{id:'-1',assessmentTypeName:'请选择'});
+			    	}
+			    }
 			});
 	    	
 	       var typeCombo = new Ext.form.ComboBox({
@@ -229,9 +234,9 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 		  for (var i = 0; i < store.getCount(); i++) {
 			  var record = store.getAt(i);
 			  var id = record.get("id");
-			  var index = attributeArray.indexOf(id);
+			  var inarray = attributeArray.in_array(id);
 			  var checked = true;
-			  if(index<0){
+			  if(!inarray){
 				  checked = false;
 			  }
 			  var checkbox = new Ext.form.Checkbox(

@@ -24,7 +24,12 @@ Ext.extend(AssessmentActivity.AssessmentActivityPanel, Ext.Panel, {
 	        }
 	    },
 	    autoLoad : true,
-	    fields: ['id', 'assessmentTypeName']
+	    fields: ['id', 'assessmentTypeName'],
+        listeners:{
+        	'load': function(store, records, options) {
+	    		 store.insert(0,{id:'-1',assessmentTypeName:'所有'});
+	    	}
+        }
 	});
 	
    var typeCombo = new Ext.form.ComboBox({
@@ -41,13 +46,7 @@ Ext.extend(AssessmentActivity.AssessmentActivityPanel, Ext.Panel, {
             hiddenName : "assessmentTypeName",  
             autoShow : true,  
             selectOnFocus : true,  
-            name : "assessmentTypeId",
-            listeners:{
-            	afterrender:function(comb){
-            	},
-            	select:function(combo, record, index){
-            	}
-            }
+            name : "assessmentTypeId"
         }); 
 	
 	var formpanel = new Ext.FormPanel({
@@ -78,6 +77,9 @@ Ext.extend(AssessmentActivity.AssessmentActivityPanel, Ext.Panel, {
 				handler : function(button, event) {
 					var assessmentActivityName = Ext.getCmp(mainId+"assessmentActivityName").getValue().trim();
 					var assessmentTypeId 	  = Ext.getCmp(mainId+"assessmentTypeId").getValue();
+					if(assessmentTypeId==-1){
+						assessmentTypeId = null;
+					}
 					store.proxy.url = appName+ '/admin/assessment/activity/query';
 					store.proxy.extraParams={
 							page:1,
@@ -157,7 +159,7 @@ Ext.extend(AssessmentActivity.AssessmentActivityPanel, Ext.Panel, {
 				}],
 	        columns: [
 	            {header: "评估任务名称",  width:50,sortable: true,  dataIndex: 'assessmentActivityName',align:'center'},
-	            {header: "咨讯类别",  width:50,sortable: true,  dataIndex: 'kgNewstype.typename',align:'center'}
+	            {header: "咨讯类别",  width:50,sortable: true,  dataIndex: 'kgAssessmentType',align:'center',renderer:me.showType}
 	        ],
 	        width:'100%',
 	        autoExpandColumn: 'assessmentActivityName',
@@ -180,6 +182,9 @@ Ext.extend(AssessmentActivity.AssessmentActivityPanel, Ext.Panel, {
 		 });
 	},
 
+	showType:function(value){
+		return value.assessmentTypeName;
+	},
 	addAssessmentActivity:function(store,mainId){
 		var win = new addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow ({
 			mainId:mainId,

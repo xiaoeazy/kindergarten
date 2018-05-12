@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.huan.HTed.account.bean.UserAndRoleContext;
 import com.huan.HTed.account.dto.Role;
+import com.huan.HTed.account.dto.User;
 import com.huan.HTed.account.dto.UserRole;
 import com.huan.HTed.account.service.IRoleService;
 import com.huan.HTed.core.IRequest;
@@ -22,6 +25,7 @@ import com.huan.HTed.system.dto.ResponseData;
 
 import cn.huan.kindergarten.bean.ExtAjax;
 import cn.huan.kindergarten.bean.ExtStore;
+import cn.huan.kindergarten.dto.RoleFunc;
 
     @Controller
     public class RoleController extends BaseController{
@@ -102,10 +106,11 @@ import cn.huan.kindergarten.bean.ExtStore;
 
     @RequestMapping(value = "/admin/role/submit")
     @ResponseBody
-	public ExtAjax adminUpdate(@RequestBody List<Role> dto, BindingResult result, HttpServletRequest request){
-		
-    	 IRequest requestCtx = createRequestContext(request);
-         List<Role> list = service.batchUpdate(requestCtx, dto);
+	public ExtAjax adminUpdate(@RequestBody UserAndRoleContext userAndRoleContext, BindingResult result, HttpServletRequest request){
+    	 IRequest requestContext = createRequestContext(request);
+         Role role = userAndRoleContext.getRole();
+    	 List<RoleFunc>  roleFuncList = userAndRoleContext.getRoleFuncList();
+		 service.adminUpdate(requestContext, role, roleFuncList);
          return new ExtAjax(true, null);
     }
 

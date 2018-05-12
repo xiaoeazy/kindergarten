@@ -78,7 +78,7 @@
 	<script src="${base.contextPath}/lib/extjs/myExt/AssessmentType/item/addorUpdateAssessmentTypeWindow.js"></script>
 	<!-- 评估任务 -->
 	<script src="${base.contextPath}/lib/extjs/myExt/AssessmentActivity/AssessmentActivity.js"></script>
-	<script src="${base.contextPath}/lib/extjs/myExt/AssessmentActivity/item/addorUpdateAdminAssessmentUserProcess.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/AssessmentActivity/item/addorUpdateAssessmentActivityWindow.js"></script>
 	<!-- 评估用户任务 -->
 	<script src="${base.contextPath}/lib/extjs/myExt/AssessmentUserProcess/AssessmentUserProcess.js"></script>
 	<script src="${base.contextPath}/lib/extjs/myExt/AssessmentUserProcess/item/addorUpdateAdminAssessmentUserProcess.js"></script>
@@ -93,6 +93,14 @@
 	
 	
 		<script type="text/javascript">
+				Array.prototype.in_array = function (element) { 
+				　　for (var i = 0; i < this.length; i++) { 
+				　　if (this[i] == element) { 
+				　　			return true; 
+				   	} 
+				   } 
+					return false; 
+				} 
 				var theLoginUserName = ' ${Session["userName"]}';
 				var theLoginUserId = ' ${Session["userId"]}';
 			

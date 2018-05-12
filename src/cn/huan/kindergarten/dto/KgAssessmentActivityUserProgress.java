@@ -39,7 +39,7 @@ public class KgAssessmentActivityUserProgress extends BaseDTO {
      private String expertSuggestion;
 
      @Length(max = 240)
-     private String state;
+     private Integer state;
      
      @Transient
      private KgAssessmentActivity kgAssessmentActivity;
@@ -102,11 +102,11 @@ public class KgAssessmentActivityUserProgress extends BaseDTO {
          return expertSuggestion;
      }
 
-     public void setState(String state){
+     public void setState(Integer state){
          this.state = state;
      }
 
-     public String getState(){
+     public Integer getState(){
          return state;
      }
 

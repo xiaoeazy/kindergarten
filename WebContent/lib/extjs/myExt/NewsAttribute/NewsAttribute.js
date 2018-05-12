@@ -64,16 +64,18 @@ Ext.extend(NewsAttribute.NewsAttributePanel, Ext.Panel, {
 						var record = records[0];
 						me.editNewsAttribute(record,store,mainId);
 					}
-				},'-',{
-					icon : _basePath+'/resources/images/icon/cancel.png',
-					text : '删除属性',
-					handler : function() {
-						var records=getDeleteRecords(grid);
-						if(records==-1)
-							return;
-						me.deleteNewsAttribute(records,store,mainId);
-					}
-				}],
+				}
+//				,'-',{
+//					icon : _basePath+'/resources/images/icon/cancel.png',
+//					text : '删除属性',
+//					handler : function() {
+//						var records=getDeleteRecords(grid);
+//						if(records==-1)
+//							return;
+//						me.deleteNewsAttribute(records,store,mainId);
+//					}
+//				}
+				],
 	        columns: [
 	            {header: "属性名称",  sortable: true,  dataIndex: 'attributename',align:'center'}
 	            

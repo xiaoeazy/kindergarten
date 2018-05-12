@@ -38,7 +38,7 @@ Ext.extend(addorUpdateCarousel.addorUpdateCarouselWindow, Ext.Window, {
 			    fields: ['id', 'assessmentActivityName'],
 			    listeners:{
 			    	'load': function(store, records, options) {
-			    		 store.insert(0,{id:'-1',assessmentActivityName:'请选择'});
+			    		 store.insert(0,{id:'-1',assessmentActivityName:'所有'});
 			    	}
 			    }
 			});
@@ -83,7 +83,7 @@ Ext.extend(addorUpdateCarousel.addorUpdateCarouselWindow, Ext.Window, {
 			    fields: ['id', 'newstitle'],
 			    listeners:{
 			    	'load': function(store, records, options) {
-			    		 store.insert(0,{id:'-1',newstitle:'请选择'});
+			    		 store.insert(0,{id:'-1',newstitle:'所有'});
 			    	}
 			    }
 			});
@@ -195,7 +195,6 @@ Ext.extend(addorUpdateCarousel.addorUpdateCarouselWindow, Ext.Window, {
 	                                  }
 	                              }
 			                },
-				  			
 				  			{
 				          		fieldLabel:'关联网址',
 								name: 'webUrl',
@@ -253,7 +252,6 @@ Ext.extend(addorUpdateCarousel.addorUpdateCarouselWindow, Ext.Window, {
 				listeners:{
 					show:function(){
 						if(record!=null){
-							
 				    		var filePath= record.get("filePath");
 				    		var webUrl= record.get("webUrl");
 				    		var activityId= record.get("activityId");
@@ -289,20 +287,22 @@ Ext.extend(addorUpdateCarousel.addorUpdateCarouselWindow, Ext.Window, {
 	},
 	inputValueToSet:function(me,mainId,inputValue,newsCombo,assessmentCombo){
 		 if(inputValue==0){
+			 	me.emptyItem(mainId,newsCombo,assessmentCombo);
 			    Ext.getCmp(mainId+"webUrl").enable();
 			    newsCombo.disable();
     			assessmentCombo.disable();
-    			me.emptyItem(mainId,newsCombo,assessmentCombo);
+    			
 		   }else if(inputValue==1){
+			    me.emptyItem(mainId,newsCombo,assessmentCombo);
 			    Ext.getCmp(mainId+"webUrl").disable();
 				newsCombo.enable();
     			assessmentCombo.disable();
-    			me.emptyItem(mainId,newsCombo,assessmentCombo);
+    			
 		   }else{
+			    me.emptyItem(mainId,newsCombo,assessmentCombo);
 				Ext.getCmp(mainId+"webUrl").disable();
 				newsCombo.disable();
     			assessmentCombo.enable();
-    			me.emptyItem(mainId,newsCombo,assessmentCombo);
 		   }
 	},
 	emptyItem :function (mainId,newsCombo,assessmentCombo){
@@ -321,7 +321,6 @@ Ext.extend(addorUpdateCarousel.addorUpdateCarouselWindow, Ext.Window, {
 		var webUrl = Ext.getCmp(mainId+"webUrl").getValue();
 		var activityId = Ext.getCmp(mainId+"activityId").getValue();
 		var newsId = Ext.getCmp(mainId+"newsId").getValue();
-		
 		 var obj = Ext.getCmp(mainId+'activeds').items.items;
          for(var i in obj){
 	    		   if(obj[i].checked){

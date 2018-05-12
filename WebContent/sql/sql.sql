@@ -46,7 +46,7 @@ CREATE TABLE `kg_assessment_activity` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_assessment_activity`
@@ -64,7 +64,9 @@ INSERT INTO `kg_assessment_activity` (`id`,`assessment_type_id`,`attributeId`,`a
  (10,16,'','评估任务8','<p>评估任务8</p>','2018-05-06 14:09:03',1,-1,-1,-1,'2018-05-06 14:09:03',-1,'2018-05-06 14:09:03',-1,'ID',NULL,NULL,NULL),
  (11,16,'','评估任务9','<p>评估任务9</p>','2018-05-06 14:09:10',1,-1,-1,-1,'2018-05-06 14:09:10',-1,'2018-05-06 14:09:10',-1,'ID',NULL,NULL,NULL),
  (12,16,'','评估任务10','<p>评估任务10</p>','2018-05-06 14:09:19',1,-1,-1,-1,'2018-05-06 14:09:19',-1,'2018-05-06 14:09:19',-1,'ID',NULL,NULL,NULL),
- (13,16,'','评估任务11','<p>评估任务11</p>','2018-05-06 14:09:26',1,-1,-1,-1,'2018-05-06 14:09:26',-1,'2018-05-06 14:09:26',-1,'ID',NULL,NULL,NULL);
+ (13,16,'','评估任务11','<p>评估任务11</p>','2018-05-06 14:09:26',1,-1,-1,-1,'2018-05-06 14:09:26',-1,'2018-05-06 14:09:26',-1,'ID',NULL,NULL,NULL),
+ (14,16,'12,14','评估12','<p>13</p>','2018-05-12 09:42:43',3,-1,-1,-1,'2018-05-12 09:42:43',-1,'2018-05-12 09:44:22',-1,'ID',NULL,NULL,NULL),
+ (15,16,'14,15','13','<p>13<br/></p>','2018-05-12 09:44:32',5,-1,-1,-1,'2018-05-12 09:44:32',-1,'2018-05-12 09:57:22',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_assessment_activity` ENABLE KEYS */;
 
 
@@ -103,7 +105,7 @@ CREATE TABLE `kg_assessment_activity_user_progress` (
 
 /*!40000 ALTER TABLE `kg_assessment_activity_user_progress` DISABLE KEYS */;
 INSERT INTO `kg_assessment_activity_user_progress` (`id`,`assessment_activity_id`,`upload_user_id`,`admin_suggestion`,`expert_user_id`,`expert_suggestion`,`state`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (12,3,10013,'通过',10014,'通过a','EXPERTPASS',NULL,-1,-1,NULL,NULL,NULL,'2018-05-11 20:52:30',NULL,'ID',NULL,NULL,NULL);
+ (12,3,10013,'管理员通过',10032,'','40',NULL,-1,-1,NULL,NULL,NULL,'2018-05-12 11:44:47',NULL,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_assessment_activity_user_progress` ENABLE KEYS */;
 
 
@@ -215,7 +217,7 @@ CREATE TABLE `kg_carousel` (
 
 /*!40000 ALTER TABLE `kg_carousel` DISABLE KEYS */;
 INSERT INTO `kg_carousel` (`id`,`file_path`,`sequence`,`urltype`,`web_url`,`activity_id`,`news_id`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (7,'/resources/upload/33.jpg',0,2,'',3,-1,6,-1,-1,-1,'2018-04-29 21:15:32',-1,'2018-05-10 20:22:14',-1,'ID',NULL,NULL,NULL),
+ (7,'/resources/upload/33.jpg',0,2,'',4,-1,7,-1,-1,-1,'2018-04-29 21:15:32',-1,'2018-05-12 20:48:57',-1,'ID',NULL,NULL,NULL),
  (9,'/resources/upload/44.jpg',3,0,'http://www.baidu.com',-1,-1,3,-1,-1,-1,'2018-04-29 21:28:27',-1,'2018-04-29 21:54:16',-1,'ID',NULL,NULL,NULL),
  (10,'/resources/upload/44.jpg',1,1,'',-1,24,4,-1,-1,-1,'2018-04-29 21:38:59',-1,'2018-04-29 21:54:48',-1,'ID',NULL,NULL,NULL),
  (14,'/resources/upload/carousel/121222.jpg',0,1,'',-1,23,1,-1,-1,-1,'2018-05-03 16:03:04',-1,'2018-05-03 16:03:04',-1,'ID',NULL,NULL,NULL),
@@ -254,13 +256,13 @@ CREATE TABLE `kg_config` (
 
 /*!40000 ALTER TABLE `kg_config` DISABLE KEYS */;
 INSERT INTO `kg_config` (`id`,`sysName`,`sysKey`,`sysValue`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (1,'网站名称','webname','欢欢1',5,-1,-1,-1,'2018-04-09 14:03:06',-1,'2018-05-05 14:46:10',-1,'ID',NULL,NULL,NULL),
- (2,'图片上传默认路径','uploadpath','/resources/upload/',5,-1,-1,-1,'2018-04-09 14:03:06',-1,'2018-05-05 14:46:10',-1,'ID',NULL,NULL,NULL),
- (3,'网站版权信息','copyright','copyright &copy huanTed ',6,-1,-1,-1,'2018-04-09 14:03:06',-1,'2018-05-05 14:46:10',-1,'ID',NULL,NULL,NULL),
- (4,'站点默认关键字','keyword','幼儿园12',4,-1,-1,-1,'2018-04-09 14:03:07',-1,'2018-05-05 14:46:10',-1,'ID',NULL,NULL,NULL),
- (5,'站点描述','webdesc','这是一个幼儿园的站点1',3,-1,-1,-1,'2018-04-09 14:03:07',-1,'2018-05-05 14:46:10',-1,'ID',NULL,NULL,NULL),
- (6,'网站备案号','ICPlicense','沪ICP备01234567891',5,-1,-1,-1,'2018-04-09 14:03:08',-1,'2018-05-05 14:46:10',-1,'ID',NULL,NULL,NULL),
- (7,'网站logo','webLogo','/lib/index/img/logo/logo.png',1,-1,-1,-1,'2018-05-05 13:30:10',-1,'2018-05-05 13:30:10',-1,'ID',NULL,NULL,NULL),
+ (1,'网站名称','webname','欢欢',8,-1,-1,-1,'2018-04-09 14:03:06',-1,'2018-05-12 13:38:59',-1,'ID',NULL,NULL,NULL),
+ (2,'图片上传默认路径','uploadpath','/resources/upload/',8,-1,-1,-1,'2018-04-09 14:03:06',-1,'2018-05-12 13:38:59',-1,'ID',NULL,NULL,NULL),
+ (3,'网站版权信息','copyright','copyright &copy huanTed ',9,-1,-1,-1,'2018-04-09 14:03:06',-1,'2018-05-12 13:38:59',-1,'ID',NULL,NULL,NULL),
+ (4,'站点默认关键字','keyword','幼儿园12',7,-1,-1,-1,'2018-04-09 14:03:07',-1,'2018-05-12 13:38:59',-1,'ID',NULL,NULL,NULL),
+ (5,'站点描述','webdesc','这是一个幼儿园的站点',6,-1,-1,-1,'2018-04-09 14:03:07',-1,'2018-05-12 13:38:59',-1,'ID',NULL,NULL,NULL),
+ (6,'网站备案号','ICPlicense','沪ICP备01234567891',8,-1,-1,-1,'2018-04-09 14:03:08',-1,'2018-05-12 13:38:59',-1,'ID',NULL,NULL,NULL),
+ (7,'网站logo','webLogo','/resources/upload/logo/logo.png',1,-1,-1,-1,'2018-05-05 13:30:10',-1,'2018-05-05 13:30:10',-1,'ID',NULL,NULL,NULL),
  (8,'网站ico','webIco','/favicon.ico',1,-1,-1,-1,'2018-05-05 13:44:02',-1,'2018-05-05 13:44:02',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_config` ENABLE KEYS */;
 
@@ -373,10 +375,9 @@ CREATE TABLE `kg_download` (
 
 /*!40000 ALTER TABLE `kg_download` DISABLE KEYS */;
 INSERT INTO `kg_download` (`id`,`file_title`,`file_path`,`summary`,`password`,`createDate`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (1,'aaa.txt','/resources/upload/download/aaa.txt','11','22','2018-05-03 15:15:57',3,-1,-1,-1,'2018-05-03 15:15:57',-1,'2018-05-03 21:17:29',-1,'ID',NULL,NULL,NULL),
- (2,'112.xml','/resources/upload/download/112.xml','','11','2018-05-03 15:17:35',2,-1,-1,-1,'2018-05-03 15:17:35',-1,'2018-05-03 21:17:25',-1,'ID',NULL,NULL,NULL),
- (3,'bbb.txt','/resources/upload/download/bbb.txt','bb','','2018-05-04 10:07:29',1,-1,-1,-1,'2018-05-04 10:07:29',-1,'2018-05-04 10:07:29',-1,'ID',NULL,NULL,NULL),
- (4,'aaa.txt','/resources/upload/download/aaa.txt','11','','2018-05-04 10:07:41',1,-1,-1,-1,'2018-05-04 10:07:41',-1,'2018-05-04 10:07:41',-1,'ID',NULL,NULL,NULL);
+ (1,'aaa.txt','/resources/upload/download/aaa.txt','11','','2018-05-03 15:15:57',4,-1,-1,-1,'2018-05-03 15:15:57',-1,'2018-05-12 11:52:58',-1,'ID',NULL,NULL,NULL),
+ (2,'112.xml','/resources/upload/download/112.xml','','','2018-05-03 15:17:35',3,-1,-1,-1,'2018-05-03 15:17:35',-1,'2018-05-12 11:53:03',-1,'ID',NULL,NULL,NULL),
+ (3,'123.txt','/resources/upload/download/123.txt','bb','','2018-05-04 10:07:29',2,-1,-1,-1,'2018-05-04 10:07:29',-1,'2018-05-12 09:35:03',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_download` ENABLE KEYS */;
 
 
@@ -443,9 +444,9 @@ CREATE TABLE `kg_link` (
 
 /*!40000 ALTER TABLE `kg_link` DISABLE KEYS */;
 INSERT INTO `kg_link` (`id`,`link_name`,`link_url`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (8,'123','123',1,-1,-1,-1,'2018-04-06 19:06:57',-1,'2018-04-06 19:06:57',-1,'ID',NULL,NULL,NULL),
- (9,'123','123',1,-1,-1,-1,'2018-04-06 19:07:00',-1,'2018-04-06 19:07:00',-1,'ID',NULL,NULL,NULL),
- (10,'3','3',1,-1,-1,-1,'2018-04-14 10:43:51',-1,'2018-04-14 10:43:51',-1,'ID',NULL,NULL,NULL);
+ (8,'百度','http://www.baidu.com',2,-1,-1,-1,'2018-04-06 19:06:57',-1,'2018-05-12 14:02:18',-1,'ID',NULL,NULL,NULL),
+ (9,'新浪','https://www.sina.com.cn/',2,-1,-1,-1,'2018-04-06 19:07:00',-1,'2018-05-12 14:04:10',-1,'ID',NULL,NULL,NULL),
+ (10,'新浪体育','http://sports.sina.com.cn/',2,-1,-1,-1,'2018-04-14 10:43:51',-1,'2018-05-12 14:04:30',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_link` ENABLE KEYS */;
 
 
@@ -502,7 +503,7 @@ INSERT INTO `kg_news` (`id`,`typeId`,`sourceId`,`attributeId`,`newsTitle`,`summa
  (32,8,1,'','幼儿园工作1','幼儿园工作1','/resources/upload/news/20180504225835_390_285.jpg',NULL,'<p style=\"margin-top: 0px; margin-bottom: 15px; padding: 0px; text-indent: 2em; word-wrap: break-word; line-height: 2em; color: rgb(49, 49, 49); font-family: 宋体, simsun, Tahoma, Verdana, Arial; white-space: normal; text-align: center;\"><strong style=\"margin: 0px; padding: 0px;\"><span style=\"margin: 0px; padding: 0px; color: rgb(255, 0, 0);\">中华人民共和国教育部令第39号</span></strong></p><p style=\"margin-top: 0px; margin-bottom: 15px; padding: 0px; text-indent: 2em; word-wrap: break-word; line-height: 2em; color: rgb(49, 49, 49); font-family: 宋体, simsun, Tahoma, Verdana, Arial; text-align: justify; white-space: normal;\">《幼儿园工作规程》已经2015年12月14日第48次部长办公会议审议通过，现予公布，自2016年3月1日起施行。　　　　　　　　　　</p><p style=\"margin-top: 0px; margin-bottom: 15px; padding: 0px; text-indent: 2em; word-wrap: break-word; line-height: 2em; color: rgb(49, 49, 49); font-family: 宋体, simsun, Tahoma, Verdana, Arial; white-space: normal; text-align: right;\">教育部部长</p><p style=\"margin-top: 0px; margin-bottom: 15px; padding: 0px; text-indent: 2em; word-wrap: break-word; line-height: 2em; color: rgb(49, 49, 49); font-family: 宋体, simsun, Tahoma, Verdana, Arial; white-space: normal; text-align: right;\">2016年1月5日</p><p style=\"margin-top: 0px; margin-bottom: 15px; padding: 0px; text-indent: 2em; word-wrap: break-word; line-height: 2em; color: rgb(49, 49, 49); font-family: 宋体, simsun, Tahoma, Verdana, Arial; white-space: normal; text-align: center;\"><strong style=\"margin: 0px; padding: 0px;\">幼儿园工作规程</strong></p><p style=\"margin-top: 0px; margin-bottom: 15px; padding: 0px; text-indent: 2em; word-wrap: break-word; line-height: 2em; color: rgb(49, 49, 49); font-family: 宋体, simsun, Tahoma, Verdana, Arial; text-align: justify; white-space: normal;\"><strong style=\"margin: 0px; padding: 0px;\">第一章　总则</strong></p><p style=\"margin-top: 0px; margin-bottom: 15px; padding: 0px; text-indent: 2em; word-wrap: break-word; line-height: 2em; color: rgb(49, 49, 49); font-family: 宋体, simsun, Tahoma, Verdana, Arial; text-align: justify; white-space: normal;\">第一条　为了加强幼儿园的科学管理，规范办园行为，提高保育和教育质量，促进幼儿身心健康，依据《中华人民共和国教育法》等法律法规，制定本规程。</p><p style=\"margin-top: 0px; margin-bottom: 15px; padding: 0px; text-indent: 2em; word-wrap: break-word; line-height: 2em; color: rgb(49, 49, 49); font-family: 宋体, simsun, Tahoma, Verdana, Arial; text-align: justify; white-space: normal;\">第二条　幼儿园是对3周岁以上学龄前幼儿实施保育和教育的机构。幼儿园教育是基础教育的重要组成部分，是学校教育制度的基础阶段。</p><p style=\"margin-top: 0px; margin-bottom: 15px; padding: 0px; text-indent: 2em; word-wrap: break-word; line-height: 2em; color: rgb(49, 49, 49); font-family: 宋体, simsun, Tahoma, Verdana, Arial; text-align: justify; white-space: normal;\">第三条　幼儿园的任务是：贯彻国家的教育方针，按照保育与教育相结合的原则，遵循幼儿身心发展特点和规律，实施德、智、体、美等方面全面发展的教育，促进幼儿身心和谐发展。</p><p><br/></p>',0,'Y','2018-04-14 13:39:53',0,2,-1,-1,-1,'2018-04-14 13:39:53',-1,'2018-05-04 22:58:38',-1,'ID',NULL,NULL,NULL);
 INSERT INTO `kg_news` (`id`,`typeId`,`sourceId`,`attributeId`,`newsTitle`,`summary`,`thumbnail`,`author`,`content`,`sequence`,`indexshow`,`createDate`,`viewsCount`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
  (33,8,1,'','幼儿园工作2','幼儿园工作2','/resources/upload/news/20180504225533_390_285.jpg',NULL,'<p>幼儿园工作2</p>',0,'Y','2018-04-14 13:40:31',0,5,-1,-1,-1,'2018-04-14 13:40:31',-1,'2018-05-04 22:58:28',-1,'ID',NULL,NULL,NULL),
- (34,7,1,'','幼儿园工作3','幼儿园工作3','/resources/upload/news/20180504225524_390_285.jpg',NULL,'<p>幼儿园工作2</p>',2,'Y','2018-04-14 13:40:46',0,10,-1,-1,-1,'2018-04-14 13:40:46',-1,'2018-05-04 22:58:09',-1,'ID',NULL,NULL,NULL);
+ (34,7,1,'12,14,15','幼儿园工作3','幼儿园工作3','/resources/upload/news/20180504225524_390_285.jpg',NULL,'<p>幼儿园工作2</p>',2,'Y','2018-04-14 13:40:46',0,13,-1,-1,-1,'2018-04-14 13:40:46',-1,'2018-05-12 13:56:52',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_news` ENABLE KEYS */;
 
 
@@ -680,6 +681,53 @@ INSERT INTO `kt_link` (`id`,`link_name`,`link_url`,`OBJECT_VERSION_NUMBER`,`REQU
 
 
 --
+-- Definition of table `sys_func`
+--
+
+DROP TABLE IF EXISTS `sys_func`;
+CREATE TABLE `sys_func` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `func_name` varchar(45) NOT NULL,
+  `OBJECT_VERSION_NUMBER` bigint(20) DEFAULT '1',
+  `REQUEST_ID` bigint(20) DEFAULT '-1',
+  `PROGRAM_ID` bigint(20) DEFAULT '-1',
+  `CREATED_BY` bigint(20) DEFAULT '-1',
+  `CREATION_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATED_BY` bigint(20) DEFAULT '-1',
+  `LAST_UPDATE_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATE_LOGIN` bigint(20) DEFAULT '-1',
+  `CERTIFICATE_TYPE` varchar(240) DEFAULT 'ID' COMMENT '证件类型',
+  `EFFECTIVE_START_DATE` date DEFAULT NULL COMMENT '有效日期从',
+  `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
+  `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `sys_func`
+--
+
+/*!40000 ALTER TABLE `sys_func` DISABLE KEYS */;
+INSERT INTO `sys_func` (`id`,`func_name`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
+ (1,'协会简介',1,-1,-1,-1,'2018-05-12 18:36:13',-1,'2018-05-12 18:36:13',-1,'ID',NULL,NULL,NULL),
+ (2,'任务类别',1,-1,-1,-1,'2018-05-12 18:36:13',-1,'2018-05-12 18:36:13',-1,'ID',NULL,NULL,NULL),
+ (3,'评估任务',1,-1,-1,-1,'2018-05-12 18:36:13',-1,'2018-05-12 18:36:13',-1,'ID',NULL,NULL,NULL),
+ (4,'评估任务进度',1,-1,-1,-1,'2018-05-12 18:36:13',-1,'2018-05-12 18:36:13',-1,'ID',NULL,NULL,NULL),
+ (5,'文档下载',1,-1,-1,-1,'2018-05-12 18:36:13',-1,'2018-05-12 18:36:13',-1,'ID',NULL,NULL,NULL),
+ (6,'资讯中心',1,-1,-1,-1,'2018-05-12 18:36:13',-1,'2018-05-12 18:36:13',-1,'ID',NULL,NULL,NULL),
+ (7,'咨询类别',1,-1,-1,-1,'2018-05-12 18:36:13',-1,'2018-05-12 18:36:13',-1,'ID',NULL,NULL,NULL),
+ (8,'来源配置',1,-1,-1,-1,'2018-05-12 18:36:13',-1,'2018-05-12 18:36:13',-1,'ID',NULL,NULL,NULL),
+ (9,'相关链接',1,-1,-1,-1,'2018-05-12 18:36:13',-1,'2018-05-12 18:36:13',-1,'ID',NULL,NULL,NULL),
+ (10,'系统配置',1,-1,-1,-1,'2018-05-12 18:36:13',-1,'2018-05-12 18:36:13',-1,'ID',NULL,NULL,NULL),
+ (11,'属性配置',1,-1,-1,-1,'2018-05-12 18:36:13',-1,'2018-05-12 18:36:13',-1,'ID',NULL,NULL,NULL),
+ (12,'用户',1,-1,-1,-1,'2018-05-12 18:36:13',-1,'2018-05-12 18:36:13',-1,'ID',NULL,NULL,NULL),
+ (13,'角色',1,-1,-1,-1,'2018-05-12 18:36:13',-1,'2018-05-12 18:36:13',-1,'ID',NULL,NULL,NULL),
+ (14,'轮播图',1,-1,-1,-1,'2018-05-12 18:36:13',-1,'2018-05-12 18:36:13',-1,'ID',NULL,NULL,NULL),
+ (15,'基本信息',1,-1,-1,-1,'2018-05-12 18:36:13',-1,'2018-05-12 18:36:13',-1,'ID',NULL,NULL,NULL);
+/*!40000 ALTER TABLE `sys_func` ENABLE KEYS */;
+
+
+--
 -- Definition of table `sys_role`
 --
 
@@ -711,10 +759,59 @@ CREATE TABLE `sys_role` (
 
 /*!40000 ALTER TABLE `sys_role` DISABLE KEYS */;
 INSERT INTO `sys_role` (`ROLE_ID`,`ROLE_CODE`,`ROLE_NAME`,`ROLE_DESCRIPTION`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (10003,'admin','后台管理员','后台管理员',1,-1,-1,-1,'2018-04-11 11:19:09',-1,'2018-04-11 11:19:09',-1,'ID',NULL,NULL,NULL),
+ (10003,'admin','后台管理员1','后台管理员1',8,-1,-1,-1,'2018-04-11 11:19:09',-1,'2018-05-12 20:10:50',-1,'ID',NULL,NULL,NULL),
  (10004,'wd','园长','园长',2,-1,-1,-1,'2018-04-12 10:45:44',-1,'2018-04-15 22:17:55',-1,'ID',NULL,NULL,NULL),
  (10006,'zj','专家','专家',1,-1,-1,-1,'2018-04-15 22:18:05',-1,'2018-04-15 22:18:05',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `sys_role` ENABLE KEYS */;
+
+
+--
+-- Definition of table `sys_role_func`
+--
+
+DROP TABLE IF EXISTS `sys_role_func`;
+CREATE TABLE `sys_role_func` (
+  `RF_ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `FUNC_ID` bigint(20) DEFAULT NULL,
+  `ROLE_ID` bigint(20) DEFAULT NULL COMMENT '角色ID',
+  `OBJECT_VERSION_NUMBER` bigint(20) DEFAULT '1',
+  `REQUEST_ID` bigint(20) DEFAULT '-1',
+  `PROGRAM_ID` bigint(20) DEFAULT '-1',
+  `CREATED_BY` bigint(20) DEFAULT '-1',
+  `CREATION_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATED_BY` bigint(20) DEFAULT '-1',
+  `LAST_UPDATE_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATE_LOGIN` bigint(20) DEFAULT '-1',
+  `CERTIFICATE_TYPE` varchar(240) DEFAULT 'ID' COMMENT '证件类型',
+  `EFFECTIVE_START_DATE` date DEFAULT NULL COMMENT '有效日期从',
+  `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
+  `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
+  PRIMARY KEY (`RF_ID`),
+  UNIQUE KEY `SYS_USER_ROLE_U1` (`ROLE_ID`,`FUNC_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=10081 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `sys_role_func`
+--
+
+/*!40000 ALTER TABLE `sys_role_func` DISABLE KEYS */;
+INSERT INTO `sys_role_func` (`RF_ID`,`FUNC_ID`,`ROLE_ID`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
+ (10066,4,10003,1,-1,-1,-1,'2018-05-12 20:10:50',-1,'2018-05-12 20:10:50',-1,'ID',NULL,NULL,NULL),
+ (10067,5,10003,1,-1,-1,-1,'2018-05-12 20:10:50',-1,'2018-05-12 20:10:50',-1,'ID',NULL,NULL,NULL),
+ (10068,6,10003,1,-1,-1,-1,'2018-05-12 20:10:50',-1,'2018-05-12 20:10:50',-1,'ID',NULL,NULL,NULL),
+ (10069,7,10003,1,-1,-1,-1,'2018-05-12 20:10:50',-1,'2018-05-12 20:10:50',-1,'ID',NULL,NULL,NULL),
+ (10070,8,10003,1,-1,-1,-1,'2018-05-12 20:10:50',-1,'2018-05-12 20:10:50',-1,'ID',NULL,NULL,NULL),
+ (10071,9,10003,1,-1,-1,-1,'2018-05-12 20:10:50',-1,'2018-05-12 20:10:50',-1,'ID',NULL,NULL,NULL),
+ (10072,10,10003,1,-1,-1,-1,'2018-05-12 20:10:50',-1,'2018-05-12 20:10:50',-1,'ID',NULL,NULL,NULL),
+ (10073,11,10003,1,-1,-1,-1,'2018-05-12 20:10:50',-1,'2018-05-12 20:10:50',-1,'ID',NULL,NULL,NULL),
+ (10074,12,10003,1,-1,-1,-1,'2018-05-12 20:10:50',-1,'2018-05-12 20:10:50',-1,'ID',NULL,NULL,NULL),
+ (10075,13,10003,1,-1,-1,-1,'2018-05-12 20:10:50',-1,'2018-05-12 20:10:50',-1,'ID',NULL,NULL,NULL),
+ (10076,14,10003,1,-1,-1,-1,'2018-05-12 20:10:50',-1,'2018-05-12 20:10:50',-1,'ID',NULL,NULL,NULL),
+ (10077,15,10003,1,-1,-1,-1,'2018-05-12 20:10:50',-1,'2018-05-12 20:10:50',-1,'ID',NULL,NULL,NULL),
+ (10078,1,10003,1,-1,-1,-1,'2018-05-12 20:10:50',-1,'2018-05-12 20:10:50',-1,'ID',NULL,NULL,NULL),
+ (10079,2,10003,1,-1,-1,-1,'2018-05-12 20:10:50',-1,'2018-05-12 20:10:50',-1,'ID',NULL,NULL,NULL),
+ (10080,3,10003,1,-1,-1,-1,'2018-05-12 20:10:50',-1,'2018-05-12 20:10:50',-1,'ID',NULL,NULL,NULL);
+/*!40000 ALTER TABLE `sys_role_func` ENABLE KEYS */;
 
 
 --
@@ -726,6 +823,7 @@ CREATE TABLE `sys_user` (
   `USER_ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `USER_TYPE` varchar(30) DEFAULT NULL COMMENT '用户类型',
   `USER_NAME` varchar(40) NOT NULL COMMENT '用户名',
+  `REAL_NAME` varchar(40) NOT NULL,
   `PASSWORD_ENCRYPTED` varchar(80) DEFAULT NULL COMMENT '加密过的密码',
   `EMAIL` varchar(150) DEFAULT NULL COMMENT '邮箱地址',
   `PHONE` varchar(40) DEFAULT NULL COMMENT '电话号码',
@@ -747,17 +845,18 @@ CREATE TABLE `sys_user` (
   PRIMARY KEY (`USER_ID`),
   UNIQUE KEY `SYS_USER_U1` (`USER_NAME`),
   KEY `SYS_USER_N1` (`STATUS`)
-) ENGINE=InnoDB AUTO_INCREMENT=10033 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10034 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `sys_user`
 --
 
 /*!40000 ALTER TABLE `sys_user` DISABLE KEYS */;
-INSERT INTO `sys_user` (`USER_ID`,`USER_TYPE`,`USER_NAME`,`PASSWORD_ENCRYPTED`,`EMAIL`,`PHONE`,`START_ACTIVE_DATE`,`END_ACTIVE_DATE`,`STATUS`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (10013,NULL,'admin','202cb962ac59075b964b07152d234b70','','',NULL,NULL,NULL,2,-1,-1,-1,'2018-04-11 14:16:39',-1,'2018-05-11 21:33:33',-1,'ID',NULL,NULL,NULL),
- (10014,NULL,'hh','d41d8cd98f00b204e9800998ecf8427e','','',NULL,NULL,NULL,7,-1,-1,-1,'2018-04-12 13:38:12',-1,'2018-04-13 13:05:30',-1,'ID',NULL,NULL,NULL),
- (10032,NULL,'0','cfcd208495d565ef66e7dff9f98764da','','',NULL,NULL,NULL,1,-1,-1,-1,'2018-04-13 14:32:16',-1,'2018-04-13 14:32:16',-1,'ID',NULL,NULL,NULL);
+INSERT INTO `sys_user` (`USER_ID`,`USER_TYPE`,`USER_NAME`,`REAL_NAME`,`PASSWORD_ENCRYPTED`,`EMAIL`,`PHONE`,`START_ACTIVE_DATE`,`END_ACTIVE_DATE`,`STATUS`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
+ (10013,NULL,'admin','','202cb962ac59075b964b07152d234b70','','',NULL,NULL,NULL,2,-1,-1,-1,'2018-04-11 14:16:39',-1,'2018-05-11 21:33:33',-1,'ID',NULL,NULL,NULL),
+ (10014,NULL,'teacher','123','d41d8cd98f00b204e9800998ecf8427e','','',NULL,NULL,NULL,21,-1,-1,-1,'2018-04-12 13:38:12',-1,'2018-05-12 20:08:50',-1,'ID',NULL,NULL,NULL),
+ (10032,NULL,'expert','','cfcd208495d565ef66e7dff9f98764da','','',NULL,NULL,NULL,1,-1,-1,-1,'2018-04-13 14:32:16',-1,'2018-04-13 14:32:16',-1,'ID',NULL,NULL,NULL),
+ (10033,NULL,'teacher2','laoshier','202cb962ac59075b964b07152d234b70','','',NULL,NULL,NULL,3,-1,-1,-1,'2018-05-12 14:50:07',-1,'2018-05-12 14:52:16',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `sys_user` ENABLE KEYS */;
 
 
@@ -784,7 +883,7 @@ CREATE TABLE `sys_user_role` (
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`SUR_ID`),
   UNIQUE KEY `SYS_USER_ROLE_U1` (`ROLE_ID`,`USER_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=10017 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10024 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `sys_user_role`
@@ -793,7 +892,8 @@ CREATE TABLE `sys_user_role` (
 /*!40000 ALTER TABLE `sys_user_role` DISABLE KEYS */;
 INSERT INTO `sys_user_role` (`SUR_ID`,`USER_ID`,`ROLE_ID`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
  (10001,10013,10003,1,-1,-1,-1,'2018-05-11 21:36:00',-1,'2018-05-11 21:36:00',-1,'ID',NULL,NULL,NULL),
- (10016,10014,10003,1,-1,-1,-1,'2018-04-13 13:05:30',-1,'2018-04-13 13:05:30',-1,'ID',NULL,NULL,NULL);
+ (10017,10033,10004,1,-1,-1,-1,'2018-05-12 14:52:16',-1,'2018-05-12 14:52:16',-1,'ID',NULL,NULL,NULL),
+ (10023,10014,10004,1,-1,-1,-1,'2018-05-12 20:08:50',-1,'2018-05-12 20:08:50',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `sys_user_role` ENABLE KEYS */;
 
 

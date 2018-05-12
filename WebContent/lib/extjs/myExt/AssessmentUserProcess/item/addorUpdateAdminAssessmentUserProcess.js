@@ -91,9 +91,16 @@ Ext.extend(addorUpdateAdminAssessmentUserProcess.addorUpdateAdminAssessmentUserP
 					show:function(){
 						if(record!=null){
 				    		var adminSuggestion= record.get("adminSuggestion");
-				    		if(adminSuggestion!=null&&adminSuggestion!="")
+				    		var state = record.get("state");
+				    		if(state>10){
 				    			Ext.getCmp(mainId+"adminSuggestion").setValue(adminSuggestion);
-				    		else{
+				    			if(state==20)
+				    				rg.setValue({pass: "Y"});
+				    			else if(state==30)
+				    				rg.setValue({pass: "N"});
+				    			else(state>30)
+				    				rg.setValue({pass: "Y"});
+				    		}else if(state==10){
 				    			Ext.getCmp(mainId+"adminSuggestion").setValue("通过");
 				    			rg.setValue({pass: "Y"});
 				    		}
@@ -111,9 +118,9 @@ Ext.extend(addorUpdateAdminAssessmentUserProcess.addorUpdateAdminAssessmentUserP
 		var adminSuggestion =Ext.getCmp(mainId+"adminSuggestion").getValue();
 		var state = "";
 		if(rgValue=="Y"){
-			state ="ADMINPASS";
+			state ="20";
 		}else{
-			state ="ADMINFAILED";
+			state ="30";
 		}
 		
 		if( formpanel.getForm().isValid()){

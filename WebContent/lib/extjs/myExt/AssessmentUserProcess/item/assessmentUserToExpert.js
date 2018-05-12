@@ -124,7 +124,7 @@ Ext.extend(assessmentUserToExpert.assessmentUserToExpertWindow, Ext.Window, {
 	},
 	
 	submit : function(me,formpanel,mainId,records,type,parentStore) {
-		var state = "TOEXPERT";
+		var state = "40";
 		var expertUserId  = Ext.getCmp(mainId+"expertUserId").getValue();
 		var postArray =[];
 		for(var i=0;i<records.length;i++){

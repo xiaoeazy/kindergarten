@@ -280,6 +280,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 			enableTabScroll : true,
 			border : false,
 			activeTab : 0,
+			deferredRender:false,
 			items : [{
 				itemId : mainId+"_1",
 				layout : 'fit',
@@ -396,9 +397,9 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 		  for (var i = 0; i < store.getCount(); i++) {
 			  var record = store.getAt(i);
 			  var id = record.get("id");
-			  var index = attributeArray.indexOf(id);
+			  var inarray = attributeArray.in_array(id);
 			  var checked = true;
-			  if(index<0){
+			  if(!inarray){
 				  checked = false;
 			  }
 			  var checkbox = new Ext.form.Checkbox(
@@ -484,7 +485,6 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
                 	  Ext.getBody().unmask();
                 	  var responseArray = Ext.util.JSON.decode(response.responseText);
 	                  if (responseArray.success == true) {
-//	                	    ExtAlert("成功");
 	                	    parentStore.reload();
 	                    	me.close();
 	                    }else{

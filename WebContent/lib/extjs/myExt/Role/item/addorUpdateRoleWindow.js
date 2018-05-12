@@ -58,34 +58,91 @@ Ext.extend(addorUpdateRole.addorUpdateRoleWindow, Ext.Window, {
 								id:mainId+"roleDescription",
 					            maxLength:45  
 				  			}
-				  			],
-				  buttonAlign : "center",
-				  buttons:[{
-					  width:50,
-						text : text,
-						handler : function(button, event) {
-							me.addorUpdateRole(me,formpanel,mainId,parentStore,id,type,isAdd);
-						}
-				  },{
-					  width:50,
-						text : '取消',
-						handler : function(button, event) {
-							me.close();
-						}
-				  }]
+				  			]
 		});
 	     
-			
+	    //=====================role=========================================
+	        var dsFrom = Ext.create('Ext.data.ArrayStore', {
+	        	pageSize:0,
+	            proxy: {
+	                type: 'ajax',
+	                url : appName+ '/admin/sys/func/queryNotHave',
+	                reader: {},
+			        extraParams: {
+			        	roleId :  id 
+			        }
+	            },
+	            autoLoad: true,
+	            fields: ['id', 'funcName']
+	        });
+	        
+	        var dsTo = Ext.create('Ext.data.ArrayStore', {
+	        	pageSize:0,
+	            proxy: {
+	                type: 'ajax',
+	                url : appName+ '/admin/sys/func/queryHave',
+	                reader: {
+			        },
+			        extraParams: {
+			        	roleId :  id 
+			        }
+	            },
+	            autoLoad: true,
+	            fields: ['id', 'funcName']
+	        });
+	    	var funcForm = new Ext.form.FormPanel({
+	            bodyStyle: 'padding:10px;',
+	            items:[{
+	            	 xtype: 'itemselector',
+	                 name: 'itemselector',
+	                 id: mainId+"itemselector",
+	                 anchor: '100%',
+	                 imagePath: '../ux/images/',
+	                 store: dsFrom,
+	                 tostore: dsTo,
+	                 displayField: 'funcName',
+	                 valueField: 'id',
+	                 allowBlank: false,
+	                 msgTarget: 'side',
+	                 fromTitle: '未选功能点',
+	                 toTitle: '已选功能点'
+	            }]
+	        });
 
+	    	
+	    var roleTabs = new Ext.TabPanel({
+	    		deferredRender:false,
+				enableTabScroll : true,
+				border : false,
+				activeTab : 0,
+				items : [{
+					itemId : mainId+"_1",
+					layout : 'fit',
+					title : "角色信息",
+					width : '100%',
+					items : [formpanel ],
+					closable : false
+				},{
+					itemId : mainId+"_2",
+					layout : 'fit',
+					title : "功能点",
+					width : '100%',
+					items : [funcForm],
+					closable : false,
+					listeners:{
+					}
+				}]
+			});
 	        
 
 		
 		Ext.apply(this, {
-				title : text+'来源',
+				title : text+'角色',
 				layout:'fit',
-				items : [formpanel],
-				width : 350,
-				height : 180,
+				items : [roleTabs],
+				width : 600,
+				height : 470,
+				autoHeight:true,
 				xtype : "window",
 				resizable : false,
 				constrain:true,
@@ -93,6 +150,20 @@ Ext.extend(addorUpdateRole.addorUpdateRoleWindow, Ext.Window, {
 		            this.hide(); 
 		        },
 				modal : true,
+				buttonAlign : "center",
+			    buttons:[{
+				  width:50,
+					text : text,
+					handler : function(button, event) {
+						me.addorUpdateRole(me,formpanel,mainId,parentStore,id,type,isAdd);
+					}
+			    },{
+				  width:50,
+					text : '取消',
+					handler : function(button, event) {
+						me.close();
+					}
+			    }],
 				listeners:{
 					show:function(){
 						if(record!=null){
@@ -114,6 +185,15 @@ Ext.extend(addorUpdateRole.addorUpdateRoleWindow, Ext.Window, {
 	
 	
 	addorUpdateRole : function(me,formpanel,mainId,parentStore,id,type,isAdd) {
+		var roleFuncList = [];
+		var itemselector = Ext.getCmp(mainId+"itemselector");
+		var allFunc = itemselector.getValue();
+		allFunc.forEach(function(ele,index){  
+			roleFuncList.push({
+            	 funcId:allFunc[index]
+             })
+         });  
+		
 		var roleCode =Ext.getCmp(mainId+"roleCode").getValue().trim();
 		if(roleCode==""){
 			Ext.getCmp(mainId+"roleCode").markInvalid("角色编码不能为空！");
@@ -125,24 +205,30 @@ Ext.extend(addorUpdateRole.addorUpdateRoleWindow, Ext.Window, {
 			return;
 		}
 		var roleDescription =Ext.getCmp(mainId+"roleDescription").getValue().trim();
+		
+		
+		var addOrUpdateRoleObj = {
+			  __status : type,
+           	  roleCode : roleCode,
+           	  roleName : roleName,
+           	  roleDescription: roleDescription,
+           	  roleId : id
+          };
+		
 		if( formpanel.getForm().isValid()){
 			Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
 			  Ext.Ajax.request({
             	  url : appName + '/admin/role/submit',
                   method : 'post',
                   headers: {'Content-Type':'application/json'},
-                  params : JSON.stringify([{
-                	  __status : type,
-                	  roleCode : roleCode,
-                	  roleName : roleName,
-                	  roleDescription: roleDescription,
-                	  roleId : id
-                  }]),
+                  params : JSON.stringify({
+                	  role:addOrUpdateRoleObj,
+                	  roleFuncList:roleFuncList
+                  }),
                   success : function(response, options) {
                 	  Ext.getBody().unmask();
                 	  var responseArray = Ext.util.JSON.decode(response.responseText);
 	                  if (responseArray.success == true) {
-//	                	    ExtAlert("成功");
 	                	    parentStore.reload();
 	                    	me.close();
 	                    }else{

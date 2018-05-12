@@ -25,14 +25,14 @@ import cn.huan.kindergarten.service.IKgAssessmentActivityUserProgressService;
 
 @Controller
 public class KgAssessmentActivityUserProgressController extends BaseController {
-	private static  Map<String,Integer> stateArray = new HashMap<String,Integer>();
+	private static  Map<Integer,String> stateArray = new HashMap<Integer,String>();
 	static {
-		stateArray.put("UPLOAD", 10);
-		stateArray.put("ADMINPASS", 20);
-		stateArray.put("ADMINFAILED", 30);
-		stateArray.put("TOEXPERT", 40);
-		stateArray.put("EXPERTPASS", 50);
-		stateArray.put("EXPERTFAILED", 60);
+		stateArray.put(10, "UPLOAD");
+		stateArray.put(20, "ADMINPASS");
+		stateArray.put(30, "ADMINFAILED");
+		stateArray.put(40, "TOEXPERT");
+		stateArray.put(50, "EXPERTPASS");
+		stateArray.put(60, "EXPERTFAILED");
 	}
 	@Autowired
 	private IKgAssessmentActivityUserProgressService service;

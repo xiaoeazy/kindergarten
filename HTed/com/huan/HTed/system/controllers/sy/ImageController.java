@@ -38,6 +38,8 @@ public class ImageController {
 	private final String CAROUSEL_PAGE="carousel";
 	private final String DOWNLOAD_PAGE="download";
 	private final String NEWS_PAGE="news";
+	private final String LOGO="logo";
+	private final String ICO = "ico";
 	/**
      * 图片上传提交页面.
      * 
@@ -119,6 +121,71 @@ public class ImageController {
             }
         }
 //        return "<script>window.parent.showUploadSucessLogo()</script>";
+    	return new UploadImgAjax(true,null, returnPath);
+    }
+    
+    @RequestMapping(value = "/sys/config/uploadImagePath", method = RequestMethod.POST, produces = "text/html")
+    @ResponseBody
+    public UploadImgAjax uploadImagePath(HttpServletRequest request)
+            throws StoragePathNotExsitException, UniqueFileMutiException, IOException, FileUploadException, FileReadIOException {
+    	String type = request.getParameter("type");
+    	String fileResourcesPath="";
+    	String imageName = "";
+    	int width =500;
+    	int height = 100;
+    	if(type.equals(LOGO)) {
+    		imageName= "logo.png";
+    		fileResourcesPath= "/resources/upload/logo/";
+    		width =380;
+    		height = 80;
+    	}
+    	if(type.equals(ICO)) {
+    		imageName= "favicon.ico";
+    		fileResourcesPath= "/";
+    		width =60;
+    		height=60;
+    	}
+    	String file_path=request.getServletContext().getRealPath("/")+fileResourcesPath;
+        File dir=new File(file_path);
+        if(!dir.exists())
+            dir.mkdir();
+      
+        DiskFileItemFactory factory = new DiskFileItemFactory();
+        ServletFileUpload upload = new ServletFileUpload(factory);
+        List<FileItem> items = upload.parseRequest(request);
+        String ext = "";
+        String returnPath ="";
+        for (FileItem fi : items) {
+            if (fi.isFormField()) {
+                fi.getFieldName();
+                fi.getString();
+            } else {
+            	 String imgName = fi.getName();
+                if (imgName == null) {
+                	return new UploadImgAjax(false, "NO_FILE",null);
+                } else {
+                    int idx = imgName.lastIndexOf(".");
+                    if (idx != -1) {
+                    	ext= imgName.substring(idx + 1).toUpperCase();
+                        ext = ext.toLowerCase();
+                        if (!ext.equals("jpg") && !ext.equals("png") && !ext.equals("jpeg") && !ext.equals("gif") && !ext.equals("ico")) {
+                        	return new UploadImgAjax(false, "FILE_TYPE_ERROR",null);
+                        }
+                    } else {
+                    	return new UploadImgAjax(false, "FILE_NO_SUFFIX",null);
+                    }
+                }
+                File tempFile = new File(file_path+'/'+imageName);
+                InputStream is = fi.getInputStream();
+                OutputStream os = new FileOutputStream(tempFile);
+                
+                Thumbnails.of(is).forceSize(width, height).toOutputStream(os);
+               
+                is.close();
+                os.close();
+                returnPath=fileResourcesPath+'/'+imageName;
+            }
+        }
     	return new UploadImgAjax(true,null, returnPath);
     }
     
