@@ -24,7 +24,7 @@
         </association>
     </resultMap>
 
- <select id="selectWithOtherInfo" resultMap="OtherResultMap" parameterType="cn.huan.kindergarten.dto.KgNews">
+ <select id="selectWithOtherInfo" resultMap="OtherResultMap" parameterType="cn.huan.kindergarten.dto.KgAssessmentActivity">
         select a.*,b.assessment_type_name from kg_assessment_activity a left join kg_assessment_type b
             on a.assessment_type_id=b.id 
            <where>
@@ -41,7 +41,7 @@
            ORDER BY a.createDate DESC
     </select>
     
-   <select id="adminQueryCount" resultType="java.lang.Integer" parameterType="cn.huan.kindergarten.dto.KgNews">
+   <select id="adminQueryCount" resultType="java.lang.Integer" parameterType="cn.huan.kindergarten.dto.KgAssessmentActivity">
         select count(1) from kg_assessment_activity a
            <where>
            		<if test="assessmentActivityName != null">

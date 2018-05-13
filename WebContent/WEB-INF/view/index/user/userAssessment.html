@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<title>个人中心_</title>
+<link href="${base.contextPath}/lib/index/css/channel.css" rel="stylesheet" type="text/css" />
+<link href="${base.contextPath}/lib/index/css/index/user.css" rel="stylesheet" type="text/css" />
+
+
+
+
+<link rel="stylesheet" href="${base.contextPath}/lib/bootstrap-3.3.7/css/bootstrap.min.css">
+<link href="${base.contextPath}/lib/bootstrap-table/bootstrap-table.css" rel="stylesheet" type="text/css" />
+
+<script  type="text/javascript" src="${base.contextPath}/lib/index/search/static/js/jquery-1.11.1.min.js"></script>
+<script src="${base.contextPath}/lib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+<script src="${base.contextPath}/lib/bootstrap-table/bootstrap-table.js"></script>
+<script src="${base.contextPath}/lib/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+
+<style type="text/css" media="screen">
+.fl { float: left;}
+.fr { float: right;}
+</style>
+<script>
+	function toUpdate(){
+		var realName = $("#realName").val();
+		var password = $("#password").val();
+		var email = $("#email").val();
+		var phone = $("#phone").val();
+		var addOrUpdateUserObj = {
+	        	  realName:realName,
+	        	  passwordEncrypted:password,
+	        	  email:email,
+	        	  phone : phone
+	          };
+		 $.ajax({  
+	            "url":"${base.contextPath}/index/user/submit",  
+	            "type":"post",  
+	            headers: {'Content-Type':'application/json'},
+	            "data":JSON.stringify(addOrUpdateUserObj),
+	            "success":function(obj){
+	            	 var json = eval(obj); 
+	            	 if(json.success){
+	            		 alert("更新成功");
+	            	 }
+	            },  
+	            "error":function(obj){
+	            	console.log(obj)
+	            },  
+	            "dataType":"json",  
+	            "async":false  
+	        });  
+	}
+</script>
+</head>
+<body>
+<link href="${base.contextPath}/lib/index/css/inc.css" rel="stylesheet" type="text/css" />
+<#include "../../include/navigation.html">
+
+<div class="main">
+<div class="main_container">
+
+	<!-- 内容  开始-->
+		<div class="wrap">
+			<div class="vip_cont c100 clearfix">
+				<!--左边列表导航  开始-->
+				<div class="fl vip_left vip_magLeft">
+					<dl>
+						<dt>用户管理</dt>
+						<dd>
+							<p><a href="#">基本信息</a></p>
+						</dd>
+					</dl>
+					<dl>
+						<dt>评选评估</dt>
+						<dd>
+							<p><a href="#" >参与评估</a></p>
+						</dd>
+					</dl>
+				</div>
+				<!--左边列表导航  结束-->
+
+				<!--右边列表内容  开始-->
+				<div class="fr vip_right vip_magRight">
+					<!--用户信息  开始 -->
+					<div class="cus01">
+<!-- 						<div class="cusImg"> -->
+<!-- 							<img src="images/customerImg.png" title="更换头像" /> -->
+<!-- 						</div> 
+						<div class="cusName">
+							<p title="用户名称">基本信息</p>
+								<span title="姓名">姓名:<input type="text" value ="" /></span>
+								<span class="bdTell">密码<i></i><em>187****3765</em></span>
+						</div>-->
+						<h3 title="用户名称">参与评估</h3>
+						<table id="table"></table>
+					</div>
+				
+					<!-- 用户信息  结束 -->
+					 <div class="cus03">
+						<div class="mess">
+							
+						</div>
+					</div>
+				</div>
+				<!--右边列表内容  结束-->
+			</div>
+		</div>
+
+		<!-- 内容  结束-->
+
+		<script>
+		$("#table").bootstrapTable({ // 对应table标签的id
+		      url: "${base.contextPath}/", // 获取表格数据的url
+		      cache: false, // 设置为 false 禁用 AJAX 数据缓存， 默认为true
+		      striped: true,  //表格显示条纹，默认为false
+		      pagination: true, // 在表格底部显示分页组件，默认false
+		      pageList: [10, 20], // 设置页面可以显示的数据条数
+		      pageSize: 10, // 页面数据条数
+		      pageNumber: 1, // 首页页码
+		      sidePagination: 'server', // 设置为服务器端分页
+		      queryParams: function (params) { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
+		          return {
+		              pageSize: params.limit, // 每页要显示的数据条数
+		              offset: params.offset, // 每页显示数据的开始行号
+		              sort: params.sort, // 要排序的字段
+		              sortOrder: params.order, // 排序规则
+		              dataId: $("#dataId").val() // 额外添加的参数
+		          }
+		      },
+		      sortName: 'id', // 要排序的字段
+		      sortOrder: 'desc', // 排序规则
+		      columns: [
+		          {
+		              checkbox: true, // 显示一个勾选框
+		              align: 'center' // 居中显示
+		          }, {
+		              field: 'code', // 返回json数据中的name
+		              title: '编号', // 表格表头显示文字
+		              align: 'center', // 左右居中
+		              valign: 'middle' // 上下居中
+		          }, {
+		              field: 'name',
+		              title: '评估活动名称',
+		              align: 'center',
+		              valign: 'middle'
+		          }, {
+		              field: 'calcMode',
+		              title: '是否结束',
+		              align: 'center',
+		              valign: 'middle',
+		              formatter: function (value, row, index){ // 单元格格式化函数
+		                  var text = '-';
+		                  if (value == 1) {
+		                      text = "方式一";
+		                  } else if (value == 2) {
+		                      text = "方式二";
+		                  } else if (value == 3) {
+		                      text = "方式三";
+		                  } else if (value == 4) {
+		                      text = "方式四";
+		                  }
+		                  return text;
+		              }
+		          }, {
+		              title: "操作",
+		              align: 'center',
+		              valign: 'middle',
+		              width: 160, // 定义列的宽度，单位为像素px
+		              formatter: function (value, row, index) {
+		                  return '<button class="btn btn-primary btn-sm" onclick="del(\'' + row.stdId + '\')">删除</button>';
+		              }
+		          }
+		      ],
+		      onLoadSuccess: function(){  //加载成功时执行
+		            console.info("加载成功");
+		      },
+		      onLoadError: function(){  //加载失败时执行
+		            console.info("加载数据失败");
+		      }
+
+		})
+
+			
+		</script>
+
+    </div>
+</div>
+<#include "../../include/footer.html">
+</body>
+<script language="javascript" src="js/channel.js" tppabs="http://www.ccgp.gov.cn/js/channel.js"></script>
+</html>

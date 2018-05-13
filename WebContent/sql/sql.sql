@@ -367,7 +367,7 @@ CREATE TABLE `kg_download` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_download`
@@ -613,6 +613,169 @@ INSERT INTO `kg_newstype` (`id`,`typeName`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,
 
 
 --
+-- Definition of table `kg_q_mainitem_items`
+--
+
+DROP TABLE IF EXISTS `kg_q_mainitem_items`;
+CREATE TABLE `kg_q_mainitem_items` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `qmi_id` bigint(20) DEFAULT NULL,
+  `qi_id` bigint(20) DEFAULT NULL,
+  `OBJECT_VERSION_NUMBER` bigint(20) DEFAULT '1',
+  `REQUEST_ID` bigint(20) DEFAULT '-1',
+  `PROGRAM_ID` bigint(20) DEFAULT '-1',
+  `CREATED_BY` bigint(20) DEFAULT '-1',
+  `CREATION_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATED_BY` bigint(20) DEFAULT '-1',
+  `LAST_UPDATE_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATE_LOGIN` bigint(20) DEFAULT '-1',
+  `CERTIFICATE_TYPE` varchar(240) DEFAULT 'ID' COMMENT '证件类型',
+  `EFFECTIVE_START_DATE` date DEFAULT NULL COMMENT '有效日期从',
+  `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
+  `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `kg_mainItem_items_U1` (`qmi_id`,`qi_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10024 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kg_q_mainitem_items`
+--
+
+/*!40000 ALTER TABLE `kg_q_mainitem_items` DISABLE KEYS */;
+/*!40000 ALTER TABLE `kg_q_mainitem_items` ENABLE KEYS */;
+
+
+--
+-- Definition of table `kg_q_survey_mainitem`
+--
+
+DROP TABLE IF EXISTS `kg_q_survey_mainitem`;
+CREATE TABLE `kg_q_survey_mainitem` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `qs_id` bigint(20) DEFAULT NULL,
+  `qmi_id` bigint(20) DEFAULT NULL,
+  `OBJECT_VERSION_NUMBER` bigint(20) DEFAULT '1',
+  `REQUEST_ID` bigint(20) DEFAULT '-1',
+  `PROGRAM_ID` bigint(20) DEFAULT '-1',
+  `CREATED_BY` bigint(20) DEFAULT '-1',
+  `CREATION_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATED_BY` bigint(20) DEFAULT '-1',
+  `LAST_UPDATE_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATE_LOGIN` bigint(20) DEFAULT '-1',
+  `CERTIFICATE_TYPE` varchar(240) DEFAULT 'ID' COMMENT '证件类型',
+  `EFFECTIVE_START_DATE` date DEFAULT NULL COMMENT '有效日期从',
+  `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
+  `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `kg_survey_mainItem_U1` (`qs_id`,`qmi_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10024 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kg_q_survey_mainitem`
+--
+
+/*!40000 ALTER TABLE `kg_q_survey_mainitem` DISABLE KEYS */;
+/*!40000 ALTER TABLE `kg_q_survey_mainitem` ENABLE KEYS */;
+
+
+--
+-- Definition of table `kg_questionitems`
+--
+
+DROP TABLE IF EXISTS `kg_questionitems`;
+CREATE TABLE `kg_questionitems` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) DEFAULT NULL,
+  `value` varchar(200) DEFAULT NULL,
+  `checkCurr` tinyint(1) DEFAULT NULL,
+  `OBJECT_VERSION_NUMBER` bigint(20) DEFAULT '1',
+  `REQUEST_ID` bigint(20) DEFAULT '-1',
+  `PROGRAM_ID` bigint(20) DEFAULT '-1',
+  `CREATED_BY` bigint(20) DEFAULT '-1',
+  `CREATION_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATED_BY` bigint(20) DEFAULT '-1',
+  `LAST_UPDATE_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATE_LOGIN` bigint(20) DEFAULT '-1',
+  `CERTIFICATE_TYPE` varchar(240) DEFAULT 'ID' COMMENT '证件类型',
+  `EFFECTIVE_START_DATE` date DEFAULT NULL COMMENT '有效日期从',
+  `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
+  `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kg_questionitems`
+--
+
+/*!40000 ALTER TABLE `kg_questionitems` DISABLE KEYS */;
+/*!40000 ALTER TABLE `kg_questionitems` ENABLE KEYS */;
+
+
+--
+-- Definition of table `kg_questionmainitem`
+--
+
+DROP TABLE IF EXISTS `kg_questionmainitem`;
+CREATE TABLE `kg_questionmainitem` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `Q_ITEMS_TITLE` varchar(200) NOT NULL,
+  `ITEM_TYPE` varchar(200) NOT NULL,
+  `OBJECT_VERSION_NUMBER` bigint(20) DEFAULT '1',
+  `REQUEST_ID` bigint(20) DEFAULT '-1',
+  `PROGRAM_ID` bigint(20) DEFAULT '-1',
+  `CREATED_BY` bigint(20) DEFAULT '-1',
+  `CREATION_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATED_BY` bigint(20) DEFAULT '-1',
+  `LAST_UPDATE_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATE_LOGIN` bigint(20) DEFAULT '-1',
+  `CERTIFICATE_TYPE` varchar(240) DEFAULT 'ID' COMMENT '证件类型',
+  `EFFECTIVE_START_DATE` date DEFAULT NULL COMMENT '有效日期从',
+  `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
+  `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kg_questionmainitem`
+--
+
+/*!40000 ALTER TABLE `kg_questionmainitem` DISABLE KEYS */;
+/*!40000 ALTER TABLE `kg_questionmainitem` ENABLE KEYS */;
+
+
+--
+-- Definition of table `kg_questionsurvey`
+--
+
+DROP TABLE IF EXISTS `kg_questionsurvey`;
+CREATE TABLE `kg_questionsurvey` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `survey_name` varchar(200) NOT NULL,
+  `survey_desc` varchar(200) DEFAULT NULL,
+  `OBJECT_VERSION_NUMBER` bigint(20) DEFAULT '1',
+  `REQUEST_ID` bigint(20) DEFAULT '-1',
+  `PROGRAM_ID` bigint(20) DEFAULT '-1',
+  `CREATED_BY` bigint(20) DEFAULT '-1',
+  `CREATION_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATED_BY` bigint(20) DEFAULT '-1',
+  `LAST_UPDATE_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATE_LOGIN` bigint(20) DEFAULT '-1',
+  `CERTIFICATE_TYPE` varchar(240) DEFAULT 'ID' COMMENT '证件类型',
+  `EFFECTIVE_START_DATE` date DEFAULT NULL COMMENT '有效日期从',
+  `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
+  `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kg_questionsurvey`
+--
+
+/*!40000 ALTER TABLE `kg_questionsurvey` DISABLE KEYS */;
+/*!40000 ALTER TABLE `kg_questionsurvey` ENABLE KEYS */;
+
+
+--
 -- Definition of table `kt_demo`
 --
 
@@ -853,7 +1016,7 @@ CREATE TABLE `sys_user` (
 
 /*!40000 ALTER TABLE `sys_user` DISABLE KEYS */;
 INSERT INTO `sys_user` (`USER_ID`,`USER_TYPE`,`USER_NAME`,`REAL_NAME`,`PASSWORD_ENCRYPTED`,`EMAIL`,`PHONE`,`START_ACTIVE_DATE`,`END_ACTIVE_DATE`,`STATUS`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (10013,NULL,'admin','','202cb962ac59075b964b07152d234b70','','',NULL,NULL,NULL,2,-1,-1,-1,'2018-04-11 14:16:39',-1,'2018-05-11 21:33:33',-1,'ID',NULL,NULL,NULL),
+ (10013,NULL,'admin','123','21232f297a57a5a743894a0e4a801fc3','123','123',NULL,NULL,NULL,5,-1,-1,-1,'2018-04-11 14:16:39',-1,'2018-05-13 15:16:58',-1,'ID',NULL,NULL,NULL),
  (10014,NULL,'teacher','123','d41d8cd98f00b204e9800998ecf8427e','','',NULL,NULL,NULL,21,-1,-1,-1,'2018-04-12 13:38:12',-1,'2018-05-12 20:08:50',-1,'ID',NULL,NULL,NULL),
  (10032,NULL,'expert','','cfcd208495d565ef66e7dff9f98764da','','',NULL,NULL,NULL,1,-1,-1,-1,'2018-04-13 14:32:16',-1,'2018-04-13 14:32:16',-1,'ID',NULL,NULL,NULL),
  (10033,NULL,'teacher2','laoshier','202cb962ac59075b964b07152d234b70','','',NULL,NULL,NULL,3,-1,-1,-1,'2018-05-12 14:50:07',-1,'2018-05-12 14:52:16',-1,'ID',NULL,NULL,NULL);

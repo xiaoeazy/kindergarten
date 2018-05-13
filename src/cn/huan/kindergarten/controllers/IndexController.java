@@ -118,7 +118,7 @@ public class IndexController extends IndexBaseController{
 		} else {
 			session = request.getSession();
 			session.setAttribute(IRequest.FIELD_USER_ID, user.getUserId());
-			session.setAttribute("userName", user.getUserName());
+			session.setAttribute("userRealName", user.getRealName());
 			setRoleInfo(request, session, user);
 		}
 		return view;

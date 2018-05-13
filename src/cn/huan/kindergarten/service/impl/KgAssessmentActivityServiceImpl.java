@@ -12,6 +12,7 @@ import com.huan.HTed.core.IRequest;
 import com.huan.HTed.system.service.impl.BaseServiceImpl;
 
 import cn.huan.kindergarten.dto.KgAssessmentActivity;
+import cn.huan.kindergarten.dto.KgAssessmentActivityUserProgress;
 import cn.huan.kindergarten.mapper.KgAssessmentActivityMapper;
 import cn.huan.kindergarten.service.IKgAssessmentActivityService;
 
@@ -24,6 +25,14 @@ public class KgAssessmentActivityServiceImpl extends BaseServiceImpl<KgAssessmen
 	@Override
     @Transactional(propagation = Propagation.SUPPORTS)
     public List<KgAssessmentActivity> selectWithOtherInfo(IRequest request,  KgAssessmentActivity condition ,Integer pageNum, Integer pageSize) {
+		if(pageNum!=null&&pageSize!=null)
+			PageHelper.startPage(pageNum, pageSize);
+        return kgAssessmentActivityMapper.selectWithOtherInfo( condition);
+    }
+	
+	@Override
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public List<KgAssessmentActivity> selectWithOtherInfo(IRequest request,  KgAssessmentActivityUserProgress condition ,Integer pageNum, Integer pageSize) {
 		if(pageNum!=null&&pageSize!=null)
 			PageHelper.startPage(pageNum, pageSize);
         return kgAssessmentActivityMapper.selectWithOtherInfo( condition);

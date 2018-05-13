@@ -62,7 +62,7 @@ Ext.extend(addorUpdateUser.addorUpdateUserWindow, Ext.Window, {
 								id:mainId+"password",
 								maxLength:8,
 								regex : /^[\s\S]{0,8}$/,
-			                    regexText : '密码长度不能超过20个字符'
+			                    regexText : '密码长度不能超过8个字符'
 				  			}, {
 		                        id : mainId+'confirmPassword',
 		                        name : 'confirmPassword',
