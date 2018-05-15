@@ -77,32 +77,34 @@ public class IndexUserController extends IndexBaseController{
 	         return mv;
 	    }
 	   
-	   @RequestMapping(value = "/index/userAssessment/assessmentInfo")
+	   @RequestMapping(value = "/index/userAssessment/userAssessmentInfo")
 	    @ResponseBody
 	    public ExtAjax  userAssessmentInfo(HttpServletRequest request) throws KgFileException {
-			 HttpSession session = request.getSession(false);
-	         if(session==null) {
-	        	 throw new KgFileException(null, "请先登陆！", null);
-	         }
-	    	 IRequest requestContext = createRequestContext(request);
-	    	 
-	    	 
-	         return mv;
+//			 HttpSession session = request.getSession(false);
+//	         if(session==null) {
+//	        	 throw new KgFileException(null, "请先登陆！", null);
+//	         }
+//	    	 IRequest requestContext = createRequestContext(request);
+//	    	 
+//	    	 
+//	         return mv;
+		   return null;
 	    }
 	   
 	    @RequestMapping(value = "/index/userAssessment/assessmentInfo")
 	    @ResponseBody
-	    public ExtStore adminQuery(KgAssessmentActivity dto, @RequestParam(defaultValue = DEFAULT_PAGE) int page,int start,
+	    public ExtStore assessmentInfo(KgAssessmentActivity dto, @RequestParam(defaultValue = DEFAULT_PAGE) int page,int start,
 	        @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit, HttpServletRequest request) {
-	    	 HttpSession session = request.getSession(false);
-	         if(session==null) {
-	        	 throw new KgFileException(null, "请先登陆！", null);
-	         }
-	    	 IRequest requestContext = createRequestContext(request);
-	    	 
-	    	 List<KgAssessmentActivity> list = service.selectWithOtherInfo(requestContext,dto,page,limit);
-	    	 int count = service.adminQueryCount(requestContext, dto);
-	    	 return new ExtStore(start, limit, count, list);
+//	    	 HttpSession session = request.getSession(false);
+//	         if(session==null) {
+//	        	 throw new KgFileException(null, "请先登陆！", null);
+//	         }
+//	    	 IRequest requestContext = createRequestContext(request);
+//	    	 
+//	    	 List<KgAssessmentActivity> list = service.selectWithOtherInfo(requestContext,dto,page,limit);
+//	    	 int count = service.adminQueryCount(requestContext, dto);
+//	    	 return new ExtStore(start, limit, count, list);
+	    	return null;
 	    }
 
 

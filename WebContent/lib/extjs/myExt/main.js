@@ -93,6 +93,8 @@ function getManager() {
 	str += "<div style='width:100%;height:100%;overflow-y:auto;overflow-x:auto;'>";
 	str += "<table width='100%' border='0' cellpadding='0' cellspacing='0'>";
 	
+	
+	str +=addFunc('introduction1.png','introduction2.png','questionSurvey');
 	str +=addFunc('introduction1.png','introduction2.png','introduction');
 	
 	str +=addFunc('assessmentType1.png','assessmentType2.png','assessmentType');
@@ -215,6 +217,11 @@ function addtabs(us) {
 			mainId: us
 		});
 		addTabFuns(us,panel,'文档下载');
+	}else if (us == "questionSurvey"){
+		var panel=  new QuestionSurvey.QuestionSurveyPanel({
+			mainId: us
+		});
+		addTabFuns(us,panel,'问卷调查');
 	}
 }
 
