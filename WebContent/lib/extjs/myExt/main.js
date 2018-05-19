@@ -5,11 +5,25 @@ var _panel3;
 var nonePic = _basePath +"/resources/images/none/none.jpg";
 
 Ext.onReady(function() {
-	//	Ext.QuickTips.init();//QuickTips的作用是读取标签中的ext:qtip属性，并为它赋予显示提示的动作。
-	//		Ext.BLANK_IMAGE_URL = appName+'/js/ext3/resources/images/default/s.gif';//获取路径
-	//	Ext.getDoc().on("contextmenu", function(e) {
-	//		e.stopEvent(); //禁止整个页面的右键
-	//	});
+		Ext.QuickTips.init();//QuickTips的作用是读取标签中的ext:qtip属性，并为它赋予显示提示的动作。
+			Ext.BLANK_IMAGE_URL = appName+'/js/ext3/resources/images/default/s.gif';//获取路径
+		Ext.getDoc().on("contextmenu", function(e) {
+			e.stopEvent(); //禁止整个页面的右键
+		});
+		
+		Ext.Ajax.on('requestcomplete',checkUserSessionStatus, this);//使用Ajax完成异步请求的交互，注册requestcomplete时间，每个ajax请求成功后首先
+		function checkUserSessionStatus(conn,response,options) {   
+		var sessionStatus = response.getResponseHeader("sessionstatus");   
+	        if(typeof(sessionStatus) != "undefined"){
+	        	sessiontimeout = true;
+	    		Ext.Msg.alert('提示', '会话超时，请重新登录!', function(btn, text){     
+	                if (btn == 'ok'){    
+	                    var redirect = appName+'/admin/login';     
+	                    window.location = redirect;     
+	                }     
+	            });	
+	         }       
+		}
 
 	var msgTip = Ext.MessageBox.show({
 		title : '提示',

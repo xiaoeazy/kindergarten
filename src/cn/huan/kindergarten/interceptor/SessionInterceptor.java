@@ -9,11 +9,15 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.huan.HTed.core.IRequest;
 
+import cn.huan.kindergarten.controllers.AdminController;
+import cn.huan.kindergarten.controllers.IndexBaseController;
+
 public class SessionInterceptor extends HandlerInterceptorAdapter{
 	 @Override
 	    public boolean preHandle(HttpServletRequest request,
 	            HttpServletResponse response, Object handler) throws Exception {
-
+		 	String url=request.getRequestURL().toString();    
+		 	System.out.println(url);
 		 	HttpSession session = request.getSession();
 		    if (session.getAttribute(IRequest.FIELD_USER_ID) != null) {
 		        return true;
@@ -22,12 +26,15 @@ public class SessionInterceptor extends HandlerInterceptorAdapter{
 		    String requestWith = request.getHeader("x-requested-with");
 		    if (requestWith != null && requestWith.equalsIgnoreCase("XMLHttpRequest")){
 		        ServletOutputStream out = response.getOutputStream();
-		        out.print("unlogin");//返回给前端页面的未登陆标识
-		        out.flush();
+		        response.addHeader("sessionstatus", "timeout");   
 		        out.close();
 		    } else {
 		    	String contextName =  request.getContextPath();
-		        response.sendRedirect(contextName+"/admin/login");
+		    	if(url.contains("/index/admin")) {
+		    		response.sendRedirect(contextName+IndexBaseController.VIEW_LOGIN);
+		    	}else {
+		    		 response.sendRedirect(contextName+AdminController.VIEW_LOGIN);
+		    	}
 		    }
 		    return false;
 	    }

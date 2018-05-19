@@ -13,12 +13,11 @@
 <script language="javascript" src="${base.contextPath}/lib/jqPaginator/jqpaginator.min.js" ></script>
 </head>
 <body id="bid_lst">
-<link href="${base.contextPath}/lib/index/css/inc.css" rel="stylesheet" type="text/css" />
 <#include "../../include/navigation.html">
 <script type="text/javascript">
 	function download(fileId,itemId){
 		var password = $("#download_"+itemId).val();
-		window.location="${base.contextPath}/index/file/download?fileId="+fileId+"&password="+password; 
+		window.location="${base.contextPath}/index/admin/file/download?fileId="+fileId+"&password="+password; 
 		$("#download_"+itemId).val("");
 	}
 </script>
@@ -42,7 +41,7 @@
 								    	  发布时间：<em>${downloadList.createdate?string('yyyy-MM-dd HH:mm:ss')}</em> 
 							    	 	   密码：<em><input type="text" id="download_${downloadList_index}" value=''/>&nbsp;&nbsp;<button onclick="download('${downloadList.id}','${downloadList_index}')">下载</button></em> 
 							    	 <#else>
-							    	 	 <a href="${base.contextPath}/index/file/download?fileId=${downloadList.id}" target="_blank" title="${downloadList.fileTitle}">${downloadList.fileTitle}</a>
+							    	 	 <a href="${base.contextPath}/index/admin/file/download?fileId=${downloadList.id}" target="_blank" title="${downloadList.fileTitle}">${downloadList.fileTitle}</a>
 								    	  发布时间：<em>${downloadList.createdate?string('yyyy-MM-dd HH:mm:ss')}</em> 
 							    	 </#if>
 						    	</li>

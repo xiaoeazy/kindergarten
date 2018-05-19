@@ -64,7 +64,8 @@ Ext.extend(QuestionSurvey.QuestionSurveyPanel, Ext.Panel, {
 					}
 				}],
 	        columns: [
-	            {header: "问卷调查名称",  sortable: true,  dataIndex: 'surveyName',align:'center'}
+	            {header: "问卷调查名称",  sortable: true,  dataIndex: 'surveyName',align:'center'},
+	            {header: "查看",  align:'center'}
 	            
 	        ],
 	        width:'100%',

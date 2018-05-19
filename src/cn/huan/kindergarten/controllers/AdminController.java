@@ -33,7 +33,7 @@ import cn.huan.kindergarten.bean.ExtAjax;
 public class AdminController extends BaseController {
 	
 	// 默认的登录页
-    private static final String VIEW_LOGIN = "/admin/login";
+    public static final String VIEW_LOGIN = "/admin/login";
  // 默认的登录页
     private static final String VIEW_MAIN = "/admin/main";
 	@Autowired
@@ -56,9 +56,7 @@ public class AdminController extends BaseController {
 		IRequest requestContext = createRequestContext(request);
 		if(dto.getPasswordEncrypted()!=null)
 			dto.setPasswordEncrypted( DigestUtils.md5Hex(dto.getPasswordEncrypted()));
-		User sel = new User();
-		sel.setUserName(dto.getUserName());
-		User user = userService.selectOne(requestContext, sel);
+		User user = userService.selectOne(requestContext, dto);
 		if (user == null) {
 			view.setViewName(VIEW_LOGIN);
 			if(dto.getUserName()!=null)

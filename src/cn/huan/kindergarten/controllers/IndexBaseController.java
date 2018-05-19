@@ -11,9 +11,11 @@ import com.huan.HTed.core.IRequest;
 import com.huan.HTed.system.controllers.BaseController;
 
 import cn.huan.kindergarten.dto.KgConfig;
+import cn.huan.kindergarten.dto.KgLink;
 import cn.huan.kindergarten.dto.KgNewsSource;
 import cn.huan.kindergarten.dto.KgNewstype;
 import cn.huan.kindergarten.service.IKgConfigService;
+import cn.huan.kindergarten.service.IKgLinkService;
 import cn.huan.kindergarten.service.IKgNewsService;
 import cn.huan.kindergarten.service.IKgNewsSourceService;
 import cn.huan.kindergarten.service.IKgNewstypeService;
@@ -24,7 +26,7 @@ import cn.huan.kindergarten.service.IKgNewstypeService;
 @RestController
 public class IndexBaseController extends BaseController{
 	// 默认的登录页
-    public static final String VIEW_LOGIN = "/index/login";
+    public static final String VIEW_LOGIN = "/index/loginPage";
     
 	public static final String  CH_INDEX = "CH_INDEX";//首页
 	public static final String  CH_XHJJ = "CH_XHJJ";//协会简介
@@ -37,14 +39,17 @@ public class IndexBaseController extends BaseController{
 	private IKgConfigService iKgConfigService;
 	@Autowired
 	private IKgNewsSourceService iKgNewsSourceService;
+	@Autowired
+	private IKgLinkService iKgLinkService;
 	
 	public void loadNavigation(ModelAndView mv,IRequest requestContext,String chanel  ) {
 	  	  List<KgNewstype> kgNewstypeList = iKgNewstypeService.selectAll(requestContext);
 	        List<KgNewsSource> KgNewsSourceList = iKgNewsSourceService.selectAll(requestContext);
-	        
+	        List<KgLink> linkList = iKgLinkService.selectAll(requestContext);
 	        mv.addObject("kgNewstypeList", kgNewstypeList);
 	        mv.addObject("KgNewsSourceList", KgNewsSourceList);
 	        mv.addObject("chanel", chanel);
+	        mv.addObject("linkList",linkList);
 	        
 	        List<KgConfig> kgConfigList= iKgConfigService.selectAll(requestContext);
 	        for(KgConfig cf:kgConfigList) {

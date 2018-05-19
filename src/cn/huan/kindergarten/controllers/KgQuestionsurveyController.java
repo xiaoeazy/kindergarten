@@ -16,7 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.validation.BindingResult;
 import java.util.List;
 
@@ -56,6 +60,7 @@ import java.util.List;
     }
     
     //========================================后台===================================
+	
     @RequestMapping(value = "/admin/questionsurvey/query")
     @ResponseBody
     public ExtStore adminQuery(KgQuestionsurvey dto, @RequestParam(defaultValue = DEFAULT_PAGE)int page,int start,

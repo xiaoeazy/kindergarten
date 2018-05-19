@@ -53,14 +53,10 @@ public class IndexDownloadController extends IndexBaseController{
 	@Autowired
 	private IKgNewsAttributeService iKgNewsAttributeService;
 	
-	@RequestMapping(value = "/index/download")
+	@RequestMapping(value = "/index/admin/download")
     @ResponseBody
     public ModelAndView download( @RequestParam(defaultValue = DEFAULT_PAGE) int page,@RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit,
     		HttpServletRequest request) {
-		 HttpSession session = request.getSession(false);
-         if(session==null) {
-        	 return new ModelAndView(REDIRECT + IndexController.VIEW_LOGIN);
-         }
 		limit=20;
     	ModelAndView mv = new ModelAndView(getViewPath() + "/index/download/download");
     	 IRequest requestContext = createRequestContext(request);
@@ -91,7 +87,7 @@ public class IndexDownloadController extends IndexBaseController{
      * @throws Exception 
      * @throws FileReadIOException 文件读取IO异常
      */
-    @RequestMapping(value = {"/index/file/download","/index/file/download"})
+    @RequestMapping(value = {"/index/admin/file/download","/index/admin/file/download"})
     public void detail(HttpServletRequest request, HttpServletResponse response, String fileId,String password) throws KgFileException, FileNotFoundException, IOException{
     	 HttpSession session = request.getSession(false);
          if(session==null) {
@@ -111,6 +107,26 @@ public class IndexDownloadController extends IndexBaseController{
         if (file.exists()) {
             response.addHeader("Content-Disposition", "attachment;filename=\"" + URLEncoder.encode(sysFile.getFileTitle(), ENC) + "\"");
 //            response.setContentType(sysFile.getFileType() + ";charset=" + ENC);
+            response.setHeader("Accept-Ranges", "bytes");
+            int fileLength = (int) file.length();
+            response.setContentLength(fileLength);
+            if (fileLength > 0) {
+                writeFileToResp(response, file);
+            }
+        } else {
+            throw new KgFileException(null, "文件不存在", null);
+        }
+    }
+	
+    
+    @RequestMapping(value = {"/index/file/excel"})
+    public void detailinfo(HttpServletRequest request, HttpServletResponse response, String fileId,String password) throws KgFileException, FileNotFoundException, IOException{
+    	IRequest requestContext = createRequestContext(request);
+      
+        File file = new File(request.getServletContext().getRealPath("/") +"/resources/upload/aaaa.doc");
+        if (file.exists()) {
+            response.addHeader("Content-Disposition", "attachment;filename=\"aaaa.doc\"");
+            response.setContentType("application/msword" + ";charset=" + ENC);
             response.setHeader("Accept-Ranges", "bytes");
             int fileLength = (int) file.length();
             response.setContentLength(fileLength);

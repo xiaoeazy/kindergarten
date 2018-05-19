@@ -1,0 +1,21 @@
+/* footer */
+ #footer {
+ 	float:left;
+	color: #fff;
+	text-align: center;
+	width: 100%;
+	margin-top: 15px;
+}
+#footer a { color: #fff; }
+#footer .footLink { height: 36px; line-height: 36px; background: #960000; }
+#footer .copyright { padding: 5px 0 5px; line-height: 24px; background: #005496; font-family: Arial; } /*#c33a3a*/
+.link{
+	display:block;
+}
+/* footer_end */
+
+/*right_start*/
+
+    
+    
+/*right_end*/    

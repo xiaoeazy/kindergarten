@@ -18,34 +18,11 @@
 		<div class="pagebox" id="pageContentId">
 			<div class="home-desktop" id="desktop_scroll">
 				<div style="width:1025px; position: relative;">
-					<div class="title">
-						<div class="name left">问卷调查</div>
-						<div class="function left">
-							<!--[&nbsp;<a href="javascript:;" onclick="definedLayer('/addTeacherData.html',{},'html');">添加</a>&nbsp;]-->
-						</div>
-						<div class="clear"></div>
-					</div>
 					<div class="create-questions-content">
-						<div class="exam-nav">
-							<div class="exam-item">
-								<h4 class="exam-item-title">常用题型<i class="icon-expand"></i></h4>
-								<ul class="exam-nav-list" id="ui_sortable_exam">
-									<li data-uid="1" data-tempId="drag_choice">
-										<a href="javascript:;" data-checkType="1"><i class="icon-singleChoice"></i>单选题</a>
-									</li>
-									<li data-uid="2" data-tempId="drag_choice">
-										<a href="javascript:;" data-checkType="2"><i class="icon-multipleChoice"></i>多选题</a>
-									</li>
-									<li data-uid="5" data-tempId="drag_completion">
-										<a href="javascript:;" data-checkType="1"><i class="icon-gapFilling"></i>单行填空</a>
-									</li>
-								</ul>
-							</div>
-						</div>
 						<!--出题-->
 						<div class="create-questions">
 							<div class="questions-head-title">
-								<h4 class="h4-bg T_edit T-center" data-Tid="10001" id="surveyName"><span style="font-size:18px;">请编辑问卷调查题目</span></h4></div>
+								<h4 class="h4-bg T_edit T-center" data-Tid="10001" id="surveyName"><span style="font-size:18px;">${questionsurvey.surveyName}</span></h4></div>
 							<table class="questions-items-title">
 								<tbody>
 									<tr>
@@ -194,7 +171,6 @@
                     	});
                     	dataBase.questionItems=questionItems;
                     	console.log(JSON.stringify(dataBase));
-//                     	alert(dataBase);
                     	
 	               		 $.ajax({  
 	         	            "url":"/kindergarten/admin/questionsurvey/submit",  

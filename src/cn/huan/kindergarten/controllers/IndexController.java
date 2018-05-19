@@ -61,15 +61,15 @@ public class IndexController extends IndexBaseController{
     	 List<KgCarousel> carouselList =iKgCarouselService.select(requestContext, null, 1, 5);
     	
     	 List<KgNews> newsList1 =iKgNewsService.select(requestContext, null, 1, 7);
-    	 CommonUtil.judgeTitleLength(newsList1);
+    	 CommonUtil.judgeNewsTitleLength(newsList1,17);
     	 
     	 List<KgNews> newsList2 =iKgNewsService.select(requestContext, null, 2, 6);
-    	 CommonUtil.judgeTitleLength(newsList2);
+    	 CommonUtil.judgeNewsTitleLength(newsList2,17);
     	 
     	 KgNews KgNews = new KgNews();
     	 KgNews.setIndexshow("Y");
     	 List<KgNews> newsThumbNailList =iKgNewsService.select(requestContext, KgNews, 1, 5);
-    	 CommonUtil.judgeTitleLength(newsThumbNailList);
+    	 CommonUtil.judgeNewsTitleLength(newsThumbNailList,17);
     	 
     	 mv.addObject("downloadList",downloadList);
     	 mv.addObject("carouselList",carouselList);
@@ -78,13 +78,13 @@ public class IndexController extends IndexBaseController{
     	 mv.addObject("newsThumbNailList",newsThumbNailList);
     	 
     	 List<KgAssessmentActivity> assessmentList = iKgAssessmentActivityService.select(requestContext, null, 1, 10);
-    	 CommonUtil.judgeTitleLength(assessmentList,22);
+    	 CommonUtil.judgeAssessmentActivityTitleLength(assessmentList,22);
     	 mv.addObject("assessmentList",assessmentList);
     	 loadNavigation(mv, requestContext, CH_INDEX);
          return mv;
     }
 	
-	@RequestMapping(value = "/index/login")
+	@RequestMapping(value = "/index/loginPage")
     @ResponseBody
     public ModelAndView login(HttpServletRequest request) {
     	 ModelAndView mv = new ModelAndView(getViewPath() + "/index/login");
@@ -93,7 +93,7 @@ public class IndexController extends IndexBaseController{
          return mv;
     }
 	
-	@RequestMapping(value = "/index/tologin")
+	@RequestMapping(value = "/index/login")
 	@ResponseBody
 	public ModelAndView login(User dto, HttpServletRequest request, HttpServletResponse response) {
 

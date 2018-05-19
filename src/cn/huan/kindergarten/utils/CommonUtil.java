@@ -10,22 +10,22 @@ import cn.huan.kindergarten.dto.KgNews;
 public class CommonUtil {
 	   public static final String  SUSPENSION_POINTS = "...";
 	   public static final String  TIME14="yyyyMMddHHmmss";
-	   public static void judgeTitleLength(List<KgNews> news) {
+	   public static void judgeNewsTitleLength(List<KgNews> news,int size) {
 	    	for(KgNews kg :news) {
 	    		String title =kg.getNewstitle();
-	    		if(title.length()>17) {
-	    			title=kg.getNewstitle().substring(0)+SUSPENSION_POINTS;
+	    		if(title.length()>size) {
+	    			title=kg.getNewstitle().substring(0,size)+SUSPENSION_POINTS;
 	    			kg.setNewsSimpleTitle(title);
 	    		}else {
 	    			kg.setNewsSimpleTitle(title);
 	    		}
 	    	}
 	    }
-	   public static void judgeTitleLength(List<KgAssessmentActivity> assessmentActivityList,int length) {
+	   public static void judgeAssessmentActivityTitleLength(List<KgAssessmentActivity> assessmentActivityList,int length) {
 	    	for(KgAssessmentActivity kg :assessmentActivityList) {
 	    		String title =kg.getAssessmentActivityName();
-	    		if(title.length()>17) {
-	    			title=kg.getAssessmentActivityName().substring(0, 22)+SUSPENSION_POINTS;
+	    		if(title.length()>length) {
+	    			title=kg.getAssessmentActivityName().substring(0, length)+SUSPENSION_POINTS;
 	    			kg.setNewsSimpleAssessmentActivityName(title);
 	    		}else {
 	    			kg.setNewsSimpleAssessmentActivityName(title);
