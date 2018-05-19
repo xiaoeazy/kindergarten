@@ -193,7 +193,27 @@
                     	});
                     	dataBase.questionItems=questionItems;
                     	console.log(JSON.stringify(dataBase));
-                    	alert(dataBase);
+//                     	alert(dataBase);
+                    	
+	               		 $.ajax({  
+	         	            "url":"/kindergarten/admin/questionsurvey/submit",  
+	         	            "type":"post",  
+	         	            headers: {'Content-Type':'application/json'},
+	         	            "data":JSON.stringify(dataBase),
+	         	            "success":function(obj){
+	         	            	 var json = eval(obj); 
+	         	            	 if(json.success){
+	         	            		 alert("更新成功");
+	         	            	 }
+	         	            },  
+	         	            "error":function(obj){
+	         	            	console.log(obj)
+	         	            },  
+	         	            "dataType":"json",  
+	         	            "async":false  
+	         	        });  
+                    	
+                    	
                     });
 				});
 			</script>

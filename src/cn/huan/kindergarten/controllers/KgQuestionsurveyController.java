@@ -5,8 +5,10 @@ import com.huan.HTed.system.controllers.BaseController;
 import com.huan.HTed.core.IRequest;
 import com.huan.HTed.system.dto.ResponseData;
 
+import cn.huan.kindergarten.bean.ExtAjax;
 import cn.huan.kindergarten.bean.ExtStore;
 import cn.huan.kindergarten.dto.KgAssessmentType;
+import cn.huan.kindergarten.dto.KgLink;
 import cn.huan.kindergarten.dto.KgQuestionsurvey;
 import cn.huan.kindergarten.service.IKgQuestionsurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,4 +65,13 @@ import java.util.List;
          int count = service.adminQueryCount(requestContext, null);
          return new ExtStore(start, limit, count, list);
     }
+    
+    @RequestMapping(value = "/admin/questionsurvey/submit")
+    @ResponseBody
+	public ExtAjax adminUpdate(@RequestBody KgQuestionsurvey  dto, BindingResult result, HttpServletRequest request){
+        IRequest requestCtx = createRequestContext(request);
+        service.addKgQuestionsurvey(requestCtx, dto);
+    	return new ExtAjax(true, null);	
+    }
+    
     }

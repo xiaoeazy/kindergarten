@@ -9,4 +9,6 @@ import cn.huan.kindergarten.dto.KgQuestionsurvey;
 
 public interface IKgQuestionsurveyService extends IBaseService<KgQuestionsurvey>, ProxySelf<IKgQuestionsurveyService>{
 	public int adminQueryCount(IRequest request,KgQuestionsurvey record);
+	
+	public void addKgQuestionsurvey(IRequest request,KgQuestionsurvey record);
 }
