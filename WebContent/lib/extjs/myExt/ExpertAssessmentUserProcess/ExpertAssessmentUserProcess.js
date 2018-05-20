@@ -1,12 +1,12 @@
-Ext.namespace('AssessmentUserProcess');
-AssessmentUserProcess.AssessmentUserProcessPanel= function(config) {
+Ext.namespace('ExpertAssessmentUserProcess');
+ExpertAssessmentUserProcess.ExpertAssessmentUserProcessPanel= function(config) {
 	Ext.applyIf(this, config);
 	this.initUIComponents();
-	AssessmentUserProcess.AssessmentUserProcessPanel.superclass.constructor.call(this);
+	ExpertAssessmentUserProcess.ExpertAssessmentUserProcessPanel.superclass.constructor.call(this);
 };
 
 
-Ext.extend(AssessmentUserProcess.AssessmentUserProcessPanel, Ext.Panel, {
+Ext.extend(ExpertAssessmentUserProcess.ExpertAssessmentUserProcessPanel, Ext.Panel, {
 	initUIComponents : function() {
 	var me = this;
 	var mainId = me.mainId;

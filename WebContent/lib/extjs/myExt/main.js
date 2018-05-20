@@ -107,7 +107,7 @@ function getManager() {
 	str += "<div style='width:100%;height:100%;overflow-y:auto;overflow-x:auto;'>";
 	str += "<table width='100%' border='0' cellpadding='0' cellspacing='0'>";
 	
-	
+	str +=addFunc('introduction1.png','introduction2.png','expertAssessment');
 	str +=addFunc('introduction1.png','introduction2.png','questionSurvey');
 	str +=addFunc('introduction1.png','introduction2.png','introduction');
 	
@@ -236,6 +236,11 @@ function addtabs(us) {
 			mainId: us
 		});
 		addTabFuns(us,panel,'问卷调查');
+	}else if(us == "expertAssessment"){
+		var panel=  new ExpertAssessmentUserProcess.ExpertAssessmentUserProcessPanel({
+			mainId: us
+		});
+		addTabFuns(us,panel,'专家审核');
 	}
 }
 

@@ -45,6 +45,15 @@ function getDeleteRecords(grid){
 	return records;
 }
 
+function getRecords(grid){
+	var records=grid.getSelectionModel().getSelection();
+	if(records==null||records==""){
+		ExtError("请选择行数据");
+		return -1;
+	}
+	return records;
+}
+
 
 Ext.apply(Ext.form.VTypes, {
     confirmPwd : function(val, field) {

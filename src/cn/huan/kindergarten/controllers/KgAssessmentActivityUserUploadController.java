@@ -4,6 +4,9 @@ import org.springframework.stereotype.Controller;
 import com.huan.HTed.system.controllers.BaseController;
 import com.huan.HTed.core.IRequest;
 import com.huan.HTed.system.dto.ResponseData;
+
+import cn.huan.kindergarten.bean.ExtStore;
+import cn.huan.kindergarten.dto.KgAssessmentActivityUserProgress;
 import cn.huan.kindergarten.dto.KgAssessmentActivityUserUpload;
 import cn.huan.kindergarten.service.IKgAssessmentActivityUserUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,4 +52,15 @@ import java.util.List;
         service.batchDelete(dto);
         return new ResponseData();
     }
+    
+    
+ // ========================================后台===================================
+ 	@RequestMapping(value = "/admin/assessment/activity/user/upload/query")
+ 	@ResponseBody
+ 	public ExtStore adminQuery(KgAssessmentActivityUserUpload dto,HttpServletRequest request) {
+ 		IRequest requestContext = createRequestContext(request);
+ 		List<KgAssessmentActivityUserUpload> list = service.select(requestContext, dto);
+ 		return new ExtStore(null, null, null, list);
+ 	}
+    
     }

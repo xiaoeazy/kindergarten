@@ -12,7 +12,6 @@ Ext.extend(showAssessmentUserExpertSuggest.showAssessmentUserExpertSuggestWindow
 		    
 		    
 	    	var mainId=me.mainId+"_addorUpdateAdminAssessmentUserProcess";
-	    	var type = me.type;
 	    	var record = me.record;
 	    	var id =record.get("id");
 	    	var parentStore = this.parentStore; 

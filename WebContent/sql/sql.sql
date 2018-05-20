@@ -645,10 +645,10 @@ CREATE TABLE `kg_question_answer` (
 
 /*!40000 ALTER TABLE `kg_question_answer` DISABLE KEYS */;
 INSERT INTO `kg_question_answer` (`id`,`qid`,`name`,`value`,`checkCurr`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (1,1,'q1_5','<span style=\"font-size: 16px;\">单选题</span>',0,1,-1,-1,-1,'2018-05-19 16:24:41',-1,'2018-05-19 16:24:41',-1,'ID',NULL,NULL,NULL),
- (2,1,'q1_5','<span style=\"font-size: 16px;\">单选题</span>',0,1,-1,-1,-1,'2018-05-19 16:24:41',-1,'2018-05-19 16:24:41',-1,'ID',NULL,NULL,NULL),
- (3,2,'q2_6','<span style=\"font-size:16px;\">多选题</span>',0,1,-1,-1,-1,'2018-05-19 16:24:41',-1,'2018-05-19 16:24:41',-1,'ID',NULL,NULL,NULL),
- (4,2,'q2_6','<span style=\"font-size:16px;\">多选题</span>',0,1,-1,-1,-1,'2018-05-19 16:24:41',-1,'2018-05-19 16:24:41',-1,'ID',NULL,NULL,NULL);
+ (1,1,'q1_5','单选题',0,1,-1,-1,-1,'2018-05-19 16:24:41',-1,'2018-05-19 16:24:41',-1,'ID',NULL,NULL,NULL),
+ (2,1,'q1_5','单选题',0,1,-1,-1,-1,'2018-05-19 16:24:41',-1,'2018-05-19 16:24:41',-1,'ID',NULL,NULL,NULL),
+ (3,2,'q2_6','多选题',0,1,-1,-1,-1,'2018-05-19 16:24:41',-1,'2018-05-19 16:24:41',-1,'ID',NULL,NULL,NULL),
+ (4,2,'q2_6','多选题',0,1,-1,-1,-1,'2018-05-19 16:24:41',-1,'2018-05-19 16:24:41',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_question_answer` ENABLE KEYS */;
 
 

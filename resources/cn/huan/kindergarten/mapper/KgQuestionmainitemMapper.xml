@@ -44,6 +44,11 @@
         	kg_question_answer b 
         ON 
         	a.id = b.qid  
+        <where>
+        		<if test="sid != null">
+           			AND a.sid  = #{sid}
+           		</if>
+        </where>
     </select>  
     
 </mapper>
