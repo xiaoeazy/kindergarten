@@ -1,17 +1,17 @@
 Ext.namespace('addorUpdateExpertAssessmentUserProcess');
-addorUpdateAdminAssessmentUserProcess.addorUpdateAdminAssessmentUserProcessWindow = function(config) {
+addorUpdateExpertAssessmentUserProcess.addorUpdateExpertAssessmentUserProcessWindow = function(config) {
 	Ext.applyIf(this, config);
 	this.initUIComponents();
-	addorUpdateAdminAssessmentUserProcess.addorUpdateAdminAssessmentUserProcessWindow.superclass.constructor.call(this);
+	addorUpdateExpertAssessmentUserProcess.addorUpdateExpertAssessmentUserProcessWindow.superclass.constructor.call(this);
 };
 
-Ext.extend(addorUpdateAdminAssessmentUserProcess.addorUpdateAdminAssessmentUserProcessWindow, Ext.Window, {
+Ext.extend(addorUpdateExpertAssessmentUserProcess.addorUpdateExpertAssessmentUserProcessWindow, Ext.Window, {
 	
 	initUIComponents : function() {
 		    var me  = this ; 
 		    
 		    
-	    	var mainId=me.mainId+"_addorUpdateAdminAssessmentUserProcess";
+	    	var mainId=me.mainId+"_addorUpdateExpertAssessmentUserProcess";
 	    	var type = me.type;
 	    	var record = me.record;
 	    	var id =record.get("id");
@@ -48,10 +48,10 @@ Ext.extend(addorUpdateAdminAssessmentUserProcess.addorUpdateAdminAssessmentUserP
 				  			rg,
 				  			{
 				  				xtype:"textarea",
-				          		fieldLabel:'管理员审核意见',
+				          		fieldLabel:'审核意见',
 								allowBlank:true,
-								name: 'adminSuggestion',
-								id:mainId+"adminSuggestion"
+								name: 'expertSuggestion',
+								id:mainId+"expertSuggestion"
 				  			}
 				  			]
 		});
@@ -60,7 +60,7 @@ Ext.extend(addorUpdateAdminAssessmentUserProcess.addorUpdateAdminAssessmentUserP
 //==============tabs========================================================
 	    	
 		Ext.apply(this, {
-				title : '管理员评估',
+				title : '专家评估',
 				layout:'fit',
 				items : [formpanel],
 				width : 400,
@@ -90,19 +90,14 @@ Ext.extend(addorUpdateAdminAssessmentUserProcess.addorUpdateAdminAssessmentUserP
 				listeners:{
 					show:function(){
 						if(record!=null){
-				    		var adminSuggestion= record.get("adminSuggestion");
+				    		var expertSuggestion= record.get("expertSuggestion");
 				    		var state = record.get("state");
-				    		if(state>10){
-				    			Ext.getCmp(mainId+"adminSuggestion").setValue(adminSuggestion);
-				    			if(state==20)
+				    		if(state>40){
+				    			Ext.getCmp(mainId+"expertSuggestion").setValue(expertSuggestion);
+				    			if(state==50)
 				    				rg.setValue({pass: "Y"});
-				    			else if(state==30)
+				    			else if(state==60)
 				    				rg.setValue({pass: "N"});
-				    			else(state>30)
-				    				rg.setValue({pass: "Y"});
-				    		}else if(state==10){
-				    			Ext.getCmp(mainId+"adminSuggestion").setValue("通过");
-				    			rg.setValue({pass: "Y"});
 				    		}
 				    	}
 					}
@@ -115,12 +110,12 @@ Ext.extend(addorUpdateAdminAssessmentUserProcess.addorUpdateAdminAssessmentUserP
 	submit : function(me,formpanel,mainId,record,rg,type,parentStore) {
 		var id = record.get("id");
 		var rgValue=rg.getValue().pass;
-		var adminSuggestion =Ext.getCmp(mainId+"adminSuggestion").getValue();
+		var expertSuggestion =Ext.getCmp(mainId+"expertSuggestion").getValue();
 		var state = "";
 		if(rgValue=="Y"){
-			state ="20";
+			state ="50";
 		}else{
-			state ="30";
+			state ="60";
 		}
 		
 		if( formpanel.getForm().isValid()){
@@ -131,7 +126,7 @@ Ext.extend(addorUpdateAdminAssessmentUserProcess.addorUpdateAdminAssessmentUserP
                   headers: {'Content-Type':'application/json'},
                   params : JSON.stringify([{
                 	  __status : type,
-                	  adminSuggestion:adminSuggestion,
+                	  expertSuggestion:expertSuggestion,
                 	  state:state,
                 	  id : id
                   }]),

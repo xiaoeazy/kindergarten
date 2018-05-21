@@ -105,7 +105,7 @@ CREATE TABLE `kg_assessment_activity_user_progress` (
 
 /*!40000 ALTER TABLE `kg_assessment_activity_user_progress` DISABLE KEYS */;
 INSERT INTO `kg_assessment_activity_user_progress` (`id`,`assessment_activity_id`,`upload_user_id`,`admin_suggestion`,`expert_user_id`,`expert_suggestion`,`state`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (12,3,10013,'管理员通过',10032,'','40',NULL,-1,-1,NULL,NULL,NULL,'2018-05-12 11:44:47',NULL,'ID',NULL,NULL,NULL);
+ (12,3,10013,'管理员通过',10013,'1111','50',NULL,-1,-1,NULL,NULL,NULL,'2018-05-21 14:06:36',NULL,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_assessment_activity_user_progress` ENABLE KEYS */;
 
 

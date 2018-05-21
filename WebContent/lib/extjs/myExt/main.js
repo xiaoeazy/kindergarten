@@ -6,7 +6,7 @@ var nonePic = _basePath +"/resources/images/none/none.jpg";
 
 Ext.onReady(function() {
 		Ext.QuickTips.init();//QuickTips的作用是读取标签中的ext:qtip属性，并为它赋予显示提示的动作。
-			Ext.BLANK_IMAGE_URL = appName+'/js/ext3/resources/images/default/s.gif';//获取路径
+//			Ext.BLANK_IMAGE_URL = appName+'/js/ext3/resources/images/default/s.gif';//获取路径
 		Ext.getDoc().on("contextmenu", function(e) {
 			e.stopEvent(); //禁止整个页面的右键
 		});
@@ -107,8 +107,8 @@ function getManager() {
 	str += "<div style='width:100%;height:100%;overflow-y:auto;overflow-x:auto;'>";
 	str += "<table width='100%' border='0' cellpadding='0' cellspacing='0'>";
 	
-	str +=addFunc('introduction1.png','introduction2.png','expertAssessment');
-	str +=addFunc('introduction1.png','introduction2.png','questionSurvey');
+	str +=addFunc('expertAssessment1.png','expertAssessment2.png','expertAssessment');
+	str +=addFunc('questionSurvey1.png','questionSurvey2.png','questionSurvey');
 	str +=addFunc('introduction1.png','introduction2.png','introduction');
 	
 	str +=addFunc('assessmentType1.png','assessmentType2.png','assessmentType');
@@ -140,7 +140,7 @@ function getConfig(){
 	str +=addFunc('user1.png','user2.png','user');
 	str +=addFunc('role1.png','role2.png','role');
 	str +=addFunc('carousel1.png','carousel2.png','carousel');
-	str +=addFunc('config1.png','config2.png','contact');
+	str +=addFunc('contact1.png','contact2.png','contact');
 	return addFuncStr(str);
 }
 
@@ -230,7 +230,7 @@ function addtabs(us) {
 		var panel=  new Contact.ContactPanel({
 			mainId: us
 		});
-		addTabFuns(us,panel,'文档下载');
+		addTabFuns(us,panel,'联系我们');
 	}else if (us == "questionSurvey"){
 		var panel=  new QuestionSurvey.QuestionSurveyPanel({
 			mainId: us

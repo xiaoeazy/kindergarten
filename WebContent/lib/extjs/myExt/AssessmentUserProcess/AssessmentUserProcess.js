@@ -253,7 +253,7 @@ Ext.extend(AssessmentUserProcess.AssessmentUserProcessPanel, Ext.Panel, {
 			return "已转移专家";
 		}else if(value==50){
 			return "专家通过";
-		}else if(value==50){
+		}else if(value==60){
 			return "专家未通过";
 		}
 	},

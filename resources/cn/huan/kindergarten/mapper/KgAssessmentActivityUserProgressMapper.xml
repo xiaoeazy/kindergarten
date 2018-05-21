@@ -37,6 +37,12 @@
            		<if test="assessmentActivityId != null">
            			AND a.assessment_activity_id = #{assessmentActivityId}
            		</if>
+           		<if test="expertUserId != null">
+           			AND a.expert_user_id = #{expertUserId}
+           		</if>
+           		<if test="state != null">
+           			AND a.state = #{state}
+           		</if>
            </where>
     </select>
     
@@ -48,6 +54,12 @@
            		</if>
            		<if test="assessmentActivityId != null">
            			AND a.assessment_activity_id = #{assessmentActivityId}
+           		</if>
+           		<if test="expertUserId != null">
+           			AND a.expert_user_id = #{expertUserId}
+           		</if>
+           		<if test="state != null">
+           			AND a.state = #{state}
            		</if>
            </where>
     </select>
