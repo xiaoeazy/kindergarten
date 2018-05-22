@@ -29,7 +29,7 @@ Ext.onReady(function() {
 		title : '提示',
 		msg : '页面初始化中,请耐心等待。。。'
 	});
-
+	var funcs = userFunc;
 	function initTwo() {
 		msgTip.hide();
 		tabs = new Ext.TabPanel({
@@ -62,20 +62,30 @@ Ext.onReady(function() {
 					animate : true
 				},
 				items : [ {
-					title : '管理',
+					title : '调查问卷',
 					border : false,
 					iconCls : 'nav',
-					html : getManager()
+					html : getQuestion(funcs)
 				},{
 					title : '资讯中心',
 					border : false,
 					iconCls : 'nav',
-					html : getNews()
+					html : getNews(funcs)
+				},{
+					title : '评估任务',
+					border : false,
+					iconCls : 'nav',
+					html : getAssessment(funcs)
+				},{
+					title : '其他',
+					border : false,
+					iconCls : 'nav',
+					html : getOthers(funcs)
 				},{
 					title : '系统',
 					border : false,
 					iconCls : 'nav',
-					html : getConfig()
+					html : getConfig(funcs)
 				} ]
 			}, {
 				region : 'center',
@@ -90,57 +100,91 @@ Ext.onReady(function() {
 
 })
 
+function isHaveFunc(func,value){
+	var flag = false;
+	for(var i =0;i<func.length;i++){
+		if(func[i].id==value){
+			flag=true;
+			break;
+		}
+	}
+	return flag;
+}
+
 function addFuncStr(func){
-	var str = "";
-	str += "<div style='width:100%;height:100%;overflow-y:auto;overflow-x:auto;'>";
-	str += "<table width='100%' border='0' cellpadding='0' cellspacing='0'>";
-	
-	str += func;
-	
-	str += '</table></div>';
-	return str;
+	if(func!=""){
+		var str = "";
+		str += "<div style='width:100%;height:100%;overflow-y:auto;overflow-x:auto;'>";
+		str += "<table width='100%' border='0' cellpadding='0' cellspacing='0'>";
+		
+		str += func;
+		
+		str += '</table></div>';
+		return str;
+	}
 }
 
 
-function getManager() {
+function getQuestion(funcs) {
 	var str = "";
-	str += "<div style='width:100%;height:100%;overflow-y:auto;overflow-x:auto;'>";
-	str += "<table width='100%' border='0' cellpadding='0' cellspacing='0'>";
-	
-	str +=addFunc('expertAssessment1.png','expertAssessment2.png','expertAssessment');
-	str +=addFunc('questionSurvey1.png','questionSurvey2.png','questionSurvey');
-	str +=addFunc('introduction1.png','introduction2.png','introduction');
-	
-	str +=addFunc('assessmentType1.png','assessmentType2.png','assessmentType');
-	str +=addFunc('assessmentActivity1.png','assessmentActivity2.png','assessmentActivity');
-	str +=addFunc('assessmentUserProgress1.png','assessmentUserProgress2.png','assessmentUserProgress');
-	
-	str +=addFunc('download1.png','download2.png','download');
-	str +=addFunc('news1.png','news2.png','news');
-	
-	
-	str += '</table></div>';
-	return str;
+	if(isHaveFunc(funcs,16))
+		str +=addFunc('questionSurvey1.png','questionSurvey2.png','questionSurvey');
+	return addFuncStr(str);
 }
-
-function getNews(){
+function getNews(funcs){
 	var str = "";
-
-	str +=addFunc('type1.png','type2.png','newsType');
-	str +=addFunc('source1.png','source2.png','newsSource');
-	
+	if(isHaveFunc(funcs,6))
+		str +=addFunc('news1.png','news2.png','news');
+	if(isHaveFunc(funcs,7))
+		str +=addFunc('type1.png','type2.png','newsType');
+	if(isHaveFunc(funcs,8))
+		str +=addFunc('source1.png','source2.png','newsSource');
 	return addFuncStr(str);
 }
 
-function getConfig(){
+function getAssessment(funcs){
 	var str = "";
-	str +=addFunc('link1.png','link2.png','link');
-	str +=addFunc('config1.png','config2.png','config');
-	str +=addFunc('attribute1.png','attribute2.png','newsAttribute');
-	str +=addFunc('user1.png','user2.png','user');
-	str +=addFunc('role1.png','role2.png','role');
-	str +=addFunc('carousel1.png','carousel2.png','carousel');
-	str +=addFunc('contact1.png','contact2.png','contact');
+	if(isHaveFunc(funcs,3))
+		str +=addFunc('assessmentActivity1.png','assessmentActivity2.png','assessmentActivity');
+	if(isHaveFunc(funcs,4))
+		str +=addFunc('assessmentUserProgress1.png','assessmentUserProgress2.png','assessmentUserProgress');
+	if(isHaveFunc(funcs,17))
+		str +=addFunc('expertAssessment1.png','expertAssessment2.png','expertAssessment');
+	if(isHaveFunc(funcs,2))
+		str +=addFunc('assessmentType1.png','assessmentType2.png','assessmentType');
+	return addFuncStr(str);
+}
+
+
+function getOthers(funcs){
+	var str = "";
+	if(isHaveFunc(funcs,1))
+		str +=addFunc('introduction1.png','introduction2.png','introduction');
+	if(isHaveFunc(funcs,5))
+		str +=addFunc('download1.png','download2.png','download');
+	if(isHaveFunc(funcs,15))
+		str +=addFunc('contact1.png','contact2.png','contact');
+	if(isHaveFunc(funcs,14))
+		str +=addFunc('carousel1.png','carousel2.png','carousel');
+	return addFuncStr(str);
+}
+
+
+
+function getConfig(funcs){
+	var str = "";
+	if(isHaveFunc(funcs,9))
+		str +=addFunc('link1.png','link2.png','link');
+	if(isHaveFunc(funcs,10))
+		str +=addFunc('config1.png','config2.png','config');
+	if(isHaveFunc(funcs,11))
+		str +=addFunc('attribute1.png','attribute2.png','newsAttribute');
+	if(isHaveFunc(funcs,12))
+		str +=addFunc('user1.png','user2.png','user');
+	if(isHaveFunc(funcs,13))
+		str +=addFunc('role1.png','role2.png','role');
+	
+	
 	return addFuncStr(str);
 }
 

@@ -60,11 +60,11 @@ public class IndexController extends IndexBaseController{
     	 List<KgDownload> downloadList = iKgDownloadService.select(requestContext, null, 1, 4);
     	 List<KgCarousel> carouselList =iKgCarouselService.select(requestContext, null, 1, 5);
     	
-    	 List<KgNews> newsList1 =iKgNewsService.select(requestContext, null, 1, 7);
-    	 CommonUtil.judgeNewsTitleLength(newsList1,17);
+    	 List<KgNews> newsList =iKgNewsService.select(requestContext, null, 1, 13);
+    	 CommonUtil.judgeNewsTitleLength(newsList,17);
     	 
-    	 List<KgNews> newsList2 =iKgNewsService.select(requestContext, null, 2, 6);
-    	 CommonUtil.judgeNewsTitleLength(newsList2,17);
+//    	 List<KgNews> newsList2 =iKgNewsService.select(requestContext, null, 2, 6);
+//    	 CommonUtil.judgeNewsTitleLength(newsList2,17);
     	 
     	 KgNews KgNews = new KgNews();
     	 KgNews.setIndexshow("Y");
@@ -73,8 +73,7 @@ public class IndexController extends IndexBaseController{
     	 
     	 mv.addObject("downloadList",downloadList);
     	 mv.addObject("carouselList",carouselList);
-    	 mv.addObject("newsList1",newsList1);
-    	 mv.addObject("newsList2",newsList2);
+    	 mv.addObject("newsList",newsList);
     	 mv.addObject("newsThumbNailList",newsThumbNailList);
     	 
     	 List<KgAssessmentActivity> assessmentList = iKgAssessmentActivityService.select(requestContext, null, 1, 10);

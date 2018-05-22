@@ -18,4 +18,13 @@
          select b.* from sys_role_func a left join sys_func b
             on a.FUNC_ID=b.id where a.ROLE_ID =#{roleId}
     </select>
+    
+    <select id="adminUserFuncQueryHave" resultMap="BaseResultMap" parameterType="java.util.List">
+         select b.* from sys_role_func a left join sys_func b
+            on a.FUNC_ID=b.id where a.ROLE_ID in (
+            <foreach collection="list" index="index" item="item" open="(" separator="," close=")">  
+			        #{item.roleId}  
+			</foreach> 
+            )
+    </select>
 </mapper>

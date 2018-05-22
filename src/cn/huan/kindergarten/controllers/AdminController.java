@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.huan.HTed.account.bean.UserAndRoleContext;
 import com.huan.HTed.account.dto.Role;
 import com.huan.HTed.account.dto.User;
@@ -28,6 +30,9 @@ import com.huan.HTed.core.impl.RequestHelper;
 import com.huan.HTed.system.controllers.BaseController;
 
 import cn.huan.kindergarten.bean.ExtAjax;
+import cn.huan.kindergarten.dto.Func;
+import cn.huan.kindergarten.dto.RoleFunc;
+import cn.huan.kindergarten.service.IFuncService;
 
 @Controller
 public class AdminController extends BaseController {
@@ -40,6 +45,8 @@ public class AdminController extends BaseController {
 	private IUserService userService;
 	@Autowired
 	private IRoleService roleService;
+	@Autowired
+	private IFuncService funcService;
 
 	@RequestMapping(value = "/admin/login")
 	@ResponseBody
@@ -63,9 +70,10 @@ public class AdminController extends BaseController {
 				view.addObject("message", "用户名或密码错误！");
 		} else {
 			session = request.getSession();
+			setRoleInfo(request, session, user);
 			session.setAttribute(IRequest.FIELD_USER_ID, user.getUserId());
 			session.setAttribute("userRealName", user.getRealName());
-			setRoleInfo(request, session, user);
+			
 		}
 		return view;
 	}
@@ -143,6 +151,40 @@ public class AdminController extends BaseController {
 			 }
 		 }
          return new ExtAjax(false, message);
+    }
+    
+    
+    @RequestMapping(value = "/admin/getUserFunc", produces = "application/javascript;charset=utf8")
+    @ResponseBody
+    public String getUserFunc( HttpServletRequest request) throws JsonProcessingException {
+        StringBuilder sb = new StringBuilder();
+        IRequest iRequest = createRequestContext(request);
+		UserRole ur = new UserRole();
+		ur.setUserId(iRequest.getUserId());
+		
+        List<Func> list = funcService.adminUserFuncQueryHave(iRequest, ur);
+        toJson(sb, "userFunc", list);
+        return sb.toString();
+    }
+
+    
+    /**
+     * 基础数据转json格式字符串
+     * @param sb
+     * @param var
+     * @param data
+     * @throws JsonProcessingException
+     */
+    private void toJson(StringBuilder sb, String var, Object data) throws JsonProcessingException {
+    	ObjectMapper objectMapper = new ObjectMapper();
+        boolean hasVar = var != null && var.length() > 0;
+        if (hasVar) {
+            sb.append("var ").append(var).append('=');
+        }
+        sb.append(objectMapper.writeValueAsString(data));
+        if (hasVar) {
+            sb.append(';');
+        }
     }
 	
 

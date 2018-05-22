@@ -46,7 +46,14 @@ public class IndexNewsController extends IndexBaseController{
         	List<KgNews> newsList = iKgNewsService.selectWithOtherInfo(requestContext, news, 1, 6);
         	kn.setNewsList(newsList);
         }
-        
+
+        KgNews kn = new KgNews();
+    	kn.setAttributeid("16");
+    	List<KgNews> newsTop=iKgNewsService.selectWithOtherInfo(requestContext, kn, 1, 1);
+    	if(newsTop.size()!=0)
+    		mv.addObject("newsTop", newsTop);
+    	else
+    		mv.addObject("newsTop", null);
         mv.addObject("typeList", typeList);
         loadNavigation(mv, requestContext,IndexController.CH_ZXZX);
         iKgNewsAttributeService.loadAttriteNews(mv, requestContext,2);

@@ -193,7 +193,7 @@ $(document).ready(function(){
 			
 			                 <ul class="c_list mt10 mb10 tab-con split" style="display:block">
 			                 	<#list typeList.newsList as newsList>   
-									<li><a href="${base.contextPath}/index/newsDetail?id=${newsList.id}" target="_blank" title="11"></a>${newsList.newstitle}</li>
+									<li><a href="${base.contextPath}/index/newsDetail?id=${newsList.id}" target="_blank" title="${newsList.newstitle}"></a>${newsList.newstitle}</li>
 								</#list>
 		                	 </ul>
 			            </div>
