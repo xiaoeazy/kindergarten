@@ -212,7 +212,7 @@ body{background:#f0f0f0;}
 
 
 .c_list{overflow: hidden}
-.c_list li{font-size:14px;line-height:30px;height:30px;overflow:hidden;background:url(../img/spr.gif)/*tpa=http://www.ccgp.gov.cn/img/spr.gif*/ no-repeat; background-position: 0 2px;padding-left:10px;}
+.c_list li{font-size:14px;line-height:30px;height:30px;overflow:hidden;background:url(../img/spr.gif) no-repeat; background-position: 0 2px;padding-left:10px;}
 .c_list li a{color:#333;text-decoration:none}
 .c_list li a:hover{text-decoration:underline;color:#ba2636;}
 
@@ -378,7 +378,7 @@ ul.links li{float:left;width:210px; margin-left:30px;text-align:center;}
 .vT-cht-section-picnews{width:383px;float:left;}
 .vF-cht-section-newsblock{width:617px;border-top:2px solid #aa0b0f;float:left;background:#fff}
 .vT-zcfg-cgf-t{width:617px;float:left;margin-left:15px}
-.vT-zcfg-cgf-t-pic{width:298px;height:31px;margin-left:150px;margin-top:10px;background:red}
+.vT-zcfg-cgf-t-pic{width:298px;height:31px;margin-left:150px;margin-top:10px;text-align:center}
 .vT-zcfg-cgf-t p.shuoming{color:#878787;line-height:28px;text-align: center}
 .vT-zcfg-cgf-con {width:580px;height:160px; overflow:hidden;overflow-y:auto;margin:0 auto;margin-top:5px;padding-right:15px;float:left;margin-left:15px}
 .vT-zcfg-cgf-con p{color:#333;font-size:12px;line-height:21px;margin:5px 15px 0 15px;text-align:left;}

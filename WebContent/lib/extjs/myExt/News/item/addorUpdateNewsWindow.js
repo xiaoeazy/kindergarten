@@ -446,16 +446,17 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 			Ext.getCmp(mainId+"sourceid").markInvalid("来源不能为空！");
 			return;
 		}
+		
+		if(indexshow==""){
+			Ext.getCmp(mainId+"indexshow").markInvalid("是否首页显示不能为空！");
+			return;
+		}
 		if(summary==""){
 			Ext.getCmp(mainId+"summary").markInvalid("咨讯简介不能为空！");
 			return;
 		}
 		if(content==""){
 			Ext.getCmp(mainId+"content").markInvalid("主体内容不能为空！");
-			return;
-		}
-		if(indexshow==""){
-			Ext.getCmp(mainId+"indexshow").markInvalid("是否首页显示不能为空！");
 			return;
 		}
 		

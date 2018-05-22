@@ -245,7 +245,8 @@ Ext.extend(ExpertAssessmentUserProcess.ExpertAssessmentUserProcessPanel, Ext.Pan
 	        columns: [
 	            {header: "评估任务名称",  width:50,sortable: true,  dataIndex: 'kgAssessmentActivity',align:'center',renderer:me.assessmentNameRender},
 	            {header: "上传用户",  width:50,sortable: true,  dataIndex: 'uploadUserId',align:'center'},
-	            {header: "审核状态",  width:50,sortable: true,  dataIndex: 'state',align:'center',renderer:me.stateRender}
+	            {header: "审核状态",  width:50,sortable: true,  dataIndex: 'state',align:'center',renderer:me.stateRender},
+	            {header: "预览",  width:50,sortable: true,  dataIndex: 'assessmentActivityId',align:'center',renderer:me.buttonRender}
 	        ],
 	        width:'100%',
 	        autoExpandColumn: 'AssessmentUserProcessName',
@@ -269,6 +270,9 @@ Ext.extend(ExpertAssessmentUserProcess.ExpertAssessmentUserProcessPanel, Ext.Pan
 	},
 	assessmentNameRender:function(value){
 		return value.assessmentActivityName;
+	},
+	buttonRender:function(id){
+		   return "<button  width=\"50px\" onclick=\"yulanAssessments('"+id+"')\">预览</button>";
 	},
 	stateRender:function(value){
 		if(value==10){

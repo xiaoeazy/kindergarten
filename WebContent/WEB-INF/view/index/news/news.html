@@ -152,25 +152,26 @@ $(document).ready(function(){
 
 
 
-
-<div class="vF-cht-section-newsblock mt13">
-            <div class="vT-zcfg-cgf-t">
-                <div class="vT-zcfg-cgf-t-pic"><a href="gjfg/201310/t20131029_3587339.htm" tppabs="http://www.ccgp.gov.cn/zcfg/gjfg/201310/t20131029_3587339.htm"><img src="../images/cgf.gif" tppabs="http://www.ccgp.gov.cn/images/cgf.gif" /></a></div>
-                <p class="shuoming">2002年6月29日第九届全国人民代表大会 常务委员会第二十八次会议通过</p>
-            </div>
-            <div class="vT-zcfg-cgf-con">
-                <p>　　第一章 总 则</p>
-               
-            </div>
-        </div>
-
-        <div class="vT-cht-section-picnews mt13">
-
-<a href="mof/201502/t20150227_5029424.htm" tppabs="http://www.ccgp.gov.cn/zcfg/mof/201502/t20150227_5029424.htm" target='_blank'  thumb="" alt="" text="">
-<img src="../img/sstl383by236.gif" tppabs="http://www.ccgp.gov.cn/img/sstl383by236.gif" border='0' alt='中华人民共和国政府采购法实施条例（中华人民共和国国务院令 第658号）' /></a>
-
-</div>
-
+<#if newsTop??>
+	<div class="vF-cht-section-newsblock mt13">
+           <div class="vT-zcfg-cgf-t">
+               <div class="vT-zcfg-cgf-t-pic"><a href="${base.contextPath}/index/newsDetail?id=${newsTop.id}" style="text-decoration:none">
+               	<font style="font-weight:bold;font-size:30px;color:red">${newsTop.newstitle}</font></a>
+               </div>
+                <p class="shuoming">&nbsp;&nbsp;&nbsp;&nbsp;</p> 
+           </div>
+           <div class="vT-zcfg-cgf-con">
+               ${newsTop.content}
+              
+           </div>
+      </div>
+	<#if newsTop.thumbnail??>
+	     <div class="vT-cht-section-picnews mt13">
+			<a href="${base.contextPath}/index/newsDetail?id=${newsTop.id}"  target='_blank'  thumb="" alt="" text="">
+			<img src="${base.contextPath}${newsTop.thumbnail}"  border='0' alt='中华人民共和国政府采购法实施条例（中华人民共和国国务院令 第658号）' width="383px" height="237px" /></a>
+		 </div>
+	 </#if>
+</#if>
 
 
 
@@ -193,7 +194,7 @@ $(document).ready(function(){
 			
 			                 <ul class="c_list mt10 mb10 tab-con split" style="display:block">
 			                 	<#list typeList.newsList as newsList>   
-									<li><a href="${base.contextPath}/index/newsDetail?id=${newsList.id}" target="_blank" title="${newsList.newstitle}"></a>${newsList.newstitle}</li>
+									<li><a href="${base.contextPath}/index/newsDetail?id=${newsList.id}" target="_blank" title="${newsList.newstitle}">${newsList.newstitle}</a></li>
 								</#list>
 		                	 </ul>
 			            </div>

@@ -51,7 +51,7 @@ public class IndexNewsController extends IndexBaseController{
     	kn.setAttributeid("16");
     	List<KgNews> newsTop=iKgNewsService.selectWithOtherInfo(requestContext, kn, 1, 1);
     	if(newsTop.size()!=0)
-    		mv.addObject("newsTop", newsTop);
+    		mv.addObject("newsTop", newsTop.get(0));
     	else
     		mv.addObject("newsTop", null);
         mv.addObject("typeList", typeList);

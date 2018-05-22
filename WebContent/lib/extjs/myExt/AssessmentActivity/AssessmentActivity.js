@@ -159,7 +159,8 @@ Ext.extend(AssessmentActivity.AssessmentActivityPanel, Ext.Panel, {
 				}],
 	        columns: [
 	            {header: "评估任务名称",  width:50,sortable: true,  dataIndex: 'assessmentActivityName',align:'center'},
-	            {header: "咨讯类别",  width:50,sortable: true,  dataIndex: 'kgAssessmentType',align:'center',renderer:me.showType}
+	            {header: "咨讯类别",  width:50,sortable: true,  dataIndex: 'kgAssessmentType',align:'center',renderer:me.showType},
+	            {header: "预览",  width:50,sortable: true,  dataIndex: 'id',align:'center',renderer:me.buttonRender}
 	        ],
 	        width:'100%',
 	        autoExpandColumn: 'assessmentActivityName',
@@ -184,6 +185,9 @@ Ext.extend(AssessmentActivity.AssessmentActivityPanel, Ext.Panel, {
 
 	showType:function(value){
 		return value.assessmentTypeName;
+	},
+	buttonRender:function(id){
+		   return "<button  width=\"50px\" onclick=\"yulanAssessments('"+id+"')\">预览</button>";
 	},
 	addAssessmentActivity:function(store,mainId){
 		var win = new addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow ({
@@ -234,4 +238,9 @@ Ext.extend(AssessmentActivity.AssessmentActivityPanel, Ext.Panel, {
       });
 	}
 });
+
+function yulanAssessments(id){
+	var url =appName+"/index/assessmentDetail?id="+id;
+	window.open(url);
+}
 

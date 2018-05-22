@@ -164,8 +164,9 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
 				}],
 	        columns: [
 	            {header: "咨讯名称",  width:50,sortable: true,  dataIndex: 'newstitle',align:'center'},
-	            {header: "咨讯类别",  width:50,sortable: true,  dataIndex: 'kgNewstype',align:'center',renderer:me.typeNameRander},
-	            {header: "咨讯简介",  sortable: true,  dataIndex: 'summary',align:'center'}
+	            {header: "咨讯类别",  width:50,sortable: true,  dataIndex: 'kgNewstype',align:'center',renderer:me.typeNameRender},
+	            {header: "咨讯简介",  sortable: true,  dataIndex: 'summary',align:'center'},
+	            {header: "预览",  width:50,sortable: true,  dataIndex: 'id',align:'center',renderer:me.buttonRender},
 	        ],
 	        width:'100%',
 	        autoExpandColumn: 'summary',
@@ -187,8 +188,12 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
 			}
 		 });
 	},
-	typeNameRander:function(value){
+	typeNameRender:function(value){
 		return value.typename;
+	},
+	buttonRender:function(id){
+		   return "<button  width=\"50px\" onclick=\"yulanNews('"+id+"')\">预览</button>";
+		   
 	},
 	addNews:function(store,mainId){
 		var win = new addorUpdateNews.addorUpdateNewsWindow ({
@@ -239,4 +244,9 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
       });
 	}
 });
+
+function yulanNews(id){
+	var url =appName+"/index/newsDetail?id="+id;
+	window.open(url);
+}
 
