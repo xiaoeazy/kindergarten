@@ -79,6 +79,9 @@
 														<div class="describe-edit-content T_edit T_plugins" >
 															<textarea style="width:100%;height:100px" class="contentInfo"></textarea>
 														</div>
+														<#list questionMainItemlist.qListItems as qListItems>
+															<div class="hiddenAId" style="display:none">${qListItems.id}</div>
+														</#list>
 													</div>
 												</div>
 											</li>
@@ -101,53 +104,53 @@
 			<script type="text/javascript">
 				$(function() {
                     $('#saveQuestion').on('click',function(){
-                    	var dataBase={},questionItems=[];
+						var questionItems = [];
                     	//封装所有题列表，遍历提取值analysis（答案）、题列表（数组对象）；
                     	$('.ui-questions-content-list').children('li').each(function(i){
-                    		var dataTx={},qListItems=[];
-                    		dataTx.id=$(this).find('.hiddenId').html();
+//                     		var dataTx={},qListItems=[];
+//                     		dataTx.id=$(this).find('.hiddenId').html();
+							var dataTx={};
                     		var itemType=$(this).find('.hiddenType').html();
                     		//封装单题，遍历提取值name、value、checkCurr（选中状态）；
                     		$(this).find('ul.cq-unset-list').children('li').each(function(j){
                     			var listItems={};
                     			var checked = $(this).find('input').prop('checked');
                     			if(checked==true){
-                    				listItems.id = $(this).find('.hiddenAId').html();
+                    				listItems.aid = $(this).find('.hiddenAId').html();
                     				listItems.checkcurr=checked;
-                    				qListItems.push(listItems)
+                    				questionItems.push(listItems)
                     			}
                     		});
                     		if(itemType==5){
                     			$(this).find('.cq-items-content').each(function(j){
                         			var listItems={};
-                        				listItems.id = $(this).find('.hiddenAId').html();
+                        				listItems.aid = $(this).find('.hiddenAId').html();
                         				listItems.content = $(this).find('.contentInfo').val();
-                        				qListItems.push(listItems);
+                        				questionItems.push(listItems);
                         		});
                     		}
-                    		
-                    		dataTx.qListItems=qListItems;
-                    		questionItems.push(dataTx);
                     	});
-                    	dataBase.questionItems=questionItems;
-                    	console.log(JSON.stringify(dataBase));
+                    	console.log(JSON.stringify(questionItems));
                     	
 	               		 $.ajax({  
-	         	            "url":"/kindergarten/admin/questionsurvey/submit",  
+	         	            "url":"${base.contextPath}/index/kg/user/q/answer/submit",  
 	         	            "type":"post",  
 	         	            headers: {'Content-Type':'application/json'},
-	         	            "data":JSON.stringify(dataBase),
+	         	            "data":JSON.stringify(questionItems),
+	         	            "dataType":"json",  
+	         	            "async":false  ,
 	         	            "success":function(obj){
 	         	            	 var json = eval(obj); 
 	         	            	 if(json.success){
 	         	            		 alert("更新成功");
+	         	            	 }else{
+	         	            		 alert(json.message);
 	         	            	 }
 	         	            },  
 	         	            "error":function(obj){
 	         	            	console.log(obj)
 	         	            },  
-	         	            "dataType":"json",  
-	         	            "async":false  
+	         	           
 	         	        });  
                     	
                     	
