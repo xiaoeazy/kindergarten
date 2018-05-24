@@ -21,7 +21,7 @@ Ext.extend(addorUpdateQuestionSurvey.addorUpdateQuestionSurveyWindow, Ext.Window
 	    	Ext.apply(this, {
 				title : text+'问卷调查',
 				 html : url,
-				width : 800,
+				width : 1100,
 				height : 650,
 				xtype : "window",
 				resizable : false,

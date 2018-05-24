@@ -33,7 +33,7 @@ public class IndexQuestionController extends BaseController {
 	public ModelAndView query(KgQuestionsurvey dto,HttpServletRequest request, HttpServletResponse response) {
 		IRequest requestCtx = createRequestContext(request);
 		ModelAndView view = new  ModelAndView(getViewPath() + VIEW_QUESTION);
-		dto.setId(1l);
+//		dto.setId(1l);
 		KgQuestionsurvey questionsurvey = iKgQuestionsurveyService.selectByPrimaryKey(requestCtx, dto);
 		KgQuestionmainitem ki = new KgQuestionmainitem();
 		ki.setSid(questionsurvey.getId());

@@ -78,5 +78,13 @@ import java.util.List;
         service.addKgQuestionsurvey(requestCtx, dto);
     	return new ExtAjax(true, null);	
     }
+    @RequestMapping(value = "/admin/QuestionSurvey/remove")
+    @ResponseBody
+	public ExtAjax adminDelete(HttpServletRequest request,@RequestBody List<KgQuestionsurvey> dto ){
+    	IRequest requestCtx = createRequestContext(request);
+    	service.adminDelete(requestCtx, dto);
+         return new ExtAjax(true, null);
+    }
+    
     
     }

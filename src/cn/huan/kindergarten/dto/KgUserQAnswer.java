@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 public class KgUserQAnswer extends BaseDTO {
 
      public static final String FIELD_ID = "id";
+     public static final String FIELD_SID = "sid";
      public static final String FIELD_IP = "ip";
      public static final String FIELD_AID = "aid";
      public static final String FIELD_CHECKCURR = "checkcurr";
@@ -22,7 +23,10 @@ public class KgUserQAnswer extends BaseDTO {
      @Id
      @GeneratedValue
      private Long id;
-
+     
+     @NotNull
+     private Long sid;
+     
      @Length(max = 40)
      private String ip;
 
@@ -75,5 +79,14 @@ public class KgUserQAnswer extends BaseDTO {
      public String getContent(){
          return content;
      }
+
+	public Long getSid() {
+		return sid;
+	}
+
+	public void setSid(Long sid) {
+		this.sid = sid;
+	}
+     
 
      }

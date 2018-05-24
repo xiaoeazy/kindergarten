@@ -33,6 +33,8 @@ public class KgQuestionsurvey extends BaseDTO {
      @Length(max = 200)
      private String surveyDesc;
      
+     private Boolean flag;
+     
      @Transient
      private List<KgQuestionmainitem> questionItems;
 
@@ -68,6 +70,16 @@ public class KgQuestionsurvey extends BaseDTO {
 	public void setQuestionItems(List<KgQuestionmainitem> questionItems) {
 		this.questionItems = questionItems;
 	}
+
+	public Boolean getFlag() {
+		return flag;
+	}
+
+	public void setFlag(Boolean flag) {
+		this.flag = flag;
+	}
+	
+	
      
 
      }

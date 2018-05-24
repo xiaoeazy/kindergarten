@@ -4,6 +4,7 @@
 <mapper namespace="cn.huan.kindergarten.mapper.KgUserQAnswerMapper">
     <resultMap id="BaseResultMap" type="cn.huan.kindergarten.dto.KgUserQAnswer">
         <result column="id" property="id" jdbcType="DECIMAL" />
+        <result column="sid" property="sid" jdbcType="DECIMAL" />
         <result column="ip" property="ip" jdbcType="VARCHAR" />
         <result column="aid" property="aid" jdbcType="DECIMAL" />
         <result column="checkCurr" property="checkcurr" jdbcType="TINYINT" />
@@ -18,6 +19,9 @@
            		</if>
            		<if test="aid != null and aid !=''">
            			AND aid = #{aid}
+           		</if>
+           		<if test="sid != null and sid !=''">
+           			AND sid = #{sid}
            		</if>
            </where>
     </select>

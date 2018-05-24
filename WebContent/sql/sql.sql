@@ -640,7 +640,7 @@ CREATE TABLE `kg_question_answer` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_question_answer`
@@ -648,11 +648,15 @@ CREATE TABLE `kg_question_answer` (
 
 /*!40000 ALTER TABLE `kg_question_answer` DISABLE KEYS */;
 INSERT INTO `kg_question_answer` (`id`,`qid`,`name`,`value`,`checkCurr`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (1,1,'q1_5','单选题',0,1,-1,-1,-1,'2018-05-19 16:24:41',-1,'2018-05-19 16:24:41',-1,'ID',NULL,NULL,NULL),
- (2,1,'q1_5','单选题',0,1,-1,-1,-1,'2018-05-19 16:24:41',-1,'2018-05-19 16:24:41',-1,'ID',NULL,NULL,NULL),
- (3,2,'q2_6','多选题',0,1,-1,-1,-1,'2018-05-19 16:24:41',-1,'2018-05-19 16:24:41',-1,'ID',NULL,NULL,NULL),
- (4,2,'q2_6','多选题',0,1,-1,-1,-1,'2018-05-19 16:24:41',-1,'2018-05-19 16:24:41',-1,'ID',NULL,NULL,NULL),
- (5,3,NULL,NULL,0,1,-1,-1,-1,'2018-05-23 19:29:32',-1,'2018-05-23 19:29:32',-1,'ID',NULL,NULL,NULL);
+ (68,41,'q1_1','选项1',0,1,-1,-1,-1,'2018-05-24 16:22:44',-1,'2018-05-24 16:22:44',-1,'ID',NULL,NULL,NULL),
+ (69,41,'q1_1','选项2',0,1,-1,-1,-1,'2018-05-24 16:22:44',-1,'2018-05-24 16:22:44',-1,'ID',NULL,NULL,NULL),
+ (70,42,'q1_1','选项1',0,1,-1,-1,-1,'2018-05-24 16:31:36',-1,'2018-05-24 16:31:36',-1,'ID',NULL,NULL,NULL),
+ (71,42,'q1_1','选项2',0,1,-1,-1,-1,'2018-05-24 16:31:36',-1,'2018-05-24 16:31:36',-1,'ID',NULL,NULL,NULL),
+ (72,43,'q2_2','选项1',0,1,-1,-1,-1,'2018-05-24 16:31:36',-1,'2018-05-24 16:31:36',-1,'ID',NULL,NULL,NULL),
+ (73,43,'q2_2','选项2',0,1,-1,-1,-1,'2018-05-24 16:31:36',-1,'2018-05-24 16:31:36',-1,'ID',NULL,NULL,NULL),
+ (74,44,NULL,NULL,NULL,1,-1,-1,-1,'2018-05-24 16:31:36',-1,'2018-05-24 16:31:36',-1,'ID',NULL,NULL,NULL),
+ (75,45,NULL,NULL,NULL,1,-1,-1,-1,'2018-05-24 16:31:36',-1,'2018-05-24 16:31:36',-1,'ID',NULL,NULL,NULL),
+ (76,46,NULL,NULL,NULL,1,-1,-1,-1,'2018-05-24 16:31:36',-1,'2018-05-24 16:31:36',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_question_answer` ENABLE KEYS */;
 
 
@@ -680,7 +684,7 @@ CREATE TABLE `kg_questionmainitem` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_questionmainitem`
@@ -688,9 +692,12 @@ CREATE TABLE `kg_questionmainitem` (
 
 /*!40000 ALTER TABLE `kg_questionmainitem` DISABLE KEYS */;
 INSERT INTO `kg_questionmainitem` (`id`,`sid`,`Q_ITEMS_TITLE`,`analysis`,`ITEM_TYPE`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (1,1,'<span style=\"font-size: 16px;\">单选题</span>','单选题分析','1',NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
- (2,1,'<span style=\"font-size:16px;\">多选题</span>','多选题分析','2',NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
- (3,1,'<span style=\"font-size:16px;\">填空题</span>','0','5',NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL);
+ (41,14,'<span style=\"font-size:16px;\">单选题目标题</span>','','1',NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
+ (42,15,'<span style=\"font-size:16px;\">单选题目标题</span>','','1',NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
+ (43,15,'<span style=\"font-size:16px;\">多选题目标题</span>','','2',NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
+ (44,15,'<span style=\"font-size:16px;\">填空题目标题</span>','','5',NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
+ (45,15,'<span style=\"font-size:16px;\">填空题目标题</span>','','5',NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
+ (46,15,'<span style=\"font-size:16px;\">填空题目标题</span>','','5',NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_questionmainitem` ENABLE KEYS */;
 
 
@@ -703,6 +710,7 @@ CREATE TABLE `kg_questionsurvey` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `survey_name` varchar(200) NOT NULL,
   `survey_desc` varchar(200) DEFAULT NULL,
+  `flag` tinyint(1) DEFAULT '0',
   `OBJECT_VERSION_NUMBER` bigint(20) DEFAULT '1',
   `REQUEST_ID` bigint(20) DEFAULT '-1',
   `PROGRAM_ID` bigint(20) DEFAULT '-1',
@@ -716,15 +724,16 @@ CREATE TABLE `kg_questionsurvey` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_questionsurvey`
 --
 
 /*!40000 ALTER TABLE `kg_questionsurvey` DISABLE KEYS */;
-INSERT INTO `kg_questionsurvey` (`id`,`survey_name`,`survey_desc`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (1,'<span style=\"font-size:18px;\">问卷调查题目</span>','<span style=\"font-size:16px;\">问卷调查简介</span>',NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL);
+INSERT INTO `kg_questionsurvey` (`id`,`survey_name`,`survey_desc`,`flag`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
+ (14,'<span style=\"font-size:18px;\">请编辑问卷调查题目</span>','<span style=\"font-size:16px;\">请编辑问卷调查简介</span>',NULL,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
+ (15,'<span style=\"font-size:18px;\">请编辑问卷调查题目</span>','<span style=\"font-size:16px;\">请编辑问卷调查简介</span>',NULL,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_questionsurvey` ENABLE KEYS */;
 
 
@@ -735,6 +744,7 @@ INSERT INTO `kg_questionsurvey` (`id`,`survey_name`,`survey_desc`,`OBJECT_VERSIO
 DROP TABLE IF EXISTS `kg_user_q_answer`;
 CREATE TABLE `kg_user_q_answer` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `sid` bigint(20) NOT NULL,
   `ip` varchar(40) NOT NULL,
   `aid` bigint(20) NOT NULL,
   `checkCurr` tinyint(1) DEFAULT NULL,
@@ -752,18 +762,15 @@ CREATE TABLE `kg_user_q_answer` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_user_q_answer`
 --
 
 /*!40000 ALTER TABLE `kg_user_q_answer` DISABLE KEYS */;
-INSERT INTO `kg_user_q_answer` (`id`,`ip`,`aid`,`checkCurr`,`content`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (12,'0:0:0:0:0:0:0:1',1,1,NULL,1,-1,-1,-1,'2018-05-23 20:53:03',-1,'2018-05-23 20:53:03',-1,'ID',NULL,NULL,NULL),
- (13,'0:0:0:0:0:0:0:1',3,1,NULL,1,-1,-1,-1,'2018-05-23 20:53:03',-1,'2018-05-23 20:53:03',-1,'ID',NULL,NULL,NULL),
- (14,'0:0:0:0:0:0:0:1',4,1,NULL,1,-1,-1,-1,'2018-05-23 20:53:03',-1,'2018-05-23 20:53:03',-1,'ID',NULL,NULL,NULL),
- (15,'0:0:0:0:0:0:0:1',5,NULL,'111',1,-1,-1,-1,'2018-05-23 20:53:03',-1,'2018-05-23 20:53:03',-1,'ID',NULL,NULL,NULL);
+INSERT INTO `kg_user_q_answer` (`id`,`sid`,`ip`,`aid`,`checkCurr`,`content`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
+ (30,14,'0:0:0:0:0:0:0:1',69,1,NULL,1,-1,-1,-1,'2018-05-24 16:22:54',-1,'2018-05-24 16:22:54',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_user_q_answer` ENABLE KEYS */;
 
 

@@ -65,6 +65,7 @@ import cn.huan.kindergarten.utils.CommonUtil;
     	 String ip = CommonUtil.getIpAddress(request);
     	 KgUserQAnswer qa = new KgUserQAnswer();
     	 qa.setIp(ip);
+    	 qa.setSid(dto.get(0).getSid());
     	 int num = service.queryCount(requestCtx,qa);
     	 if(num!=0) {
     		 return new ExtAjax(false, "对不起，该ip已经投过票了");

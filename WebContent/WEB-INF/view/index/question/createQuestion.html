@@ -14,16 +14,26 @@
 		<link href="${base.contextPath}/lib/question/resources/skin/blue.css" rel="stylesheet" type="text/css" />
 		<link href="${base.contextPath}/lib/question/resources/skin/content.css" rel="stylesheet" type="text/css" />
 		<link href="${base.contextPath}/lib/question/resources/script/layer/skin/layer.css" rel="stylesheet" type="text/css" />
+		<style>
+			.pagebox{
+				background-image: url(${base.contextPath}/lib/index/img/questionbg/questionBg.png);
+			    background-position: top center;
+			    background-attachment: fixed;
+			    background-size: cover;
+			    background-repeat: no-repeat;
+			}
+			
+		</style>
 	</head>
 
 	<body>
 		<!--主体框架开始-->
 		<div class="pagebox" id="pageContentId">
-			<div class="home-desktop" id="desktop_scroll">
-				<div style="width:1025px; position: relative;">
-					<div class="create-questions-content">
+			<div class="home-desktop" id="desktop_scroll" >
+				<div style="width:900px;  margin:auto">
+					<div >
 						<!--出题-->
-						<div class="create-questions">
+						<div class="create-questions" >
 							<div class="questions-head-title">
 								<h4 class="h4-bg T_edit T-center" data-Tid="10001" id="surveyName"><span style="font-size:18px;">${questionsurvey.surveyName}</span></h4></div>
 							<#if questionsurvey.surveyDesc!=''>
@@ -44,6 +54,9 @@
 											<!-- 单选题start -->
 												<li class="ui-module items-questions">
 													<div class="theme-type">
+														<div class="module-menu">
+															<h4>Q${questionMainItemlist_index+1}</h4>
+														</div>
 														<div class="ui-drag-area">
 															<div class="cq-title T_edit T_plugins" ><span style="font-size:16px;">${questionMainItemlist.qItemsTitle}</span></div>
 															<div class="hiddenType" style="display:none">${questionMainItemlist.itemType}</div>
@@ -71,6 +84,9 @@
 										<!-- 填空start -->
 											<li class="ui-module items-questions">
 												<div class="theme-type">
+													<div class="module-menu">
+															<h4>Q${questionMainItemlist_index+1}</h4>
+													</div>
 													<div class="ui-drag-area">
 														<div class="cq-title T_edit T_plugins" ><span style="font-size:16px;">${questionMainItemlist.qItemsTitle}</span></div>
 														<div class="hiddenType" style="display:none">${questionMainItemlist.itemType}</div>
@@ -95,7 +111,7 @@
 						</div>
 					</div>
 					<div style="height:40px; margin: 20px 0; text-align: right;">
-						<button type="button" class="cotrlBtn exam-save-btn btnBlue" id="saveQuestion" style="height:40px;width: 140px; font-size:18px;">保存试题</button>
+						<button type="button" class="cotrlBtn exam-save-btn btnBlue" id="saveQuestion" style="height:40px;width: 140px; font-size:18px;">提交</button>
 					</div>
 				</div>
 			</div>
@@ -117,6 +133,7 @@
                     			var checked = $(this).find('input').prop('checked');
                     			if(checked==true){
                     				listItems.aid = $(this).find('.hiddenAId').html();
+                    				listItems.sid = ${questionsurvey.id};
                     				listItems.checkcurr=checked;
                     				questionItems.push(listItems)
                     			}
@@ -125,6 +142,7 @@
                     			$(this).find('.cq-items-content').each(function(j){
                         			var listItems={};
                         				listItems.aid = $(this).find('.hiddenAId').html();
+                        				listItems.sid = ${questionsurvey.id};
                         				listItems.content = $(this).find('.contentInfo').val();
                         				questionItems.push(listItems);
                         		});
@@ -142,7 +160,7 @@
 	         	            "success":function(obj){
 	         	            	 var json = eval(obj); 
 	         	            	 if(json.success){
-	         	            		 alert("更新成功");
+	         	            		 alert("提交成功");
 	         	            	 }else{
 	         	            		 alert(json.message);
 	         	            	 }

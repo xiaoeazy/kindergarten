@@ -37,7 +37,7 @@
 										<a href="javascript:;" data-checkType="2"><i class="icon-multipleChoice"></i>多选题</a>
 									</li>
 									<li data-uid="5" data-tempId="drag_completion">
-										<a href="javascript:;" data-checkType="5"><i class="icon-gapFilling"></i>单行填空</a>
+										<a href="javascript:;" data-checkType="1"><i class="icon-gapFilling"></i>单行填空</a>
 									</li>
 								</ul>
 							</div>
@@ -75,6 +75,7 @@
 							<div class="module-ctrl">
 								<a href="javascript:void(0);" class="ui-up-btn" data-tisp="上移"><i class="icon-up"></i></a>
 								<a href="javascript:void(0);" class="ui-down-btn" data-tisp="下移"><i class="icon-down"></i></a>
+								<a href="javascript:void(0);" class="ui-clone-btn" data-tisp="复制"><i class="icon-clone"></i></a>
 								<a href="javascript:void(0);" class="ui-del-btn" data-tisp="删除"><i class="icon-del"></i></a>
 							</div>
 						</div>
@@ -85,13 +86,14 @@
 						<div class="cq-items-content">
 							<ul class="cq-unset-list" data-checkType="{{type}}" data-nameStr="{{name}}">
 								{{each items as itemData i}}
-								<li><label class="input-check"><input type="{{if type==1}}radio{{else if type==2}}checkbox{{/if}}" name="{{name}}" value="选项{{i+1}}"></label>
+								<li><label class="input-check"><input type="{{if type==1}}radio{{else if type==2}}checkbox{{/if}}" name="{{name}}" value="{{itemData.value}}"></label>
 									<div class="cq-answer-content T_edit T_plugins" data-Tid="{{itemData.tid}}">选项{{i+1}}</div>
 								</li>
 								{{/each}}
 							</ul>
 							<div class="cq-items-ctrl">
 								<a href="javascript:void(0);" class="ui-add-item-btn" data-tisp="添加"><i class="icon-add"></i></a>
+								<a href="javascript:void(0);" class="ui-batch-item-btn" data-tisp="批量添加"><i class="icon-addList"></i></a>
 								<a href="javascript:void(0);" class="ui-add-answer-btn" data-tisp="添加答案解析"><i class="icon-assignment"></i></a>
 							</div>
 						</div>
@@ -107,20 +109,21 @@
 							<div class="module-ctrl">
 								<a href="javascript:void(0);" class="ui-up-btn" data-tisp="上移"><i class="icon-up"></i></a>
 								<a href="javascript:void(0);" class="ui-down-btn" data-tisp="下移"><i class="icon-down"></i></a>
+								<a href="javascript:void(0);" class="ui-clone-btn" data-tisp="复制"><i class="icon-clone"></i></a>
 								<a href="javascript:void(0);" class="ui-del-btn" data-tisp="删除"><i class="icon-del"></i></a>
 							</div>
 						</div>
 						<div class="ui-drag-area">
-							<div class="cq-title T_edit T_plugins" data-Tid="{{itmetid}}"><span style="font-size:16px;">{{if type==5}}填空题目标题{{else if type==6}}完形填空题目标题{{/if}}</span></div>
+							<div class="cq-title T_edit T_plugins" data-Tid="{{itmetid}}"><span style="font-size:16px;">{{if type==1}}填空题目标题{{else if type==2}}完形填空题目标题{{/if}}</span></div>
 							<div class="hiddenType" style="display:none">{{type}}</div>
 						</div>
 						<div class="cq-items-content">
-							<div class="describe-edit-content T_edit T_plugins" data-tid="{{items[0].tid}}"><span style="line-height: 1.6;12px;">这里是{{if type==5}}填空题目标题{{else if type==6}}完形填空题目标题{{/if}}</span></div>
+							<div class="describe-edit-content T_edit T_plugins" data-tid="{{items[0].tid}}"><span style="line-height: 1.6;12px;">这里是{{if type==1}}填空题目标题{{else if type==2}}完形填空题目标题{{/if}}</span></div>
 						</div>
 					</div>
 				</li>
 			</script>
-			<!--描述题
+			<!--描述题-->
 			<script type="text/html" id="drag_describe">
 				<li class="ui-module items-questions">
 					<div class="theme-type">
@@ -142,7 +145,7 @@
 						</div>
 					</div>
 				</li>
-			</script>-->
+			</script>
 			<script type="text/html" id="drag_T_edit">
 				<div class="cq-into-edit">
 					<div class="add-edit cq-edit-title" contenteditable="true">{{title}}</div>
@@ -156,7 +159,7 @@
 			</script>
 			<script type="text/html" id="ui_additem_content">
 				{{each items as itemData i}}
-				<li><label class="input-check"><input type="{{if type==1}}radio{{else if type==2}}checkbox{{/if}}" name="{{name}}" value="选项{{i+1+index}}"></label>
+				<li><label class="input-check"><input type="{{if type==1}}radio{{else if type==2}}checkbox{{/if}}" name="{{name}}" value="{{itemData.value}}"></label>
 					<div class="cq-answer-content T_edit T_plugins" data-Tid="{{itemData.tid}}">选项{{i+1+index}}</div>
 				</li>
 				{{/each}}
@@ -185,7 +188,7 @@
                     			listItems.checkcurr=$(this).find('input').prop('checked');
                     			qListItems.push(listItems)
                     		});
-                    		dataTx.analysis=$(this).find('.analysis_contx').val()||"";
+                    		dataTx.analysis=$(this).find('.analysis_contx').val()||0;
                     		dataTx.qListItems=qListItems;
                     		questionItems.push(dataTx);
                     	});
@@ -193,7 +196,6 @@
                     	console.log(JSON.stringify(dataBase));
 //                     	alert(dataBase);
                     	
-//                     	return ;
 	               		 $.ajax({  
 	         	            "url":"/kindergarten/admin/questionsurvey/submit",  
 	         	            "type":"post",  

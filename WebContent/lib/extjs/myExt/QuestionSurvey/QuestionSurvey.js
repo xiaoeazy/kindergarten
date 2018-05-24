@@ -65,7 +65,7 @@ Ext.extend(QuestionSurvey.QuestionSurveyPanel, Ext.Panel, {
 				}],
 	        columns: [
 	            {header: "问卷调查名称",  sortable: true,  dataIndex: 'surveyName',align:'center'},
-	            {header: "查看",  align:'center'}
+	            {header: "查看",dataIndex: 'id',  align:'center',renderer:me.buttonRender}
 	            
 	        ],
 	        width:'100%',
@@ -98,13 +98,17 @@ Ext.extend(QuestionSurvey.QuestionSurveyPanel, Ext.Panel, {
 		});
 		win.show();
 	},
+	buttonRender:function(id){
+		   return "<button  width=\"50px\" onclick=\"yulanQuestion('"+id+"')\">预览</button>";
+		   
+	},
 	deleteQuestionSurvey:function(records,store,mainId){
 		  Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
-		  var linkobj = [];
+		  var qsobj = [];
 		  for(var i=0;i<records.length;i++){
 			  var record = records[i];
 			  var id = record.get("id");
-			  linkobj.push({"id":id});
+			  qsobj.push({"id":id});
 		  }
 		  
 		  
@@ -115,7 +119,7 @@ Ext.extend(QuestionSurvey.QuestionSurveyPanel, Ext.Panel, {
 		    			url : appName + '/admin/QuestionSurvey/remove',
 		                method : 'post',
 		                headers: {'Content-Type':'application/json'},
-		                params : JSON.stringify(linkobj),
+		                params : JSON.stringify(qsobj),
 		                success : function(response, options) {
 		              	  Ext.getBody().unmask();
 		              	  var responseArray = Ext.util.JSON.decode(response.responseText);
@@ -140,4 +144,9 @@ Ext.extend(QuestionSurvey.QuestionSurveyPanel, Ext.Panel, {
 	
 	
 });
+
+function yulanQuestion(id){
+	var url =appName+"/index/questionsurvey/query?id="+id;
+	window.open(url);
+}
 
