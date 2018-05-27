@@ -4,7 +4,11 @@ import org.springframework.stereotype.Controller;
 import com.huan.HTed.system.controllers.BaseController;
 import com.huan.HTed.core.IRequest;
 import com.huan.HTed.system.dto.ResponseData;
+
+import cn.huan.kindergarten.bean.ExtStore;
+import cn.huan.kindergarten.bean.TreeBean;
 import cn.huan.kindergarten.dto.KgQuestionmainitem;
+import cn.huan.kindergarten.dto.KgQuestionsurvey;
 import cn.huan.kindergarten.service.IKgQuestionmainitemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.validation.BindingResult;
+
+import java.util.ArrayList;
 import java.util.List;
 
     @Controller
@@ -49,4 +55,23 @@ import java.util.List;
         service.batchDelete(dto);
         return new ResponseData();
     }
+    
+ //========================================后台===================================
+	
+    @RequestMapping(value = "/admin/questionmainitem/query")
+    @ResponseBody
+    public List<TreeBean> adminQuery(KgQuestionmainitem dto, HttpServletRequest request) {
+    	 IRequest requestContext = createRequestContext(request);
+         List<KgQuestionmainitem> list = service.select(requestContext, dto);
+         List<TreeBean> tlist = new ArrayList<TreeBean>();
+         for(KgQuestionmainitem km :list) {
+        	 TreeBean tb = new TreeBean();
+        	 tb.setText(km.getqItemsTitle());
+        	 tb.setLeaf(true);
+        	 tb.setId(km.getId()+"");
+        	 tlist.add(tb);
+         }
+         return tlist;
+    }
+    
     }
