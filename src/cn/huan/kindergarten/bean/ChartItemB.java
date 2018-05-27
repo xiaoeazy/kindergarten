@@ -1,6 +1,6 @@
 package cn.huan.kindergarten.bean;
 
-public class ChartItemA {
+public class ChartItemB {
 	private Long id;
 	private String name;
 	private String value;
@@ -9,7 +9,7 @@ public class ChartItemA {
 	
 	
 	
-
+	
 	public String getValue() {
 		return value;
 	}

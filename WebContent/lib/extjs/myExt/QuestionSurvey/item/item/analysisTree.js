@@ -10,6 +10,7 @@ Ext.extend(analysisTree.analysisTreePanel, Ext.tree.Panel, {
 	initUIComponents : function() {
 		
 		var mainId = this.mainId;
+		var centerMainId  = this.centerMainId;
 		var sid = this.sid;
 		var _panel2 =this._panel2;
 		var leftTreeSign=mainId+'leftTree_';
@@ -33,7 +34,7 @@ Ext.extend(analysisTree.analysisTreePanel, Ext.tree.Panel, {
 //                      root : 'data'//数据
                   },
                   extraParams: {
-                	  sid :  sid 
+                	  sid : sid 
 		         }
               },
               root : {//定义根节点，此配置是必须的
@@ -58,13 +59,24 @@ Ext.extend(analysisTree.analysisTreePanel, Ext.tree.Panel, {
 			listeners:{
 				 'itemclick':function(view,record,item,index,e,eOpts){
 //					 alert(record.data.id+":"+record.data.text);
-					 var centerTop = Ext.getCmp("centerTop");
-					 var centerPanel=null;
-		    		 if(frontPanel!=null){
-		    			 _panel2.remove(frontPanel);
+					 var iconCls = record.data.iconCls;
+					 var qid = record.data.id;
+					 var centerPanel = Ext.getCmp(centerMainId);
+					 var newCenterPanel=null;
+		    		 if(centerPanel!=null){
+		    			 _panel2.remove(centerPanel);
 		    			 _panel2.doLayout();
-		    			 centerPanel=new ChartsKitchenSink.view.charts.pie.Basic({mainId:'centerTop_'});
-		    			 _panel2.add(right_top_panel);
+		    			 if(iconCls=='A'){
+		    				 newCenterPanel = new chartA.chartAPanel({mainId:centerMainId,qid:qid});
+		    			 }
+		    			 if(iconCls=='B'){
+		    				 newCenterPanel = new chartB.chartBPanel({mainId:centerMainId,qid:qid});
+		    			 }
+		    			 if(iconCls=='C'){
+		    				 newCenterPanel = new chartC.chartCPanel({mainId:centerMainId,qid:qid});
+		    			 }
+		    			
+		    			 _panel2.add(newCenterPanel);
 		    			 _panel2.doLayout();
 		    		 }
 				 }

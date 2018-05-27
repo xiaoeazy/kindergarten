@@ -99,8 +99,7 @@ Ext.extend(QuestionSurvey.QuestionSurveyPanel, Ext.Panel, {
 		win.show();
 	},
 	buttonRender:function(id){
-		   return "<button  width=\"50px\" onclick=\"yulanQuestion('"+id+"')\">预览</button>";
-		   
+		   return "<button  width=\"50px\" onclick=\"yulanQuestion('"+id+"')\">预览</button>&nbsp;&nbsp;<button  width=\"50px\" onclick=\"yulanAnalysis('"+id+"')\">分析</button>";
 	},
 	deleteQuestionSurvey:function(records,store,mainId){
 		  Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
@@ -148,5 +147,14 @@ Ext.extend(QuestionSurvey.QuestionSurveyPanel, Ext.Panel, {
 function yulanQuestion(id){
 	var url =appName+"/index/questionsurvey/query?id="+id;
 	window.open(url);
+}
+
+function yulanAnalysis(sid){
+	var mainId = "analysis_";
+	var win = new showAnalysisWindow.showAnalysisWindowWindow({
+		sid:sid,
+		mainId:mainId
+	});
+	win.show();
 }
 

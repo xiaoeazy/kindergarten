@@ -51,7 +51,7 @@
 									<tr>
 										<td class="module-menu">&nbsp;</td>
 										<td>
-											<div class="cq-title T_edit" data-Tid="10002" id="surveyDesc"><span style="font-size:16px;">请编辑问卷调查简介</span></div>
+											<div class="cq-title T_edit" data-Tid="10002" id="surveyDesc">请编辑问卷调查简介</div>
 										</td>
 									</tr>
 								</tbody>
@@ -79,7 +79,7 @@
 							</div>
 						</div>
 						<div class="ui-drag-area">
-							<div class="cq-title T_edit T_plugins" data-Tid="{{itmetid}}"><span style="font-size:16px;">{{if type==1}}单选题目标题{{else if type==2}}多选题目标题{{/if}}</span></div>
+							<div class="cq-title T_edit T_plugins" data-Tid="{{itmetid}}">{{if type==1}}单选题目标题{{else if type==2}}多选题目标题{{/if}}</div>
 							<div class="hiddenType" style="display:none">{{type}}</div>
 						</div>
 						<div class="cq-items-content">
@@ -111,7 +111,7 @@
 							</div>
 						</div>
 						<div class="ui-drag-area">
-							<div class="cq-title T_edit T_plugins" data-Tid="{{itmetid}}"><span style="font-size:16px;">{{if type==5}}填空题目标题{{else if type==6}}完形填空题目标题{{/if}}</span></div>
+							<div class="cq-title T_edit T_plugins" data-Tid="{{itmetid}}">{{if type==5}}填空题目标题{{else if type==6}}完形填空题目标题{{/if}}</div>
 							<div class="hiddenType" style="display:none">{{type}}</div>
 						</div>
 						<div class="cq-items-content">
@@ -134,7 +134,7 @@
 							</div>
 						</div>
 						<div class="ui-drag-area">
-							<div class="cq-title T_edit T_plugins" data-Tid="{{itmetid}}"><span style="font-size:16px;">描述题目标题</span></div>
+							<div class="cq-title T_edit T_plugins" data-Tid="{{itmetid}}">描述题目标题</div>
 							<div class="hiddenType" style="display:none">{{type}}</div>
 						</div>
 						<div class="cq-items-content">
@@ -202,7 +202,9 @@
 	         	            "success":function(obj){
 	         	            	 var json = eval(obj); 
 	         	            	 if(json.success){
-	         	            		 alert("更新成功");
+	         	            		 alert("添加成功");
+	         	            		var windowElement = parent.Ext.fly(window.frameElement).up('div.x-window');
+	         	            		parent.Ext.getCmp(windowElement.id).close();
 	         	            	 }
 	         	            },  
 	         	            "error":function(obj){

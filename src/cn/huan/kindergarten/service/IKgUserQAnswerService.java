@@ -7,4 +7,5 @@ import cn.huan.kindergarten.dto.KgUserQAnswer;
 
 public interface IKgUserQAnswerService extends IBaseService<KgUserQAnswer>, ProxySelf<IKgUserQAnswerService>{
 	public int queryCount(IRequest request,KgUserQAnswer record);
+	public int adminQueryCount(IRequest request,KgUserQAnswer record);
 }

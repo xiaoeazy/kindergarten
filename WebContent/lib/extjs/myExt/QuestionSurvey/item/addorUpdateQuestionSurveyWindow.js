@@ -31,7 +31,9 @@ Ext.extend(addorUpdateQuestionSurvey.addorUpdateQuestionSurveyWindow, Ext.Window
 		        },
 				modal : true,
 				listeners:{
-					
+					'close':function(){
+						parentStore.reload();
+					}
 				}
 			}
 		);

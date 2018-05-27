@@ -42,8 +42,8 @@
     <div class="v4incheadertop_tel_block">
         <div class="v4incheadertop_tel">
             <p class="cl"></p><p class="cr" style="float:right">
-            	<a href="javascript:void(0)" onclick="javascript:SetHomeFoot(this,&#39;http://www.gszfcg.gansu.gov.cn/&#39;)" title="" style="color:#fff"> 设为首页 </a><span class="spe"> | </span> 
-			 	<a href="javascript:void(0)" onclick="javascript:shouCangFoot(&#39;http://www.gszfcg.gansu.gov.cn/&#39;,&#39;甘肃政府采购网&#39;)" title="" style="color:#fff"> 收藏本站 </a> <span class="spe"> | </span>
+            	<a href="javascript:void(0)" onclick="javascript:SetHomeFoot(this,&#39;http://www.baidu.com/&#39;)" title="" style="color:#fff"> 设为首页 </a><span class="spe"> | </span> 
+			 	<a href="javascript:void(0)" onclick="javascript:shouCangFoot(&#39;http://www.baidu.com/&#39;,&#39;甘肃政府采购网&#39;)" title="" style="color:#fff"> 收藏本站 </a> <span class="spe"> | </span>
 			 <#if Session["userId"]?exists>
 				<a href="${base.contextPath}/index/user"  style="color:#fff">${Session["userRealName"]}</a>
 			 <#else>
@@ -81,10 +81,10 @@
 					
                 </ul>
                 </li>
-                <li id="ch_xhgz" <#if chanel =='CH_XHGZ'> class="actv" </#if>><a href="../../jdjc/index.htm" >协会工作</a>
-                <ul>
-               		 <li><a href="${base.contextPath}/index/assessmentTypeList">评选评估</a></li> 
-                </ul>
+                <li id="ch_xhgz" <#if chanel =='CH_XHGZ'> class="actv" </#if>><a href="${base.contextPath}/index/assessmentTypeList" >评选评估</a>
+<!--                 <ul> -->
+<!--                		 <li><a href="${base.contextPath}/index/assessmentTypeList">评选评估</a></li>  -->
+<!--                 </ul> -->
                 </li>
                 <li id="ch_lxwm" <#if chanel =='CH_LXWM'> class="actv" </#if>><a href="${base.contextPath}/index/contact" >联系我们</a></li>
             </ul>

@@ -67,6 +67,13 @@ import java.util.List;
          for(KgQuestionmainitem km :list) {
         	 TreeBean tb = new TreeBean();
         	 tb.setText(km.getqItemsTitle());
+        	 if(("1").equals(km.getItemType())) {
+        		 tb.setIconCls("A");  //A饼状图
+        	 }else if(("2").equals(km.getItemType())) {
+        		 tb.setIconCls("B");	//B条状图
+        	 }else {
+        		 tb.setIconCls("C");	//C查询列表
+        	 }
         	 tb.setLeaf(true);
         	 tb.setId(km.getId()+"");
         	 tlist.add(tb);

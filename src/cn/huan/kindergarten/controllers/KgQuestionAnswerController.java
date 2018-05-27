@@ -18,6 +18,10 @@ import com.huan.HTed.system.controllers.BaseController;
 import com.huan.HTed.system.dto.ResponseData;
 
 import cn.huan.kindergarten.bean.ChartItemA;
+import cn.huan.kindergarten.bean.ChartItemB;
+import cn.huan.kindergarten.bean.ChartItemC;
+import cn.huan.kindergarten.bean.ExtStore;
+import cn.huan.kindergarten.dto.KgNewstype;
 import cn.huan.kindergarten.dto.KgQuestionAnswer;
 import cn.huan.kindergarten.dto.KgUserQAnswer;
 import cn.huan.kindergarten.service.IKgQuestionAnswerService;
@@ -61,9 +65,9 @@ import cn.huan.kindergarten.service.IKgUserQAnswerService;
         return new ResponseData();
     }
 //========================================后台===================================
-    @RequestMapping(value = "/admin/question/answer/query")
+    @RequestMapping(value = "/admin/question/answer/queryA")
     @ResponseBody
-    public List<ChartItemA> adminQuery(KgQuestionAnswer dto, HttpServletRequest request) {
+    public ExtStore adminQueryA(KgQuestionAnswer dto, HttpServletRequest request) {
     	 IRequest requestContext = createRequestContext(request);
          List<KgQuestionAnswer> list = service.select(requestContext, dto);
          List<ChartItemA> tlist = new ArrayList<ChartItemA>();
@@ -71,6 +75,7 @@ import cn.huan.kindergarten.service.IKgUserQAnswerService;
          for(KgQuestionAnswer ka :list) {
         	 ChartItemA tb = new ChartItemA();
         	 tb.setName(ka.getName());
+        	 tb.setValue(ka.getValue());
         	 tb.setId(ka.getId());
         	 
         	 KgUserQAnswer qa = new KgUserQAnswer();
@@ -83,9 +88,66 @@ import cn.huan.kindergarten.service.IKgUserQAnswerService;
         	 tlist.add(tb);
          }
          for(ChartItemA ka:tlist) {
-        	 double percent = ka.getSize()/allSize;
+        	 double percent = ka.getSize()/allSize*100;
         	 ka.setPercent(percent);
          }
-         return tlist;
+         return new ExtStore(null, null, tlist.size(), tlist);
     }
+    
+    @RequestMapping(value = "/admin/question/answer/queryB")
+    @ResponseBody
+    public ExtStore adminQueryB(KgQuestionAnswer dto, HttpServletRequest request) {
+    	 IRequest requestContext = createRequestContext(request);
+         List<KgQuestionAnswer> list = service.select(requestContext, dto);
+         List<ChartItemB> tlist = new ArrayList<ChartItemB>();
+         double allSize = 0;
+         for(KgQuestionAnswer ka :list) {
+        	 ChartItemB tb = new ChartItemB();
+        	 tb.setName(ka.getName());
+        	 tb.setValue(ka.getValue());
+        	 tb.setId(ka.getId());
+        	 
+        	 KgUserQAnswer qa = new KgUserQAnswer();
+        	 qa.setAid(ka.getId());
+        	 List<KgUserQAnswer> uqa = qService.select(requestContext, qa);
+        	 if(uqa.size()>0) {
+        		 tb.setSize(uqa.size());
+        		 allSize+=uqa.size();
+        	 }
+        	 tlist.add(tb);
+         }
+         for(ChartItemB ka:tlist) {
+        	 double percent = ka.getSize()/allSize*100;
+        	 ka.setPercent(percent);
+         }
+         return new ExtStore(null, null, tlist.size(), tlist);
+    }
+    
+    
+    @RequestMapping(value = "/admin/question/answer/queryC")
+    @ResponseBody
+    public ExtStore adminQueryC(KgQuestionAnswer dto, @RequestParam(defaultValue = DEFAULT_PAGE)int page,int start,
+            @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit, HttpServletRequest request) {
+    	 IRequest requestContext = createRequestContext(request);
+         List<KgQuestionAnswer> list = service.select(requestContext, dto);
+         List<ChartItemC> tlist = new ArrayList<ChartItemC>();
+         int count = 0;
+         if(list.size()>0) {
+        	 KgQuestionAnswer answer = list.get(0);
+        	 KgUserQAnswer qa = new KgUserQAnswer();
+        	 qa.setAid(answer.getId());
+        	 
+        	 List<KgUserQAnswer> uqaList = qService.select(requestContext, qa,page,limit);
+              count = qService.adminQueryCount(requestContext, qa);
+        	 
+        	 for(KgUserQAnswer kuq :uqaList) {
+        		 ChartItemC tb = new ChartItemC();
+        		 tb.setContent(kuq.getContent());
+            	 tb.setId(kuq.getId());
+            	 tlist.add(tb);
+        	 }
+         }
+         return new ExtStore(start, limit, count, tlist);
+    }
+    
     }

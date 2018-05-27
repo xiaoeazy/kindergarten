@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.huan.HTed.core.IRequest;
 import com.huan.HTed.system.service.impl.BaseServiceImpl;
 
+import cn.huan.kindergarten.dto.KgQuestionAnswer;
 import cn.huan.kindergarten.dto.KgUserQAnswer;
 import cn.huan.kindergarten.mapper.KgUserQAnswerMapper;
 import cn.huan.kindergarten.service.IKgUserQAnswerService;
@@ -19,5 +20,9 @@ public class KgUserQAnswerServiceImpl extends BaseServiceImpl<KgUserQAnswer> imp
 	@Override
 	public int queryCount(IRequest request,KgUserQAnswer record) {
 		return  kgUserQAnswerMapper.queryCount(record);
+	}
+	
+	public int adminQueryCount(IRequest request,KgUserQAnswer record) {
+		return  mapper.selectCount(record);
 	}
 }

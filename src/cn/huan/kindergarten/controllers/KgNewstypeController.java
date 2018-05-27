@@ -66,7 +66,7 @@ import cn.huan.kindergarten.service.IKgNewstypeService;
         @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit, HttpServletRequest request) {
     	 IRequest requestContext = createRequestContext(request);
          List<KgNewstype> list = service.select(requestContext,dto,page,limit);
-         int count = service.adminQueryCount(requestContext, null);
+         int count = service.adminQueryCount(requestContext, dto);
          return new ExtStore(start, limit, count, list);
     }
     

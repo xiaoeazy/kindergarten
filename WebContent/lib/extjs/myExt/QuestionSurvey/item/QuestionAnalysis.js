@@ -11,7 +11,11 @@ Ext.extend(QuestionAnalysis.QuestionAnalysisPanel, Ext.Panel, {
 		 var mainId = this.mainId+"_QuestionAnalysis";
 		 
 		 
-		 var centerPanel = new chartA.chartAPanel({mainId:'centerTop_'});
+//		 var centerPanel = new chartA.chartAPanel({mainId:'centerTop_'});
+		 var centerMainId = 'AnalysisCenterTop';
+		 var sid = this.sid;
+		 var centerPanel = new chartEmpty.chartEmptyPanel({mainId:centerMainId});
+		 
 		 var  _panel2 = new Ext.Panel({
 	   			width : '100%',
 	   			border:false	,
@@ -20,11 +24,12 @@ Ext.extend(QuestionAnalysis.QuestionAnalysisPanel, Ext.Panel, {
 	   			frame : true,
 	   			items:[centerPanel]
 	   	   }) ;
-		 //lefttree
+		 
 		 var leftTree  = new  analysisTree.analysisTreePanel({
 			 mainId:mainId,
 			 _panel2:_panel2,
-			 sid:15
+			 centerMainId:centerMainId,
+			 sid:sid
 		 });
 	
 		
