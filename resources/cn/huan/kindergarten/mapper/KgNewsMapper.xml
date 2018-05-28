@@ -39,7 +39,7 @@
     </resultMap>
 
    <select id="selectWithOtherInfo" resultMap="OtherResultMap" parameterType="cn.huan.kindergarten.dto.KgNews">
-        select a.*,b.typename from kg_news a left join kg_newsType b
+        select a.*,b.typename from kg_news a left join kg_newstype b
             on a.typeid=b.id 
            <where>
            		<if test="newstitle != null">
