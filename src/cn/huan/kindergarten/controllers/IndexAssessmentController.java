@@ -122,7 +122,7 @@ public class IndexAssessmentController extends IndexBaseController{
         
         mv.addObject("assessmentType", kgNewstype);
         mv.addObject("userUploadList",userUploadList);
-        loadNavigation(mv, requestContext,CH_ZXZX);
+        loadNavigation(mv, requestContext,CH_XHGZ);
         loadAttriteAssessment(mv, requestContext,3);
         return mv;
     }

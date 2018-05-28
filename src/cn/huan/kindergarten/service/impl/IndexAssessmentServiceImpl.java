@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -41,7 +42,8 @@ public class IndexAssessmentServiceImpl  implements IIndexAssessmentService{
 	 
 	 public List<FileInfo> assessmentUpload(IRequest requestContext,HttpServletRequest request,Long assessmentActivityId) 
 			 throws StoragePathNotExsitException, UniqueFileMutiException, IOException, FileUploadException  {
-			String fileResourcesPath="/resources/upload/assessment";
+		    Long userid = (Long)request.getSession().getAttribute(IRequest.FIELD_USER_ID);
+			String fileResourcesPath="/resources/upload/assessment"+"/"+assessmentActivityId+"/"+userid;
 	    	String file_path=request.getServletContext().getRealPath("/") + fileResourcesPath;
 	        File dir=new File(file_path);
 	        if(!dir.exists())
@@ -57,19 +59,23 @@ public class IndexAssessmentServiceImpl  implements IIndexAssessmentService{
 	                fi.getString();
 	            } else {
 	            	
-	            	String imgName = fi.getName();
-	                File tempFile = new File(file_path+'/'+imgName);
-	                if (imgName == null) {
+	            	String oriFileName = fi.getName();
+	                if (oriFileName == null) {
 	                	throw new RuntimeException("无文件");
 	                } 
+	                int idx = oriFileName.lastIndexOf(".");
+	                String ext= oriFileName.substring(idx ).toUpperCase();
+	                UUID randomFileName = UUID.randomUUID();
+	                String newFileName = randomFileName+ext;
+	                File tempFile = new File(file_path+'/'+newFileName);
 	                try (InputStream is = fi.getInputStream(); OutputStream os = new FileOutputStream(tempFile)) {
 	                    IOUtils.copyLarge(is, os);
 	                }
-	                allFilePath.add(new FileInfo(imgName,fileResourcesPath+"/"+imgName));
+	                allFilePath.add(new FileInfo(oriFileName,fileResourcesPath+"/"+newFileName));
 	            }
 	        }
 	        //更新
-	        Long userid = (Long)request.getSession().getAttribute(IRequest.FIELD_USER_ID);
+	       
 //	        int lockTable = iKgAssessmentActivityUserProgressService.countLockTable(requestContext);
 	        KgAssessmentActivityUserProgress isExistHaveUploadQuery = new KgAssessmentActivityUserProgress();
 	        isExistHaveUploadQuery.setUploadUserId(userid);
@@ -80,6 +86,7 @@ public class IndexAssessmentServiceImpl  implements IIndexAssessmentService{
 	        if(isExistHaveUploadResult.size()==0) {
 	        	    KgAssessmentActivityUserProgress kaup = new KgAssessmentActivityUserProgress();
 		   	        kaup.setAssessmentActivityId(assessmentActivityId);
+		   	        kaup.setState(10);
 		   	        kaup.setUploadUserId(userid);
 		   	        insertBean=iKgAssessmentActivityUserProgressService.insert(requestContext, kaup);
 	        }else {
