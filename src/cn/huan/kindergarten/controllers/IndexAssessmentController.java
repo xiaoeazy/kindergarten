@@ -144,19 +144,15 @@ public class IndexAssessmentController extends IndexBaseController{
     
     
     
-    @RequestMapping(value = "/index/assessment/upload", method = RequestMethod.POST, produces = "text/html")
+    @RequestMapping(value = "/index/admin/assessment/upload", method = RequestMethod.POST, produces = "text/html")
     @ResponseBody
     public UploadImgAjax fileupload(HttpServletRequest request)
             throws StoragePathNotExsitException, UniqueFileMutiException, IOException, FileUploadException {
-    	 HttpSession session = request.getSession(false);
-         if(session==null) {
-        	 throw new FileUploadException("需要登陆");
-         }
+         
     	IRequest requestContext = createRequestContext(request);
     	Long assessmentActivityId = Long.parseLong(request.getParameter("assessmentActivityId"));
     	if(assessmentActivityId==null)
     		throw new  FileUploadException("参数错误");
-    	
     	List<FileInfo> list = iIndexAssessmentService.assessmentUpload(requestContext, request, assessmentActivityId);
 //        return "<script>window.parent.showUploadSucessLogo()</script>";
     	return new UploadImgAjax(true,null, "");

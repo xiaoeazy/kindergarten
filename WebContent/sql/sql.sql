@@ -98,7 +98,7 @@ CREATE TABLE `kg_assessment_activity_user_progress` (
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `Index_2` (`assessment_activity_id`,`upload_user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_assessment_activity_user_progress`
@@ -107,7 +107,9 @@ CREATE TABLE `kg_assessment_activity_user_progress` (
 /*!40000 ALTER TABLE `kg_assessment_activity_user_progress` DISABLE KEYS */;
 INSERT INTO `kg_assessment_activity_user_progress` (`id`,`assessment_activity_id`,`upload_user_id`,`admin_suggestion`,`expert_user_id`,`expert_suggestion`,`state`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
  (12,3,10013,'管理员通过',10013,'1111',50,NULL,-1,-1,NULL,NULL,NULL,'2018-05-21 14:06:36',NULL,'ID',NULL,NULL,NULL),
- (13,5,10013,NULL,NULL,NULL,10,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL);
+ (13,5,10013,NULL,NULL,NULL,10,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
+ (14,6,10013,NULL,NULL,NULL,10,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
+ (15,9,10013,NULL,NULL,NULL,10,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_assessment_activity_user_progress` ENABLE KEYS */;
 
 
@@ -136,7 +138,7 @@ CREATE TABLE `kg_assessment_activity_user_upload` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_assessment_activity_user_upload`
@@ -156,7 +158,12 @@ INSERT INTO `kg_assessment_activity_user_upload` (`id`,`upload_user_id`,`progres
  (24,10013,12,'44.jpg','/resources/upload/assessment/44.jpg','2018-05-31 12:56:04',1,-1,-1,-1,'2018-05-31 12:56:04',-1,'2018-05-31 12:56:04',-1,'ID',NULL,NULL,NULL),
  (25,10013,12,'44.jpg','/resources/upload/assessment/44.jpg','2018-05-31 12:56:04',1,-1,-1,-1,'2018-05-31 12:56:04',-1,'2018-05-31 12:56:04',-1,'ID',NULL,NULL,NULL),
  (26,10013,12,'44.jpg','/resources/upload/assessment/44.jpg','2018-05-31 12:56:04',1,-1,-1,-1,'2018-05-31 12:56:04',-1,'2018-05-31 12:56:04',-1,'ID',NULL,NULL,NULL),
- (27,10013,12,'44.jpg','/resources/upload/assessment/44.jpg','2018-05-31 12:56:04',1,-1,-1,-1,'2018-05-31 12:56:04',-1,'2018-05-31 12:56:04',-1,'ID',NULL,NULL,NULL);
+ (27,10013,12,'44.jpg','/resources/upload/assessment/44.jpg','2018-05-31 12:56:04',1,-1,-1,-1,'2018-05-31 12:56:04',-1,'2018-05-31 12:56:04',-1,'ID',NULL,NULL,NULL),
+ (28,10013,14,'1.txt','/resources/upload/assessment/6/10013/d97438a5-119d-4f28-b95d-0c275c68b5fe.TXT',NULL,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
+ (29,10013,14,'1.txt','/resources/upload/assessment/6/10013/46793017-ff87-42f1-813d-f76c760435ec.TXT',NULL,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
+ (30,10013,14,'a.docx','/resources/upload/assessment/6/10013/03d818fc-076b-4d45-a160-6749df50a43a.DOCX',NULL,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
+ (31,10013,14,'b.pptx','/resources/upload/assessment/6/10013/76c64cb9-392c-4719-8276-ecbc43e66b87.PPTX',NULL,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
+ (32,10013,15,'1.txt','/resources/upload/assessment/9/10013/8374aecb-0e03-4670-bf8a-a145ccc98a0a.TXT',NULL,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_assessment_activity_user_upload` ENABLE KEYS */;
 
 

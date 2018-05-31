@@ -43,11 +43,11 @@ public class IndexAssessmentServiceImpl  implements IIndexAssessmentService{
 	 public List<FileInfo> assessmentUpload(IRequest requestContext,HttpServletRequest request,Long assessmentActivityId) 
 			 throws StoragePathNotExsitException, UniqueFileMutiException, IOException, FileUploadException  {
 		    Long userid = (Long)request.getSession().getAttribute(IRequest.FIELD_USER_ID);
-			String fileResourcesPath="/resources/upload/assessment"+"/"+assessmentActivityId+"/"+userid;
+			String fileResourcesPath="/resources/upload/assessment"+"/"+assessmentActivityId+"/"+userid+"/";
 	    	String file_path=request.getServletContext().getRealPath("/") + fileResourcesPath;
 	        File dir=new File(file_path);
 	        if(!dir.exists())
-	            dir.mkdir();
+	            dir.mkdirs();
 	        DiskFileItemFactory factory = new DiskFileItemFactory();
 	        ServletFileUpload upload = new ServletFileUpload(factory);
 	        List<FileItem> items = upload.parseRequest(request);
@@ -71,7 +71,7 @@ public class IndexAssessmentServiceImpl  implements IIndexAssessmentService{
 	                try (InputStream is = fi.getInputStream(); OutputStream os = new FileOutputStream(tempFile)) {
 	                    IOUtils.copyLarge(is, os);
 	                }
-	                allFilePath.add(new FileInfo(oriFileName,fileResourcesPath+"/"+newFileName));
+	                allFilePath.add(new FileInfo(oriFileName,fileResourcesPath+newFileName));
 	            }
 	        }
 	        //更新

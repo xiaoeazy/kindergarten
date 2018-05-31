@@ -7,20 +7,25 @@
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <title>${assessmentInfo.assessmentActivityName}_上海市托幼协会</title>
 <link href="${base.contextPath}/lib/index/css/detail.css" rel="stylesheet" type="text/css" />
 
-<!-- <link rel="stylesheet" type="text/css" href="${base.contextPath}/lib/index/webuploader/webuploader.css"> -->
-<!-- <script type="text/javascript" src="${base.contextPath}/lib/index/webuploader/webuploader.min.js"></script> -->
-
-
-<link rel="stylesheet" href="${base.contextPath}/lib/bootstrap-3.3.7/css/bootstrap.min.css">
-<link href="${base.contextPath}/lib/bootstrap-table/bootstrap-table.css" rel="stylesheet" type="text/css" />
-
 <script  type="text/javascript" src="${base.contextPath}/lib/index/search/static/js/jquery-1.11.1.min.js"></script>
+
+<!-- bootstrap插件 -->
+<link rel="stylesheet" href="${base.contextPath}/lib/bootstrap-3.3.7/css/bootstrap.min.css">
 <script src="${base.contextPath}/lib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-<script src="${base.contextPath}/lib/bootstrap-table/bootstrap-table.js"></script>
-<script src="${base.contextPath}/lib/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+
+<!-- bootstraptable插件 -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/locale/bootstrap-table-zh-CN.min.js"></script>
+
+<!-- bootstrap-fileupload -->
+<link rel="stylesheet" href="${base.contextPath}/lib/bootstrap-fileupload/css/fileinput.min.css"  />
+<script src="${base.contextPath}/lib/bootstrap-fileupload/js/fileinput.min.js"></script>
+<script src="${base.contextPath}/lib/bootstrap-fileupload/js/locales/zh.js"></script>
 
 <script>
 function dowload(filePath){
@@ -28,6 +33,9 @@ function dowload(filePath){
 }
 function btn_fresh(){
 	$("#table").bootstrapTable('refresh');
+}
+function btn_add(){
+	 $("#myModal").modal().show();
 }
 
 </script>
@@ -44,7 +52,7 @@ function btn_fresh(){
 <div class="main_left_block mt13">
 <div class="wz_block">
     <div class="vF_deail_currentloc">
-        <p>当前位置：<a href="../../index.htm"  title="首页" main.htm class="CurrChnlCls">首页</a>
+        <p>当前位置：<a href="../../index.htm"  title="首页"  class="CurrChnlCls">首页</a>
           &nbsp;&raquo;&nbsp;<a href="${base.contextPath}/index/news" title="政府采购动态" class="CurrChnlCls">资讯中心</a>
           &nbsp;&raquo;&nbsp;<a href="${base.contextPath}/index/assessmentTypeList?typeid=${assessmentType.id}" title="${assessmentType.assessmentTypeName}" class="CurrChnlCls">${assessmentType.assessmentTypeName}</a>
            &nbsp;&raquo;&nbsp;${assessmentInfo.assessmentActivityName}
@@ -54,7 +62,7 @@ function btn_fresh(){
 
 		<div class="vF_detail_main">
             <div class="vF_detail_header"><h2 class="tc">${assessmentInfo.assessmentActivityName};</h2>
-            <p class="tc"><span id="pubTime">${assessmentInfo.createdate?string('yyyy-MM-dd HH:mm:ss')}</span> 来源：<span id="sourceName">发布部</span> 【<span id="printBtn">打印</span>】 <span id="shareTo" style=""></span><img src="../../../pub.ccgp.gov.cn/common/images/2tqr.jpg" tppabs="http://pub.ccgp.gov.cn/common/images/2tqr.jpg" id="imgqrshow" style="postion: relative;vertical-align:middle" /><div id="qrcode" style="display:none;position: absolute;margin-left:527px;margin-top:-15px;"></div></p></div>
+            <p class="tc"><span id="pubTime">${assessmentInfo.createdate?string('yyyy-MM-dd HH:mm:ss')}</span> 来源：<span id="sourceName">发布部</span> 【<span id="printBtn">打印</span>】 <span id="shareTo" style=""></span><img src="../../../pub.ccgp.gov.cn/common/images/2tqr.jpg" tppabs="http://pub.ccgp.gov.cn/common/images/2tqr.jpg" id="imgqrshow" style="postion: relative;vertical-align:middle" /></div>
             <div class="vF_detail_content">
                 ${assessmentInfo.assessmentActivityContent};
             </div>
@@ -65,8 +73,24 @@ function btn_fresh(){
 
     </div>
     <#if Session["userId"]?exists>
+    	<!-- 弹出框 -->
+    	<form>
+		    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		        <div class="modal-dialog modal-lg" role="document">
+		            <div class="modal-content">
+		                <div class="modal-header">
+		                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		                    <h4 class="modal-title" id="myModalLabel">请选择文件</h4>
+		                </div>
+		                <div class="modal-body">
+		                    <input type="file" name="txt_file" id="txt_file" multiple class="file-loading" />
+		                </div></div>
+		        </div>
+		    </div>
+		</form>
+    
     	<div id="toolbar" class="btn-group">
-            <button id="btn_add" type="button" class="btn btn-default">
+            <button id="btn_add" type="button" class="btn btn-default"  onclick="btn_add()" >
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
             </button>
             <button id="btn_delete" type="button" class="btn btn-default">
@@ -79,23 +103,14 @@ function btn_fresh(){
             
         </div>
 	    <div id="uploader" class="wu-example" style="float:left;width:100%">
-		    <!--用来存放文件信息-->
-<!-- 		    <div id="thelist" class="uploader-list"></div> -->
-<!-- 		    <div class="btns"> -->
-<!-- 		        <div id="picker">选择文件</div> -->
-<!-- 		        <button id="ctlBtn" class="btn btn-default">开始上传</button> -->
-<!-- 		    </div> -->
 		</div>
 	    
 	    <div class="vF_detail_relcontent mt13">
 		    <h2>
-	<!-- 	    	<input type="file" multiple id="ssi-upload2"/> -->
 		    </h2>
 		    <div class="vF_detail_relcontent_lst">
-		    	 
 	<!-- 	       	  <ul class="c_list_tat"> -->
 	<!--         	 </ul> -->
-
 	        	 	<table id="table"></table>
 		    </div>
 		</div>
@@ -142,99 +157,62 @@ function btn_fresh(){
         </div>
     </div>
 </div>
-<script type="text/javascript">
-		// 文件上传
-// 		jQuery(function() {
-// 		    var $ = jQuery,
-// 		        $list = $('#thelist'),
-// 		        $btn = $('#ctlBtn'),
-// 		        state = 'pending',
-// 		        uploader;
-
-// 		    uploader = WebUploader.create({
-// 		        // 不压缩image
-// 		        resize: false,
-// 		        // swf文件路径
-// 		        swf:'${base.contextPath}/lib/index/webuploader/Uploader.swf',
-// 		        // 文件接收服务端。
-// 		        server: '${base.contextPath}/index/assessment/upload?assessmentActivityId=${assessmentInfo.id}',
-// 		        // 选择文件的按钮。可选。
-// 		        // 内部根据当前运行是创建，可能是input元素，也可能是flash.
-// 		        pick: '#picker'
-// 		    });
-
-// 		    // 当有文件添加进来的时候
-// 		    uploader.on( 'fileQueued', function( file ) {
-// 		        $list.append( '<div id="' + file.id + '" class="item">' +
-// 		            '<h4 class="info">' + file.name + '</h4>' +
-// 		            '<p class="state">等待上传...</p>' +
-// 		        '</div>' );
-// 		    });
-
-// 		    // 文件上传过程中创建进度条实时显示。
-// 		    uploader.on( 'uploadProgress', function( file, percentage ) {
-// 		        var $li = $( '#'+file.id ),
-// 		            $percent = $li.find('.progress .progress-bar');
-
-// 		        // 避免重复创建
-// 		        if ( !$percent.length ) {
-// 		            $percent = $('<div class="progress progress-striped active">' +
-// 		              '<div class="progress-bar" role="progressbar" style="width: 0%">' +
-// 		              '</div>' +
-// 		            '</div>').appendTo( $li ).find('.progress-bar');
-// 		        }
-
-// 		        $li.find('p.state').text('上传中');
-
-// 		        $percent.css( 'width', percentage * 100 + '%' );
-// 		    });
-
-// 		    uploader.on( 'uploadSuccess', function( file ) {
-// 		        $( '#'+file.id ).find('p.state').text('已上传');
-// 		    });
-
-// 		    uploader.on( 'uploadError', function( file ) {
-// 		        $( '#'+file.id ).find('p.state').text('上传出错');
-// 		    });
-
-// 		    uploader.on( 'uploadComplete', function( file ) {
-// 		        $( '#'+file.id ).find('.progress').fadeOut();
-// 		    });
-
-// 		    uploader.on( 'all', function( type ) {
-// 		        if ( type === 'startUpload' ) {
-// 		            state = 'uploading';
-// 		        } else if ( type === 'stopUpload' ) {
-// 		            state = 'paused';
-// 		        } else if ( type === 'uploadFinished' ) {
-// 		            state = 'done';
-// 		        }
-
-// 		        if ( state === 'uploading' ) {
-// 		            $btn.text('暂停上传');
-// 		        } else {
-// 		            $btn.text('开始上传');
-// 		        }
-// 		    });
-
-// 		    $btn.on( 'click', function() {
-// 		        if ( state === 'uploading' ) {
-// 		            uploader.stop();
-// 		        } else {
-// 		            uploader.upload();
-// 		        }
-// 		    });
-// 		});
-
-
-		
-		
-</script>
 
 <script>
+
+var FileInput = function () {
+    var oFile = new Object();
+
+    //初始化fileinput控件（第一次初始化）
+    oFile.Init = function(ctrlName, uploadUrl) {
+	    var control = $('#' + ctrlName);
+	    //初始化上传控件的样式
+	    control.fileinput({
+	        language: 'zh', //设置语言
+	        uploadUrl: uploadUrl, //上传的地址
+// 	        allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
+	        showUpload: true, //是否显示上传按钮
+	        showCaption: false,//是否显示标题
+	        browseClass: "btn btn-primary", //按钮样式     
+	        //dropZoneEnabled: false,//是否显示拖拽区域
+	        //minImageWidth: 50, //图片的最小宽度
+	        //minImageHeight: 50,//图片的最小高度
+	        //maxImageWidth: 1000,//图片的最大宽度
+	        //maxImageHeight: 1000,//图片的最大高度
+	        //maxFileSize: 0,//单位为kb，如果为0表示不限制文件大小
+	        //minFileCount: 0,
+	        maxFileCount: 10, //表示允许同时上传的最大文件个数
+	        enctype: 'multipart/form-data',
+	        validateInitialCount:true,
+	        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+	        msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+	    });
+	
+	    //导入文件上传完成之后的事件
+	    $("#"+ctrlName).on("fileuploaded", function (event, data, previewId, index) {
+	        $("#myModal").modal("hide");
+	        var data = data.response.lstOrderImport;
+	        if (data == undefined) {
+	            toastr.error('文件格式类型不正确');
+	            return;
+	        }
+	        //1.初始化表格
+	        var oTable = new TableInit();
+	        oTable.Init(data);
+	        $("#div_startimport").show();
+	    });
+	}
+    
+    return oFile;
+};
+
 $(function () {
+	 	var oFileInput = new FileInput();
+	    oFileInput.Init("txt_file", "${base.contextPath}/index/admin/assessment/upload?assessmentActivityId="+${assessmentInfo.id});
+	    
+	    
 		$("#table").bootstrapTable({ // 对应table标签的id
-		      url: "${base.contextPath}/index/admin/assessmentDetail/uploadList?activityId ="+${assessmentInfo.id}, // 获取表格数据的url
+		      url: "${base.contextPath}/index/admin/assessmentDetail/uploadList?activityId="+${assessmentInfo.id}, // 获取表格数据的url
 		      toolbar: '#toolbar',
 		      cache: false, // 设置为 false 禁用 AJAX 数据缓存， 默认为true
 		      striped: true,  //表格显示条纹，默认为false
