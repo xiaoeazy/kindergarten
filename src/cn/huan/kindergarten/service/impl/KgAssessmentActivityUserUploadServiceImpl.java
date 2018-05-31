@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.pagehelper.PageHelper;
 import com.huan.HTed.core.IRequest;
 import com.huan.HTed.system.service.impl.BaseServiceImpl;
 
@@ -20,7 +21,12 @@ public class KgAssessmentActivityUserUploadServiceImpl extends BaseServiceImpl<K
 	@Autowired
 	private KgAssessmentActivityUserUploadMapper KgAssessmentActivityUserUploadMapper;
 	
-	public List<KgAssessmentActivityUserUpload>  loadUserUploadList(IRequest request,KgAssessmentActivityUserProgress kaup){
+	public List<KgAssessmentActivityUserUpload>  loadUserUploadList(IRequest request,KgAssessmentActivityUserProgress kaup,int page,int limit){
+		PageHelper.startPage(page, limit);
 		return KgAssessmentActivityUserUploadMapper.loadUserUploadList(kaup);
+	}
+	
+	public int  countUserUploadList(IRequest request,KgAssessmentActivityUserProgress kaup){
+		return KgAssessmentActivityUserUploadMapper.countUserUploadList(kaup);
 	}
 }

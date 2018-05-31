@@ -17,6 +17,7 @@ public class KgAssessmentActivityUserUpload extends BaseDTO {
      public static final String FIELD_UPLOAD_USER_ID = "uploadUserId";
      public static final String FIELD_ASSESSMENT_ACTIVITY_ID = "assessmentActivityId";
      public static final String FIELD_FILE_PATH = "filePath";
+     public static final String FILENAME = "fileName";
 
      @Id
      @GeneratedValue

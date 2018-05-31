@@ -28,6 +28,7 @@ USE kindergarten_dev;
 DROP TABLE IF EXISTS `kg_assessment_activity`;
 CREATE TABLE `kg_assessment_activity` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `finished` tinyint(1) DEFAULT '1',
   `assessment_type_id` bigint(20) unsigned NOT NULL,
   `attributeId` varchar(200) DEFAULT '-1',
   `assessment_activity_name` varchar(45) NOT NULL,
@@ -53,20 +54,20 @@ CREATE TABLE `kg_assessment_activity` (
 --
 
 /*!40000 ALTER TABLE `kg_assessment_activity` DISABLE KEYS */;
-INSERT INTO `kg_assessment_activity` (`id`,`assessment_type_id`,`attributeId`,`assessment_activity_name`,`assessment_activity_content`,`createDate`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (3,16,'','评估任务413111111222222222223333333333333','<p>111</p>','2018-04-23 10:59:19',3,-1,-1,-1,'2018-04-23 10:59:19',-1,'2018-05-19 20:27:31',-1,'ID',NULL,NULL,NULL),
- (4,17,'','评估任务3','<p>222</p>','2018-04-23 10:59:24',2,-1,-1,-1,'2018-04-23 10:59:24',-1,'2018-05-06 13:57:32',-1,'ID',NULL,NULL,NULL),
- (5,16,'','评估任务2','<p>333</p>','2018-04-23 10:59:29',4,-1,-1,-1,'2018-04-23 10:59:29',-1,'2018-05-06 13:57:27',-1,'ID',NULL,NULL,NULL),
- (6,16,'12,14,15','评估任务1','<p>11</p>','2018-04-28 15:51:30',5,-1,-1,-1,'2018-04-28 15:51:30',-1,'2018-05-19 19:24:06',-1,'ID',NULL,NULL,NULL),
- (7,16,'12','评估任务5','<p>评估任务1</p>','2018-05-06 13:57:47',1,-1,-1,-1,'2018-05-06 13:57:47',-1,'2018-05-06 13:57:47',-1,'ID',NULL,NULL,NULL),
- (8,16,'','评估任务6','<p>评估任务1</p>','2018-05-06 13:57:54',1,-1,-1,-1,'2018-05-06 13:57:54',-1,'2018-05-06 13:57:54',-1,'ID',NULL,NULL,NULL),
- (9,16,'','评估任务7','<p>11</p>','2018-05-06 13:58:01',1,-1,-1,-1,'2018-05-06 13:58:01',-1,'2018-05-06 13:58:01',-1,'ID',NULL,NULL,NULL),
- (10,16,'','评估任务8','<p>评估任务8</p>','2018-05-06 14:09:03',1,-1,-1,-1,'2018-05-06 14:09:03',-1,'2018-05-06 14:09:03',-1,'ID',NULL,NULL,NULL),
- (11,16,'','评估任务9','<p>评估任务9</p>','2018-05-06 14:09:10',1,-1,-1,-1,'2018-05-06 14:09:10',-1,'2018-05-06 14:09:10',-1,'ID',NULL,NULL,NULL),
- (12,16,'','评估任务10','<p>评估任务10</p>','2018-05-06 14:09:19',1,-1,-1,-1,'2018-05-06 14:09:19',-1,'2018-05-06 14:09:19',-1,'ID',NULL,NULL,NULL),
- (13,16,'','评估任务11','<p>评估任务11</p>','2018-05-06 14:09:26',1,-1,-1,-1,'2018-05-06 14:09:26',-1,'2018-05-06 14:09:26',-1,'ID',NULL,NULL,NULL),
- (14,16,'12,14','评估12','<p>13</p>','2018-05-12 09:42:43',3,-1,-1,-1,'2018-05-12 09:42:43',-1,'2018-05-12 09:44:22',-1,'ID',NULL,NULL,NULL),
- (15,16,'14,15','131111112222222222233333333333333344444','<p>13<br/></p>','2018-05-12 09:44:32',8,-1,-1,-1,'2018-05-12 09:44:32',-1,'2018-05-19 20:27:06',-1,'ID',NULL,NULL,NULL);
+INSERT INTO `kg_assessment_activity` (`id`,`finished`,`assessment_type_id`,`attributeId`,`assessment_activity_name`,`assessment_activity_content`,`createDate`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
+ (3,1,16,'','评估任务413111111222222222223333333333333','<p>111</p>','2018-04-23 10:59:19',3,-1,-1,-1,'2018-04-23 10:59:19',-1,'2018-05-19 20:27:31',-1,'ID',NULL,NULL,NULL),
+ (4,1,17,'','评估任务3','<p>222</p>','2018-04-23 10:59:24',2,-1,-1,-1,'2018-04-23 10:59:24',-1,'2018-05-06 13:57:32',-1,'ID',NULL,NULL,NULL),
+ (5,1,16,'','评估任务2','<p>333</p>','2018-04-23 10:59:29',4,-1,-1,-1,'2018-04-23 10:59:29',-1,'2018-05-06 13:57:27',-1,'ID',NULL,NULL,NULL),
+ (6,1,16,'12,14,15','评估任务1','<p>11</p>','2018-04-28 15:51:30',5,-1,-1,-1,'2018-04-28 15:51:30',-1,'2018-05-19 19:24:06',-1,'ID',NULL,NULL,NULL),
+ (7,1,16,'12','评估任务5','<p>评估任务1</p>','2018-05-06 13:57:47',1,-1,-1,-1,'2018-05-06 13:57:47',-1,'2018-05-06 13:57:47',-1,'ID',NULL,NULL,NULL),
+ (8,1,16,'','评估任务6','<p>评估任务1</p>','2018-05-06 13:57:54',1,-1,-1,-1,'2018-05-06 13:57:54',-1,'2018-05-06 13:57:54',-1,'ID',NULL,NULL,NULL),
+ (9,1,16,'','评估任务7','<p>11</p>','2018-05-06 13:58:01',1,-1,-1,-1,'2018-05-06 13:58:01',-1,'2018-05-06 13:58:01',-1,'ID',NULL,NULL,NULL),
+ (10,1,16,'','评估任务8','<p>评估任务8</p>','2018-05-06 14:09:03',1,-1,-1,-1,'2018-05-06 14:09:03',-1,'2018-05-06 14:09:03',-1,'ID',NULL,NULL,NULL),
+ (11,1,16,'','评估任务9','<p>评估任务9</p>','2018-05-06 14:09:10',1,-1,-1,-1,'2018-05-06 14:09:10',-1,'2018-05-06 14:09:10',-1,'ID',NULL,NULL,NULL),
+ (12,1,16,'','评估任务10','<p>评估任务10</p>','2018-05-06 14:09:19',1,-1,-1,-1,'2018-05-06 14:09:19',-1,'2018-05-06 14:09:19',-1,'ID',NULL,NULL,NULL),
+ (13,1,16,'','评估任务11','<p>评估任务11</p>','2018-05-06 14:09:26',1,-1,-1,-1,'2018-05-06 14:09:26',-1,'2018-05-06 14:09:26',-1,'ID',NULL,NULL,NULL),
+ (14,1,16,'12,14','评估12','<p>13</p>','2018-05-12 09:42:43',3,-1,-1,-1,'2018-05-12 09:42:43',-1,'2018-05-12 09:44:22',-1,'ID',NULL,NULL,NULL),
+ (15,1,16,'14,15','131111112222222222233333333333333344444','<p>13<br/></p>','2018-05-12 09:44:32',10,-1,-1,-1,'2018-05-12 09:44:32',-1,'2018-05-31 15:48:50',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_assessment_activity` ENABLE KEYS */;
 
 
@@ -135,7 +136,7 @@ CREATE TABLE `kg_assessment_activity_user_upload` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_assessment_activity_user_upload`
@@ -147,8 +148,15 @@ INSERT INTO `kg_assessment_activity_user_upload` (`id`,`upload_user_id`,`progres
  (16,10013,12,'none2.jpg','/resources/upload/assessment/none2.jpg','2018-04-14 13:28:43',NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
  (17,10013,12,'44.jpg','/resources/upload/assessment/44.jpg','2018-04-14 13:28:43',NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
  (18,10013,12,'44 (2).jpg','/resources/upload/assessment/44 (2).jpg','2018-04-14 13:28:43',NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
- (19,10013,13,'新建 Microsoft Word 文档.docx','/resources/upload/assessment/5/新建 Microsoft Word 文档.docx',NULL,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
- (20,10013,13,'新建 Microsoft Office Word 文档.docx','/resources/upload/assessment/5/10013/61f07711-02c2-49d0-ba9a-167d64479879.DOCX',NULL,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL);
+ (19,10013,13,'新建 Microsoft Word 文档.docx','/resources/upload/assessment/5/新建 Microsoft Word 文档.docx','2018-04-14 13:28:43',NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
+ (20,10013,13,'新建 Microsoft Office Word 文档.docx','/resources/upload/assessment/5/10013/61f07711-02c2-49d0-ba9a-167d64479879.DOCX','2018-04-14 13:28:43',NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
+ (21,10013,12,'44.jpg','/resources/upload/assessment/44.jpg','2018-04-14 13:28:43',1,-1,-1,-1,'2018-05-31 12:55:25',-1,'2018-05-31 12:55:25',-1,'ID',NULL,NULL,NULL),
+ (22,10013,12,'44.jpg','/resources/upload/assessment/44.jpg','2018-05-31 12:56:04',1,-1,-1,-1,'2018-05-31 12:56:04',-1,'2018-05-31 12:56:04',-1,'ID',NULL,NULL,NULL),
+ (23,10013,12,'44.jpg','/resources/upload/assessment/44.jpg','2018-05-31 12:56:04',1,-1,-1,-1,'2018-05-31 12:56:04',-1,'2018-05-31 12:56:04',-1,'ID',NULL,NULL,NULL),
+ (24,10013,12,'44.jpg','/resources/upload/assessment/44.jpg','2018-05-31 12:56:04',1,-1,-1,-1,'2018-05-31 12:56:04',-1,'2018-05-31 12:56:04',-1,'ID',NULL,NULL,NULL),
+ (25,10013,12,'44.jpg','/resources/upload/assessment/44.jpg','2018-05-31 12:56:04',1,-1,-1,-1,'2018-05-31 12:56:04',-1,'2018-05-31 12:56:04',-1,'ID',NULL,NULL,NULL),
+ (26,10013,12,'44.jpg','/resources/upload/assessment/44.jpg','2018-05-31 12:56:04',1,-1,-1,-1,'2018-05-31 12:56:04',-1,'2018-05-31 12:56:04',-1,'ID',NULL,NULL,NULL),
+ (27,10013,12,'44.jpg','/resources/upload/assessment/44.jpg','2018-05-31 12:56:04',1,-1,-1,-1,'2018-05-31 12:56:04',-1,'2018-05-31 12:56:04',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_assessment_activity_user_upload` ENABLE KEYS */;
 
 

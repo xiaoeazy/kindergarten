@@ -4,6 +4,7 @@
 <mapper namespace="cn.huan.kindergarten.mapper.KgAssessmentActivityMapper">
     <resultMap id="BaseResultMap" type="cn.huan.kindergarten.dto.KgAssessmentActivity">
         <result column="id" property="id" jdbcType="DECIMAL" />
+        <result column="finished" property="finished" jdbcType="TINYINT" />
         <result column="assessment_type_id" property="assessmentTypeId" jdbcType="DECIMAL" />
          <result column="attributeId" property="attributeid" jdbcType="VARCHAR" />
         <result column="assessment_activity_name" property="assessmentActivityName" jdbcType="VARCHAR" />
@@ -13,6 +14,7 @@
 
  <resultMap  id="OtherResultMap" type="cn.huan.kindergarten.dto.KgAssessmentActivity">
         <result column="id" property="id" jdbcType="DECIMAL" />
+        <result column="finished" property="finished" jdbcType="TINYINT" />
         <result column="assessment_type_id" property="assessmentTypeId" jdbcType="DECIMAL" />
         <result column="attributeId" property="attributeid" jdbcType="VARCHAR" />
         <result column="assessment_activity_name" property="assessmentActivityName" jdbcType="VARCHAR" />

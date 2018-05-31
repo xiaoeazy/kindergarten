@@ -1,18 +1,36 @@
 <!doctype html>
 <html>
 <head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=9" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
 <title>${assessmentInfo.assessmentActivityName}_上海市托幼协会</title>
 <link href="${base.contextPath}/lib/index/css/detail.css" rel="stylesheet" type="text/css" />
-<link href="${base.contextPath}/lib/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<script src="${base.contextPath}/lib/jquery/jquery.min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="${base.contextPath}/lib/index/webuploader/webuploader.css">
-<script type="text/javascript" src="${base.contextPath}/lib/index/webuploader/webuploader.min.js"></script>
+<!-- <link rel="stylesheet" type="text/css" href="${base.contextPath}/lib/index/webuploader/webuploader.css"> -->
+<!-- <script type="text/javascript" src="${base.contextPath}/lib/index/webuploader/webuploader.min.js"></script> -->
 
+
+<link rel="stylesheet" href="${base.contextPath}/lib/bootstrap-3.3.7/css/bootstrap.min.css">
+<link href="${base.contextPath}/lib/bootstrap-table/bootstrap-table.css" rel="stylesheet" type="text/css" />
+
+<script  type="text/javascript" src="${base.contextPath}/lib/index/search/static/js/jquery-1.11.1.min.js"></script>
+<script src="${base.contextPath}/lib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+<script src="${base.contextPath}/lib/bootstrap-table/bootstrap-table.js"></script>
+<script src="${base.contextPath}/lib/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+
+<script>
+function dowload(filePath){
+	window.open("${base.contextPath}"+filePath);
+}
+function btn_fresh(){
+	$("#table").bootstrapTable('refresh');
+}
+
+</script>
 </head>
 <body id="detail">
 <#include "../../include/navigation.html">
@@ -47,36 +65,40 @@
 
     </div>
     <#if Session["userId"]?exists>
-    
-    <div id="uploader" class="wu-example" style="float:left;width:100%">
-	    <!--用来存放文件信息-->
-	    <div id="thelist" class="uploader-list"></div>
-	    <div class="btns">
-	        <div id="picker">选择文件</div>
-	        <button id="ctlBtn" class="btn btn-default">开始上传</button>
-	    </div>
-	</div>
-    
-    <div class="vF_detail_relcontent mt13">
-	    <h2>
-<!-- 	    	<input type="file" multiple id="ssi-upload2"/> -->
-	    </h2>
-	    <div class="vF_detail_relcontent_lst">
-	    	 
-<!-- 	       	  <ul class="c_list_tat"> -->
-<!--         	 </ul> -->
-        	 <table tyle="width:100%;border:1;margin:0;padding:0;height:100%;">
-        	 		<caption align="top">上传文件列表：</caption>
-        	 		<tr><td>序号</td><td>文件名</td></tr>
-        	 		<#list userUploadList as userUploadList>
-						<tr>
-							<td>#{userUploadList_index+1}</td>
-							<td><a href="#"  target="_blank" >${userUploadList.fileName}</a></td>
-						</tr>
-					</#list>
-        	 </table>
-	    </div>
-	</div>
+    	<div id="toolbar" class="btn-group">
+            <button id="btn_add" type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+            </button>
+            <button id="btn_delete" type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+            </button>
+            <button id="btn_fresh" type="button" class="btn btn-default" onclick="btn_fresh()" >
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>刷新
+            </button>
+           
+            
+        </div>
+	    <div id="uploader" class="wu-example" style="float:left;width:100%">
+		    <!--用来存放文件信息-->
+<!-- 		    <div id="thelist" class="uploader-list"></div> -->
+<!-- 		    <div class="btns"> -->
+<!-- 		        <div id="picker">选择文件</div> -->
+<!-- 		        <button id="ctlBtn" class="btn btn-default">开始上传</button> -->
+<!-- 		    </div> -->
+		</div>
+	    
+	    <div class="vF_detail_relcontent mt13">
+		    <h2>
+	<!-- 	    	<input type="file" multiple id="ssi-upload2"/> -->
+		    </h2>
+		    <div class="vF_detail_relcontent_lst">
+		    	 
+	<!-- 	       	  <ul class="c_list_tat"> -->
+	<!--         	 </ul> -->
+
+	        	 	<table id="table"></table>
+		    </div>
+		</div>
 	</#if>
 
 </div>
@@ -120,95 +142,165 @@
         </div>
     </div>
 </div>
-</div>
 <script type="text/javascript">
 		// 文件上传
-		jQuery(function() {
-		    var $ = jQuery,
-		        $list = $('#thelist'),
-		        $btn = $('#ctlBtn'),
-		        state = 'pending',
-		        uploader;
+// 		jQuery(function() {
+// 		    var $ = jQuery,
+// 		        $list = $('#thelist'),
+// 		        $btn = $('#ctlBtn'),
+// 		        state = 'pending',
+// 		        uploader;
 
-		    uploader = WebUploader.create({
-		        // 不压缩image
-		        resize: false,
-		        // swf文件路径
-		        swf:'${base.contextPath}/lib/index/webuploader/Uploader.swf',
-		        // 文件接收服务端。
-		        server: '${base.contextPath}/index/assessment/upload?assessmentActivityId=${assessmentInfo.id}',
-		        // 选择文件的按钮。可选。
-		        // 内部根据当前运行是创建，可能是input元素，也可能是flash.
-		        pick: '#picker'
-		    });
+// 		    uploader = WebUploader.create({
+// 		        // 不压缩image
+// 		        resize: false,
+// 		        // swf文件路径
+// 		        swf:'${base.contextPath}/lib/index/webuploader/Uploader.swf',
+// 		        // 文件接收服务端。
+// 		        server: '${base.contextPath}/index/assessment/upload?assessmentActivityId=${assessmentInfo.id}',
+// 		        // 选择文件的按钮。可选。
+// 		        // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+// 		        pick: '#picker'
+// 		    });
 
-		    // 当有文件添加进来的时候
-		    uploader.on( 'fileQueued', function( file ) {
-		        $list.append( '<div id="' + file.id + '" class="item">' +
-		            '<h4 class="info">' + file.name + '</h4>' +
-		            '<p class="state">等待上传...</p>' +
-		        '</div>' );
-		    });
+// 		    // 当有文件添加进来的时候
+// 		    uploader.on( 'fileQueued', function( file ) {
+// 		        $list.append( '<div id="' + file.id + '" class="item">' +
+// 		            '<h4 class="info">' + file.name + '</h4>' +
+// 		            '<p class="state">等待上传...</p>' +
+// 		        '</div>' );
+// 		    });
 
-		    // 文件上传过程中创建进度条实时显示。
-		    uploader.on( 'uploadProgress', function( file, percentage ) {
-		        var $li = $( '#'+file.id ),
-		            $percent = $li.find('.progress .progress-bar');
+// 		    // 文件上传过程中创建进度条实时显示。
+// 		    uploader.on( 'uploadProgress', function( file, percentage ) {
+// 		        var $li = $( '#'+file.id ),
+// 		            $percent = $li.find('.progress .progress-bar');
 
-		        // 避免重复创建
-		        if ( !$percent.length ) {
-		            $percent = $('<div class="progress progress-striped active">' +
-		              '<div class="progress-bar" role="progressbar" style="width: 0%">' +
-		              '</div>' +
-		            '</div>').appendTo( $li ).find('.progress-bar');
-		        }
+// 		        // 避免重复创建
+// 		        if ( !$percent.length ) {
+// 		            $percent = $('<div class="progress progress-striped active">' +
+// 		              '<div class="progress-bar" role="progressbar" style="width: 0%">' +
+// 		              '</div>' +
+// 		            '</div>').appendTo( $li ).find('.progress-bar');
+// 		        }
 
-		        $li.find('p.state').text('上传中');
+// 		        $li.find('p.state').text('上传中');
 
-		        $percent.css( 'width', percentage * 100 + '%' );
-		    });
+// 		        $percent.css( 'width', percentage * 100 + '%' );
+// 		    });
 
-		    uploader.on( 'uploadSuccess', function( file ) {
-		        $( '#'+file.id ).find('p.state').text('已上传');
-		    });
+// 		    uploader.on( 'uploadSuccess', function( file ) {
+// 		        $( '#'+file.id ).find('p.state').text('已上传');
+// 		    });
 
-		    uploader.on( 'uploadError', function( file ) {
-		        $( '#'+file.id ).find('p.state').text('上传出错');
-		    });
+// 		    uploader.on( 'uploadError', function( file ) {
+// 		        $( '#'+file.id ).find('p.state').text('上传出错');
+// 		    });
 
-		    uploader.on( 'uploadComplete', function( file ) {
-		        $( '#'+file.id ).find('.progress').fadeOut();
-		    });
+// 		    uploader.on( 'uploadComplete', function( file ) {
+// 		        $( '#'+file.id ).find('.progress').fadeOut();
+// 		    });
 
-		    uploader.on( 'all', function( type ) {
-		        if ( type === 'startUpload' ) {
-		            state = 'uploading';
-		        } else if ( type === 'stopUpload' ) {
-		            state = 'paused';
-		        } else if ( type === 'uploadFinished' ) {
-		            state = 'done';
-		        }
+// 		    uploader.on( 'all', function( type ) {
+// 		        if ( type === 'startUpload' ) {
+// 		            state = 'uploading';
+// 		        } else if ( type === 'stopUpload' ) {
+// 		            state = 'paused';
+// 		        } else if ( type === 'uploadFinished' ) {
+// 		            state = 'done';
+// 		        }
 
-		        if ( state === 'uploading' ) {
-		            $btn.text('暂停上传');
-		        } else {
-		            $btn.text('开始上传');
-		        }
-		    });
+// 		        if ( state === 'uploading' ) {
+// 		            $btn.text('暂停上传');
+// 		        } else {
+// 		            $btn.text('开始上传');
+// 		        }
+// 		    });
 
-		    $btn.on( 'click', function() {
-		        if ( state === 'uploading' ) {
-		            uploader.stop();
-		        } else {
-		            uploader.upload();
-		        }
-		    });
-		});
+// 		    $btn.on( 'click', function() {
+// 		        if ( state === 'uploading' ) {
+// 		            uploader.stop();
+// 		        } else {
+// 		            uploader.upload();
+// 		        }
+// 		    });
+// 		});
 
 
 		
 		
 </script>
+
+<script>
+$(function () {
+		$("#table").bootstrapTable({ // 对应table标签的id
+		      url: "${base.contextPath}/index/admin/assessmentDetail/uploadList?activityId ="+${assessmentInfo.id}, // 获取表格数据的url
+		      toolbar: '#toolbar',
+		      cache: false, // 设置为 false 禁用 AJAX 数据缓存， 默认为true
+		      striped: true,  //表格显示条纹，默认为false
+		      pagination: true, // 在表格底部显示分页组件，默认false
+		      pageList: [10, 20], // 设置页面可以显示的数据条数
+		      pageSize: 10, // 页面数据条数
+		      pageNumber: 1, // 首页页码
+		      sidePagination: 'server', // 设置为服务器端分页
+		      queryParams: function (params) { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
+		          return {
+		              pageSize: params.limit, // 每页要显示的数据条数
+		              offset: params.offset, // 每页显示数据的开始行号
+		              sort: params.sort, // 要排序的字段
+		              sortOrder: params.order, // 排序规则
+		          }
+		      },
+		      responseHandler: function(res) {
+	                return {
+	                    "total": res.totalProperty,//总页数
+	                    "rows": res.results   //数据
+	                 };
+	          },
+		      sortName: 'id', // 要排序的字段
+		      sortOrder: 'desc', // 排序规则
+		      columns: [
+		          {
+		              checkbox: true, // 显示一个勾选框
+		              align: 'center' // 居中显示
+		          },{  
+                      title: '序号',//标题  可不加  
+                      formatter: function (value, row, index) {  
+//                           return index+1;  
+  							 var pageSize=$('#table').bootstrapTable('getOptions').pageSize;//通过表的#id 可以得到每页多少条
+               				 var pageNumber=$('#table').bootstrapTable('getOptions').pageNumber;//通过表的#id 可以得到当前第几页
+               				 return pageSize * (pageNumber - 1) + index + 1;    //返回每条的序号： 每页条数 * （当前页 - 1 ）+ 序号
+                      }  
+                  }, {
+		              field: 'fileName',
+		              title: '评估活动名称',
+		              align: 'center',
+		              valign: 'middle'
+		          }, {
+		              title: "操作",
+		              align: 'center',
+		              valign: 'middle',
+		              width: 160, // 定义列的宽度，单位为像素px
+		              formatter: function (value, row, index) {
+		                  return '<button class="btn btn-primary btn-sm" onclick="dowload(\'' + row.filePath + '\')">下载</button>';
+		              }
+		          }
+		      ],
+		      onLoadSuccess: function(){  //加载成功时执行
+		            console.info("加载成功");
+		      },
+		      onLoadError: function(){  //加载失败时执行
+		            console.info("加载数据失败");
+		      }
+
+		})
+
+});
+
+
+
+		</script>
+
 <#include "../../include/footer.html">
 </body>
 <script language="javascript" src="../../js/detailaddon.js" tppabs="http://www.ccgp.gov.cn/js/detailaddon.js"></script>

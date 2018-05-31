@@ -20,25 +20,20 @@ import com.huan.HTed.attachment.exception.StoragePathNotExsitException;
 import com.huan.HTed.attachment.exception.UniqueFileMutiException;
 import com.huan.HTed.bean.UploadImgAjax;
 import com.huan.HTed.core.IRequest;
-import com.huan.HTed.system.controllers.BaseController;
+import com.huan.HTed.system.dto.ResponseData;
 
+import cn.huan.kindergarten.bean.ExtStore;
 import cn.huan.kindergarten.bean.FileInfo;
 import cn.huan.kindergarten.dto.KgAssessmentActivity;
 import cn.huan.kindergarten.dto.KgAssessmentActivityUserProgress;
 import cn.huan.kindergarten.dto.KgAssessmentActivityUserUpload;
 import cn.huan.kindergarten.dto.KgAssessmentType;
-import cn.huan.kindergarten.dto.KgConfig;
 import cn.huan.kindergarten.dto.KgNewsAttribute;
-import cn.huan.kindergarten.dto.KgNewsSource;
-import cn.huan.kindergarten.dto.KgNewstype;
 import cn.huan.kindergarten.service.IIndexAssessmentService;
 import cn.huan.kindergarten.service.IKgAssessmentActivityService;
 import cn.huan.kindergarten.service.IKgAssessmentActivityUserUploadService;
 import cn.huan.kindergarten.service.IKgAssessmentTypeService;
-import cn.huan.kindergarten.service.IKgConfigService;
 import cn.huan.kindergarten.service.IKgNewsAttributeService;
-import cn.huan.kindergarten.service.IKgNewsSourceService;
-import cn.huan.kindergarten.service.IKgNewstypeService;
 
 @Controller
 public class IndexAssessmentController extends IndexBaseController{
@@ -56,7 +51,6 @@ public class IndexAssessmentController extends IndexBaseController{
     private IKgAssessmentActivityUserUploadService iKgAssessmentActivityUserUploadService;
     //======================================评估========================================
     @RequestMapping(value = "/index/assessmentTypeList")
-    @ResponseBody
     public ModelAndView assessmentTypeList(Long typeid, @RequestParam(defaultValue = DEFAULT_PAGE) int page,
             @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit,HttpServletRequest request) {
     	ModelAndView mv = new ModelAndView(getViewPath() + "/index/assessment/assessmentTypeList");
@@ -95,7 +89,6 @@ public class IndexAssessmentController extends IndexBaseController{
 
     
     @RequestMapping(value = "/index/assessmentDetail")
-    @ResponseBody
     public ModelAndView assessmentDetail(Long id, @RequestParam(defaultValue = DEFAULT_PAGE) int page,
             @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit,HttpServletRequest request) {
     	ModelAndView mv = new ModelAndView(getViewPath() + "/index/assessment/assessmentDetail");
@@ -109,23 +102,46 @@ public class IndexAssessmentController extends IndexBaseController{
         requestKT.setId(kaa.getAssessmentTypeId());
         KgAssessmentType kgNewstype = iKgAssessmentTypeService.selectByPrimaryKey(requestContext, requestKT);
         
-        List<KgAssessmentActivityUserUpload> userUploadList = new ArrayList<KgAssessmentActivityUserUpload>();
+//        List<KgAssessmentActivityUserUpload> userUploadList = new ArrayList<KgAssessmentActivityUserUpload>();
         HttpSession session = request.getSession(false);
         if(session!=null) {
         	  Long userid = (Long)session.getAttribute(IRequest.FIELD_USER_ID);
               KgAssessmentActivityUserProgress userProgress = new KgAssessmentActivityUserProgress();
               userProgress.setUploadUserId(userid);
               userProgress.setAssessmentActivityId(id);
-              userUploadList.addAll(iKgAssessmentActivityUserUploadService.loadUserUploadList(requestContext,userProgress ));
+//              userUploadList.addAll(iKgAssessmentActivityUserUploadService.loadUserUploadList(requestContext,userProgress ));
         }
       
         
         mv.addObject("assessmentType", kgNewstype);
-        mv.addObject("userUploadList",userUploadList);
+//        mv.addObject("userUploadList",userUploadList);
         loadNavigation(mv, requestContext,CH_XHGZ);
         loadAttriteAssessment(mv, requestContext,3);
         return mv;
     }
+    
+    
+    @RequestMapping(value = "/index/admin/assessmentDetail/uploadList")
+    @ResponseBody
+    public ExtStore uploadList(Long activityId,HttpServletRequest request,
+    		@RequestParam(defaultValue = DEFAULT_PAGE) int offset,
+            @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int pageSize) {
+    	
+        IRequest requestContext = createRequestContext(request);
+        List<KgAssessmentActivityUserUpload> userUploadList = new ArrayList<KgAssessmentActivityUserUpload>();
+        
+        HttpSession session = request.getSession(false);
+        Long userid = (Long)session.getAttribute(IRequest.FIELD_USER_ID);
+        KgAssessmentActivityUserProgress userProgress = new KgAssessmentActivityUserProgress();
+        userProgress.setUploadUserId(userid);
+        userProgress.setAssessmentActivityId(activityId);
+        int page = offset /pageSize+1;
+        List<KgAssessmentActivityUserUpload> list = iKgAssessmentActivityUserUploadService.loadUserUploadList(requestContext,userProgress,page,pageSize );
+        int size = iKgAssessmentActivityUserUploadService.countUserUploadList(requestContext, userProgress);
+        
+        return new ExtStore(page, pageSize, size, list);
+    }
+    
     
     
     @RequestMapping(value = "/index/assessment/upload", method = RequestMethod.POST, produces = "text/html")

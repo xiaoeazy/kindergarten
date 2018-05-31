@@ -9,4 +9,7 @@ import cn.huan.kindergarten.dto.KgAssessmentActivityUserUpload;
 
 public interface KgAssessmentActivityUserUploadMapper extends Mapper<KgAssessmentActivityUserUpload>{
 	public List<KgAssessmentActivityUserUpload>  loadUserUploadList(KgAssessmentActivityUserProgress kaup);
+	
+	public int  countUserUploadList(KgAssessmentActivityUserProgress kaup);
+	
 }

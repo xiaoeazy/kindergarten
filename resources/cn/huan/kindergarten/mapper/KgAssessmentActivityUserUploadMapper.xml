@@ -24,4 +24,18 @@
            </where>
            ORDER BY a.createDate DESC
     </select>
+    
+     <select id="countUserUploadList" resultType="int" parameterType="cn.huan.kindergarten.dto.KgAssessmentActivityUserProgress">
+        select count(1) from kg_assessment_activity_user_upload a left join kg_assessment_activity_user_progress b
+            on a.progress_id=b.id 
+           <where>
+           		<if test="assessmentActivityId != null">
+           			AND b.assessment_activity_id  =#{assessmentActivityId} 
+           		</if>
+           		<if test="uploadUserId != null">
+           			AND b.upload_user_id = #{uploadUserId}
+           		</if>
+           </where>
+           ORDER BY a.createDate DESC
+    </select>
 </mapper>

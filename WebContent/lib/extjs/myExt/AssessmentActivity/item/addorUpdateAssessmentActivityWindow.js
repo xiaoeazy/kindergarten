@@ -93,6 +93,43 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 			    	}
 			    }
 			});
+	       
+	       //=====================attribute=========================================
+	       var finished_Combo_Store = new Ext.data.Store({
+	    	   fields: [  
+	    	         {name: 'key', type: 'string'},  
+	    	         {name: 'value',  type: 'string'}
+	    	     ],  
+	    	     data : [  
+	    	         {key: 'true',    value: '未结束'},
+	    	         {key: 'false',    value: '已结束'}
+	    	     ]  
+	    	});
+	       
+	       var finishedCombo = new Ext.form.ComboBox({
+	    	    style:'padding:5px',
+	    	    columnWidth: .33  ,   
+	      		fieldLabel:'任务状态',
+	    	    id:mainId+"finished",
+	            store : finished_Combo_Store,  
+	            valueField : "key",  
+	            mode : 'remote',  
+	            displayField : "value",  
+	            forceSelection : true,  
+	            emptyText : '请选择',  
+	            editable : false,  
+	            triggerAction : 'all',  
+	            hiddenName : "value",  
+	            autoShow : true,  
+	            selectOnFocus : true,  
+	            name : "finished",
+	            listeners:{
+	           	afterrender:function(comb){
+	           	},
+	           	select:function(combo, record, index){
+	           	}
+	           }
+	       }); 
 	       //=====================formpanel=========================================
 	    	var formpanel = new Ext.FormPanel({
 	    		  region:'north',
@@ -136,6 +173,7 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 		                            }
 		                        }
 		                    },
+		                    finishedCombo
 				  			]
 		});
 	     
@@ -195,10 +233,12 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 						if(record!=null){
 				    		var assessmentActivityName= record.get("assessmentActivityName");
 				    		var assessmentTypeId = record.get("assessmentTypeId");
-				    		
+				    		var finished = record.get("finished");
 				    		Ext.getCmp(mainId+"assessmentActivityName").setValue(assessmentActivityName);
 				    		typeCombo.setValue(assessmentTypeId);
-				    		
+				    		finishedCombo.setValue(finished);
+				    	}else{
+				    		finishedCombo.setValue(true);
 				    	}
 					}
 				}
@@ -276,6 +316,8 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 			return;
 		}
 		
+		var finished =Ext.getCmp(mainId+"finished").getValue();
+		
 		if( formpanel.getForm().isValid()){
 			Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
 			  Ext.Ajax.request({
@@ -285,6 +327,7 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
                   params : JSON.stringify([{
                 	  __status : type,
                 	  attributeid:attributeid,
+                	  finished:finished,
                 	  assessmentActivityName:assessmentActivityName,
                 	  assessmentTypeId:assessmentTypeId,
                 	  assessmentActivityContent:assessmentActivityContent,

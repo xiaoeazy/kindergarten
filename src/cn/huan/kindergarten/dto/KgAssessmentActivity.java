@@ -21,11 +21,14 @@ public class KgAssessmentActivity extends BaseDTO {
      public static final String FIELD_ATTRIBUTEID = "attributeid";
      public static final String FIELD_ASSESSMENT_ACTIVITY_NAME = "assessmentActivityName";
      public static final String FIELD_ASSESSMENT_ACTIVITY_CONTENT = "assessmentActivityContent";
+     public static final String FIELD_FINISHED = "finished";
 
 
      @Id
      @GeneratedValue
      private Long id;
+     
+     private Boolean finished;
 
      private Long assessmentTypeId;
      
@@ -108,6 +111,14 @@ public class KgAssessmentActivity extends BaseDTO {
 
 	public void setNewsSimpleAssessmentActivityName(String newsSimpleAssessmentActivityName) {
 		this.newsSimpleAssessmentActivityName = newsSimpleAssessmentActivityName;
+	}
+
+	public Boolean getFinished() {
+		return finished;
+	}
+
+	public void setFinished(Boolean finished) {
+		this.finished = finished;
 	}
      
      

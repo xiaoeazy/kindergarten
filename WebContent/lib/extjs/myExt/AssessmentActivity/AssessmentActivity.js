@@ -160,6 +160,7 @@ Ext.extend(AssessmentActivity.AssessmentActivityPanel, Ext.Panel, {
 	        columns: [
 	            {header: "评估任务名称",  width:50,sortable: true,  dataIndex: 'assessmentActivityName',align:'center'},
 	            {header: "咨讯类别",  width:50,sortable: true,  dataIndex: 'kgAssessmentType',align:'center',renderer:me.showType},
+	            {header: "状态",  width:50,sortable: true,  dataIndex: 'finished',align:'center',renderer:me.isFinished},
 	            {header: "预览",  width:50,sortable: true,  dataIndex: 'id',align:'center',renderer:me.buttonRender}
 	        ],
 	        width:'100%',
@@ -185,6 +186,13 @@ Ext.extend(AssessmentActivity.AssessmentActivityPanel, Ext.Panel, {
 
 	showType:function(value){
 		return value.assessmentTypeName;
+	},
+	isFinished:function(value){
+		if(value==0){
+			return "<font color='red'>已结束</font>";
+		}else{
+			return "<font color='green'>进行中</font>";
+		}
 	},
 	buttonRender:function(id){
 		   return "<button  width=\"50px\" onclick=\"yulanAssessments('"+id+"')\">预览</button>";

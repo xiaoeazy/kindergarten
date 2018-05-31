@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -32,52 +33,49 @@ public class IndexUserController extends IndexBaseController{
 	private IUserService iUserService;
 	
 	
-	@RequestMapping(value = "/index/user")
+	@RequestMapping(value = "/index/admin/user")
     @ResponseBody
     public ModelAndView user(HttpServletRequest request) throws KgFileException {
+		 IRequest requestContext = createRequestContext(request);
+		 
 		 HttpSession session = request.getSession(false);
-         if(session==null) {
-        	 throw new KgFileException(null, "请先登陆！", null);
-         }
+    	 User s = new User();
+    	 s.setUserId((Long)session.getAttribute(IRequest.FIELD_USER_ID));
+    	 User user = iUserService.selectByPrimaryKey(requestContext, s);
     	 ModelAndView mv = new ModelAndView(getViewPath() + "/index/user/user");
-    	 IRequest requestContext = createRequestContext(request);
-    	 loadNavigation(mv, requestContext, CH_INDEX);
+    	 loadNavigation(mv, requestContext, CH_NULL);
+    	 
+    	 mv.addObject("user",user);
          return mv;
     }
 	
-	   @RequestMapping(value = "/index/user/submit")
+	   @RequestMapping(value = "/index/admin/user/submit")
 	    @ResponseBody
 		public ExtAjax userUpdate(@RequestBody User user,  BindingResult result, HttpServletRequest request) throws KgFileException{
-		   HttpSession session = request.getSession(false);
-	         if(session==null) {
-	        	 throw new KgFileException(null, "请先登陆！", null);
-	         }
 	    	 IRequest requestCtx = createRequestContext(request);
 	    	 user.setUserId(requestCtx.getUserId());
 	    	 user.set__status("update");
 	    
-			 if(user.getPasswordEncrypted()!=null) {
+			 if(!StringUtils.isEmpty(user.getPasswordEncrypted())) {
 				 String passwordEncrypted = DigestUtils.md5Hex(user.getPasswordEncrypted());
 				 user.setPasswordEncrypted(passwordEncrypted);
+			 }else {
+				 user.setPasswordEncrypted(null); 
 			 }
 			 iUserService.adminUpdate(requestCtx, user, null);
 	         return new ExtAjax(true, null);
 	    }
 	   
-	   @RequestMapping(value = "/index/userAssessment")
+	   @RequestMapping(value = "/index/admin/userAssessment")
 	    @ResponseBody
 	    public ModelAndView userAssessment(HttpServletRequest request) throws KgFileException {
-			 HttpSession session = request.getSession(false);
-	         if(session==null) {
-	        	 throw new KgFileException(null, "请先登陆！", null);
-	         }
 	    	 ModelAndView mv = new ModelAndView(getViewPath() + "/index/user/userAssessment");
 	    	 IRequest requestContext = createRequestContext(request);
-	    	 loadNavigation(mv, requestContext, CH_INDEX);
+	    	 loadNavigation(mv, requestContext, CH_NULL);
 	         return mv;
 	    }
 	   
-	   @RequestMapping(value = "/index/userAssessment/userAssessmentInfo")
+	   @RequestMapping(value = "/index/admin/userAssessment/userAssessmentInfo")
 	    @ResponseBody
 	    public ExtAjax  userAssessmentInfo(HttpServletRequest request) throws KgFileException {
 //			 HttpSession session = request.getSession(false);
@@ -91,7 +89,7 @@ public class IndexUserController extends IndexBaseController{
 		   return null;
 	    }
 	   
-	    @RequestMapping(value = "/index/userAssessment/assessmentInfo")
+	    @RequestMapping(value = "/index/admin/userAssessment/assessmentInfo")
 	    @ResponseBody
 	    public ExtStore assessmentInfo(KgAssessmentActivity dto, @RequestParam(defaultValue = DEFAULT_PAGE) int page,int start,
 	        @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit, HttpServletRequest request) {

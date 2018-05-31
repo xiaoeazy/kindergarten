@@ -25,6 +25,10 @@
 		var password = $("#password").val();
 		var email = $("#email").val();
 		var phone = $("#phone").val();
+		if(realName==""){
+			alert("请输入姓名！");
+			return;
+		}
 		var addOrUpdateUserObj = {
 	        	  realName:realName,
 	        	  passwordEncrypted:password,
@@ -32,7 +36,7 @@
 	        	  phone : phone
 	          };
 		 $.ajax({  
-	            "url":"${base.contextPath}/index/user/submit",  
+	            "url":"${base.contextPath}/index/admin/user/submit",  
 	            "type":"post",  
 	            headers: {'Content-Type':'application/json'},
 	            "data":JSON.stringify(addOrUpdateUserObj),
@@ -71,7 +75,7 @@
 					<dl>
 						<dt>评选评估</dt>
 						<dd>
-							<p><a href="#" >参与评估</a></p>
+							<p><a href="${base.contextPath}/index/admin/userAssessment" >参与评估</a></p>
 						</dd>
 					</dl>
 				</div>
@@ -93,19 +97,19 @@
 						<form role="form">
 						    <div class="form-group">
 						        <label for="realName">姓名</label>
-						        <input type="text" class="form-control" id="realName" placeholder="请输入姓名">
+						        <input type="text" class="form-control" id="realName" value="${(user.realName)!}" placeholder="请输入姓名">
 						    </div>
 						    <div class="form-group">
 						        <label for="email">email</label>
-						        <input type="text" class="form-control" id="email" placeholder="请输入email">
+						        <input type="text" class="form-control" id="email" value="${(user.realName)!}" placeholder="请输入email">
 						    </div>
 						    <div class="form-group">
 						        <label for="phone">电话</label>
-						        <input type="text" class="form-control" id="phone" placeholder="请输入电话">
+						        <input type="text" class="form-control" id="phone"  value="${(user.phone)!}" placeholder="请输入电话">
 						    </div>
 					       <div class="form-group">
 						        <label for="password">密码</label>
-						        <input type="text" class="form-control" id="password" placeholder="请输入要修改的密码，填空默认不修改">
+						        <input type="text" class="form-control" id="password" value="${(user.password)!}" placeholder="请输入要修改的密码，填空默认不修改">
 						    </div>
 						
 <!-- 						    <div class="form-group"> -->

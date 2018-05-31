@@ -45,7 +45,7 @@
             	<a href="javascript:void(0)" onclick="javascript:SetHomeFoot(this,&#39;http://www.baidu.com/&#39;)" title="" style="color:#fff"> 设为首页 </a><span class="spe"> | </span> 
 			 	<a href="javascript:void(0)" onclick="javascript:shouCangFoot(&#39;http://www.baidu.com/&#39;,&#39;甘肃政府采购网&#39;)" title="" style="color:#fff"> 收藏本站 </a> <span class="spe"> | </span>
 			 <#if Session["userId"]?exists>
-				<a href="${base.contextPath}/index/user"  style="color:#fff">${Session["userRealName"]}</a>
+				<a href="${base.contextPath}/index/admin/user"  style="color:#fff">${Session["userRealName"]}</a>
 			 <#else>
 			 	<a href="${base.contextPath}/index/loginPage"  style="color:#fff">登录</a>
 			 </#if>

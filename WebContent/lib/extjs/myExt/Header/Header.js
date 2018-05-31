@@ -100,8 +100,8 @@ Ext.extend(Header.HeaderPanel, Ext.form.FormPanel , {
 						html: ''
 					},{
 						xtype: 'container',
-						style: 'padding:3px 0px 0px 32px',
-						html: ''
+						style: 'padding:3px 0px 0px 22px',
+						html: '<a href="javascript:toIndex()"><img width="23px" height="23px" src="'+_basePath+'/resources/images/header/house.png" alt="前台" title="前台"/></a>'
 					},{
 						xtype: 'container',
 						style: 'padding:3px 0px 0px 10px',
@@ -145,7 +145,9 @@ function loginOut(){
 	  });
 		 
 }
-
+function toIndex(){
+	window.open(appName+"/");
+}
 function currentUserUpdate(){
 	  var win =new updateCurrentUser.updateCurrentUserWin();
 	  win.show();
