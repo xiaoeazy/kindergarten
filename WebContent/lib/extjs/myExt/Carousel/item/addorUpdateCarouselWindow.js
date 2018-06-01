@@ -25,6 +25,7 @@ Ext.extend(addorUpdateCarousel.addorUpdateCarouselWindow, Ext.Window, {
 
 	    	//================关联活动============================================
 	    	var assessment_Combo_Store = new Ext.data.Store({
+	    		  autoLoad : true,
 	    		pageSize:0,
 	    		proxy: {
 			        type: 'ajax',
@@ -71,6 +72,7 @@ Ext.extend(addorUpdateCarousel.addorUpdateCarouselWindow, Ext.Window, {
 	    	//================news store============================================
 	    	var news_Combo_Store = new Ext.data.Store({
 	    		pageSize:0,
+	    		  autoLoad : true,
 	    		proxy: {
 			        type: 'ajax',
 			        url : appName+ '/admin/news/queryAll',

@@ -105,7 +105,9 @@ import cn.huan.kindergarten.service.IKgDownloadService;
     @RequestMapping(value = "/admin/download/remove")
     @ResponseBody
     public ExtAjax adminDelete(HttpServletRequest request,@RequestBody List<KgDownload> dto){
-    	  service.batchDelete(dto);
+    	 IRequest requestCtx = createRequestContext(request);
+    	  String webPath = request.getServletContext().getRealPath("/");
+    	  service.adminDelete(requestCtx, webPath, dto);
           return new ExtAjax(true, null);
     }
     }

@@ -13,8 +13,10 @@ import com.huan.HTed.core.IRequest;
 import com.huan.HTed.core.ProxySelf;
 
 import cn.huan.kindergarten.bean.FileInfo;
+import cn.huan.kindergarten.dto.KgAssessmentActivityUserUpload;
 
 public interface IIndexAssessmentService extends  ProxySelf<IIndexAssessmentService>{
 	public List<FileInfo> assessmentUpload(IRequest requestContext,HttpServletRequest request,Long assessmentActivityId) throws StoragePathNotExsitException, UniqueFileMutiException, IOException, FileUploadException ;
 
+	 public void indexFileDelete (IRequest request, String webPath , List<KgAssessmentActivityUserUpload> dto);
 }

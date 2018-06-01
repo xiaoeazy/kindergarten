@@ -13,16 +13,20 @@ Ext.onReady(function() {
 		
 		Ext.Ajax.on('requestcomplete',checkUserSessionStatus, this);//使用Ajax完成异步请求的交互，注册requestcomplete时间，每个ajax请求成功后首先
 		function checkUserSessionStatus(conn,response,options) {   
-		var sessionStatus = response.getResponseHeader("sessionstatus");   
-	        if(typeof(sessionStatus) != "undefined"){
-	        	sessiontimeout = true;
-	    		Ext.Msg.alert('提示', '会话超时，请重新登录!', function(btn, text){     
-	                if (btn == 'ok'){    
-	                    var redirect = appName+'/admin/login';     
-	                    window.location = redirect;     
-	                }     
-	            });	
-	         }       
+			try {
+				var sessionStatus = response.getResponseHeader("sessionstatus");   
+		        if(typeof(sessionStatus) != "undefined"){
+		        	sessiontimeout = true;
+		    		Ext.Msg.alert('提示', '会话超时，请重新登录!', function(btn, text){     
+		                if (btn == 'ok'){    
+		                    var redirect = appName+'/admin/login';     
+		                    window.location = redirect;     
+		                }     
+		            });	
+		         }       
+			} catch (e) {
+				// TODO: handle exception
+			}       
 		}
 
 	var msgTip = Ext.MessageBox.show({

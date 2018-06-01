@@ -124,7 +124,8 @@ Ext.extend(Carousel.CarouselPanel, Ext.Panel, {
 		  for(var i=0;i<records.length;i++){
 			  var record = records[i];
 			  var id = record.get("id");
-			  linkobj.push({"id":id});
+			  var filePath = record.get("filePath");
+			  linkobj.push({"id":id,"filePath":filePath});
 		  }
 		  
 		  

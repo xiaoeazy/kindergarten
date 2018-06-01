@@ -16,15 +16,18 @@
 <script src="${base.contextPath}/lib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
 
 <!-- bootstraptable插件 -->
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/locale/bootstrap-table-zh-CN.min.js"></script>
+<link rel="stylesheet" href="${base.contextPath}/lib/bootstrap-table/css/bootstrap-table.min.css" />
+<script src="${base.contextPath}/lib/bootstrap-table/js/bootstrap-table.min.js"></script>
+<script src="${base.contextPath}/lib/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 
 <style type="text/css" media="screen">
 .fl { float: left;}
 .fr { float: right;}
 </style>
 <script>
+	function toUserAssessmentPage(id){
+		window.open("${base.contextPath}/index/assessmentDetail?id="+id)
+	}
 	function toUpdate(){
 		var realName = $("#realName").val();
 		var password = $("#password").val();
@@ -84,25 +87,10 @@
 
 				<!--右边列表内容  开始-->
 				<div class="fr vip_right vip_magRight">
-					<!--用户信息  开始 -->
+					<!--参与评估  开始 -->
 					<div class="cus01">
-<!-- 						<div class="cusImg"> -->
-<!-- 							<img src="images/customerImg.png" title="更换头像" /> -->
-<!-- 						</div> 
-						<div class="cusName">
-							<p title="用户名称">基本信息</p>
-								<span title="姓名">姓名:<input type="text" value ="" /></span>
-								<span class="bdTell">密码<i></i><em>187****3765</em></span>
-						</div>-->
-						<h3 title="用户名称">参与评估</h3>
+						<h3 title="参与评估">参与评估</h3>
 						<table id="table"></table>
-					</div>
-				
-					<!-- 用户信息  结束 -->
-					 <div class="cus03">
-						<div class="mess">
-							
-						</div>
 					</div>
 				</div>
 				<!--右边列表内容  结束-->
@@ -112,78 +100,67 @@
 		<!-- 内容  结束-->
 
 		<script>
-		$("#table").bootstrapTable({ // 对应table标签的id
-		      url: "${base.contextPath}/", // 获取表格数据的url
-		      cache: false, // 设置为 false 禁用 AJAX 数据缓存， 默认为true
-		      striped: true,  //表格显示条纹，默认为false
-		      pagination: true, // 在表格底部显示分页组件，默认false
-		      pageList: [10, 20], // 设置页面可以显示的数据条数
-		      pageSize: 10, // 页面数据条数
-		      pageNumber: 1, // 首页页码
-		      sidePagination: 'server', // 设置为服务器端分页
-		      queryParams: function (params) { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
-		          return {
-		              pageSize: params.limit, // 每页要显示的数据条数
-		              offset: params.offset, // 每页显示数据的开始行号
-		              sort: params.sort, // 要排序的字段
-		              sortOrder: params.order, // 排序规则
-		              dataId: $("#dataId").val() // 额外添加的参数
-		          }
-		      },
-		      sortName: 'id', // 要排序的字段
-		      sortOrder: 'desc', // 排序规则
-		      columns: [
-		          {
-		              checkbox: true, // 显示一个勾选框
-		              align: 'center' // 居中显示
-		          }, {
-		              field: 'code', // 返回json数据中的name
-		              title: '编号', // 表格表头显示文字
-		              align: 'center', // 左右居中
-		              valign: 'middle' // 上下居中
-		          }, {
-		              field: 'name',
-		              title: '评估活动名称',
-		              align: 'center',
-		              valign: 'middle'
-		          }, {
-		              field: 'calcMode',
-		              title: '是否结束',
-		              align: 'center',
-		              valign: 'middle',
-		              formatter: function (value, row, index){ // 单元格格式化函数
-		                  var text = '-';
-		                  if (value == 1) {
-		                      text = "方式一";
-		                  } else if (value == 2) {
-		                      text = "方式二";
-		                  } else if (value == 3) {
-		                      text = "方式三";
-		                  } else if (value == 4) {
-		                      text = "方式四";
-		                  }
-		                  return text;
-		              }
-		          }, {
-		              title: "操作",
-		              align: 'center',
-		              valign: 'middle',
-		              width: 160, // 定义列的宽度，单位为像素px
-		              formatter: function (value, row, index) {
-		                  return '<button class="btn btn-primary btn-sm" onclick="del(\'' + row.stdId + '\')">删除</button>';
-		              }
-		          }
-		      ],
-		      onLoadSuccess: function(){  //加载成功时执行
-		            console.info("加载成功");
-		      },
-		      onLoadError: function(){  //加载失败时执行
-		            console.info("加载数据失败");
-		      }
-
+		$(function () {
+			$("#table").bootstrapTable({ // 对应table标签的id
+			      url: "${base.contextPath}/index/admin/user/joinAssessment", // 获取表格数据的url
+			      cache: false, // 设置为 false 禁用 AJAX 数据缓存， 默认为true
+			      striped: true,  //表格显示条纹，默认为false
+			      pagination: true, // 在表格底部显示分页组件，默认false
+			      pageList: [10, 20], // 设置页面可以显示的数据条数
+			      pageSize: 10, // 页面数据条数
+			      pageNumber: 1, // 首页页码
+			      sidePagination: 'server', // 设置为服务器端分页
+			      queryParams: function (params) { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
+			          return {
+			              pageSize: params.limit, // 每页要显示的数据条数
+			              offset: params.offset, // 每页显示数据的开始行号
+			              sort: params.sort, // 要排序的字段
+			              sortOrder: params.order, // 排序规则
+			          }
+			      },
+			      responseHandler: function(res) {
+		                return {
+		                    "total": res.totalProperty,//总页数
+		                    "rows": res.results   //数据
+		                 };
+		          },
+			      sortName: 'id', // 要排序的字段
+			      sortOrder: 'desc', // 排序规则
+			      columns: [
+			          {
+			              checkbox: true, // 显示一个勾选框
+			              align: 'center' // 居中显示
+			          },{  
+	                      title: '序号',//标题  可不加  
+	                      formatter: function (value, row, index) {  
+//	                           return index+1;  
+	  							 var pageSize=$('#table').bootstrapTable('getOptions').pageSize;//通过表的#id 可以得到每页多少条
+	               				 var pageNumber=$('#table').bootstrapTable('getOptions').pageNumber;//通过表的#id 可以得到当前第几页
+	               				 return pageSize * (pageNumber - 1) + index + 1;    //返回每条的序号： 每页条数 * （当前页 - 1 ）+ 序号
+	                      }  
+	                  }, {
+			              field: 'kgAssessmentActivity.assessmentActivityName',
+			              title: '评估活动名称',
+			              align: 'center',
+			              valign: 'middle'
+			          }, {
+			              title: "操作",
+			              align: 'center',
+			              valign: 'middle',
+			              width: 160, // 定义列的宽度，单位为像素px
+			              formatter: function (value, row, index) {
+			                  return '<button class="btn btn-primary btn-sm" onclick="toUserAssessmentPage(\'' + row.assessmentActivityId + '\')">查看</button>';
+			              }
+			          }
+			      ],
+			      onLoadSuccess: function(){  //加载成功时执行
+			            console.info("加载成功");
+			      },
+			      onLoadError: function(){  //加载失败时执行
+			            console.info("加载数据失败");
+			      }
+			})
 		})
-
-			
 		</script>
 
     </div>

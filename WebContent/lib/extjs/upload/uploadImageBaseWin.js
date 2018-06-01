@@ -28,8 +28,8 @@ Ext.extend(uploadImageBase.uploadImageBaseWin, Ext.Window, {
 				        xtype: 'fileuploadfield',
 				        id: mainId+'photo',
 				        width:400,
-				        emptyText: 'Select an image',
-				        fieldLabel: 'photo',
+				        emptyText: '选择一个文件',
+				        fieldLabel: '文件',
 				        name: 'photo',
 				        buttonText: '',
 				        buttonCfg: {
@@ -49,7 +49,7 @@ Ext.extend(uploadImageBase.uploadImageBaseWin, Ext.Window, {
 			items : [fp],
 		    buttonAlign:'center',
 		    buttons: [{
-		        text: 'Save',
+		        text: '保存',
 		        handler: function(){
 		            if(fp.getForm().isValid()){
 		            	var url = appName+"/sys/config/upload?type="+type;
@@ -77,7 +77,7 @@ Ext.extend(uploadImageBase.uploadImageBaseWin, Ext.Window, {
 		            }
 		        }
 		    },{
-		        text: 'Reset',
+		        text: '重置',
 		        handler: function(){
 		           fp.getForm().reset();
 		        }

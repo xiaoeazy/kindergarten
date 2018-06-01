@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -117,9 +118,11 @@ import cn.huan.kindergarten.bean.ExtStore;
     	 IRequest requestCtx = createRequestContext(request);
     	 User user = userAndRoleContext.getUser();
     	 List<UserRole>  userRoleList = userAndRoleContext.getUserRoleList();
-		 if(user.getPasswordEncrypted()!=null) {
+		 if(!StringUtils.isEmpty(user.getPasswordEncrypted())) {
 			 String passwordEncrypted = DigestUtils.md5Hex(user.getPasswordEncrypted());
 			 user.setPasswordEncrypted(passwordEncrypted);
+		 }else {
+			 user.setPasswordEncrypted(null); 
 		 }
 //         List<User> list = service.batchUpdate(requestCtx, dto);
 		 service.adminUpdate(requestCtx, user, userRoleList);

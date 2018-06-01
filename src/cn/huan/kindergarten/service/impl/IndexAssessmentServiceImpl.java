@@ -16,6 +16,7 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +28,7 @@ import com.huan.HTed.core.IRequest;
 import cn.huan.kindergarten.bean.FileInfo;
 import cn.huan.kindergarten.dto.KgAssessmentActivityUserProgress;
 import cn.huan.kindergarten.dto.KgAssessmentActivityUserUpload;
+import cn.huan.kindergarten.dto.KgNews;
 import cn.huan.kindergarten.service.IIndexAssessmentService;
 import cn.huan.kindergarten.service.IKgAssessmentActivityUserProgressService;
 import cn.huan.kindergarten.service.IKgAssessmentActivityUserUploadService;
@@ -76,7 +78,7 @@ public class IndexAssessmentServiceImpl  implements IIndexAssessmentService{
 	        }
 	        //更新
 	       
-//	        int lockTable = iKgAssessmentActivityUserProgressService.countLockTable(requestContext);
+	        int lockTable = iKgAssessmentActivityUserProgressService.countLockTable(requestContext);
 	        KgAssessmentActivityUserProgress isExistHaveUploadQuery = new KgAssessmentActivityUserProgress();
 	        isExistHaveUploadQuery.setUploadUserId(userid);
 	        isExistHaveUploadQuery.setAssessmentActivityId(assessmentActivityId);
@@ -104,5 +106,17 @@ public class IndexAssessmentServiceImpl  implements IIndexAssessmentService{
 	        }
 	        return allFilePath;
 	      
+	 }
+	 
+	 public void indexFileDelete (IRequest request, String webPath , List<KgAssessmentActivityUserUpload> dto) {
+		 iKgAssessmentActivityUserUploadService.batchDelete(dto);
+		 File file = null;
+		 for(KgAssessmentActivityUserUpload dl :dto) {
+			 if(!StringUtils.isEmpty(dl.getFilePath())) {
+				 file = new File(webPath+dl.getFilePath());
+				 if(file.exists())
+					 file.delete();
+			 }
+		 }
 	 }
 }

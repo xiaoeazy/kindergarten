@@ -77,7 +77,9 @@ import java.util.List;
     @RequestMapping(value = "/admin/carousel/remove")
     @ResponseBody
     public ExtAjax adminDelete(HttpServletRequest request,@RequestBody List<KgCarousel> dto){
-    	  service.batchDelete(dto);
+          IRequest requestCtx = createRequestContext(request);
+    	  String webPath = request.getServletContext().getRealPath("/");
+    	  service.adminDelete(requestCtx, webPath, dto);
           return new ExtAjax(true, null);
     }
     }

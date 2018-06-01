@@ -89,7 +89,9 @@ import java.util.List;
     @RequestMapping(value = "/admin/news/remove")
     @ResponseBody
     public ExtAjax adminDelete(HttpServletRequest request,@RequestBody List<KgNews> dto){
-        service.batchDelete(dto);
+        IRequest requestCtx = createRequestContext(request);
+  	    String webPath = request.getServletContext().getRealPath("/");
+  	    service.adminDelete(requestCtx, webPath, dto);
         return new ExtAjax(true, null);
     }
     }

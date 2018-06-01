@@ -83,7 +83,7 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
 					var newstitle = Ext.getCmp(mainId+"newstitle").getValue().trim();
 					var typeid 	  = Ext.getCmp(mainId+"typeid").getValue();
 					if(typeid==-1){
-						typeid="";
+						typeid=null;
 					}
 					store.proxy.url = appName+ '/admin/news/query';
 					store.proxy.extraParams={
@@ -220,7 +220,8 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
 		  for(var i=0;i<records.length;i++){
 			  var record = records[i];
 			  var id = record.get("id");
-			  linkobj.push({"id":id});
+			  var thumbnail = record.get("thumbnail");
+			  linkobj.push({"id":id,"thumbnail":thumbnail});
 		  }
 		  Ext.Ajax.request({
 			url : appName + '/admin/news/remove',
