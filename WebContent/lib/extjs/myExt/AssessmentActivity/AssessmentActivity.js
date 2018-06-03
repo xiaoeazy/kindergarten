@@ -148,6 +148,24 @@ Ext.extend(AssessmentActivity.AssessmentActivityPanel, Ext.Panel, {
 						me.editAssessmentActivity(record,store,mainId);
 					}
 				},'-',{
+					icon : _basePath+'/resources/images/icon/start.png',
+					text : '启用',
+					handler : function() {
+						var records=getRecords(grid);
+						if(records==-1)
+							return;
+						me.assessmentActivityState(records,store,mainId,"start");
+					}
+				},'-',{
+					icon : _basePath+'/resources/images/icon/pause.png',
+					text : '终止',
+					handler : function() {
+						var records=getRecords(grid);
+						if(records==-1)
+							return;
+						me.assessmentActivityState(records,store,mainId,"pause");
+					}
+				},'-',{
 					icon : _basePath+'/resources/images/icon/cancel.png',
 					text : '删除咨讯',
 					handler : function() {
@@ -196,6 +214,45 @@ Ext.extend(AssessmentActivity.AssessmentActivityPanel, Ext.Panel, {
 	},
 	buttonRender:function(id){
 		   return "<button  width=\"50px\" onclick=\"yulanAssessments('"+id+"')\">预览</button>";
+	},
+	assessmentActivityState:function(records,store,mainId,state){
+		  Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
+		  var qsobj = [];
+		  var finished = true;
+		  if (state=="pause"){
+			  finished = false;
+		  }
+		  for(var i=0;i<records.length;i++){
+			  var record = records[i];
+			  var id = record.get("id");
+			  qsobj.push({"id":id,"finished":finished,"__status":"update"});
+		  }
+		  Ext.Msg.confirm('提示信息','确认要改变状态？',function(op){  
+		        if(op == 'yes'){
+		        	Ext.Ajax.request({
+		    			url : appName + '/admin/assessment/activity/submit',
+		                method : 'post',
+		                headers: {'Content-Type':'application/json'},
+		                params : JSON.stringify(qsobj),
+		                success : function(response, options) {
+		              	  Ext.getBody().unmask();
+		              	  var responseArray = Ext.util.JSON.decode(response.responseText);
+		                    if (responseArray.success == true) {
+//		                  	    ExtAlert("成功");
+		                  	    store.reload();
+		                      }else{
+		                      	ExtError(responseArray.message);
+		                      }
+		                },
+		    			failure : function() {
+		    				Ext.getBody().unmask();
+		    				ExtError();
+		    			}
+		    		  });
+		        }else{
+		        	Ext.getBody().unmask();
+		        }
+		  })  
 	},
 	addAssessmentActivity:function(store,mainId){
 		var win = new addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow ({

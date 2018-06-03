@@ -66,11 +66,6 @@ Ext.onReady(function() {
 					animate : true
 				},
 				items : [ {
-					title : '调查问卷',
-					border : false,
-					iconCls : 'nav',
-					html : getQuestion(funcs)
-				},{
 					title : '资讯中心',
 					border : false,
 					iconCls : 'nav',
@@ -85,6 +80,11 @@ Ext.onReady(function() {
 					border : false,
 					iconCls : 'nav',
 					html : getOthers(funcs)
+				},{
+					title : '调查问卷',
+					border : false,
+					iconCls : 'nav',
+					html : getQuestion(funcs)
 				},{
 					title : '系统',
 					border : false,
@@ -131,6 +131,7 @@ function addFuncStr(func){
 
 function getQuestion(funcs) {
 	var str = "";
+	
 	if(isHaveFunc(funcs,16))
 		str +=addFunc('questionSurvey1.png','questionSurvey2.png','questionSurvey');
 	return addFuncStr(str);

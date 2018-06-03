@@ -151,7 +151,7 @@
                     	console.log(JSON.stringify(questionItems));
                     	
 	               		 $.ajax({  
-	         	            "url":"${base.contextPath}/index/kg/user/q/answer/submit",  
+	         	            "url":"${base.contextPath}/index/kg/user/q/answer/submit?sid="+${questionsurvey.id},  
 	         	            "type":"post",  
 	         	            headers: {'Content-Type':'application/json'},
 	         	            "data":JSON.stringify(questionItems),

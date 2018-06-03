@@ -7,7 +7,7 @@
         <result column="survey_name" property="surveyName" jdbcType="VARCHAR" />
         <result column="survey_desc" property="surveyDesc" jdbcType="VARCHAR" />
         <result column="survey_desc" property="surveyDesc" jdbcType="VARCHAR" />
-        <result column="flag" property="flag" jdbcType="TINYINT" />
+        <result column="finished" property="finished" jdbcType="TINYINT" />
         
     </resultMap>
 

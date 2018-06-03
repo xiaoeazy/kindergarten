@@ -28,34 +28,33 @@
 	function toUserAssessmentPage(id){
 		window.open("${base.contextPath}/index/assessmentDetail?id="+id)
 	}
-	function toUpdate(){
-		var realName = $("#realName").val();
-		var password = $("#password").val();
-		var email = $("#email").val();
-		var phone = $("#phone").val();
-		var addOrUpdateUserObj = {
-	        	  realName:realName,
-	        	  passwordEncrypted:password,
-	        	  email:email,
-	        	  phone : phone
-	          };
-		 $.ajax({  
-	            "url":"${base.contextPath}/index/user/submit",  
-	            "type":"post",  
-	            headers: {'Content-Type':'application/json'},
-	            "data":JSON.stringify(addOrUpdateUserObj),
-	            "success":function(obj){
-	            	 var json = eval(obj); 
-	            	 if(json.success){
-	            		 alert("更新成功");
-	            	 }
-	            },  
-	            "error":function(obj){
-	            	console.log(obj)
-	            },  
-	            "dataType":"json",  
-	            "async":false  
-	        });  
+	function btn_fresh(){
+		$("#table").bootstrapTable('refresh');
+	}
+	function btn_delete(){
+		var jsonArray = [];
+		var allTableData = $('#table').bootstrapTable('getSelections');
+	    for(var i = 0; i < allTableData.length; i++) {
+	    	var id =allTableData[i].id;
+	    	jsonArray.push({id:id});
+	     }
+	    if(jsonArray.length==0){
+	    	return;
+	    }
+		$.ajax({
+	        type: "post",
+	        dataType: "json",
+	        contentType: 'application/json',
+	        url:  '${base.contextPath}/index/admin/user/join/assessment/delete',
+	        data: JSON.stringify(jsonArray),
+	        success: function (data) {
+	            if (data.success) {
+	            	btn_fresh();
+	            }else{
+	            	alert(data.message);
+	            }
+	        }
+		 });
 	}
 </script>
 </head>
@@ -87,9 +86,19 @@
 
 				<!--右边列表内容  开始-->
 				<div class="fr vip_right vip_magRight">
+					
 					<!--参与评估  开始 -->
 					<div class="cus01">
 						<h3 title="参与评估">参与评估</h3>
+						<div id="toolbar" class="btn-group">
+				            <button id="btn_delete" type="button" class="btn btn-default" onclick="btn_delete()">
+				                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+				            </button>
+				            <button id="btn_fresh" type="button" class="btn btn-default" onclick="btn_fresh()" >
+				                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
+				            </button>
+				        </div>
+				        <br/>
 						<table id="table"></table>
 					</div>
 				</div>

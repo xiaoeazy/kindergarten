@@ -53,7 +53,51 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
             	}
             }
         }); 
-	
+   //==========属性================================================
+   var attribute_Combo_Store = new Ext.data.Store({
+	   pageSize:0,
+		proxy: {
+	        type: 'ajax',
+	        url : appName+ '/admin/newsattribute/queryAll',
+	        reader: {
+	        	root : "results",
+				totalProperty: "totalProperty",
+				successProperty:'success'
+	        }
+	    },
+	    autoLoad : true,
+	    fields: ['id', 'attributename'],
+	    listeners:{
+	    	load:function(){
+	    			me.LoadingAttribute1(me,formpanel,attribute_Combo_Store,mainId);
+	    	}
+	    }
+	});
+   //=====================是否前台显示=========================================
+   var indexShowCombo = new Ext.form.ComboBox({
+  		fieldLabel:'是否前台展示图片',
+	    id:mainId+"indexshow",
+	    model:'local',
+        store:new Ext.data.SimpleStore({  //填充的数据
+            fields : ['text', 'value'],
+            data : [['所有', '-1'],['否', 'N'], ['是', 'Y']]
+    	}),
+        valueField : "value",  
+        displayField : "text",  
+        forceSelection : true,  
+        blankText : '请选择',  
+        emptyText : '请选择',  
+        editable : false,  
+        triggerAction : 'all',  
+        allowBlank : false,  
+        hiddenName : "text",  
+        autoShow : true,  
+        selectOnFocus : true,  
+        name : "indexshow",
+        listeners:{
+        }
+    });  
+   //===================================================================
 	var formpanel = new Ext.FormPanel({
 		  region:'north',
 		  labelAlign: "right",
@@ -74,7 +118,25 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
 			            maxLength:45 ,
 			            width:400
 		  			},
-		  			typeCombo
+		  			typeCombo,
+		  			{
+                        xtype: 'checkboxgroup',
+                        id: mainId+"attribute",
+                        name: 'attribute',
+                        columns: 4,
+                        fieldLabel: '自定义属性',
+                        labelWidth: 100,
+                        width: '200',
+                        align: 'left',
+                        border: true,
+                        anchor: '100%', flex: 1,
+                        listeners: {
+                            render: function (view, opt) {
+                            	
+                            }
+                        }
+                    },
+                    indexShowCombo
 		  			],
 		   buttons:[{
 			    width:50,
@@ -82,15 +144,32 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
 				handler : function(button, event) {
 					var newstitle = Ext.getCmp(mainId+"newstitle").getValue().trim();
 					var typeid 	  = Ext.getCmp(mainId+"typeid").getValue();
+					
+					var attributeValue = Ext.getCmp(mainId+'attribute').getChecked();
+					var attributeid="";
+					Ext.Array.each(attributeValue, function(item){
+						attributeid +=  item.inputValue+",";
+					});
+					if(attributeid!="")
+						attributeid=attributeid.substring(0,attributeid.length-1);
 					if(typeid==-1){
 						typeid=null;
+					}
+					if(attributeid==""){
+						attributeid=null;
+					}
+					var indexshow = Ext.getCmp(mainId+"indexshow").getValue();
+					if(indexshow==-1){
+						indexshow=null;
 					}
 					store.proxy.url = appName+ '/admin/news/query';
 					store.proxy.extraParams={
 							page:1,
 							start:0,
+							attributeid:attributeid,
 							newstitle:newstitle,
-							typeid:typeid
+							typeid:typeid,
+							indexshow:indexshow
 					};
 					store.load();  
 				}
@@ -102,6 +181,7 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
 	//==========================grid====================
 		var store = new Ext.data.Store({
 			pageSize:10,
+			remoteSort: true,
 			proxy: {
 		        type: 'ajax',
 		        url : appName+ '/admin/news/query',
@@ -166,6 +246,7 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
 	            {header: "咨讯名称",  width:50,sortable: true,  dataIndex: 'newstitle',align:'center'},
 	            {header: "咨讯类别",  width:50,sortable: true,  dataIndex: 'kgNewstype',align:'center',renderer:me.typeNameRender},
 	            {header: "咨讯简介",  sortable: true,  dataIndex: 'summary',align:'center'},
+	            {header: "权重",  width:50,sortable: true,  dataIndex: 'sequence',align:'center'},
 	            {header: "预览",  width:50,sortable: true,  dataIndex: 'id',align:'center',renderer:me.buttonRender},
 	        ],
 	        width:'100%',
@@ -187,6 +268,21 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
 				}
 			}
 		 });
+	},
+	LoadingAttribute1:function(me,formpanel,store,mainId){
+		  var checkboxgroup = Ext.getCmp(mainId+"attribute");
+		  for (var i = 0; i < store.getCount(); i++) {
+			  var record = store.getAt(i);
+			  var id = record.get("id");
+			  var checkbox = new Ext.form.Checkbox(
+		                 {
+		                     boxLabel: record.get("attributename"),
+		                     inputValue:id,
+		                     checked: false
+		                 });
+		          checkboxgroup.items.add(checkbox);
+		  }
+		  formpanel.doLayout();
 	},
 	typeNameRender:function(value){
 		return value.typename;

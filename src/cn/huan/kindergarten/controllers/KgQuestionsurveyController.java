@@ -9,6 +9,7 @@ import cn.huan.kindergarten.bean.ExtAjax;
 import cn.huan.kindergarten.bean.ExtStore;
 import cn.huan.kindergarten.dto.KgAssessmentType;
 import cn.huan.kindergarten.dto.KgLink;
+import cn.huan.kindergarten.dto.KgNews;
 import cn.huan.kindergarten.dto.KgQuestionsurvey;
 import cn.huan.kindergarten.service.IKgQuestionsurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,6 +79,15 @@ import java.util.List;
         service.addKgQuestionsurvey(requestCtx, dto);
     	return new ExtAjax(true, null);	
     }
+    
+    @RequestMapping(value = "/admin/questionsurvey/update")
+    @ResponseBody
+	public ExtAjax adminUpdate(@RequestBody List<KgQuestionsurvey> dto, BindingResult result, HttpServletRequest request){
+    	 IRequest requestCtx = createRequestContext(request);
+         List<KgQuestionsurvey> list = service.batchUpdate(requestCtx, dto);
+         return new ExtAjax(true, null);
+    }
+    
     @RequestMapping(value = "/admin/QuestionSurvey/remove")
     @ResponseBody
 	public ExtAjax adminDelete(HttpServletRequest request,@RequestBody List<KgQuestionsurvey> dto ){

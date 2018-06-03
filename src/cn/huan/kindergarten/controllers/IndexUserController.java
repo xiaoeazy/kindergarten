@@ -3,6 +3,7 @@ package cn.huan.kindergarten.controllers;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -88,6 +89,17 @@ public class IndexUserController extends IndexBaseController{
 //	         return mv;
 		   return null;
 	    }
+	   
+		@RequestMapping(value = "/i/loginout")
+		@ResponseBody
+		public ModelAndView loginout(HttpServletRequest request, HttpServletResponse response) {
+
+			HttpSession session = request.getSession(false);
+			if(session!=null)
+				session.invalidate();
+			ModelAndView view = new ModelAndView(REDIRECT + VIEW_LOGIN);
+			return view;
+		}
 	   
 	    @RequestMapping(value = "/index/admin/userAssessment/assessmentInfo")
 	    @ResponseBody

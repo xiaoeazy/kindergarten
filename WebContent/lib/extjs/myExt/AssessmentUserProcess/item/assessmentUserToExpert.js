@@ -19,7 +19,7 @@ Ext.extend(assessmentUserToExpert.assessmentUserToExpertWindow, Ext.Window, {
 	    		pageSize:0,
 	    		proxy: {
 			        type: 'ajax',
-			        url : appName+ '/admin/user/queryAll',
+			        url : appName+ '/admin/user/queryAllWithRole?roleId=10006',
 			        reader: {
 			        	root : "results",
 						totalProperty: "totalProperty",

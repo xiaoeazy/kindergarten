@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.huan.HTed.account.bean.UserAndRoleContext;
+import com.huan.HTed.account.dto.Role;
 import com.huan.HTed.account.dto.User;
 import com.huan.HTed.account.dto.UserRole;
 import com.huan.HTed.account.service.IUserService;
@@ -85,7 +86,6 @@ import cn.huan.kindergarten.bean.ExtStore;
     public ExtStore adminqueryAll(User dto, HttpServletRequest request) {
     	 IRequest requestContext = createRequestContext(request);
          List<User> list = service.select(requestContext,dto);
-         int count  =  service.adminQueryCount(requestContext, null);
          Iterator<User> it = list.iterator();
          while(it.hasNext()){
         	  User user = it.next();
@@ -93,7 +93,22 @@ import cn.huan.kindergarten.bean.ExtStore;
         		   it.remove();
          	  }
         	}
-         return new ExtStore(null, null, count-1, list);
+         return new ExtStore(null, null, list.size(), list);
+    }
+    
+    @RequestMapping(value = "/admin/user/queryAllWithRole")
+    @ResponseBody
+    public ExtStore adminqueryWithRole(Role dto, HttpServletRequest request) {
+    	 IRequest requestContext = createRequestContext(request);
+         List<User> list = service.selectWithRole(requestContext,dto);
+         Iterator<User> it = list.iterator();
+         while(it.hasNext()){
+        	  User user = it.next();
+        	   if(("admin").equals(user.getUserName())) {
+        		   it.remove();
+         	  }
+        	}
+         return new ExtStore(null, null, list.size(), list);
     }
     
 

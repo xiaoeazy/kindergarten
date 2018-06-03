@@ -15,5 +15,23 @@
         <result column="STATUS" property="status" jdbcType="VARCHAR" />
     </resultMap>
 
+	  <select id="selectWithRole" resultMap="BaseResultMap" parameterType="com.huan.HTed.account.dto.Role">
+	        select a.* from sys_user a left join sys_user_role b
+	            on a.USER_ID=b.USER_ID  
+	           <where>
+	           		<if test="roleId != null and roleId !=''">
+           			AND b.ROLE_ID  = #{roleId}
+           		</if>
+	           </where>
+	    </select>
+	    
+	    <select id="adminQueryCountWithRole" resultType="java.lang.Integer" parameterType="com.huan.HTed.account.dto.Role">
+        select count(1) from sys_role_func  
+           <where>
+           		<if test="roleId != null and roleId !=''">
+           			AND ROLE_ID  = #{roleId}
+           		</if>
+           </where>
+    </select>
 
 </mapper>

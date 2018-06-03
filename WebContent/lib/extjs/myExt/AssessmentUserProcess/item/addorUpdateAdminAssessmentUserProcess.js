@@ -94,15 +94,16 @@ Ext.extend(addorUpdateAdminAssessmentUserProcess.addorUpdateAdminAssessmentUserP
 				    		var state = record.get("state");
 				    		if(state>10){
 				    			Ext.getCmp(mainId+"adminSuggestion").setValue(adminSuggestion);
-				    			if(state==20)
+				    			if(state==20){
 				    				rg.setValue({pass: "Y"});
-				    			else if(state==30)
+				    			}else if(state==30){
 				    				rg.setValue({pass: "N"});
-				    			else(state>30)
+				    			}else if(state>30){
 				    				rg.setValue({pass: "Y"});
+				    			}
 				    		}else if(state==10){
-				    			Ext.getCmp(mainId+"adminSuggestion").setValue("通过");
-				    			rg.setValue({pass: "Y"});
+//				    			Ext.getCmp(mainId+"adminSuggestion").setValue("");
+//				    			rg.setValue({pass: "Y"});
 				    		}
 				    	}
 					}
@@ -115,6 +116,10 @@ Ext.extend(addorUpdateAdminAssessmentUserProcess.addorUpdateAdminAssessmentUserP
 	submit : function(me,formpanel,mainId,record,rg,type,parentStore) {
 		var id = record.get("id");
 		var rgValue=rg.getValue().pass;
+		if(rgValue==null){
+			alert("请选定通过状态");
+			return;
+		}
 		var adminSuggestion =Ext.getCmp(mainId+"adminSuggestion").getValue();
 		var state = "";
 		if(rgValue=="Y"){

@@ -6,6 +6,7 @@ import com.huan.HTed.system.service.IBaseService;
 
 import java.util.List;
 
+import com.huan.HTed.account.dto.Role;
 import com.huan.HTed.account.dto.User;
 import com.huan.HTed.account.dto.UserRole;
 
@@ -14,4 +15,6 @@ public interface IUserService extends IBaseService<User>, ProxySelf<IUserService
 	public void adminDelete(IRequest request ,List<User> list);
 	public int adminQueryCount(IRequest request,User record);
 	public User selectOne(IRequest request, User record);
+	public List<User> selectWithRole(IRequest request, Role dto);
+	public int adminQueryCountWithRole(IRequest request, Role dto);
 }

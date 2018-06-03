@@ -158,6 +158,44 @@ public class IndexAssessmentController extends IndexBaseController{
     }
     
     
+    @RequestMapping(value = "/index/admin/assessment/updateState")
+    @ResponseBody
+    public ResponseData updateState(Long  id,HttpServletRequest request){
+    	ResponseData ua = new ResponseData(true);
+    	try {
+			IRequest requestContext = createRequestContext(request);
+			KgAssessmentActivity ka = new KgAssessmentActivity();
+			ka.setId(id);
+			KgAssessmentActivity kaa = iKgAssessmentActivityService.selectByPrimaryKey(requestContext, ka);
+			Boolean flag = kaa.getFinished();
+			if(flag ==false) {
+				ua = new ResponseData(false);
+				ua.setMessage("该活动已经结束");
+			}else {
+				 HttpSession session = request.getSession(false);
+			     Long userid = (Long)session.getAttribute(IRequest.FIELD_USER_ID);
+			     KgAssessmentActivityUserProgress kup = new KgAssessmentActivityUserProgress();
+			     kup.setAssessmentActivityId(id);
+			     kup.setUploadUserId(userid);
+			     List<KgAssessmentActivityUserProgress> kupDataList = iKgAssessmentActivityUserProgressService.select(requestContext, kup);
+			     if(kupDataList.size()==1) {
+			    	 Integer state = kupDataList.get(0).getState();
+			    	 if(state==30||state==60) {
+			    		 
+			    	 }else {
+			    		 ua = new ResponseData(false);
+						 ua.setMessage("上传文件等待后台人员处理中，不能上传！");
+			    	 }
+			     }
+			}
+		} catch(Exception e) {
+			ua = new ResponseData(false);
+			ua.setMessage(e.getMessage());
+		}
+    	return ua;
+    }
+    
+    
     @RequestMapping(value = "/index/admin/assessment/upload", method = RequestMethod.POST, produces = "text/html")
     @ResponseBody
     public ResponseData fileupload(HttpServletRequest request){
@@ -167,6 +205,7 @@ public class IndexAssessmentController extends IndexBaseController{
 			Long assessmentActivityId = Long.parseLong(request.getParameter("assessmentActivityId"));
 			if(assessmentActivityId==null)
 				throw new  FileUploadException("参数错误");
+			
 			List<FileInfo> list = iIndexAssessmentService.assessmentUpload(requestContext, request, assessmentActivityId);
 			ua = new ResponseData(true);
 //        return "<script>window.parent.showUploadSucessLogo()</script>";
@@ -197,6 +236,22 @@ public class IndexAssessmentController extends IndexBaseController{
 			IRequest requestCtx = createRequestContext(request);
 			String webPath = request.getServletContext().getRealPath("/");
 			iIndexAssessmentService.indexFileDelete(requestCtx, webPath, dto);
+			rd = new ResponseData(true);
+		} catch (Exception e) {
+			rd = new ResponseData(false);
+			rd.setMessage(e.getMessage());
+		}
+    	return rd;
+    }
+    
+    @RequestMapping(value = "/index/admin/user/join/assessment/delete")
+    @ResponseBody
+    public ResponseData userJoinAssessmentDelete(HttpServletRequest request,@RequestBody List<KgAssessmentActivityUserProgress> dto) {
+    	ResponseData rd = null;
+    	try {
+			IRequest requestCtx = createRequestContext(request);
+			String webPath = request.getServletContext().getRealPath("/");
+			iIndexAssessmentService.userJoinAssessmentDelete(requestCtx, webPath, dto);
 			rd = new ResponseData(true);
 		} catch (Exception e) {
 			rd = new ResponseData(false);

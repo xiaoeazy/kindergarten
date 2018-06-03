@@ -10,6 +10,8 @@ import cn.huan.kindergarten.bean.ExtStore;
 import cn.huan.kindergarten.dto.KgNews;
 import cn.huan.kindergarten.dto.KgNewstype;
 import cn.huan.kindergarten.service.IKgNewsService;
+import cn.huan.kindergarten.utils.CommonUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,7 @@ import org.springframework.validation.BindingResult;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
     @Controller
     public class KgNewsController extends BaseController{
@@ -60,9 +63,14 @@ import java.util.List;
     @RequestMapping(value = "/admin/news/query")
     @ResponseBody
     public ExtStore adminQuery(KgNews dto, @RequestParam(defaultValue = DEFAULT_PAGE) int page,int start,
-        @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit, HttpServletRequest request) {
+        @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit,String sort, HttpServletRequest request) {
     	 IRequest requestContext = createRequestContext(request);
 //         List<KgNews> list = service.select(requestContext,dto,1,limit);
+    	 Map<String,String> map = CommonUtil.getSort(sort);
+    	 if(map.size()!=0) {
+    		 dto.setSortname(map.get("property"));
+    		 dto.setSortorder(map.get("direction"));
+    	 }
     	 List<KgNews> list = service.selectWithOtherInfo(requestContext,dto,page,limit);
     	 int count = service.adminQueryCount(requestContext, dto);
     	 return new ExtStore(start, limit, count, list);

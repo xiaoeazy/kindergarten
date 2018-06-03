@@ -35,9 +35,41 @@ function btn_fresh(){
 	$("#table").bootstrapTable('refresh');
 }
 function btn_add(){
-	 $("#myModal").modal().show();
+	var flag = judgeState();//true 表示正在进行
+	if(flag){
+		 $("#myModal").modal().show();
+	}
 }
+//判断活动是否结束
+function judgeState(){
+	var flag = true;
+	$.ajax({
+        type: "post",
+        async: false,
+        dataType: "json",
+        contentType: 'application/json',
+        url:  '${base.contextPath}/index/admin/assessment/updateState?id='+${assessmentInfo.id},
+        data: '',
+        success: function (data) {
+            if (data.success) {
+            	flag=true
+            }else{
+            	alert(data.message);
+            	flag=false;
+            }
+        }
+	 });
+	return flag;
+}
+
 function btn_delete(){
+	var flag = judgeState();//true 表示正在进行
+	if(flag){
+		toDelete();
+	}
+}
+
+function toDelete(){
 	var jsonArray = [];
 	var allTableData = $('#table').bootstrapTable('getSelections');
     for(var i = 0; i < allTableData.length; i++) {

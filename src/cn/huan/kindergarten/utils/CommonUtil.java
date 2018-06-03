@@ -2,10 +2,16 @@ package cn.huan.kindergarten.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import cn.huan.kindergarten.bean.SortBean;
 import cn.huan.kindergarten.dto.KgAssessmentActivity;
 import cn.huan.kindergarten.dto.KgNews;
 
@@ -59,5 +65,17 @@ public class CommonUtil {
 		                ip = request.getRemoteAddr();  
 		            }  
 		            return ip;  
-		        }  
+		        }
+	   
+	   public static Map<String,String> getSort(String sort){  
+		    Gson gson = new Gson();  
+		    Map<String,String> map = new HashMap<String,String>();  
+		    if(sort == null || "".equals(sort)){  
+		    }else{  
+		      List<SortBean> sortData = gson.fromJson(sort, new TypeToken<List<SortBean>>(){}.getType());  
+		        map.put("direction", sortData.get(0).getDirection());  
+		        map.put("property", sortData.get(0).getProperty());  
+		    }  
+		    return map;  
+		  }  
 }

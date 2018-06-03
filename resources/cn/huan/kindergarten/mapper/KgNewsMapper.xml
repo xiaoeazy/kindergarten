@@ -48,11 +48,23 @@
            		<if test="typeid != null">
            			AND a.typeId = #{typeid}
            		</if>
-           		<if test="attributeid != null">
+           		<if test="attributeid != null and attributeid !=''">
            		 	AND FIND_IN_SET(#{attributeid},a.attributeId) 
            		</if>
+           		<if test="indexshow!=null and indexshow !=''">
+           			AND a.indexshow = #{indexshow}
+           		</if>
            </where>
-           ORDER BY a.createDate DESC
+           
+           <choose>
+			    <when test="sortname!=null and sortname !=''">
+			         ORDER BY #{sortname} #{sortorder}
+			    </when>
+			    <otherwise>
+			        ORDER BY a.sequence, a.createDate DESC
+			    </otherwise>
+			</choose>
+           
     </select>
     
    <select id="adminQueryCount" resultType="java.lang.Integer" parameterType="cn.huan.kindergarten.dto.KgNews">
@@ -64,6 +76,13 @@
            		<if test="typeid != null and typeid !=''">
            			AND typeId = #{typeid}
            		</if>
+           		<if test="attributeid != null and attributeid !='' ">
+           		 	AND FIND_IN_SET(#{attributeid},attributeId) 
+           		</if>
+           		<if test="indexshow!=null  and indexshow !='' ">
+           			AND indexshow = #{indexshow}
+           		</if>
+           		
            </where>
     </select>
 </mapper>

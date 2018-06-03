@@ -48,7 +48,7 @@ public class AdminController extends BaseController {
 	@Autowired
 	private IFuncService funcService;
 
-	@RequestMapping(value = "/admin/login")
+	@RequestMapping(value = { "/admin/login","/admin"})
 	@ResponseBody
 	public ModelAndView login(User dto, HttpServletRequest request, HttpServletResponse response) {
 

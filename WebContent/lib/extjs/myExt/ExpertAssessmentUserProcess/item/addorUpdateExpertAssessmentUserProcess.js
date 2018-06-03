@@ -110,6 +110,10 @@ Ext.extend(addorUpdateExpertAssessmentUserProcess.addorUpdateExpertAssessmentUse
 	submit : function(me,formpanel,mainId,record,rg,type,parentStore) {
 		var id = record.get("id");
 		var rgValue=rg.getValue().pass;
+		if(rgValue==null){
+			alert("请选定通过状态");
+			return;
+		}
 		var expertSuggestion =Ext.getCmp(mainId+"expertSuggestion").getValue();
 		var state = "";
 		if(rgValue=="Y"){

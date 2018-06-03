@@ -218,7 +218,7 @@ Ext.extend(AssessmentUserProcess.AssessmentUserProcessPanel, Ext.Panel, {
 	            {header: "管理员建议",  width:50,sortable: true,  dataIndex: 'adminSuggestion',align:'center'},
 	            {header: "专家用户",  width:50,sortable: true,  dataIndex: 'expertUserId',align:'center'},
 	            {header: "状态",  width:50,sortable: true,  dataIndex: 'state',align:'center',renderer:me.stateRender},
-	            {header: "预览",  width:50,sortable: true,  dataIndex: 'id',align:'center',renderer:me.buttonRender}
+	            {header: "预览",  width:50,sortable: true,  dataIndex: 'assessmentActivityId',align:'center',renderer:me.buttonRender}
 	        ],
 	        width:'100%',
 	        autoExpandColumn: 'AssessmentUserProcessName',
@@ -250,20 +250,20 @@ Ext.extend(AssessmentUserProcess.AssessmentUserProcessPanel, Ext.Panel, {
 		if(value==10){
 			return "已上传";
 		}else if(value==20){
-			return "管理员通过";
+			return "<font color='green'>管理员通过</font>";
 		}else if(value==30){
-			return "管理员未通过";
+			return "<font color='red'>管理员未通过</font>";
 		}else if(value==40){
-			return "已转移专家";
+			return "<font color='blue'>已转移专家</font>";
 		}else if(value==50){
-			return "专家通过";
+			return "<font color='green'>专家通过</font>";
 		}else if(value==60){
-			return "专家未通过";
+			return "<font color='red'>专家未通过</font>";
 		}
 	},
 	editAdminAssessmentUserProcess:function(record,store,mainId){
 		var state = record.get("state");
-		if(state<50){
+		if(state<40){
 			var win = new addorUpdateAdminAssessmentUserProcess.addorUpdateAdminAssessmentUserProcessWindow ({
 				mainId:mainId,
 				type:'update',
@@ -271,7 +271,7 @@ Ext.extend(AssessmentUserProcess.AssessmentUserProcessPanel, Ext.Panel, {
 				parentStore:store
 			});
 		}else{
-			ExtError("专家已经评论 ，管理员不能再评论");
+			ExtError("已经转移给专家了 ，管理员不能再评论");
 		}
 		win.show();
 	},
@@ -287,6 +287,10 @@ Ext.extend(AssessmentUserProcess.AssessmentUserProcessPanel, Ext.Panel, {
 			}
 			if(state ==30){
 				ExtError("评估任务 ："+assessmentActivityName +" ，未通过管理员!");
+				toContinue=false;
+			}
+			if(state ==10){
+				ExtError("评估任务 ："+assessmentActivityName +" ，管理员尚未评估!");
 				toContinue=false;
 			}
 		}

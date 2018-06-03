@@ -119,4 +119,22 @@ public class IndexAssessmentServiceImpl  implements IIndexAssessmentService{
 			 }
 		 }
 	 }
+	 
+	 public void userJoinAssessmentDelete (IRequest request, String webPath , List<KgAssessmentActivityUserProgress> dto) {
+		 for(KgAssessmentActivityUserProgress kp :dto) {
+			 KgAssessmentActivityUserUpload ku = new KgAssessmentActivityUserUpload();
+			 ku.setProgressId(kp.getId());
+			 List<KgAssessmentActivityUserUpload> userUploadInfo = iKgAssessmentActivityUserUploadService.select(request, ku) ;
+			 File file = null;
+			 for(KgAssessmentActivityUserUpload kk:userUploadInfo) {
+				 if(!StringUtils.isEmpty(kk.getFilePath())) {
+					 file = new File(webPath+kk.getFilePath());
+					 if(file.exists())
+						 file.delete();
+				 }
+			 }
+			 iKgAssessmentActivityUserUploadService.batchDelete(userUploadInfo);
+			 iKgAssessmentActivityUserProgressService.deleteByPrimaryKey(kp);
+		 }
+	 }
 }

@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.huan.HTed.account.dto.Role;
 import com.huan.HTed.account.dto.User;
 import com.huan.HTed.account.dto.UserRole;
+import com.huan.HTed.account.mapper.UserMapper;
 import com.huan.HTed.account.service.IUserRoleService;
 import com.huan.HTed.account.service.IUserService;
 import com.huan.HTed.core.IRequest;
@@ -20,6 +22,8 @@ import com.huan.HTed.system.service.impl.BaseServiceImpl;
 public class UserServiceImpl extends BaseServiceImpl<User> implements IUserService{
 	@Autowired
 	private IUserRoleService userRoleService;
+	@Autowired
+	private UserMapper userMapper;
 	
 	public void adminUpdate(IRequest request ,User user,List<UserRole> userRole) {
 		 List<User> list = new ArrayList<User>();
@@ -66,4 +70,15 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements IUserServi
 			return mapper.selectOne(record);
 		return null;
 	}
+	
+	@Override
+	public List<User> selectWithRole(IRequest request,Role dto) {
+		
+		return userMapper.selectWithRole(dto);
+	}
+	@Override
+	public int adminQueryCountWithRole(IRequest request,Role dto) {
+		return  userMapper.adminQueryCountWithRole(dto);
+	}
+	
 }
