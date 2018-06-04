@@ -164,7 +164,13 @@ Ext.extend(ExpertAssessmentUserProcess.ExpertAssessmentUserProcessPanel, Ext.Pan
 					var assessmentActivityId 	  = Ext.getCmp(mainId+"assessmentActivityId").getValue();
 					var state 	  = Ext.getCmp(mainId+"state").getValue();
 					if(assessmentActivityId==-1){
-						assessmentActivityId="";
+						assessmentActivityId=null;
+					}
+					if(uploadUserId==-1){
+						uploadUserId=null;
+					}
+					if(state==-1){
+						state=null;
 					}
 					store.proxy.url = appName+ '/admin/assessment/activity/user/progress/query';
 					store.proxy.extraParams={
@@ -172,6 +178,7 @@ Ext.extend(ExpertAssessmentUserProcess.ExpertAssessmentUserProcessPanel, Ext.Pan
 							start:0,
 							assessmentActivityId:assessmentActivityId,
 							uploadUserId:uploadUserId,
+							expertUserId:theLoginUserId,
 							state:state
 					};
 					store.load();  

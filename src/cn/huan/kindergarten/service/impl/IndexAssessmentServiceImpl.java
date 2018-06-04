@@ -122,6 +122,11 @@ public class IndexAssessmentServiceImpl  implements IIndexAssessmentService{
 	 
 	 public void userJoinAssessmentDelete (IRequest request, String webPath , List<KgAssessmentActivityUserProgress> dto) {
 		 for(KgAssessmentActivityUserProgress kp :dto) {
+			 KgAssessmentActivityUserProgress nowProgressState =iKgAssessmentActivityUserProgressService.selectByPrimaryKey(request, kp);
+			 int state = nowProgressState.getState();
+			 if(state!=10) {
+				 throw new RuntimeException(kp.getAssessmentActivityName()+" ，已经进入审核流程不能删除!");
+			 }
 			 KgAssessmentActivityUserUpload ku = new KgAssessmentActivityUserUpload();
 			 ku.setProgressId(kp.getId());
 			 List<KgAssessmentActivityUserUpload> userUploadInfo = iKgAssessmentActivityUserUploadService.select(request, ku) ;

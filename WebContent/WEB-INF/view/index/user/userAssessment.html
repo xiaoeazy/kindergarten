@@ -36,7 +36,8 @@
 		var allTableData = $('#table').bootstrapTable('getSelections');
 	    for(var i = 0; i < allTableData.length; i++) {
 	    	var id =allTableData[i].id;
-	    	jsonArray.push({id:id});
+	    	var assessmentActivityName =allTableData[i].kgAssessmentActivity.assessmentActivityName;
+	    	jsonArray.push({"id":id,"assessmentActivityName":assessmentActivityName});
 	     }
 	    if(jsonArray.length==0){
 	    	return;

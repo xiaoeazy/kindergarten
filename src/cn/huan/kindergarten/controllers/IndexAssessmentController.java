@@ -180,7 +180,7 @@ public class IndexAssessmentController extends IndexBaseController{
 			     List<KgAssessmentActivityUserProgress> kupDataList = iKgAssessmentActivityUserProgressService.select(requestContext, kup);
 			     if(kupDataList.size()==1) {
 			    	 Integer state = kupDataList.get(0).getState();
-			    	 if(state==30||state==60) {
+			    	 if(state==10||state==30||state==60) {
 			    		 
 			    	 }else {
 			    		 ua = new ResponseData(false);

@@ -98,13 +98,15 @@ CREATE TABLE `kg_assessment_activity_user_progress` (
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `Index_2` (`assessment_activity_id`,`upload_user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_assessment_activity_user_progress`
 --
 
 /*!40000 ALTER TABLE `kg_assessment_activity_user_progress` DISABLE KEYS */;
+INSERT INTO `kg_assessment_activity_user_progress` (`id`,`assessment_activity_id`,`upload_user_id`,`admin_suggestion`,`expert_user_id`,`expert_suggestion`,`state`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
+ (5,3,10013,'',10032,NULL,40,NULL,-1,-1,NULL,NULL,NULL,'2018-06-04 21:43:25',NULL,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_assessment_activity_user_progress` ENABLE KEYS */;
 
 
@@ -133,13 +135,15 @@ CREATE TABLE `kg_assessment_activity_user_upload` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_assessment_activity_user_upload`
 --
 
 /*!40000 ALTER TABLE `kg_assessment_activity_user_upload` DISABLE KEYS */;
+INSERT INTO `kg_assessment_activity_user_upload` (`id`,`upload_user_id`,`progress_id`,`file_name`,`file_path`,`createDate`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
+ (6,10013,5,'1.txt','/resources/upload/assessment/3/10013/ea35459b-1321-4340-8b40-17203709c367.TXT',NULL,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_assessment_activity_user_upload` ENABLE KEYS */;
 
 

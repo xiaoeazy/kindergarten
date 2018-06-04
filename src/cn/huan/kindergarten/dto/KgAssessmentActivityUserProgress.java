@@ -43,6 +43,8 @@ public class KgAssessmentActivityUserProgress extends BaseDTO {
      
      @Transient
      private KgAssessmentActivity kgAssessmentActivity;
+     @Transient
+     private String assessmentActivityName;
      
 
 
@@ -109,5 +111,15 @@ public class KgAssessmentActivityUserProgress extends BaseDTO {
      public Integer getState(){
          return state;
      }
+
+	public String getAssessmentActivityName() {
+		return assessmentActivityName;
+	}
+
+	public void setAssessmentActivityName(String assessmentActivityName) {
+		this.assessmentActivityName = assessmentActivityName;
+	}
+     
+     
 
      }
