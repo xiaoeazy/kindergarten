@@ -90,7 +90,7 @@ public class IndexUserController extends IndexBaseController{
 		   return null;
 	    }
 	   
-		@RequestMapping(value = "/i/loginout")
+		@RequestMapping(value = "/index/logout")
 		@ResponseBody
 		public ModelAndView loginout(HttpServletRequest request, HttpServletResponse response) {
 
