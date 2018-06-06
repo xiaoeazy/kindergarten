@@ -15,11 +15,11 @@
     <context:component-scan base-package="**.*.service"/>
     <context:component-scan base-package="**.*.components"/>
 
-<!-- 	<bean id="requestAD" class="cn.shareit.LoadArchiveNeu.core.impl.ServiceExecutionAdvice"/> -->
+	<bean id="requestAD" class="com.huan.HTed.core.impl.ServiceExecutionAdvice"/>
 
     <aop:config expose-proxy="true">
-<!--         <aop:pointcut id="servicePointcut" expression="execution(* *..*ServiceImpl.*(..))"/> -->
-<!--         <aop:advisor advice-ref="requestAD" pointcut-ref="servicePointcut"/> -->
+        <aop:pointcut id="servicePointcut" expression="execution(* *..*ServiceImpl.*(..))"/>
+        <aop:advisor advice-ref="requestAD" pointcut-ref="servicePointcut"/>
     </aop:config>
 
 

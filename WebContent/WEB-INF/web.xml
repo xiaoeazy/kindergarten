@@ -10,11 +10,11 @@
 <!-- 	</listener> -->
 	
 	
-	<servlet>
-	    <servlet-name>InitLog4jServlet</servlet-name>
-	    <servlet-class>cn.huan.kindergarten.utils.InitLog4jServlet</servlet-class>
-	    <load-on-startup>0</load-on-startup>
-	</servlet>
+<!-- 	<servlet> -->
+<!-- 	    <servlet-name>InitLog4jServlet</servlet-name> -->
+<!-- 	    <servlet-class>cn.huan.kindergarten.utils.InitLog4jServlet</servlet-class> -->
+<!-- 	    <load-on-startup>0</load-on-startup> -->
+<!-- 	</servlet> -->
 	
 	
 	 <context-param>

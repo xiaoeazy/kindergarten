@@ -11,27 +11,28 @@
         </encoder>
     </appender>
 
-<!--    <appender name="PLATFORM-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="PLATFORM-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <encoder>
             <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%X{accountId}] [%X{requestId}] %logger -  %msg%n</pattern>
         </encoder>
-        <file>${catalina.base}/logs/hap.log</file>
+        <file>${catalina.base}/logs/kindergarten.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${catalina.base}/logs/hap-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${catalina.base}/logs/kindergarten-%d{yyyy-MM-dd}.log</fileNamePattern>
         </rollingPolicy>
-    </appender>-->
+    </appender>
 
     <!-- <appender name="stash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
         <encoder>
             <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%X{accountId}] [%X{requestId}] %logger -  %msg%n</pattern>
         </encoder>
-        <destination>elk-hap:4560</destination>
+        <destination>elk-kindergarten:4560</destination>
     </appender> -->
 
 
     <root level="DEBUG">
         <appender-ref ref="STDOUT" />
-        <!-- <appender-ref ref="stash" /> -->
+        <appender-ref ref="PLATFORM-FILE" />
+<!--         <appender-ref ref="stash" /> -->
     </root>
     <logger name="org.activiti.engine" level="INFO" additivity="false">
         <appender-ref ref="STDOUT" />
