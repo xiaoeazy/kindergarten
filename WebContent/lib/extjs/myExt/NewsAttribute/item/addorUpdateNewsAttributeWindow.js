@@ -38,7 +38,7 @@ Ext.extend(addorUpdateNewsAttribute.addorUpdateNewsAttributeWindow, Ext.Window, 
 					  			text:''
 				  			},
 				  			{
-				          		fieldLabel:'属性名',
+				          		fieldLabel:'属性名<font color="red">*</font>',
 								allowBlank:false,
 								name: 'attributename',
 								blankText:'必须填写',

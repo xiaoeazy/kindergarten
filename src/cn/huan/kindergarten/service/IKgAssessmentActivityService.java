@@ -15,5 +15,7 @@ public interface IKgAssessmentActivityService extends IBaseService<KgAssessmentA
 	public List<KgAssessmentActivity> selectWithOtherInfo(IRequest request,  KgAssessmentActivityUserProgress condition ,Integer pageNum, Integer pageSize);
 
 	public int adminQueryCount(IRequest request, KgAssessmentActivity record);
+	
+	public void deleteActivity(IRequest request, String webPath, List<KgAssessmentActivity> dlist);
 
 }

@@ -133,13 +133,13 @@ Ext.extend(AssessmentActivity.AssessmentActivityPanel, Ext.Panel, {
 	        }),
 	        tbar:[{
 					icon : _basePath+'/resources/images/icon/add.png',
-					text : '添加咨讯',
+					text : '添加评估任务',
 					handler : function() {
 						me.addAssessmentActivity(store,mainId);
 					}
 				},'-',{
 					icon : _basePath+'/resources/images/icon/edit.png',
-					text : '修改咨讯',
+					text : '修改评估咨讯',
 					handler : function() {
 						var records=getRecords(grid);
 						if(records==-1)
@@ -167,7 +167,7 @@ Ext.extend(AssessmentActivity.AssessmentActivityPanel, Ext.Panel, {
 					}
 				},'-',{
 					icon : _basePath+'/resources/images/icon/cancel.png',
-					text : '删除咨讯',
+					text : '删除评估',
 					handler : function() {
 						var records=getDeleteRecords(grid);
 						if(records==-1)
@@ -274,33 +274,37 @@ Ext.extend(AssessmentActivity.AssessmentActivityPanel, Ext.Panel, {
 		win.show();
 	},
 	deleteAssessmentActivity:function(records,store,mainId){
-		  Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
-		  var linkobj = [];
-		  for(var i=0;i<records.length;i++){
-			  var record = records[i];
-			  var id = record.get("id");
-			  linkobj.push({"id":id});
-		  }
-		  Ext.Ajax.request({
-			url : appName + '/admin/assessment/activity/remove',
-            method : 'post',
-            headers: {'Content-Type':'application/json'},
-            params : JSON.stringify(linkobj),
-            success : function(response, options) {
-          	  Ext.getBody().unmask();
-          	  var responseArray = Ext.util.JSON.decode(response.responseText);
-                if (responseArray.success == true) {
-              	    ExtAlert("成功");
-              	    store.reload();
-                  }else{
-                  	ExtError(responseArray.message);
-                  }
-            },
-			failure : function() {
-				Ext.getBody().unmask();
-				ExtError();
-			}
-      });
+		Ext.Msg.confirm('提示信息','确认要删除这些信息吗？',function(op){  
+	        if(op == 'yes'){
+	        	      Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
+					  var linkobj = [];
+					  for(var i=0;i<records.length;i++){
+						  var record = records[i];
+						  var id = record.get("id");
+						  linkobj.push({"id":id});
+					  }
+					  Ext.Ajax.request({
+						url : appName + '/admin/assessment/activity/remove',
+			            method : 'post',
+			            headers: {'Content-Type':'application/json'},
+			            params : JSON.stringify(linkobj),
+			            success : function(response, options) {
+			          	  Ext.getBody().unmask();
+			          	  var responseArray = Ext.util.JSON.decode(response.responseText);
+			                if (responseArray.success == true) {
+			              	    ExtAlert("成功");
+			              	    store.reload();
+			                  }else{
+			                  	ExtError(responseArray.message);
+			                  }
+			            },
+						failure : function() {
+							Ext.getBody().unmask();
+							ExtError();
+						}
+			      });
+	        }
+		})
 	}
 });
 

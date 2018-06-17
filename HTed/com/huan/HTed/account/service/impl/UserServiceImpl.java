@@ -14,14 +14,24 @@ import com.huan.HTed.account.mapper.UserMapper;
 import com.huan.HTed.account.service.IUserRoleService;
 import com.huan.HTed.account.service.IUserService;
 import com.huan.HTed.core.IRequest;
+import com.huan.HTed.mybatis.common.example.DeleteByExampleMapper;
 import com.huan.HTed.system.dto.DTOStatus;
 import com.huan.HTed.system.service.impl.BaseServiceImpl;
+
+import cn.huan.kindergarten.dto.KgAssessmentActivityUserProgress;
+import cn.huan.kindergarten.dto.KgAssessmentActivityUserUpload;
+import cn.huan.kindergarten.service.IKgAssessmentActivityUserProgressService;
+import cn.huan.kindergarten.service.IKgAssessmentActivityUserUploadService;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class UserServiceImpl extends BaseServiceImpl<User> implements IUserService{
 	@Autowired
 	private IUserRoleService userRoleService;
+	@Autowired
+	private IKgAssessmentActivityUserProgressService iKgAssessmentActivityUserProgressService;
+	@Autowired
+	private IKgAssessmentActivityUserUploadService iKgAssessmentActivityUserUploadService;
 	@Autowired
 	private UserMapper userMapper;
 	
@@ -56,8 +66,21 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements IUserServi
 			 for(UserRole ur :orignalUserRole) {
 				 ur.set__status(DTOStatus.DELETE);
 			 }
+			 
+			 KgAssessmentActivityUserProgress kap = new KgAssessmentActivityUserProgress();
+			 kap.setUploadUserId(user.getUserId());
+			 List<KgAssessmentActivityUserProgress> lista = iKgAssessmentActivityUserProgressService.select(request, kap);
+			 iKgAssessmentActivityUserProgressService.batchDelete(lista);
+			 
+			 KgAssessmentActivityUserUpload kau = new KgAssessmentActivityUserUpload();
+			 kau.setUploadUserId(user.getUserId());
+			 List<KgAssessmentActivityUserUpload> listb = iKgAssessmentActivityUserUploadService.select(request, kau);
+			 iKgAssessmentActivityUserUploadService.batchDelete(listb);
+			 
 			 userRoleService.batchUpdate(request, orignalUserRole);
 		 }
+		 
+		
 	}
 	
 	public int adminQueryCount(IRequest request,User record) {

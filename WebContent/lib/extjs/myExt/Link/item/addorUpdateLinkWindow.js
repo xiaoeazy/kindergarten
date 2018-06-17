@@ -38,7 +38,7 @@ Ext.extend(addorUpdateLink.addorUpdateLinkWindow, Ext.Window, {
 					  			text:''
 				  			},
 				  			{
-				          		fieldLabel:'网址名',
+				          		fieldLabel:'网址名<font color="red">*</font>',
 								allowBlank:false,
 								name: 'linkName',
 								blankText:'必须填写',

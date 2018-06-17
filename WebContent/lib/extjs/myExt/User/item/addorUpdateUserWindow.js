@@ -41,7 +41,7 @@ Ext.extend(addorUpdateUser.addorUpdateUserWindow, Ext.Window, {
 					  			text:''
 				  			},
 				  			{
-				          		fieldLabel:'用户名',
+				          		fieldLabel:'用户名(登录名)<font color="red">*</font>',
 								allowBlank:false,
 								name: 'userName',
 								blankText:'必须填写',
@@ -49,7 +49,7 @@ Ext.extend(addorUpdateUser.addorUpdateUserWindow, Ext.Window, {
 					            maxLength:40  
 				  			},{
 				          		fieldLabel:'真实姓名',
-								allowBlank:false,
+								allowBlank:true,
 								name: 'realName',
 								blankText:'姓名',
 								id:mainId+"realName",
@@ -140,6 +140,7 @@ Ext.extend(addorUpdateUser.addorUpdateUserWindow, Ext.Window, {
 	                 name: 'itemselector',
 	                 id: mainId+"itemselector",
 	                 anchor: '100%',
+	                 height:220,
 //	                 fieldLabel: 'ItemSelector',
 	                 imagePath: '../ux/images/',
 	                 store: dsFrom,
@@ -263,12 +264,13 @@ Ext.extend(addorUpdateUser.addorUpdateUserWindow, Ext.Window, {
 		}
 		if(type=="add"){
 			if(password==""){
-				Ext.getCmp(mainId+"password").markInvalid("密码不能为空！");
-				return;
+				password="123456";
+//				Ext.getCmp(mainId+"password").markInvalid("密码不能为空！");
+//				return;
 			}
 			if(confirmPassword==""){
-				Ext.getCmp(mainId+"confirmPassword").markInvalid("确认密码不能为空！");
-				return;
+//				Ext.getCmp(mainId+"confirmPassword").markInvalid("确认密码不能为空！");
+//				return;
 			}
 		}
 		

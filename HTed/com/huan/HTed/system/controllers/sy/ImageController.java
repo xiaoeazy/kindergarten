@@ -26,6 +26,7 @@ import com.huan.HTed.attachment.exception.StoragePathNotExsitException;
 import com.huan.HTed.attachment.exception.UniqueFileMutiException;
 import com.huan.HTed.bean.UploadImgAjax;
 
+import cn.huan.kindergarten.bean.SysConfig;
 import cn.huan.kindergarten.exception.FileReadIOException;
 import cn.huan.kindergarten.utils.CommonUtil;
 import net.coobird.thumbnailator.Thumbnails;
@@ -59,18 +60,16 @@ public class ImageController {
     public UploadImgAjax upload(HttpServletRequest request)
             throws StoragePathNotExsitException, UniqueFileMutiException, IOException, FileUploadException, FileReadIOException {
     	String type = request.getParameter("type");
-    	String fileResourcesPath="";
+    	String fileResourcesPath=SysConfig.uploadpath;
     	if(type.equals(CAROUSEL_PAGE)) {
-    		fileResourcesPath= "/resources/upload/carousel";
+    		fileResourcesPath += "/carousel";
     	}else if(type.equals(NEWS_PAGE))  {
-    		fileResourcesPath= "/resources/upload/news";
-    	}else {
-    		fileResourcesPath= "/resources/upload";
+    		fileResourcesPath += "/news";
     	}
     	String file_path=request.getServletContext().getRealPath("/")+fileResourcesPath;
         File dir=new File(file_path);
         if(!dir.exists())
-            dir.mkdir();
+            dir.mkdirs();
       
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload upload = new ServletFileUpload(factory);
@@ -111,7 +110,8 @@ public class ImageController {
                 }
                 
                 if(type.equals(CAROUSEL_PAGE)) {
-                	returnPath=genCompressImg(fileResourcesPath,file_path+'/'+randomName,ext, 1920, 765);
+//                	returnPath=genCompressImg(fileResourcesPath,file_path+'/'+randomName,ext, 1920, 765);
+                	returnPath=genCompressImg(fileResourcesPath,file_path+'/'+randomName,ext, 1000, 475);
                 }else  if(type.equals(NEWS_PAGE)) {
                 	returnPath=genCompressImg(fileResourcesPath,file_path+'/'+randomName,ext, 390, 285);
                 }else {
@@ -148,7 +148,7 @@ public class ImageController {
     	String file_path=request.getServletContext().getRealPath("/")+fileResourcesPath;
         File dir=new File(file_path);
         if(!dir.exists())
-            dir.mkdir();
+            dir.mkdirs();
       
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload upload = new ServletFileUpload(factory);
@@ -195,14 +195,14 @@ public class ImageController {
     public UploadImgAjax fileupload(HttpServletRequest request)
             throws StoragePathNotExsitException, UniqueFileMutiException, IOException, FileUploadException {
     	String type = request.getParameter("type");
-    	String fileResourcesPath="";
+    	String fileResourcesPath=SysConfig.uploadpath;;
     	 if(type.equals(DOWNLOAD_PAGE)){
-    		 fileResourcesPath="/resources/upload/download";
+    		 fileResourcesPath+="/download";
     	}
     	String file_path=request.getServletContext().getRealPath("/") + fileResourcesPath;
         File dir=new File(file_path);
         if(!dir.exists())
-            dir.mkdir();
+            dir.mkdirs();
       
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload upload = new ServletFileUpload(factory);

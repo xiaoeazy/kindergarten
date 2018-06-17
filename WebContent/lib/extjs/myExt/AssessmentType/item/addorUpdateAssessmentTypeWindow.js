@@ -38,7 +38,7 @@ Ext.extend(addorUpdateAssessmentType.addorUpdateAssessmentTypeWindow, Ext.Window
 					  			text:''
 				  			},
 				  			{
-				          		fieldLabel:'任务类型名',
+				          		fieldLabel:'任务类型名<font color="red">*</font>',
 								allowBlank:false,
 								name: 'assessmentTypeName',
 								blankText:'必须填写',

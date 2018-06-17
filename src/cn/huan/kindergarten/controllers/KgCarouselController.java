@@ -60,6 +60,8 @@ import java.util.List;
     public ExtStore adminQuery(KgCarousel dto, @RequestParam(defaultValue = DEFAULT_PAGE)int page,int start,
         @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit, HttpServletRequest request) {
     	 IRequest requestContext = createRequestContext(request);
+    	 dto.setSortname("sequence");
+    	 dto.setSortorder("desc");
          List<KgCarousel> list = service.select(requestContext,dto,page,limit);
          int count = service.adminQueryCount(requestContext, null);
          return new ExtStore(start, limit, count, list);

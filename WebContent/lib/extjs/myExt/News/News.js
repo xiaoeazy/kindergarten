@@ -311,34 +311,38 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
 		win.show();
 	},
 	deleteNews:function(records,store,mainId){
-		  Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
-		  var linkobj = [];
-		  for(var i=0;i<records.length;i++){
-			  var record = records[i];
-			  var id = record.get("id");
-			  var thumbnail = record.get("thumbnail");
-			  linkobj.push({"id":id,"thumbnail":thumbnail});
-		  }
-		  Ext.Ajax.request({
-			url : appName + '/admin/news/remove',
-            method : 'post',
-            headers: {'Content-Type':'application/json'},
-            params : JSON.stringify(linkobj),
-            success : function(response, options) {
-          	  Ext.getBody().unmask();
-          	  var responseArray = Ext.util.JSON.decode(response.responseText);
-                if (responseArray.success == true) {
-              	    ExtAlert("成功");
-              	    store.reload();
-                  }else{
-                  	ExtError(responseArray.message);
-                  }
-            },
-			failure : function() {
-				Ext.getBody().unmask();
-				ExtError();
-			}
-      });
+		 Ext.Msg.confirm('提示信息','确认要删除这些信息吗？',function(op){  
+		        if(op == 'yes'){
+						  Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
+						  var linkobj = [];
+						  for(var i=0;i<records.length;i++){
+							  var record = records[i];
+							  var id = record.get("id");
+							  var thumbnail = record.get("thumbnail");
+							  linkobj.push({"id":id,"thumbnail":thumbnail});
+						  }
+						  Ext.Ajax.request({
+							url : appName + '/admin/news/remove',
+				            method : 'post',
+				            headers: {'Content-Type':'application/json'},
+				            params : JSON.stringify(linkobj),
+				            success : function(response, options) {
+				          	  Ext.getBody().unmask();
+				          	  var responseArray = Ext.util.JSON.decode(response.responseText);
+				                if (responseArray.success == true) {
+				              	    ExtAlert("成功");
+				              	    store.reload();
+				                  }else{
+				                  	ExtError(responseArray.message);
+				                  }
+				            },
+							failure : function() {
+								Ext.getBody().unmask();
+								ExtError();
+							}
+				      });
+		        }
+	        })  
 	}
 });
 

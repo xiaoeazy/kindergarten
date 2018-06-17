@@ -26,8 +26,12 @@ Ext.extend(showUserUpload.showUserUploadWindow , Ext.Window, {
 			        	root : "results",
 						totalProperty: "totalProperty",
 						successProperty:'success'
+			        },
+			        extraParams: {
+				    	progressId :  id 
 			        }
 			    },
+			   
 			    autoLoad : true,
 			    fields: ['id', 'fileName']
 			});

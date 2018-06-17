@@ -41,7 +41,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 			});
 	    	
 	       var typeCombo = new Ext.form.ComboBox({
-	    	   		fieldLabel:'类型',
+	    	   		fieldLabel:'类型<font color="red">*</font>',
 		    	    id:mainId+"typeid",
 		            store : typeid_Combo_Store,  
 		            valueField : "id",  
@@ -87,7 +87,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 			});
 	    	
 	       var sourceCombo = new Ext.form.ComboBox({
-	    	   		fieldLabel:'来源',
+	    	   		fieldLabel:'来源<font color="red">*</font>',
 		    	    id:mainId+"sourceid",
 		            store : sourceid_Combo_Store,  
 		            valueField : "id",  
@@ -105,8 +105,6 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 		            name : "sourceid",
 		            listeners:{
 		            	afterrender:function(comb){
-		            		sourceCombo.setValue(1);
-//		            	     typeCombo.setRawValue("所有");
 		            	},
 		            	select:function(combo, record, index){
 		            	}
@@ -138,7 +136,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 			});
 	       //=====================是否前台显示=========================================
 	       var indexShowCombo = new Ext.form.ComboBox({
-   	   			fieldLabel:'是否前台展示图片',
+   	   			fieldLabel:'是否前台展示图片<font color="red">*</font>',
 	    	    id:mainId+"indexshow",
 	    	    model:'local',
 	            store:new Ext.data.SimpleStore({  //填充的数据
@@ -182,7 +180,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 					  			text:''
 				  			},
 				  			{
-				          		fieldLabel:'标题名',
+				          		fieldLabel:'标题名<font color="red">*</font>',
 								allowBlank:false,
 								name: 'newstitle',
 								blankText:'必须填写',
@@ -255,7 +253,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 			                },{
 			                	xtype:'textarea',
 				          		fieldLabel:'简介',
-								allowBlank:false,
+								allowBlank:true,
 								name: 'summary',
 								blankText:'必须填写',
 								id:mainId+"summary",
@@ -346,6 +344,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 						if(record!=null){
 				    		var newstitle= record.get("newstitle");
 				    		var typeid = record.get("typeid");
+				    		var sourceid = record.get("sourceid");
 				    		var thumbnail= record.get("thumbnail");
 				    		var summary= record.get("summary");
 				    		var sequence = record.get("sequence");
@@ -353,6 +352,8 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 				    		var indexshow = record.get("indexshow");
 				    		Ext.getCmp(mainId+"newstitle").setValue(newstitle);
 				    		typeCombo.setValue(typeid);
+				    		
+				    		sourceCombo.setValue(sourceid);
 				    		
 				    		Ext.getCmp(mainId+"imageUrl").setValue(thumbnail);
 				    		if(thumbnail!=null&&thumbnail!=""){
@@ -363,6 +364,8 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 				    		 Ext.getCmp(mainId+"indexshow").setValue(indexshow);
 //				    		Ext.getCmp(mainId+"content").setValue(content);
 //				    		Ext.getCmp(mainId+"content").getEditor().setContent(content);
+				    	}else{
+				    		sourceCombo.setValue(1);
 				    	}
 					}
 				}
@@ -451,10 +454,10 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 			Ext.getCmp(mainId+"indexshow").markInvalid("是否首页显示不能为空！");
 			return;
 		}
-		if(summary==""){
-			Ext.getCmp(mainId+"summary").markInvalid("咨讯简介不能为空！");
-			return;
-		}
+//		if(summary==""){
+//			Ext.getCmp(mainId+"summary").markInvalid("咨讯简介不能为空！");
+//			return;
+//		}
 		if(content==""){
 			Ext.getCmp(mainId+"content").markInvalid("主体内容不能为空！");
 			return;

@@ -49,7 +49,7 @@ Ext.extend(addorUpdateDownload.addorUpdateDownloadWindow, Ext.Window, {
 					             	id:mainId+"filePath",
 					                xtype:"textfield",  
 					                readOnly:true,
-									fieldLabel : '文件'
+									fieldLabel : '文件<font color="red">*</font>'
 				                },{
 				                	columnWidth:.2,
 									xtype : 'button',

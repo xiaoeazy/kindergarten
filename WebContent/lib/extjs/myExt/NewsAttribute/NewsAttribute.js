@@ -65,16 +65,16 @@ Ext.extend(NewsAttribute.NewsAttributePanel, Ext.Panel, {
 						me.editNewsAttribute(record,store,mainId);
 					}
 				}
-//				,'-',{
-//					icon : _basePath+'/resources/images/icon/cancel.png',
-//					text : '删除属性',
-//					handler : function() {
-//						var records=getDeleteRecords(grid);
-//						if(records==-1)
-//							return;
-//						me.deleteNewsAttribute(records,store,mainId);
-//					}
-//				}
+				,'-',{
+					icon : _basePath+'/resources/images/icon/cancel.png',
+					text : '删除属性',
+					handler : function() {
+						var records=getDeleteRecords(grid);
+						if(records==-1)
+							return;
+						me.deleteNewsAttribute(records,store,mainId);
+					}
+				}
 				],
 	        columns: [
 	            {header: "属性名称",  sortable: true,  dataIndex: 'attributename',align:'center'}
@@ -123,11 +123,23 @@ Ext.extend(NewsAttribute.NewsAttributePanel, Ext.Panel, {
 	deleteNewsAttribute:function(records,store,mainId){
 		  Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
 		  var linkobj = [];
+		  var canSubmit = true;
 		  for(var i=0;i<records.length;i++){
 			  var record = records[i];
 			  var id = record.get("id");
+			  if(id==1||id==2||id==3||id==4){
+				  ExtAlert(record.get("attributename")+" 为基础属性，不允许删除！");
+				  canSubmit=false;
+				  break;
+			  }
 			  linkobj.push({"id":id});
 		  }
+		  
+		  if(!canSubmit){
+			  Ext.getBody().unmask();
+			  return;
+		  }
+		  
 		  
 		  
 		  

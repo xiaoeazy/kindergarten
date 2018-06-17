@@ -57,8 +57,12 @@ public class IndexController extends IndexBaseController{
     	 IRequest requestContext = createRequestContext(request);
     	 KgIntroduction ki = new KgIntroduction();
     	 ki.setId(1l);
+    	 
+    	 KgCarousel kc = new KgCarousel();
+    	 kc.setSortorder("desc");
+    	 kc.setSortname("sequence");
     	 List<KgDownload> downloadList = iKgDownloadService.select(requestContext, null, 1, 4);
-    	 List<KgCarousel> carouselList =iKgCarouselService.select(requestContext, null, 1, 5);
+    	 List<KgCarousel> carouselList =iKgCarouselService.select(requestContext, kc, 1, 5);
     	
     	 List<KgNews> newsList =iKgNewsService.select(requestContext, null, 1, 13);
     	 CommonUtil.judgeNewsTitleLength(newsList,17);

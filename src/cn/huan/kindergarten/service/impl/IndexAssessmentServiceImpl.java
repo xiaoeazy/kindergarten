@@ -26,6 +26,7 @@ import com.huan.HTed.attachment.exception.UniqueFileMutiException;
 import com.huan.HTed.core.IRequest;
 
 import cn.huan.kindergarten.bean.FileInfo;
+import cn.huan.kindergarten.bean.SysConfig;
 import cn.huan.kindergarten.dto.KgAssessmentActivityUserProgress;
 import cn.huan.kindergarten.dto.KgAssessmentActivityUserUpload;
 import cn.huan.kindergarten.dto.KgNews;
@@ -45,7 +46,7 @@ public class IndexAssessmentServiceImpl  implements IIndexAssessmentService{
 	 public List<FileInfo> assessmentUpload(IRequest requestContext,HttpServletRequest request,Long assessmentActivityId) 
 			 throws StoragePathNotExsitException, UniqueFileMutiException, IOException, FileUploadException  {
 		    Long userid = (Long)request.getSession().getAttribute(IRequest.FIELD_USER_ID);
-			String fileResourcesPath="/resources/upload/assessment"+"/"+assessmentActivityId+"/"+userid+"/";
+			String fileResourcesPath=SysConfig.uploadpath+"/assessment"+"/"+assessmentActivityId+"/"+userid+"/";
 	    	String file_path=request.getServletContext().getRealPath("/") + fileResourcesPath;
 	        File dir=new File(file_path);
 	        if(!dir.exists())

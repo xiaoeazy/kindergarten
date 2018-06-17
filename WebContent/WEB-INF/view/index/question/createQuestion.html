@@ -65,7 +65,11 @@
 														<div class="cq-items-content">
 															<ul class="cq-unset-list" data-checkType="${questionMainItemlist.itemType}" >
 																<#list questionMainItemlist.qListItems as qListItems>
-																	<li><label class="input-check"><input  type="<#if questionMainItemlist.itemType=='1'>radio<#else>checkbox</#if>" name="${qListItems.name}" value="${qListItems.value?html}"></label>
+																	<li>
+																		<label class="input-check">
+																		
+																			<input  type="<#if questionMainItemlist.itemType=='1'>radio<#else>checkbox</#if>"   name="${qListItems.name}"  value="${qListItems.value?html}"  <#if qListItems.checkcurr>checked</#if> />
+																		</label>
 																		<div class="cq-answer-content T_edit T_plugins" >${qListItems.value?html}</div>
 																		<div class="hiddenAId" style="display:none">${qListItems.id}</div>
 																		

@@ -120,12 +120,22 @@ Ext.extend(NewsSource.NewsSourcePanel, Ext.Panel, {
 	deleteNewsSource:function(records,store,mainId){
 		  Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
 		  var linkobj = [];
+		  var canSubmit = true;
 		  for(var i=0;i<records.length;i++){
 			  var record = records[i];
 			  var id = record.get("id");
+			  if(id==1){
+				  ExtAlert(record.get("sourcename")+" ，为基础来源，不允许删除！");
+				  canSubmit=false;
+				  break;
+			  }
+			
 			  linkobj.push({"id":id});
 		  }
-		  
+		  if(!canSubmit){
+			  Ext.getBody().unmask();
+			  return;
+		  }
 		  
 		  Ext.Msg.confirm('提示信息','确认要删除这些信息吗？',function(op){  
 		        if(op == 'yes'){

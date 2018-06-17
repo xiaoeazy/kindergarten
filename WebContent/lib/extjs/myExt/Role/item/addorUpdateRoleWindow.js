@@ -37,21 +37,21 @@ Ext.extend(addorUpdateRole.addorUpdateRoleWindow, Ext.Window, {
 					  			text:''
 				  			},
 				  			{
-				          		fieldLabel:'角色编码',
+				          		fieldLabel:'角色编码<font color="red">*</font>',
 								allowBlank:false,
 								name: 'roleCode',
 								blankText:'必须填写',
 								id:mainId+"roleCode",
 					            maxLength:45  
 				  			},	{
-				          		fieldLabel:'角色名称',
+				          		fieldLabel:'角色名称<font color="red">*</font>',
 								allowBlank:false,
 								name: 'roleName',
 								blankText:'必须填写',
 								id:mainId+"roleName",
 					            maxLength:45  
 				  			},	{
-				          		fieldLabel:'角色描述',
+				          		fieldLabel:'角色描述<font color="red">*</font>',
 								allowBlank:false,
 								name: 'roleDescription',
 								blankText:'必须填写',
@@ -95,6 +95,7 @@ Ext.extend(addorUpdateRole.addorUpdateRoleWindow, Ext.Window, {
 	            items:[{
 	            	 xtype: 'itemselector',
 	                 name: 'itemselector',
+	                 height : 320,
 	                 id: mainId+"itemselector",
 	                 anchor: '100%',
 	                 imagePath: '../ux/images/',

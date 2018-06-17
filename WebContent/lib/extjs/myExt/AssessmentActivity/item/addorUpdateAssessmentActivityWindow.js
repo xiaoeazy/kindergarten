@@ -46,7 +46,7 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 			});
 	    	
 	       var typeCombo = new Ext.form.ComboBox({
-	    	   		fieldLabel:'类型',
+	    	   		fieldLabel:'类型<font color="red">*</font>',
 		    	    id:mainId+"assessmentTypeId",
 		            store : typeid_Combo_Store,  
 		            valueField : "id",  
@@ -109,7 +109,7 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 	       var finishedCombo = new Ext.form.ComboBox({
 	    	    style:'padding:5px',
 	    	    columnWidth: .33  ,   
-	      		fieldLabel:'任务状态',
+	      		fieldLabel:'任务状态<font color="red">*</font>',
 	    	    id:mainId+"finished",
 	            store : finished_Combo_Store,  
 	            valueField : "key",  
@@ -148,7 +148,7 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 					  			text:''
 				  			},
 				  			{
-				          		fieldLabel:'评估任务名称',
+				          		fieldLabel:'评估任务名称<font color="red">*</font>',
 								allowBlank:false,
 								name: 'assessmentActivityName',
 								blankText:'必须填写',
@@ -189,7 +189,7 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 					width : '100%',
 					items : [{
 		                xtype: 'ueditor',
-		                fieldLabel: '内  容',
+		                fieldLabel: '内  容<font color="red">*</font>',
 		                id: mainId+"assessmentActivityContent",
 		                //不要设置高度，否则滚动条出现后工具栏会消失
 		                width: '100%'
