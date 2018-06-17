@@ -8,7 +8,7 @@
 @charset "utf-8";
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}
 article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}
-body,a{line-height:24px;font-size:14px;font-family:"Microsoft YaHei","微软雅黑","黑体";>font-family:"simhei","黑体";color:#02396F;}
+body,a{line-height:24px;font-size:14px;font-family:"Microsoft YaHei","寰蒋闆呴粦","榛戜綋";>font-family:"simhei","榛戜綋";color:#02396F;}
 ol,ul{list-style:none}
 blockquote,q{quotes:none}
 blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}
@@ -53,7 +53,7 @@ body{background:#f0f0f0;}
 .clb{clear:both;}
 
 /*
- *font-family:"Microsoft YaHei","微软雅黑","黑体";>font-family:"simhei","黑体";color:#02396F;
+ *font-family:"Microsoft YaHei","寰蒋闆呴粦","榛戜綋";>font-family:"simhei","榛戜綋";color:#02396F;
  */
 
 .vT_search{width:432px;float:left;overflow:hidden}
@@ -72,11 +72,11 @@ body{background:#f0f0f0;}
 #kw {border:none;height:32px;font-size:14px;line-height:30px;float:left;width:206px;width:200px\9;-webkit-appearance:none;-webkit-border-radius:0}
 #dbselect{border:none;height:34px;font-size:14px;line-height:30px;float:left;width:90px;*width:110px;outline:none;}
 #dbselect option{line-height:30px;}
-#doSearch1,#doSearch2{font-family:"Microsoft YaHei","微软雅黑","黑体";>font-family:"simhei","黑体";font-size:14px;font-weight:bolder;width:70px;*width:68px;background:#ca0000;color:#fff;float:left;height:34px;border:none;display:inline-block;-webkit-appearance:none;-webkit-border-radius:0}
+#doSearch1,#doSearch2{font-family:"Microsoft YaHei","寰蒋闆呴粦","榛戜綋";>font-family:"simhei","榛戜綋";font-size:14px;font-weight:bolder;width:70px;*width:68px;background:#ca0000;color:#fff;float:left;height:34px;border:none;display:inline-block;-webkit-appearance:none;-webkit-border-radius:0}
 #doSearch2{color:#fff;background:#00b8ee}
 
 
-/*网站头部*/
+/*缃戠珯澶撮儴*/
 .top,.main,.footer{float:left}
 .top{width:100%;}
 .top_tel_block,.top_logosearch_block,.top_nav_block{width:100%;min-width:1000px;}
@@ -88,16 +88,16 @@ body{background:#f0f0f0;}
 
 .top_logosearch_block{background:#008ae1;height:114px}
 .top_logosearch_block2{background:#008ae1;height:114px;min-width:1000px;}
-.logo{width:388px;height:76px;float:left;background:url("../img/logo.gif")/*tpa=http://www.ccgp.gov.cn/img/logo.gif*/ no-repeat left top}
-.logo_gh{width:388px;height:80px;float:left;background:url("../img/logo_new.gif")/*tpa=http://www.ccgp.gov.cn/img/logo_new.gif*/ no-repeat left top}
+.logo{width:388px;height:76px;float:left;background:url("../img/logo.gif") no-repeat left top}
+.logo_gh{width:388px;height:80px;float:left;background:url("../img/logo_new.gif") no-repeat left top}
 .logo a.ccgp{display:block;width:388px;height:28px;float:left}
 .logo a.ccgp2{display:block;width:60px;height:28px;float:left}
 .logo a.gmfw{display:block;width:328px;height:28px;float:right}
 .logo a.ccgp3{display:block;width:328px;height:28px;float:right}
 
-.searcharea{width:612px;height:114px;float:left;background:url(../img/cloud.gif)/*tpa=http://www.ccgp.gov.cn/img/cloud.gif*/ no-repeat right bottom;}
-.searcharea2{width:612px;height:114px;float:left;background:url(../img/cloud.gif)/*tpa=http://www.ccgp.gov.cn/img/cloud.gif*/ no-repeat right bottom;}
-.sangong_bl{width:420px;height:33px;float:left;background:url(../img/sangong.gif)/*tpa=http://www.ccgp.gov.cn/img/sangong.gif*/ no-repeat top center;margin-left:134px;margin-top:50px;display:none}
+.searcharea{width:612px;height:114px;float:left;background:url(../img/cloud.gif) no-repeat right bottom;}
+.searcharea2{width:612px;height:114px;float:left;background:url(../img/cloud.gif) no-repeat right bottom;}
+.sangong_bl{width:420px;height:33px;float:left;background:url(../img/sangong.gif) no-repeat top center;margin-left:134px;margin-top:50px;display:none}
 .search_bl{width:420px;height:40px;float:left;margin-left:134px;margin-top:35px}
 
 .xxgg_btn_search{width:163px;height:42px;margin-left:72px;margin-top:40px}
@@ -117,9 +117,9 @@ body{background:#f0f0f0;}
 .main_notice{width:100%;height:51px;}
 .main_notice p{font-size:14px;font-weight:bolder;line-height:51px; }
 
-.vF_main_notice_icn_horn{width:62px;height:51px;background:url(../img/notice.gif)/*tpa=http://www.ccgp.gov.cn/img/notice.gif*/ no-repeat center top;background-position:10px 8px;float:left}
+.vF_main_notice_icn_horn{width:62px;height:51px;background:url(../img/notice.gif) no-repeat center top;background-position:10px 8px;float:left}
 .main_notice p{float:left;width:890px;}
-.vF_main_notice_icn_close{width:48px;height:51px;background:url(../img/notice_cls.gif)/*tpa=http://www.ccgp.gov.cn/img/notice_cls.gif*/ no-repeat center top #def0fc;float:left;background-position:12px 15px}
+.vF_main_notice_icn_close{width:48px;height:51px;background:url(../img/notice_cls.gif) no-repeat center top #def0fc;float:left;background-position:12px 15px}
 
 .main_topic_block{width:100%;float:left;background:#fff;box-shadow:0px 0px 8px #ccc;}
 .picnews{width:390px;height:285px;float:left}
@@ -142,16 +142,16 @@ body{background:#f0f0f0;}
 .syslinkleft_lst li {width:183px;height:49px;margin-top:2px;background:#e8f0f7;overflow:hidden}
 
 
-.syslinkleft_lst li.lsys1{background:url(../img/leftsys_1.gif)/*tpa=http://www.ccgp.gov.cn/img/leftsys_1.gif*/ no-repeat top left;background-position:28px 12px;padding-left:75px;background-color:#e8f0f7;margin-top:10px}
-.syslinkleft_lst li.lsys2{background:url(../img/leftsys_2.gif)/*tpa=http://www.ccgp.gov.cn/img/leftsys_2.gif*/ no-repeat top left;background-position:28px 12px;padding-left:75px;background-color:#e8f0f7;}
-.syslinkleft_lst li.lsys3{background:url(../img/leftsys_3.gif)/*tpa=http://www.ccgp.gov.cn/img/leftsys_3.gif*/ no-repeat top left;background-position:28px 12px;padding-left:75px;background-color:#e8f0f7;}
-.syslinkleft_lst li.lsys4{background:url(../img/leftsys_4.gif)/*tpa=http://www.ccgp.gov.cn/img/leftsys_4.gif*/ no-repeat top left;background-position:28px 12px;padding-left:75px;background-color:#e8f0f7;}
-.syslinkleft_lst li.lsys5{background:url(../img/leftsys_5.gif)/*tpa=http://www.ccgp.gov.cn/img/leftsys_5.gif*/ no-repeat top left;background-position:28px 12px;padding-left:75px;background-color:#e8f0f7;}
-.syslinkleft_lst li.lsys6{background:url(../img/leftsys_6.gif)/*tpa=http://www.ccgp.gov.cn/img/leftsys_6.gif*/ no-repeat top left;background-position:28px 12px;padding-left:75px;background-color:#e8f0f7;}
-.syslinkleft_lst li.lsys7{background:url(../img/leftsys_7.gif)/*tpa=http://www.ccgp.gov.cn/img/leftsys_7.gif*/ no-repeat top left;background-position:28px 12px;padding-left:75px;background-color:#e8f0f7;}
-.syslinkleft_lst li.lsys8{background:url(../img/leftsys_8.gif)/*tpa=http://www.ccgp.gov.cn/img/leftsys_8.gif*/ no-repeat top left;background-position:28px 12px;padding-left:75px;background-color:#e8f0f7;}
-.syslinkleft_lst li.lsys9{background:url(../img/leftsys_9.gif)/*tpa=http://www.ccgp.gov.cn/img/leftsys_9.gif*/ no-repeat top left;background-position:28px 12px;padding-left:75px;background-color:#e8f0f7;}
-.syslinkleft_lst li.lsys10{background:url(../img/leftsys_10.gif)/*tpa=http://www.ccgp.gov.cn/img/leftsys_10.gif*/ no-repeat top left;background-position:28px 12px;padding-left:75px;background-color:#e8f0f7;}
+.syslinkleft_lst li.lsys1{background:url(../img/leftsys_1.gif) no-repeat top left;background-position:28px 12px;padding-left:75px;background-color:#e8f0f7;margin-top:10px}
+.syslinkleft_lst li.lsys2{background:url(../img/leftsys_2.gif) no-repeat top left;background-position:28px 12px;padding-left:75px;background-color:#e8f0f7;}
+.syslinkleft_lst li.lsys3{background:url(../img/leftsys_3.gif) no-repeat top left;background-position:28px 12px;padding-left:75px;background-color:#e8f0f7;}
+.syslinkleft_lst li.lsys4{background:url(../img/leftsys_4.gif) no-repeat top left;background-position:28px 12px;padding-left:75px;background-color:#e8f0f7;}
+.syslinkleft_lst li.lsys5{background:url(../img/leftsys_5.gif) no-repeat top left;background-position:28px 12px;padding-left:75px;background-color:#e8f0f7;}
+.syslinkleft_lst li.lsys6{background:url(../img/leftsys_6.gif) no-repeat top left;background-position:28px 12px;padding-left:75px;background-color:#e8f0f7;}
+.syslinkleft_lst li.lsys7{background:url(../img/leftsys_7.gif) no-repeat top left;background-position:28px 12px;padding-left:75px;background-color:#e8f0f7;}
+.syslinkleft_lst li.lsys8{background:url(../img/leftsys_8.gif) no-repeat top left;background-position:28px 12px;padding-left:75px;background-color:#e8f0f7;}
+.syslinkleft_lst li.lsys9{background:url(../img/leftsys_9.gif) no-repeat top left;background-position:28px 12px;padding-left:75px;background-color:#e8f0f7;}
+.syslinkleft_lst li.lsys10{background:url(../img/leftsys_10.gif) no-repeat top left;background-position:28px 12px;padding-left:75px;background-color:#e8f0f7;}
 .syslinkleft_lst li p{margin-top:13px;color:#383838}
 .syslinkleft_lst li p.dul{margin-top:6px;line-height:18px}
 .syslinkleft_lst li p a{width:258px;height:49px;background:red;display:block;margin:-20px 0 0 -30px}
@@ -162,7 +162,7 @@ body{background:#f0f0f0;}
 .vF_t3 ul{float:left}
 .vF_t3 p{float:left;}
 
-.vF_title_bar2 { height:45px;position:relative;background:#fff;border-bottom:1px solid #e1e1e1;}/*background:#f5f5f5;通栏加上背景色*/
+.vF_title_bar2 { height:45px;position:relative;background:#fff;border-bottom:1px solid #e1e1e1;}/*background:#f5f5f5;閫氭爮鍔犱笂鑳屾櫙鑹�*/
 .vF_title_bar2 h2 {color:#005495;float:left; line-height:45px;  text-align:center; font-size:18px;font-weight:bolder;width:120px;height:40px}
 .vF_title_bar2 h2 a{color:#333;text-decoration:none;font-size:18px;line-height:45px;}
 .ui_til4_tab_u {   width: 80px; height:45px; line-height:45px; text-align:center; font-size:14px; font-weight:normal; border-bottom:1px solid #fff;}
@@ -195,7 +195,7 @@ body{background:#f0f0f0;}
 
 
 
-.vF_title_bar3 { height:45px;position:relative;background:#fff;float:left}/*background:#f5f5f5;通栏加上背景色*/
+.vF_title_bar3 { height:45px;position:relative;background:#fff;float:left}/*background:#f5f5f5;閫氭爮鍔犱笂鑳屾櫙鑹�*/
 .vF_title_bar3 h2 {color:#005495;float:left; line-height:30px;  text-align:center; font-size:18px;font-weight:bolder;width:120px;height:30px;}
 .vF_title_bar3 h2 a{color:#333;text-decoration:none;font-size:18px;line-height:30px;}
 .ui_til4_tab_u {   width: 80px; height:45px; line-height:30px; text-align:center; font-size:14px; font-weight:normal; border-bottom:1px solid #fff;}
@@ -228,9 +228,9 @@ body{background:#f0f0f0;}
 
 
 .vF_banner{width:698px;height:98px;}
-.bx_log{background:url(../img/sys_gg_bg.gif)/*tpa=http://www.ccgp.gov.cn/img/sys_gg_bg.gif*/ no-repeat top left #2b7ecc;height:60px}
-.banner1{background:url(../img/banner1.gif)/*tpa=http://www.ccgp.gov.cn/img/banner1.gif*/ no-repeat top left}
-.banner2{background:url(../img/banner2.gif)/*tpa=http://www.ccgp.gov.cn/img/banner2.gif*/ no-repeat top left}
+.bx_log{background:url(../img/sys_gg_bg.gif) no-repeat top left #2b7ecc;height:60px}
+.banner1{background:url(../img/banner1.gif) no-repeat top left}
+.banner2{background:url(../img/banner2.gif) no-repeat top left}
 .banner3{height:251px}
 .bx_log p{float:left;font-size:20px;color:#fff;line-height:60px}
 .bx_log p.dlzc a{font-size:16px;color:#fff;font-decoration:none}
@@ -244,7 +244,7 @@ body{background:#f0f0f0;}
 .vF_t8{width:292px;overflow:hidden;float:left}
 .vF_t2 ul{float:left}
 .vF_t2 p{float:left;}
-.vF_title_bar_nor { height:45px;position:relative;background:#fff;border-bottom:1px solid #e1e1e1}/*background:#f5f5f5;通栏加上背景色*/
+.vF_title_bar_nor { height:45px;position:relative;background:#fff;border-bottom:1px solid #e1e1e1}
 .vF_title_bar_nor h2 {color:#005495;float:left; line-height:45px;  text-align:center; font-size:18px;font-weight:bolder;width:120px;}
 .vF_title_bar_nor h2 a{color:#333;text-decoration:none;font-size:18px;line-height:45px;}
 .ui_til4_tab_u {  border-top:3px solid #fff; width: 80px; height:45px; line-height:45px; text-align:center; font-size:14px; font-weight:normal; border-bottom:1px solid #fff;}
@@ -266,7 +266,7 @@ body{background:#f0f0f0;}
 .vF_t9 p{float:left;}
 
 
-.vF_title_bar_links { height:37px;position:relative;background:#e8e8e8;}/*background:#f5f5f5;通栏加上背景色*/
+.vF_title_bar_links { height:37px;position:relative;background:#e8e8e8;}/*background:#f5f5f5;閫氭爮鍔犱笂鑳屾櫙鑹�*/
 
 
 
@@ -274,8 +274,8 @@ body{background:#f0f0f0;}
 .vF_title_bar_links h2 a{color:#333;text-decoration:none;font-size:14px;line-height:37px;}
 .ui_til5_tab_u { width: 180px; height:37px; line-height:37px; text-align:center; font-family: "\5B8B\4F53", serif; font-size:14px; font-weight:normal; }
 
-.vF_title_bar_links h2.links_area1{width:180px;background:url("../img/link2.gif")/*tpa=http://www.ccgp.gov.cn/img/link2.gif*/ no-repeat top left #e8e8e8;background-position:150px 15px}
-.vF_title_bar_links h2.links_area2{width:180px;background:url("../img/link2.gif")/*tpa=http://www.ccgp.gov.cn/img/link2.gif*/ no-repeat top left #e8e8e8;background-position:150px 15px}
+.vF_title_bar_links h2.links_area1{width:180px;background:url("../img/link2.gif") no-repeat top left #e8e8e8;background-position:150px 15px}
+.vF_title_bar_links h2.links_area2{width:180px;background:url("../img/link2.gif") no-repeat top left #e8e8e8;background-position:150px 15px}
 
 ul.links li{float:left;width:210px; margin-left:30px;text-align:center;}
 
@@ -297,7 +297,7 @@ ul.links li{float:left;width:210px; margin-left:30px;text-align:center;}
 .jiucuo{width:110px;height:55px;float:left;margin-top:10px;margin-left:10px}
 .dzjg{width:80px;height:80px;float:left;margin-left:10px}
 
-.vF_title_bar_links h2.current3 {background:url("../img/link1.gif")/*tpa=http://www.ccgp.gov.cn/img/link1.gif*/ no-repeat top left #fff;background-position:150px 15px}
+.vF_title_bar_links h2.current3 {background:url("../img/link1.gif")  no-repeat top left #fff;background-position:150px 15px}
 
 
 .main_right_cbl{width:100%;background:#fff;float:left}
@@ -306,15 +306,15 @@ ul.links li{float:left;width:210px; margin-left:30px;text-align:center;}
 .main_right_cbl ul li.jyxtlinks{width:259px;height:59px;background:#fff;border:1px solid #e0e0e0;margin: 0 auto;margin-top:11px;}
 .main_right_cbl ul li.jyxtlinks p{font-size:14px;line-height:18px;color:#333;}
 
-.main_right_cbl ul li.sys0{background:url(../img/rightsys_0.gif)/*tpa=http://www.ccgp.gov.cn/img/rightsys_0.gif*/ no-repeat top left #00b8ee;border:none;padding-top:8px}
+.main_right_cbl ul li.sys0{background:url(../img/rightsys_0.gif) no-repeat top left #00b8ee;border:none;padding-top:8px}
 
-.main_right_cbl ul li.sys1{background:url(../img/rightsys_1.gif)/*tpa=http://www.ccgp.gov.cn/img/rightsys_1.gif*/ no-repeat top left #fff;background-position:21px 19px}
-.main_right_cbl ul li.sys2{background:url(../img/rightsys_2.gif)/*tpa=http://www.ccgp.gov.cn/img/rightsys_2.gif*/ no-repeat top left #fff;background-position:21px 19px}
-.main_right_cbl ul li.sys3{background:url(../img/rightsys_3.gif)/*tpa=http://www.ccgp.gov.cn/img/rightsys_3.gif*/ no-repeat top left #fff;background-position:21px 19px}
-.main_right_cbl ul li.sys4{background:url(../img/rightsys_4.gif)/*tpa=http://www.ccgp.gov.cn/img/rightsys_4.gif*/ no-repeat top left #fff;background-position:21px 19px}
-.main_right_cbl ul li.sys5{background:url(../img/rightsys_5.gif)/*tpa=http://www.ccgp.gov.cn/img/rightsys_5.gif*/ no-repeat top left #fff;background-position:21px 19px}
-.main_right_cbl ul li.sys6{background:url(../img/rightsys_6.gif)/*tpa=http://www.ccgp.gov.cn/img/rightsys_6.gif*/ no-repeat top left #fff;background-position:21px 19px}
-.main_right_cbl ul li.sys7{background:url(../img/rightsys_7.gif)/*tpa=http://www.ccgp.gov.cn/img/rightsys_7.gif*/ no-repeat top left #fff;background-position:21px 19px}
+.main_right_cbl ul li.sys1{background:url(../img/rightsys_1.gif) no-repeat top left #fff;background-position:21px 19px}
+.main_right_cbl ul li.sys2{background:url(../img/rightsys_2.gif) no-repeat top left #fff;background-position:21px 19px}
+.main_right_cbl ul li.sys3{background:url(../img/rightsys_3.gif) no-repeat top left #fff;background-position:21px 19px}
+.main_right_cbl ul li.sys4{background:url(../img/rightsys_4.gif) no-repeat top left #fff;background-position:21px 19px}
+.main_right_cbl ul li.sys5{background:url(../img/rightsys_5.gif) no-repeat top left #fff;background-position:21px 19px}
+.main_right_cbl ul li.sys6{background:url(../img/rightsys_6.gif) no-repeat top left #fff;background-position:21px 19px}
+.main_right_cbl ul li.sys7{background:url(../img/rightsys_7.gif) no-repeat top left #fff;background-position:21px 19px}
 
 .main_right_cbl ul li.sys0 p{color:#fff;font-size:20px;font-weight:bolder;line-height:24px;text-align:center}
 .main_right_cbl ul li.singleln p{margin-left:70px;margin-top:22px}
@@ -331,9 +331,9 @@ ul.links li{float:left;width:210px; margin-left:30px;text-align:center;}
 .main_right_cbl ul li.xzzqlinks{width:263px;height:53px;margin: 0 auto;margin-top:11px;border-radius:5px}
 .main_right_cbl ul li.xzzqlinks p{font-size:14px;line-height:18px;color:#02396f;margin-top:18px;float:left;margin-left:10px}
 
-.main_right_cbl ul.xzzqlinks li.sys1{background:url(../img/download_1.gif)/*tpa=http://www.ccgp.gov.cn/img/download_1.gif*/ no-repeat top right #d5eef5;background-position:222px 13px}
-.main_right_cbl ul.xzzqlinks li.sys2{background:url(../img/download_2.gif)/*tpa=http://www.ccgp.gov.cn/img/download_2.gif*/ no-repeat top right #d5eef5;background-position:222px 13px}
-.main_right_cbl ul.xzzqlinks li.sys3{background:url(../img/download_3.gif)/*tpa=http://www.ccgp.gov.cn/img/download_3.gif*/ no-repeat top right #d5eef5;background-position:222px 13px}
+.main_right_cbl ul.xzzqlinks li.sys1{background:url(../img/download_1.gif) no-repeat top right #d5eef5;background-position:222px 13px}
+.main_right_cbl ul.xzzqlinks li.sys2{background:url(../img/download_2.gif) no-repeat top right #d5eef5;background-position:222px 13px}
+.main_right_cbl ul.xzzqlinks li.sys3{background:url(../img/download_3.gif) no-repeat top right #d5eef5;background-position:222px 13px}
 .main_right_cbl ul.xzzqlinks li.sys2 p{margin-top:10px}
 
 .dzzwlinks img{margin-left:10px}
@@ -398,7 +398,7 @@ ul.links li{float:left;width:210px; margin-left:30px;text-align:center;}
 .vF_channeltitle{width:1000px;margin:0 auto;height:73px;float:left}
 
 
-/*--顶部头条公用部分--*/
+/*--椤堕儴澶存潯鍏敤閮ㄥ垎--*/
 .vT-cht-xw-more,.vT-cht-xw-topic{margin:10px 10px 10px 15px;float:left}
 .vT-cht-xw-topic {width:580px;text-align:center;height:110px;margin-top:10px}
 .vT-cht-wx-topic h1{font-weight:bolder;}
@@ -415,94 +415,6 @@ ul.links li{float:left;width:210px; margin-left:30px;text-align:center;}
 
 img#shows{width:698px;height:193px}
 
-
-/*GPA*/
-/************GPA新版*************/
-.wrapper{overflow:hidden}
-.gpacontainer{width:1000px;margin:auto; margin-top:13px}
-.part1{width:996px;border:1px solid #707070;padding:1px}
-.part1top{width:996px;height:78px; background:url(../img/final3_03.gif)/*tpa=http://www.ccgp.gov.cn/img/final3_03.gif*/ no-repeat top left;}
-.part1word{width:995px;border:1px solid #ffffff;background-color:#f9f9f9;text-align:left}
-.part1word h1{font-size:14px;font-weight:bolder;color:#2b2b2b;line-height:1.2em;margin-bottom:0;padding-bottom:5px;margin-left:8px}
-.part1word p{font-size:14px;line-height:20px;color:#2b2b2b; text-indent:2em;margin:0 8px}
-
-.part2_a{width:100%;height:37px; background:url(../img/final3_09.gif)/*tpa=http://www.ccgp.gov.cn/img/final3_09.gif*/ repeat-x; top left;margin-top:8px;float:left}
-.part2_a h1{padding:0;margin:0;background:url(../img/final3_07.gif)/*tpa=http://www.ccgp.gov.cn/img/final3_07.gif*/ no-repeat;height:37px;}\
-.part2_b {background:#fff;border:1px solid #000;width:100px}
-.part2_b img{border:1px solid #dcdddd;float: left;}
-
-
-.part2_b .none{border:none}
-.part2_box{border:1px solid #dcdddd;margin-top:1px;float: left;}
-.part2_b{width:100%;float:left;margin-top:1px;background:#fff}
-.npart2_b{width:100%;float:left;margin-top:1px;background:#fff}
-.npart2_b img{width:478px;height:147px;margin-left:10px}
-.part2_b img {border-left:10px solid #fff;border-right:10px solid #fff;margin-left:10px}
-.wochujia{padding:0;margin:0;background:url(../img/final4_20.gif)/*tpa=http://www.ccgp.gov.cn/img/final4_20.gif*/ no-repeat;height:37px;}
-.guojijiaoliu{padding:0;margin:0;background:url(../img/final3_28.gif)/*tpa=http://www.ccgp.gov.cn/img/final3_28.gif*/ no-repeat;height:37px;}
-.guojijiaoliu a{width:950px;height:37px;display:block}
-.shichangjingji{padding:0;margin:0;background:url(../img/final3_26.gif)/*tpa=http://www.ccgp.gov.cn/img/final3_26.gif*/ no-repeat;height:37px;}
-.shichangjingji a{width:950px;height:37px;display:block}
-.chujia{padding:0;margin:0;background:url(../img/final3_20.gif)/*tpa=http://www.ccgp.gov.cn/img/final3_20.gif*/ no-repeat;height:37px;}
-.zhidu{padding:0;margin:0;background:url(../img/final3_26.gif)/*tpa=http://www.ccgp.gov.cn/img/final3_26.gif*/ no-repeat;height:37px;}
-.jl{padding:0;margin:0;background:url(../img/final3_28.gif)/*tpa=http://www.ccgp.gov.cn/img/final3_28.gif*/ no-repeat;height:37px;}
-.jl a{width:476px;height:37px;display:block}
-.lk{padding:0;margin:0;background:url(../img/final3_32.gif)/*tpa=http://www.ccgp.gov.cn/img/final3_32.gif*/ no-repeat;height:37px;}
-.half{width:476px; overflow:hidden}
-.halfright{width:476px; overflow:hidden;float:right}
-.cgzd{width:474px;border:1px solid #dcdddd;margin-top:1px;float:left}
-.cgzd2{width:100%;border:1px solid #dcdddd;margin-top:1px;float:left}
-.gjjl{width:474px;border:1px solid #dcdddd;margin-top:1px}
-
-.gjlist{width:100%;padding-top:10px;height:138px}
-.spgl{height:90px}
-.gjlist ul{float:left}
-.gjlh{float:left}
-.gjl li{width:240px;list-style:none;font-size:14px;color:#383838;font-weight:bolder;line-height:30px;height:26px; overflow:hidden;float:left;text-align:center;}
-.gjl li a{list-style:none;font-size:14px;color:#383838;font-weight:bolder;line-height:25px;text-decoration:none;width:200px;}
-.gjl li a:hover{ text-decoration:underline;color:#383838;}
-
-.nwlist{width:100%;height:138px;padding-top:10px;background:#fff}
-.nwlist2{width:45%;height:138px;padding-top:10px;float:left;background:#fff;margin-left:20px}
-.nwlist3{width:45%;height:225px;padding-top:10px;float:left;background:#fff;margin-left:20px}
-
-.nlst li{margin-left:15px;list-style:none;font-size:14px;color:#383838;line-height:22px; background:url(../img/maincb001.gif)/*tpa=http://www.ccgp.gov.cn/img/maincb001.gif*/ no-repeat -390px -65px;padding-left:8px;overflow: hidden;white-space: nowrap;*zoom:1;text-overflow:ellipsis; -o-text-overflow:ellipsis;}
-.nlst li a{text-decoration:none;color:#383838;}
-.nlst li a:hover{ text-decoration:underline;color:#383838;}
-
-.listpart1{width:956px;border:1px solid #dcdddd;padding:1px}
-.listpart1 a{display:block;width:956px;height:75px;}
-.listpart1top{width:956px;height:75px; background:url(../img/final_second_03.gif)/*tpa=http://www.ccgp.gov.cn/img/final_second_03.gif*/ no-repeat top left;border:0}
-
-.listpart2{width:956px;padding:1px;border:1px solid #dcdddd;float:left;margin-top:1px}
-.nation{width:956px; background:url(../img/final_second_08.gif) no-repeat bottom right;height:66px}
-.listpart2_b{ 956px;margin-top:1px;border-top:1px solid #dcdddd;float:left}
-.listpart2_bb{ 956px;margin-top:1px;background-color:#f2f6f8;float:left}
-.listpart2_innerl{width:477px;border-right:1px solid #fff;float:left;height:360px;margin-top:20px;margin-bottom:20px}
-.listpart2_innerr{width:477px;border-left:1px solid #d4d7d9;float:left;height:360px;margin-top:20px;margin-bottom:20px}
-
-.chn{width:230px;margin-top:85px;margin-left:128px;line-height:24px;font-size:14px}
-.chn span{font-size:12px}
-.eng{width:230px;margin-top:85px;margin-left:128px;line-height:24px;font-family:Georgia, "Times New Roman", Times, serif}
-.eng span{font-size:12px}
-
-.usa{background:url(../img/final_second_06.gif) no-repeat;height:66px;}
-.eu{background:url(../img/eu.gif) no-repeat;height:66px;}
-.bd{background:url(../img/bd.gif) no-repeat;height:66px;}
-.jnd{background:url(../img/jnd.gif) no-repeat;height:66px;}
-.rb{background:url(../img/rb.gif) no-repeat;height:66px;}
-.hg{background:url(../img/hg.gif) no-repeat;height:66px;}
-.hk{background:url(../img/hk.gif) no-repeat;height:66px;}
-.xjp{background:url(../img/xjp.gif) no-repeat;height:66px;}
-.nw{background:url(../img//nw.gif) no-repeat;height:66px;}
-.ysl{background:url(../img/ysl.gif) no-repeat;height:66px;}
-.alb{background:url(../img/alb.gif) no-repeat;height:66px;}
-.lzdsd{background:url(../img/lzdsd.gif) no-repeat;height:66px;}
-.rs{background:url(../img/rs.gif) no-repeat;height:66px;}
-.tp{background:url(../img/tp.gif) no-repeat;height:66px;}
-
-.note{width:300px;margin-top:10px;color:#383838;margin-left:100px;text-align:left}
-.part2_box img{margin-left:15px}
 
 
 .clearfix:after {

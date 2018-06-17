@@ -5,7 +5,7 @@
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
-<title>${kgNewstype.typename!}_上海市托幼协会</title>
+<title>${kgNewsSource.sourcename!}_上海市托幼协会</title>
 <link href="${base.contextPath}/lib/index/css/detail.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="${base.contextPath}/lib/bootstrap-3.3.7/css/bootstrap.min.css">
 <script language="javascript" src="${base.contextPath}/lib/jquery/jquery.min.js" ></script>
@@ -22,11 +22,12 @@
 	<div class="wz_block">
 	    <div class="vF_deail_currentloc">
 	        <p>当前位置：<a href="${base.contextPath}/index/news" title="资讯中心" class="CurrChnlCls">资讯中心</a>
-	        &nbsp;&raquo;&nbsp;${kgNewstype.typename} 列表页</p>
+	        &nbsp;&raquo;&nbsp;文章来源
+	        &nbsp;&raquo;&nbsp;${kgNewsSource.sourcename} 列表页</p>
 	    </div>
 	
 	    <div class="vF_detail_relcontent mt13">
-		    <h2><p>${kgNewstype.typename}</p></h2>
+		    <h2><p>${kgNewsSource.sourcename}</p></h2>
 		    <div class="vF_detail_relcontent_lst">
 		        <ul class="c_list_tat">
 		
@@ -56,7 +57,7 @@
 	        page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',  
 	        onPageChange: function (num, type) {
 	        	if(type=="change"){
-	 	            var path ="newsTypeList?typeid=${typeid}&page="+num;
+	 	            var path ="newsSourceList?sourceid=${sourceid}&page="+num;
 	 	            window.location.href=path;
 	        	}
 	        }

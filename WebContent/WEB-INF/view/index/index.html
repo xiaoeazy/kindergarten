@@ -13,10 +13,12 @@
 	rel="stylesheet" type="text/css" />
 <script type="text/javascript"
 	src="${base.contextPath}/lib/index/search/static/js/jquery-1.11.1.min.js"></script>
+<!-- 主要内容轮播 -->
 <script type="text/javascript"
 	src="${base.contextPath}/lib/index/js/responsiveslides.min.js"></script>
 <script type="text/javascript"
 	src="${base.contextPath}/lib/index/js/index/common.js"></script>
+<!-- 导航下轮播 -->
 <script type="text/javascript"
 	src="${base.contextPath}/lib/index/js/index/jquery.SuperSlide.2.1.1.js"></script>
 </head>
@@ -50,15 +52,16 @@
 
 
 				<#list carouselList as carouselList>
-				<li><#if carouselList.urltype==0> <a
-						href="${carouselList.webUrl}" title="" target="_blank"> <#elseif
-							carouselList.urltype==1> <a
-							href="${base.contextPath}/index/newsDetail?id=${carouselList.newsId}"
-							title="" target="_blank"> <#else> <a
-								href="${base.contextPath}/index/assessmentDetail?id=${carouselList.activityId}"
-								title="" target="_blank"></#if> <img
-					src="${base.contextPath}${carouselList.filePath}" alt=""
-					width="1920" height="675" title="" /> </a></li>
+				<li>
+					<#if carouselList.urltype==0> 
+						<a href="${carouselList.webUrl}" title="" target="_blank"> 
+					<#elseif carouselList.urltype==1> 
+						<a href="${base.contextPath}/index/newsDetail?id=${carouselList.newsId}" title="" target="_blank"> 
+					<#else> 
+						<a href="${base.contextPath}/index/assessmentDetail?id=${carouselList.activityId}" title="" target="_blank">
+					</#if> 
+				<img src="${base.contextPath}${carouselList.filePath}" alt="" width="1000" height="475" title="" /></a>
+				</li>
 				</#list>
 			</ul>
 		</div>
@@ -147,6 +150,7 @@
 			</div>
 			<div>
 				<div class="main_left_block mt13">
+					<!-- 内容检索start -->
 					<div class="banner_block ">
 						<div class="vF_banner bx_log">
 							<p class="ml92 dlzc">
@@ -156,24 +160,34 @@
 							<p class="ml92 dlzc"></p>
 						</div>
 					</div>
+					<!-- 内容检索end  -->
 
+					<!-- 评估入口start -->
+					<div class="banner_block mt10" style="height: 98px; overflow: hidden;">
+						
+					</div>
+					<!-- 评估入口end -->
+
+					<!-- 公告公示 -->
 					<div class="wz_block">
-						<div class="newslist_bl_nor mt13">
+							<div class="newslist_bl_gsgg mt13">
 							<div class="newslist">
-								<div class="vF_t2">
-									<div class="vF_t2_r1" style="height: 80px">
+								<div class="vF_t3">
+									<div class="vF_t2_r1" style="">
 										<div class="vF_tab unit2">
-											<div class="vF_title_bar2">
+											<div class="vF_title_bar3">
 												<h2 class="ui_til4_tab_u current2 word8">
-													<a href="${base.contextPath}/index/assessmentTypeList">评估任务</a>
+													<a href="${base.contextPath}/index/assessmentTypeList">公告公示</a>
 												</h2>
 											</div>
 										</div>
 									</div>
 									<ul class="c_list mt10 mb10 split" id="area3_con1">
 										<#list assessmentList as assessmentList>
-										<li><a href="${base.contextPath}/index/assessmentDetail?id=${assessmentList.id}" target="_blank"
-											title="${assessmentList.assessmentActivityName}">${assessmentList.newsSimpleAssessmentActivityName}</a></li>
+										<li style="width:628px"><a href="${base.contextPath}/index/assessmentDetail?id=${assessmentList.id}" target="_blank"
+											title="${assessmentList.assessmentActivityName}">${assessmentList.newsSimpleAssessmentActivityName}</a>
+											<font style="float:right">${assessmentList.createdate?string('yyyy-MM-dd')}</font>
+										</li>
 										</#list>
 									</ul>
 
@@ -188,88 +202,13 @@
 
 								</div>
 							</div>
-							<!--newslist-->
-						</div>
-
-						<div class="newslist_bl_nor mt13">
-							<div class="newslist">
-								<div class="vF_t2">
-									<div class="vF_t2_r1" style="height: 80px">
-										<div class="vF_tab unit2">
-											<div class="vF_title_bar2">
-												<h2 class="ui_til4_tab_u current2 word8">
-													<a href="cggg/dfgg/index.htm">尚无内容</a>
-												</h2>
-												<ul class="c_list_bidtype">
-												</ul>
-											</div>
-										</div>
-									</div>
-
-
-
-
-
-									<ul class="c_list mt10 mb10 split" id="area4_con1">
-										<li><a
-											href="cggg/dfgg/fblbgg/201803/t20180315_9667199.htm"
-											target="_blank"
-											title="尚无内容">尚无内容...</a></li>
-									</ul>
-
-
-									<div class="vT_t3_r3">
-										<div class="vT_pg">
-											<div id="area4_sel_1"></div>
-											<div id="area4_sel_2"></div>
-											<div id="area4_sel_3"></div>
-										</div>
-									</div>
-
-								</div>
-							</div>
-							<!--newslist-->
-						</div>
-
-
-
-
-
-
-					</div>
-					<div class="banner_block mt10"
-						style="height: 98px; overflow: hidden;">
-						<!--ccccc-->
-						<div id="wrapper">
-							<div class="callbacks_container">
-								<ul class="rslides" id="slider4">
-									<li><a href="specialtopic/2018yd/index.shtml.htm"
-										tppabs="http://www.ccgp.gov.cn/specialtopic/2018yd/index.shtml"
-										title="2018年春节专题"><img src="img/18cjbanner.jpg"
-											tppabs="http://www.ccgp.gov.cn/img/18cjbanner.jpg" alt="" /></a>
-									</li>
-									<li><a href="specialtopic/index.htm"
-										tppabs="http://www.ccgp.gov.cn/specialtopic/" title="专题专栏"><img
-											src="img/ztzl.jpg"
-											tppabs="http://www.ccgp.gov.cn/img/ztzl.jpg" alt="" /></a></li>
-								</ul>
-							</div>
 						</div>
 					</div>
-
-
-
-
-
-					<div class="banner_block mt10">
-						<div class="vF_banner banner2"></div>
-					</div>
-
+					<!-- 公告公示 end-->
 				</div>
 
 				<div class="main_right_block mt13">
-
-
+					<!-- 资料下载start -->
 					<div class="main_right_cbl ">
 						<h2>
 							<a href="${base.contextPath}/index/admin/download"
@@ -287,37 +226,13 @@
 								</p></li></#if> </#list>
 						</ul>
 					</div>
-
-
-
-					<div class="main_right_cbl mt13">
-						<h2 class="tpjj">
-							<a href="tupian/index.htm"
-								tppabs="http://www.ccgp.gov.cn/tupian/">图片集锦</a>
-						</h2>
-						<!--div class="tpjj_btn"><img src="img/btn_arrow_left.gif" alt="" /><img src="img/btn_arrow_right.gif" alt="" /></div-->
-						<ul class="tpjjlinks mt10 mb15">
-							<li class="tpjjlinks sys1"><a
-								href="tupian/201712/t20171213_9327772.htm"
-								tppabs="http://www.ccgp.gov.cn/tupian/201712/t20171213_9327772.htm"
-								target="_blank"><img
-									src="tupian/201712/W020180109518455960337.jpg"
-									tppabs="http://www.ccgp.gov.cn/tupian/201712/W020180109518455960337.jpg"
-									alt="W020171213410321008054.jpg" /></a></li>
-						</ul>
-					</div>
-
-
+					<!-- 资料下载end -->
 					<div class="main_right_cbl mt13">
 						<h2>电子政务</h2>
 						<div class="dzzwlinks mt10">
-							<img src="img/wx_mof.gif"
-								tppabs="http://www.ccgp.gov.cn/img/wx_mof.gif" alt="" /><img
-								src="img/wx_ccgp.gif"
-								tppabs="http://www.ccgp.gov.cn/img/wx_ccgp.gif" alt="" /> <img
-								src="img/app_qrcode.gif"
-								tppabs="http://www.ccgp.gov.cn/img/app_qrcode.gif" alt=""
-								style="margin-top: 6px" />
+							<img src="img/wx_mof.gif" alt="" />
+							<img src="img/wx_ccgp.gif" alt="" /> 
+							<img src="img/app_qrcode.gif" alt="" style="margin-top: 6px" />
 						</div>
 					</div>
 
@@ -367,6 +282,4 @@ $(function(){
 </script>
 <script type="text/javascript"
 	src="${base.contextPath}/lib/index/js/slider.js"></script>
-<script language="javascript" src="images/vr.js"
-	tppabs="http://www.ccgp.gov.cn/images/vr.js"></script>
 </html>

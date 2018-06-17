@@ -61,6 +61,11 @@ public class KgNews extends BaseDTO {
      private String indexshow;
      
      private Date createdate;
+     
+     @Transient
+     private Date startDate;
+     @Transient
+     private Date endDate;
 
      private Long viewscount;
      
@@ -192,6 +197,24 @@ public class KgNews extends BaseDTO {
 		this.indexshow = indexshow;
 	}
 
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	
+	
 
 	
 	

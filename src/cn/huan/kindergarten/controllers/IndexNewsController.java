@@ -14,12 +14,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.huan.HTed.core.IRequest;
 
 import cn.huan.kindergarten.dto.KgNews;
+import cn.huan.kindergarten.dto.KgNewsSource;
 import cn.huan.kindergarten.dto.KgNewstype;
 import cn.huan.kindergarten.service.IKgConfigService;
 import cn.huan.kindergarten.service.IKgNewsAttributeService;
 import cn.huan.kindergarten.service.IKgNewsService;
 import cn.huan.kindergarten.service.IKgNewsSourceService;
 import cn.huan.kindergarten.service.IKgNewstypeService;
+import cn.huan.kindergarten.utils.CommonUtil;
 
 @Controller
 public class IndexNewsController extends IndexBaseController{
@@ -29,6 +31,8 @@ public class IndexNewsController extends IndexBaseController{
 	private IKgNewsService iKgNewsService;
 	@Autowired
 	private IKgNewstypeService iKgNewstypeService;
+	@Autowired 
+	private IKgNewsSourceService iKgNewsSourceService;
 	@Autowired
 	private IKgNewsAttributeService iKgNewsAttributeService;
 	
@@ -46,7 +50,16 @@ public class IndexNewsController extends IndexBaseController{
         	List<KgNews> newsList = iKgNewsService.selectWithOtherInfo(requestContext, news, 1, 6);
         	kn.setNewsList(newsList);
         }
-
+        
+        List<KgNewsSource> sourceList = iKgNewsSourceService.selectAll(requestContext);
+        for(KgNewsSource kn:sourceList) {
+        	KgNews news = new KgNews();
+        	news.setSourceid(kn.getId());
+        	int count = iKgNewsService.adminQueryCount(requestContext, news);
+        	kn.setCount(count);
+        }
+        
+        
         KgNews kn = new KgNews();
     	kn.setAttributeid("16");
     	List<KgNews> newsTop=iKgNewsService.selectWithOtherInfo(requestContext, kn, 1, 1);
@@ -55,6 +68,7 @@ public class IndexNewsController extends IndexBaseController{
     	else
     		mv.addObject("newsTop", null);
         mv.addObject("typeList", typeList);
+        mv.addObject("sourceList",sourceList);
         loadNavigation(mv, requestContext,IndexController.CH_ZXZX);
         iKgNewsAttributeService.loadAttriteNews(mv, requestContext,2);
        
@@ -73,6 +87,8 @@ public class IndexNewsController extends IndexBaseController{
         if(searchparam!=null&&!("").equals(searchparam)) news.setNewstitle(searchparam);
         if(newstype!=null)   news.setTypeid(newstype);
         if(newssource!=null)   news.setSourceid(newssource);
+        if(dateissuestart!=null) news.setStartDate(CommonUtil.stringTodate10(dateissuestart+CommonUtil.STARTTIME));
+        if(dateissueend!=null) news.setEndDate(CommonUtil.stringTodate10(dateissueend+CommonUtil.ENDTIME));
         List<KgNews> list = iKgNewsService.selectWithOtherInfo(requestContext, news, page, limit);
         int count = iKgNewsService.adminQueryCount(requestContext, news);
         int allPageNum = count%limit==0?count/limit:count/limit+1;
@@ -80,9 +96,15 @@ public class IndexNewsController extends IndexBaseController{
         
         mv.addObject("newstitle",searchparam);
         mv.addObject("newsList", list);
-        mv.addObject("newsListSize", list.size());
+        mv.addObject("newsListSize", count);
         mv.addObject("page", page);
         mv.addObject("allPageNum",allPageNum);
+        
+        mv.addObject("searchparam",searchparam);
+        mv.addObject("dateissuestart",dateissuestart);
+        mv.addObject("dateissueend",dateissueend);
+        mv.addObject("newstype",newstype==null?"":newstype);
+        mv.addObject("newssource",newssource==null?"":newssource);
         
         
         loadNavigation(mv, requestContext,IndexController.CH_ZXZX);
@@ -116,6 +138,32 @@ public class IndexNewsController extends IndexBaseController{
 	        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,3);
 	        return mv;
 	    }
+	 
+	 @RequestMapping(value = "/index/newsSourceList")
+	    @ResponseBody
+	    public ModelAndView newsSourceList(Long sourceid, @RequestParam(defaultValue = DEFAULT_PAGE) int page,
+	            @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit,HttpServletRequest request) {
+	    	ModelAndView mv = new ModelAndView(getViewPath() + "/index/news/newsSourceList");
+	        IRequest requestContext = createRequestContext(request);
+	        KgNews news = new KgNews();
+	        news.setSourceid(sourceid);
+	        int count = iKgNewsService.adminQueryCount(requestContext, news);
+	        int allPageNum = count%limit==0?count/limit:count/limit+1;
+	        if(count==0) allPageNum=1;
+	        List<KgNews> list = iKgNewsService.selectWithOtherInfo(requestContext, news, page, limit);
+	        KgNewsSource newsSource = new KgNewsSource();
+	        newsSource.setId(sourceid);
+	        KgNewsSource kgNewsSource = iKgNewsSourceService.selectByPrimaryKey(requestContext, newsSource);
+	        mv.addObject("newsList", list);
+	        mv.addObject("page", page);
+	        mv.addObject("allPageNum",allPageNum);
+	        mv.addObject("kgNewsSource", kgNewsSource);
+	        mv.addObject("sourceid", sourceid);
+	        
+	        loadNavigation(mv, requestContext,IndexController.CH_ZXZX);
+	        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,3);
+	        return mv;
+	    }
 
 
     @RequestMapping(value = "/index/newsDetail")
@@ -133,7 +181,21 @@ public class IndexNewsController extends IndexBaseController{
         newsType.setId(newsInfo.getTypeid());
         KgNewstype kgNewstype = iKgNewstypeService.selectByPrimaryKey(requestContext, newsType);
         
+        KgNewsSource newsSource = new KgNewsSource();
+        newsSource.setId(newsInfo.getSourceid());
+        KgNewsSource kgNewsSource = iKgNewsSourceService.selectByPrimaryKey(requestContext, newsSource);
+        
+      
+        KgNews linkNews = new KgNews();
+        linkNews.setTypeid(newsInfo.getTypeid());
+        List<KgNews> linkNewsList = iKgNewsService.select(requestContext, linkNews, 1, 2);
+        CommonUtil.judgeNewsTitleLength(linkNewsList,17);
+        
         mv.addObject("kgNewstype", kgNewstype);
+        mv.addObject("kgNewsSource", kgNewsSource);
+        mv.addObject("linkNewsList", linkNewsList);
+        
+        
         loadNavigation(mv, requestContext,IndexController.CH_ZXZX);
         iKgNewsAttributeService.loadAttriteNews(mv, requestContext,3);
         return mv;

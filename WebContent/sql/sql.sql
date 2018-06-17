@@ -58,14 +58,6 @@ INSERT INTO `kg_assessment_activity` (`id`,`finished`,`assessment_type_id`,`attr
  (3,1,16,'','评估任务413111111222222222223333333333333','<p>111</p>','2018-04-23 10:59:19',3,-1,-1,-1,'2018-04-23 10:59:19',-1,'2018-05-19 20:27:31',-1,'ID',NULL,NULL,NULL),
  (4,1,17,'','评估任务3','<p>222</p>','2018-04-23 10:59:24',2,-1,-1,-1,'2018-04-23 10:59:24',-1,'2018-05-06 13:57:32',-1,'ID',NULL,NULL,NULL),
  (5,1,16,'','评估任务2','<p>333</p>','2018-04-23 10:59:29',4,-1,-1,-1,'2018-04-23 10:59:29',-1,'2018-05-06 13:57:27',-1,'ID',NULL,NULL,NULL),
- (6,1,16,'12,14,15','评估任务1','<p>11</p>','2018-04-28 15:51:30',5,-1,-1,-1,'2018-04-28 15:51:30',-1,'2018-05-19 19:24:06',-1,'ID',NULL,NULL,NULL),
- (7,1,16,'12','评估任务5','<p>评估任务1</p>','2018-05-06 13:57:47',1,-1,-1,-1,'2018-05-06 13:57:47',-1,'2018-05-06 13:57:47',-1,'ID',NULL,NULL,NULL),
- (8,1,16,'','评估任务6','<p>评估任务1</p>','2018-05-06 13:57:54',1,-1,-1,-1,'2018-05-06 13:57:54',-1,'2018-05-06 13:57:54',-1,'ID',NULL,NULL,NULL),
- (9,1,16,'','评估任务7','<p>11</p>','2018-05-06 13:58:01',1,-1,-1,-1,'2018-05-06 13:58:01',-1,'2018-05-06 13:58:01',-1,'ID',NULL,NULL,NULL),
- (10,1,16,'','评估任务8','<p>评估任务8</p>','2018-05-06 14:09:03',1,-1,-1,-1,'2018-05-06 14:09:03',-1,'2018-05-06 14:09:03',-1,'ID',NULL,NULL,NULL),
- (11,1,16,'','评估任务9','<p>评估任务9</p>','2018-05-06 14:09:10',1,-1,-1,-1,'2018-05-06 14:09:10',-1,'2018-05-06 14:09:10',-1,'ID',NULL,NULL,NULL),
- (12,1,16,'','评估任务10','<p>评估任务10</p>','2018-05-06 14:09:19',1,-1,-1,-1,'2018-05-06 14:09:19',-1,'2018-05-06 14:09:19',-1,'ID',NULL,NULL,NULL),
- (13,1,16,'','评估任务11','<p>评估任务11</p>','2018-05-06 14:09:26',1,-1,-1,-1,'2018-05-06 14:09:26',-1,'2018-05-06 14:09:26',-1,'ID',NULL,NULL,NULL),
  (14,1,16,'12,14','评估12','<p>13</p>','2018-05-12 09:42:43',5,-1,-1,-1,'2018-05-12 09:42:43',-1,'2018-06-03 09:21:03',-1,'ID',NULL,NULL,NULL),
  (15,1,16,'14,15','131111112222222222233333333333333344444','<p>13<br/></p>','2018-05-12 09:44:32',18,-1,-1,-1,'2018-05-12 09:44:32',-1,'2018-06-03 20:10:11',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_assessment_activity` ENABLE KEYS */;
@@ -98,7 +90,7 @@ CREATE TABLE `kg_assessment_activity_user_progress` (
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `Index_2` (`assessment_activity_id`,`upload_user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_assessment_activity_user_progress`
@@ -106,7 +98,9 @@ CREATE TABLE `kg_assessment_activity_user_progress` (
 
 /*!40000 ALTER TABLE `kg_assessment_activity_user_progress` DISABLE KEYS */;
 INSERT INTO `kg_assessment_activity_user_progress` (`id`,`assessment_activity_id`,`upload_user_id`,`admin_suggestion`,`expert_user_id`,`expert_suggestion`,`state`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (5,3,10013,'',10032,NULL,40,NULL,-1,-1,NULL,NULL,NULL,'2018-06-04 21:43:25',NULL,'ID',NULL,NULL,NULL);
+ (5,3,10013,'',10032,NULL,40,NULL,-1,-1,NULL,NULL,NULL,'2018-06-04 21:43:25',NULL,'ID',NULL,NULL,NULL),
+ (6,8,10013,NULL,NULL,NULL,10,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
+ (7,5,10013,NULL,NULL,NULL,10,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_assessment_activity_user_progress` ENABLE KEYS */;
 
 
@@ -135,7 +129,7 @@ CREATE TABLE `kg_assessment_activity_user_upload` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_assessment_activity_user_upload`
@@ -143,7 +137,10 @@ CREATE TABLE `kg_assessment_activity_user_upload` (
 
 /*!40000 ALTER TABLE `kg_assessment_activity_user_upload` DISABLE KEYS */;
 INSERT INTO `kg_assessment_activity_user_upload` (`id`,`upload_user_id`,`progress_id`,`file_name`,`file_path`,`createDate`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (6,10013,5,'1.txt','/resources/upload/assessment/3/10013/ea35459b-1321-4340-8b40-17203709c367.TXT',NULL,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL);
+ (6,10013,5,'1.txt','/resources/upload/assessment/3/10013/ea35459b-1321-4340-8b40-17203709c367.TXT',NULL,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
+ (7,10013,6,'1.txt','/resources/upload/assessment/8/10013/c3550bb5-7163-4080-a668-fd25ecf55b5a.TXT',NULL,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
+ (8,10013,7,'a.docx','/resources/upload/assessment/5/10013/c206d933-3cc4-45ea-9c9e-79d1daf80ae6.DOCX',NULL,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL),
+ (9,10013,7,'1.txt','/resources/upload/assessment/5/10013/b44f167f-86c9-4f00-b6b8-822150a5f23b.TXT',NULL,NULL,-1,-1,NULL,NULL,NULL,NULL,NULL,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_assessment_activity_user_upload` ENABLE KEYS */;
 
 
@@ -365,7 +362,7 @@ CREATE TABLE `kg_download` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_download`
@@ -373,7 +370,8 @@ CREATE TABLE `kg_download` (
 
 /*!40000 ALTER TABLE `kg_download` DISABLE KEYS */;
 INSERT INTO `kg_download` (`id`,`file_title`,`file_path`,`summary`,`password`,`createDate`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (5,'112.xml','/resources/upload/download/112.xml','123','123','2018-06-01 11:05:16',1,-1,-1,-1,'2018-06-01 11:05:16',-1,'2018-06-01 11:05:16',-1,'ID',NULL,NULL,NULL);
+ (5,'112.xml','/resources/upload/download/112.xml','123','123','2018-06-01 11:05:16',1,-1,-1,-1,'2018-06-01 11:05:16',-1,'2018-06-01 11:05:16',-1,'ID',NULL,NULL,NULL),
+ (6,'1.txt','/resources/upload/download/1.txt','','','2018-06-05 22:14:49',1,-1,-1,-1,'2018-06-05 22:14:49',-1,'2018-06-05 22:14:49',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_download` ENABLE KEYS */;
 
 
@@ -457,7 +455,7 @@ CREATE TABLE `kg_news` (
   `sourceId` bigint(20) unsigned NOT NULL DEFAULT '1',
   `attributeId` varchar(200) DEFAULT '-1',
   `newsTitle` varchar(45) NOT NULL,
-  `summary` varchar(45) NOT NULL,
+  `summary` varchar(200) NOT NULL,
   `thumbnail` varchar(200) DEFAULT NULL,
   `author` varchar(200) DEFAULT NULL,
   `content` text,
@@ -477,8 +475,9 @@ CREATE TABLE `kg_news` (
   `EFFECTIVE_START_DATE` date DEFAULT NULL COMMENT '有效日期从',
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  KEY `Index_2` (`newsTitle`)
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_news`
@@ -501,7 +500,8 @@ INSERT INTO `kg_news` (`id`,`typeId`,`sourceId`,`attributeId`,`newsTitle`,`summa
  (33,8,1,'','幼儿园工作2','幼儿园工作2','/resources/upload/news/20180504225533_390_285.jpg',NULL,'<p>幼儿园工作2</p>',0,'N','2018-04-14 13:40:31',0,6,-1,-1,-1,'2018-04-14 13:40:31',-1,'2018-06-01 13:22:27',-1,'ID',NULL,NULL,NULL),
  (34,7,1,'12,14,15','幼儿园工作3','幼儿园工作3','/resources/upload/news/20180504225524_390_285.jpg',NULL,'<p>幼儿园工作2</p>',2,'N','2018-04-14 13:40:46',0,14,-1,-1,-1,'2018-04-14 13:40:46',-1,'2018-06-01 13:22:23',-1,'ID',NULL,NULL,NULL),
  (35,7,1,'','123','123','',NULL,'<p>123</p>',0,'N','2018-05-22 20:45:49',0,1,-1,-1,-1,'2018-05-22 20:45:49',-1,'2018-05-22 20:45:49',-1,'ID',NULL,NULL,NULL),
- (36,7,1,'','123','123','',NULL,'<p>123</p>',0,'N','2018-05-22 20:49:14',0,1,-1,-1,-1,'2018-05-22 20:49:14',-1,'2018-05-22 20:49:14',-1,'ID',NULL,NULL,NULL);
+ (36,7,1,'','123','123','',NULL,'<p>123</p>',0,'N','2018-05-22 20:49:14',0,1,-1,-1,-1,'2018-05-22 20:49:14',-1,'2018-05-22 20:49:14',-1,'ID',NULL,NULL,NULL),
+ (37,7,13,'','616','616','',NULL,'<p>616</p>',0,'N','2018-06-16 22:05:07',0,4,-1,-1,-1,'2018-06-16 22:05:07',-1,'2018-06-17 10:04:59',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_news` ENABLE KEYS */;
 
 
@@ -570,7 +570,7 @@ CREATE TABLE `kg_newssource` (
 
 /*!40000 ALTER TABLE `kg_newssource` DISABLE KEYS */;
 INSERT INTO `kg_newssource` (`id`,`sourceName`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (1,'无',1,-1,-1,-1,'2018-04-10 14:09:01',-1,'2018-04-10 14:09:01',-1,'ID',NULL,NULL,NULL),
+ (1,'管理员',2,-1,-1,-1,'2018-04-10 14:09:01',-1,'2018-06-17 11:35:58',-1,'ID',NULL,NULL,NULL),
  (13,'网络',3,-1,-1,-1,'2018-04-10 14:09:06',-1,'2018-04-10 14:11:21',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_newssource` ENABLE KEYS */;
 
@@ -1069,7 +1069,7 @@ CREATE TABLE `sys_user` (
 
 /*!40000 ALTER TABLE `sys_user` DISABLE KEYS */;
 INSERT INTO `sys_user` (`USER_ID`,`USER_TYPE`,`USER_NAME`,`REAL_NAME`,`PASSWORD_ENCRYPTED`,`EMAIL`,`PHONE`,`START_ACTIVE_DATE`,`END_ACTIVE_DATE`,`STATUS`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (10013,NULL,'admin','123','202cb962ac59075b964b07152d234b70','123','123',NULL,NULL,NULL,6,-1,-1,-1,'2018-04-11 14:16:39',-1,'2018-05-19 19:25:38',-1,'ID',NULL,NULL,NULL),
+ (10013,NULL,'admin','管理员','202cb962ac59075b964b07152d234b70','123','123',NULL,NULL,NULL,6,-1,-1,-1,'2018-04-11 14:16:39',-1,'2018-05-19 19:25:38',-1,'ID',NULL,NULL,NULL),
  (10014,NULL,'teacher','123','d41d8cd98f00b204e9800998ecf8427e','','',NULL,NULL,NULL,23,-1,-1,-1,'2018-04-12 13:38:12',-1,'2018-06-01 11:27:11',-1,'ID',NULL,NULL,NULL),
  (10032,NULL,'expert','123','202cb962ac59075b964b07152d234b70','123','',NULL,NULL,NULL,7,-1,-1,-1,'2018-04-13 14:32:16',-1,'2018-06-03 09:30:55',-1,'ID',NULL,NULL,NULL),
  (10033,NULL,'teacher2','laoshier','202cb962ac59075b964b07152d234b70','','',NULL,NULL,NULL,3,-1,-1,-1,'2018-05-12 14:50:07',-1,'2018-05-12 14:52:16',-1,'ID',NULL,NULL,NULL);

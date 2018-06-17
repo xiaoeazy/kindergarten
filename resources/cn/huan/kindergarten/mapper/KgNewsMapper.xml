@@ -54,6 +54,15 @@
            		<if test="indexshow!=null and indexshow !=''">
            			AND a.indexshow = #{indexshow}
            		</if>
+           		<if test="sourceid!=null and sourceid !=''">
+           			AND a.sourceId = #{sourceid}
+           		</if>
+           		<if test="startDate!=null">
+           			<![CDATA[AND createdate >= #{startDate} ]]>
+           		</if>
+           		<if test="endDate!=null">
+           		 	<![CDATA[ AND createdate <= #{endDate} ]]>
+           		</if>
            </where>
            
            <choose>
@@ -81,6 +90,15 @@
            		</if>
            		<if test="indexshow!=null  and indexshow !='' ">
            			AND indexshow = #{indexshow}
+           		</if>
+           		<if test="sourceid!=null and sourceid !=''">
+           			AND sourceId = #{sourceid}
+           		</if>
+           		<if test="startDate!=null">
+           			<![CDATA[AND createdate >= #{startDate} ]]>
+           		</if>
+           		<if test="endDate!=null">
+           		 	<![CDATA[ AND createdate <= #{endDate} ]]>
            		</if>
            		
            </where>

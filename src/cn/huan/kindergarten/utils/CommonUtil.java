@@ -1,5 +1,6 @@
 package cn.huan.kindergarten.utils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -18,6 +19,9 @@ import cn.huan.kindergarten.dto.KgNews;
 public class CommonUtil {
 	   public static final String  SUSPENSION_POINTS = "...";
 	   public static final String  TIME14="yyyyMMddHHmmss";
+	   public static final String  TIME10="yyyy-MM-dd HH:mm:ss";
+	   public static final String  STARTTIME=" 00:00:00";
+	   public static final String  ENDTIME=" 23:59:59";
 	   public static void judgeNewsTitleLength(List<KgNews> news,int size) {
 	    	for(KgNews kg :news) {
 	    		String title =kg.getNewstitle();
@@ -45,6 +49,17 @@ public class CommonUtil {
 		   Date day=new Date();
 		   SimpleDateFormat df = new SimpleDateFormat(TIME14); 
 		   return (df.format(day));   
+	   }
+	   
+	   public static Date stringTodate10(String time ) {
+		   SimpleDateFormat df = new SimpleDateFormat(TIME10); 
+		   	try {
+		   		return (df.parse(time));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}   
+		   return null;
 	   }
 	   
 	   public static String getIpAddress(HttpServletRequest request) {  

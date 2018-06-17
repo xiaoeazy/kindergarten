@@ -11,9 +11,7 @@
 	<script language="javascript">
 
 		function gopage(e){
-
 			$("#page").val(e);
-			//alert($("#pageindex").val());
 			$("#searchForm").submit();
 		}
 
@@ -35,6 +33,11 @@
 			$("#newssource").val("");
 		}
 
+		function CompareDate(d1,d2)
+		{
+		  return ((new Date(d1.replace(/-/g,"\/"))) > (new Date(d2.replace(/-/g,"\/"))));
+		}
+		
 		$(document).ready(function(){
 			$('#searchparam').bind('blur',function(event){
 				$(this).val(delHtmlTag($(this).val()));
@@ -45,13 +48,20 @@
 			});
 			
 
-			var selval = "";
-			$("#newstype").val(selval);
+			var searchparam = "${searchparam}";
+			$("#searchparam").val(searchparam);
+			
+			var dateissuestart = "${dateissuestart}";
+			$("#dateissuestart").val(dateissuestart);
+			
+			var dateissueend = "${dateissueend}";
+			$("#dateissueend").val(dateissueend);
+			
+			var newstype = "${newstype}";
+			$("#newstype").val(newstype);
 
-			var selval2 = "";
-			$("#newssource").val(selval2);
-
-
+			var newssource = "${newssource}";
+			$("#newssource").val(newssource);
 
 			$("#doSearch").click(function(){
 				var value1 = $("#dateissuestart").val();
@@ -62,24 +72,18 @@
 					if(value2==""){alert("请选择颁布日期的结束时间。");}
 					return false;
 				}
+				if(CompareDate(value1,value2)){
+					alert("结束时间小于开始时间");
+					return false;
+				}
 				dosearch();
 			});
 			$("#doReset").click(function(){
 				doreset();
 			});
 
-
 			$("#dateissuestart").css("cursor","pointer");
 			$("#dateissueend").css("cursor","pointer");
-
-			$(".vT_search_sortby li:not(.current)").mouseover(function(){
-				$(this).css("background","#d0d0d0");
-				$(this).css("text-decoration","underline");
-			});
-			$(".vT_search_sortby li:not(.current)").mouseout(function(){
-				$(this).css("background","#ececec");
-				$(this).css("text-decoration","none");
-			});
 
 		})
 	</script>
@@ -96,19 +100,11 @@
 	.vT_search_sortby li a{color:#555;text-decoration:none}
 	.zcfg_listheader p{line-height:35px;font-size:14px;font-weight:bolder;}
 	.zcfg_listheader p span.title{width:749px;height:35px;background:#f1f1f1;border-right:1px solid #fff;text-align:center;display:block;float:left;}
-	.zcfg_listheader p span.fwzh{width:119px;height:35px;background:#f1f1f1;border-right:1px solid #fff;text-align:center;display:block;float:left;}
+	.zcfg_listheader p span.zxlb{width:119px;height:35px;background:#f1f1f1;border-right:1px solid #fff;text-align:center;display:block;float:left;}
 	.zcfg_listheader p span.bwrq{width:89px;height:35px;background:#f1f1f1;text-align:center;display:block;float:left;}
 
 </style>
 
-<span class="blank37"></span>
-
-<div class="vT_z">
-	<div class="vT-srch-result-top">
-		<div class="vT-srch-result-top-logo n_fl"><img src="${base.contextPath}/lib/index/search/static/images/searchplatform_zcfg.gif" style="border:0"></div>
-	</div>
-</div>
-<span class="blank20"></span>
 
 <!--主导航-->
 <form name="searchForm" id="searchForm" action="newsSearch" method="post">
@@ -133,7 +129,7 @@
 				<div style="clear:both"></div></div>
 
 			<div class="vT_bidSearch_addon_con" style="margin-top:5px">
-				<div class="vT_bidSearch_addon_block" style="margin-left:0;width:350px"><p>发布日期</p><input type="text" name="dateissuestart" id="dateissuestart" style="width:90px" value=""  class="laydate-icon"  /> 至 <input type="text" name="dateissueend" id="dateissueend" style="width:90px" value=""  class="laydate-icon" /></div>
+				<div class="vT_bidSearch_addon_block" style="margin-left:0;width:350px"><p>发布日期</p><input type="text" name="dateissuestart" id="dateissuestart" style="width:117px" value="" class="laydate-icon"  /> 至 <input type="text" name="dateissueend" id="dateissueend" style="width:117px" value="" class="laydate-icon"/></div>
 				
 				<div style="clear:both"></div></div>
 
@@ -180,19 +176,12 @@
 	</div>
 </div>
 <span class="blank5"></span>
-<!--div class="vT_z">
-	<div class="vT-srch-condition">
-        <p>搜索条件：</p><ul class="vT-srch-condi">
-            <li>北京市</li>
-            <li>丰台区</li>
-        </ul>
-    </div>
-</div-->
 
+<!-- 查询列表start -->
 <div class="vT_z">
 	<div class="zcfg_listheader"><p>
 	<span class="title">标题</span>
-	<span class="fwzh">发文字号</span>
+	<span class="zxlb">咨询类别</span>
 	<span class="bwrq">发布日期</span></p>
 	</div>
 </div>
@@ -208,7 +197,7 @@
 										<a href="${base.contextPath}/index/newsDetail?id=${news.id}" target="_blank">
 											${news.newstitle}
 										</a>
-										<span></span>
+										<span style="text-align:center">${news.kgNewstype.typename}</span>
 										<em>
 											${news.createdate?string('yyyy-MM-dd')}
 										</em>
@@ -247,33 +236,10 @@
 	<!---->
 
 </div>
-<div class="vT-srch-result-page-con" style="background:#ac0000;color:white;width:1200px"><div class="pagigation"></div>
-</div>
+<!-- 查询列表end -->
 </div>
 
-<span class="blank37"></span>
-<div class="vT_nav_cp">
-	<div class="vT_z">
-		<div class="vT_b_c vT_cp"><p><span>&copy; 1999-<script language="javascript">
-			var myDate = new Date();
-			document.write(myDate.getFullYear());
-		</script></span> 中华人民共和国财政部版权所有 | <a href="http://www.ccgp.gov.cn/contact.shtml" target="_blank">联系我们</a> | <a href="mailto:feedback@ccgp.gov.cn">意见反馈</a> | <a href="http://www.miibeian.gov.cn" target="_blank">京<span>ICP</span>备<span>10046031</span>号<span>-10</span></a></p>
-		</div>
-	</div>
-</div>
-<script language="javascript" src="http://www.ccgp.gov.cn/images/sa.js"></script>
-<script type="text/javascript" src="${base.contextPath}/lib/index/search/static/js/fixdiv.js"></script>
-<!--[if IE 6]>
-<script language="javascript" src="/static/js/DD_belatedPNG_0.0.8a-min.js"></script>
-<script>
-	/* EXAMPLE */
-	DD_belatedPNG.fix('.c_list li,.vT_R_clist li');
-
-	/* string argument can be any CSS selector */
-	/* .png_bg example is unnecessary */
-	/* change it to what suits you! */
-</script>
-<![endif]-->
+<#include "../../include/footer.html">
 <script language="javascript">
 	function showd(n)
 	{
@@ -304,13 +270,6 @@
 		}
 	});
 
-	/*
-	 laydate({
-	 elem: '#hello3',
-	 min: laydate.now(-1), //-1代表昨天，-2代表前天，以此类推
-	 max: laydate.now(+1) //+1代表明天，+2代表后天，以此类推
-	 });
-	 */
 </script>
 </body>
 </html>

@@ -10,80 +10,53 @@
 <script  type="text/javascript" src="${base.contextPath}/lib/index/search/static/js/jquery-1.11.1.min.js"></script>
 <script language="javascript">
 
-
+function CompareDate(d1,d2)
+{
+  return ((new Date(d1.replace(/-/g,"\/"))) > (new Date(d2.replace(/-/g,"\/"))));
+}
 
 function dosearch(e){
-
-
-            document.searchForm.submit();
-            }
+	var value1 = $("#dateissuestart").val();
+	var value2 = $("#dateissueend").val();
+	alert(value1);
+	alert(value2);
+	if((value1!=="" && value2=="")||(value1=="" && value2!==""))
+	{
+		if(value1==""){alert("请选择颁布日期的起始时间。");}
+		if(value2==""){alert("请选择颁布日期的结束时间。");}
+		return false;
+	}
+	if(CompareDate(value1,value2)){
+		alert("结束时间小于开始时间");
+		return false;
+	}
+    document.searchForm.submit();
+}
 function doreset(){
-                $("#searchparam").val("");
-                $("#filedep").val("");
-                $("#fileyear").val("");
-                $("#filenum").val("");
-                $("#dateissuestart").val("");
-                $("#dateissueend").val("");
-                $("#datematerialstart").val("");
-                $("#datematerialend").val("");
-                $("#issuedep").val("");
-                $("#lawtype").val("");
-                $("#lawlevle").val("");
-                $("#lawvalid").val("");
-                }
-
+	$("#searchparam").val("");
+	$("#dateissuestart").val("");
+	$("#dateissueend").val("");
+	$("#newstype").val("");
+	$("#newssource").val("");
+ }
+ 
 $(document).ready(function(){
-    var selval="";
-    $("#lawtype").val(selval);
-
-    var selval2="";
-    $("#lawlevle").val(selval2);
-
-    var selval3="";
-    $("#lawvalid").val(selval3);
-
     $("#doSearch").click(function(){
-        dosearch(1);
+    	dosearch(1);
     });
     $("#doReset").click(function(){
         doreset();
     });
-	$("#btn_zcfgsearch").click(function(){
-       $("#vT_bidSearch_o").toggle();
-        if($("#btn_zcfgsearch").attr("src")=="../images/btn_zcfgsearch_on.gif"/*tpa=http://www.ccgp.gov.cn/images/btn_zcfgsearch_on.gif*/)
-         {
-           $("#btn_zcfgsearch").attr("src","../images/btn_zcfgsearch.gif"/*tpa=http://www.ccgp.gov.cn/images/btn_zcfgsearch.gif*/);
-           $("#searchspan20").hide();
-         }
-         else
-         {
-          $("#btn_zcfgsearch").attr("src","../images/btn_zcfgsearch_on.gif"/*tpa=http://www.ccgp.gov.cn/images/btn_zcfgsearch_on.gif*/);
-          $("#searchspan20").show();
-          }
-    });
 
     $("#dateissuestart").css("cursor","pointer");
     $("#dateissueend").css("cursor","pointer");
-    $("#datematerialstart").css("cursor","pointer");
-    $("#datematerialend").css("cursor","pointer");
-	$("#btn_zcfgsearch").css("cursor","pointer");
+})
 
-    $(".vT_search_sortby li:not(.current)").mouseover(function(){
-        $(this).css("background","#d0d0d0");
-        $(this).css("text-decoration","underline");
-        });
-        $(".vT_search_sortby li:not(.current)").mouseout(function(){
-        $(this).css("background","#ececec");
-        $(this).css("text-decoration","none");
-        });
-
-    })
 </script>
 <script type="text/javascript" src="${base.contextPath}/lib/index/search/static/js/laydate/laydate.js" ></script>
 </head>
 <body id="zcfg">
 <#include "../../include/navigation.html">
-
 
 <div class="main">
 <div class="main_container">
@@ -136,12 +109,8 @@ $(document).ready(function(){
 			<div style="clear:both"></div></div>
        <!--输入内容-->
         <div class="vT_bidSearch_addon_con" style="margin-top:10px;margin-bottom:10px;text-align:center">
-            <button class="ui gray button"  id="doSearch" >
-                         检索
-                      </button>
-                      <button class="ui gray button" id="doReset" >
-                         重置
-                      </button>
+            <button class="ui gray button"  id="doSearch" > 检索</button>
+            <button class="ui gray button" id="doReset" >重置 </button>
             <div style="clear:both"></div>
         </div>
         <div style="clear:both"></div>
@@ -175,12 +144,11 @@ $(document).ready(function(){
 
 
 
-
+	<!--left newslist start-->
     <div class="main_left_block mt13">
         <div class="wz_block">
         
         	<#list typeList as typeList>   
-			    
 			    <div class="newslist_bl_nor">
 	                <div class="newslist">
 			               <div class="vF_t2">
@@ -198,21 +166,14 @@ $(document).ready(function(){
 								</#list>
 		                	 </ul>
 			            </div>
-	                </div><!--newslist-->
+	                </div>
             	</div>
-			    
     		</#list> 
-    		
-            
-
-
-      
         </div>
-
     </div>
-
+	<!--left newslist end-->
+	
     <div class="main_right_block mt13">
-
         <div class="main_right_cbl">
             <h2>分类总览</h2>
                 <div class="vT-chs-section-content-con">
@@ -225,28 +186,12 @@ $(document).ready(function(){
         </div>
 
         <div class="main_right_cbl mt13">
-            <h2>条法类别</h2>
-            <div class="vT-chs-section-content-con">
-                <ul class="vT-chs-section-content-list w100">
-
-					<li><a href="tflb/cgztl/index.htm"  target="_blank" title="采购主体类">采购主体类</a>(31)</li>
-
-                </ul>
-                <ul class="vT-chs-section-content-list w100">
-
-					<li><a href="tflb/jzxtp/index.htm"  target="_blank" title="竞争性谈判">竞争性谈判</a>(2)</li>
-
-                </ul>
-                </div>
-        </div>
-
-        <div class="main_right_cbl mt13">
-            <h2>法规文件</h2>
+            <h2>文章来源</h2>
             <div class="vT-chs-section-content-con">
                 <ul class="vT-chs-section-content-list">
-
-						<li><a href="bbdw/qgrd/index.htm" target="_blank" title="全国人大">全国人大</a>(21)</li>
-
+						<#list sourceList as sourceList> 
+							<li class="sorthead1"><a href="${base.contextPath}/index/newsSourceList?sourceid=${sourceList.id}"  target="_blank" title="sourceList.soucename">${sourceList.sourcename}</a>(${sourceList.count})</li>
+						</#list> 
                 </ul>
                 </div>
         </div>
@@ -282,22 +227,6 @@ laydate({
       format: 'YYYY-MM-DD', // 分隔符可以任意定义，该例子表示只显示年月
       festival: false, //显示节日
       max:gEnd,
-      choose: function(datas){ //选择日期完毕的回调
-        //alert('得到：'+datas);
-      }
-    });
-laydate({
-      elem: '#datematerialstart',
-      format: 'YYYY-MM-DD', // 分隔符可以任意定义，该例子表示只显示年月
-      festival: false, //显示节日
-      choose: function(datas){ //选择日期完毕的回调
-        //alert('得到：'+datas);
-      }
-    });
-laydate({
-      elem: '#datematerialend',
-      format: 'YYYY-MM-DD', // 分隔符可以任意定义，该例子表示只显示年月
-      festival: false, //显示节日
       choose: function(datas){ //选择日期完毕的回调
         //alert('得到：'+datas);
       }
