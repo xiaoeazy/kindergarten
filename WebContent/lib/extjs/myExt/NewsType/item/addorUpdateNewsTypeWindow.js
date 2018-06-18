@@ -22,6 +22,43 @@ Ext.extend(addorUpdateNewsType.addorUpdateNewsTypeWindow, Ext.Window, {
 	    	var text = type=="update"?"更新":"添加";
 	    	var isAdd =  type=="update"?false:true;
 	    	
+	    	 //=====================是否结束=========================================
+		       var showIndex_Combo_Store = new Ext.data.Store({
+		    	   fields: [  
+		    	         {name: 'key', type: 'string'},  
+		    	         {name: 'value',  type: 'string'}
+		    	     ],  
+		    	     data : [  
+		    	         {key: 'true',    value: '显示'},
+		    	         {key: 'false',    value: '不显示'}
+		    	     ]  
+		    	});
+		       
+		       var showIndexCombo = new Ext.form.ComboBox({
+		    	    style:'padding:5px',
+		    	    columnWidth: .33  ,   
+		      		fieldLabel:'是否前台显示<font color="red">*</font>',
+		    	    id:mainId+"showindex",
+		            store : showIndex_Combo_Store,  
+		            valueField : "key",  
+		            mode : 'remote',  
+		            displayField : "value",  
+		            forceSelection : true,  
+		            emptyText : '请选择',  
+		            editable : false,  
+		            triggerAction : 'all',  
+		            hiddenName : "value",  
+		            autoShow : true,  
+		            selectOnFocus : true,  
+		            name : "showindex",
+		            listeners:{
+		           	afterrender:function(comb){
+		           	},
+		           	select:function(combo, record, index){
+		           	}
+		           }
+		       }); 
+	    	
 	    	var formpanel = new Ext.FormPanel({
 	    		  labelAlign: "right",
 	    		  labelWidth :100,
@@ -44,7 +81,8 @@ Ext.extend(addorUpdateNewsType.addorUpdateNewsTypeWindow, Ext.Window, {
 								blankText:'必须填写',
 								id:mainId+"typename",
 					            maxLength:45  
-				  			}
+				  			},
+				  			showIndexCombo
 				  			],
 				  buttonAlign : "center",
 				  buttons:[{
@@ -85,6 +123,10 @@ Ext.extend(addorUpdateNewsType.addorUpdateNewsTypeWindow, Ext.Window, {
 						if(record!=null){
 				    		var typename= record.get("typename");
 				    		Ext.getCmp(mainId+"typename").setValue(typename);
+				    		var showindex =  record.get("showindex");
+				    		showIndexCombo.setValue(showindex);
+				    	}else{
+				    		showIndexCombo.setValue(false);
 				    	}
 					}
 				}
@@ -100,6 +142,7 @@ Ext.extend(addorUpdateNewsType.addorUpdateNewsTypeWindow, Ext.Window, {
 			Ext.getCmp(mainId+"typename").markInvalid("类型名不能为空！");
 			return;
 		}
+		var showindex =Ext.getCmp(mainId+"showindex").getValue();
 	
 		if( formpanel.getForm().isValid()){
 			Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
@@ -110,6 +153,7 @@ Ext.extend(addorUpdateNewsType.addorUpdateNewsTypeWindow, Ext.Window, {
                   params : JSON.stringify([{
                 	  __status : type,
                 	  typename : typename,
+                	  showindex:showindex,
                 	  id : id
                   }]),
                   success : function(response, options) {

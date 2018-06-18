@@ -34,7 +34,8 @@ Ext.define('App.ux.UEditor', {
             //编辑器各项参数配置，参考UEditor.config.js
             me.ue = UE.getEditor(me.getInputId(), Ext.apply(me.ueditorConfig, {
                 //编辑器高度，可在此处修改，但不要在表单配置中修改，否则滚动条出现后工具栏会消失
-                initialFrameHeight:320,
+//                initialFrameHeight:320,
+            	initialFrameHeight:450,
                 initialFrameWidth: '100%',
                 autoHeightEnabled: false,
                 enableAutoSave: false,

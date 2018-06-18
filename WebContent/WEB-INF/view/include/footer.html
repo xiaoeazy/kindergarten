@@ -8,16 +8,20 @@
 			
 		</div>
 		<div class="siteWidth">
-			版权所有：上海幼协会 Copyright © 2015 - 2018 All Rights Reserved aaaaaa号 <br>
+			<#if copyright??>
+				版权所有：${copyright}<br>
+			</#if>
 		</div>
 		<div class="siteWidth">
-			&nbsp;&nbsp; <a target="_blank"
-				href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=62010002000482"
+			&nbsp;&nbsp; 
+			<#if ICPlicense??>
+			<a target="_blank" href="${ICPlicensePath}"
 				style="display: inline-block; text-decoration: none; height: 20px; line-height: 20px;">
 				<img src="${base.contextPath}/lib/index/img/batb.png"
 				style="float: left;" />
-			<p style="float: left; height: 20px; line-height: 20px; margin: 0px 0px 0px 5px; color: #ffffff;">上公网安备12312312号</p>
+			<p style="float: left; height: 20px; line-height: 20px; margin: 0px 0px 0px 5px; color: #ffffff;">${ICPlicense}</p>
 			</a>
+			</#if>
 		</div>
 
 		<div class="footerLinks"></div>

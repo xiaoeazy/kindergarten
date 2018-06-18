@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-	<title> - 用户登录</title>
+	<title>用户登录</title>
 	<link href="${base.contextPath}/lib/index/css/index/login.css" rel="stylesheet" type="text/css" />
 	<script language="javascript" src="${base.contextPath}/lib/jquery/jquery.min.js" ></script>
 	<style type="text/css">
@@ -117,27 +117,16 @@
 		function _focus() {
 			//提示登录失败信息
 			failInfo();
-			$('#permit').focus();
-		}
-		function removeXXS(str){
-			if(str){
-				return str.replace(/<[^>]+>/g,"")
-			}else{
-				return "";
-			}
+			$('#userName').focus();
 		}
 
 		function failInfo(){
-			var errMsg = removeXXS(getUrlParam('errorMessage'));
-			var licError = removeXXS(getUrlParam('licError'));
-			var msg="";
-			if(errMsg) msg+= errMsg;
-			if(licError) msg+= (errMsg?'<br>':'')+licError;
-			if(msg){
-
-				document.getElementById('failInfo').innerHTML = msg;
+			var errorInfo = $("#errorInfo").val();
+			if(errorInfo!=""){
+				document.getElementById('failInfo').innerHTML = errorInfo;
 				document.getElementById('failInfo').style.display = "";
 			}
+				
 		}
 
 		function keyDownEvent(evt){
@@ -152,22 +141,16 @@
 			setMsg('msg1','', 'red');
 			setMsg('msg2','', 'red');
 			//setMsg('msg3','', 'red');
-			if(document.getElementById('permit').value=="") {
+			if(document.getElementById('userName').value=="") {
 				setMsg('msg1','请输入用户名！','red');
-				document.getElementById('permit').focus();
+				document.getElementById('userName').focus();
 				return false;
 			}
-			if(document.getElementById('password').value=="") {
+			if(document.getElementById('passwordEncrypted').value=="") {
 				setMsg('msg2','请输入密码！','red');
-				document.getElementById('password').focus();
+				document.getElementById('passwordEncrypted').focus();
 				return false;
 			}
-              var u = document.getElementById('permit').value;
-              var p = document.getElementById('password').value;
-			document.getElementById('userid').value=document.getElementById('permit').value;
-			document.getElementById('userName').value=document.getElementById('permit').value;
-			document.getElementById('j_username').value=document.getElementById('permit').value;
-			document.getElementById('j_password').value=document.getElementById('password').value;
 			document.getElementById('form1').submit();
 		}
 
@@ -181,53 +164,13 @@
 		}
 
 
-		function _refresh(){
-		   	document.getElementById('img').src = '/iUser_user/pages/common/check.jsp?id=' + Math.round(new Date().getTime());
-		}
-
-		
-
-		function uaMatch(ua) {
-			rMsie = /(msie\s|trident.*rv:)([\w.]+)/,
-			rFirefox = /(firefox)\/([\w.]+)/,
-			rOpera = /(opera).+version\/([\w.]+)/,
-			rChrome = /(chrome)\/([\w.]+)/,
-			rSafari = /version\/([\w.]+).*(safari)/;
-
-			var match = rMsie.exec(ua);
-			if (match != null) {
-				return { browser : "IE", version : match[2] || "0" };
-			}
-			var match = rFirefox.exec(ua);
-			if (match != null) {
-				return { browser : match[1] || "", version : match[2] || "0" };
-			}
-			var match = rOpera.exec(ua);
-			if (match != null) {
-				return { browser : match[1] || "", version : match[2] || "0" };
-			}
-			var match = rChrome.exec(ua);
-			if (match != null) {
-				return { browser : match[1] || "", version : match[2] || "0" };
-			}
-			var match = rSafari.exec(ua);
-			if (match != null) {
-				return { browser : match[2] || "", version : match[1] || "0" };
-			}
-			if (match != null) {
-				return { browser : "", version : "0" };
-			}
-        }
-
+	
 		function getUrlParam(name){
 			var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
 			var r = window.location.search.substr(1).match(reg);  //匹配目标参数
 			if (r!=null) return decodeURI(r[2]); return null; //返回参数值 传时encodeURI
 		}
 
-		function getSymbols(){
-			return "\\_\\!\\@\\#\\$\\&\\%\\^\\&\\*\\(\\)\\-\\+\\[\\]\\{\\}\\|\\:\\;\\<\\>\\?\\,\\.\\/\\~\\`";
-		}
 
 	</script>
 </head>
@@ -244,7 +187,7 @@
 		<div class="split"></div>
 
 		<div class="login-box loginbox">
-			<div class="title"><h2>上海市幼托协会</h2></div>
+			<div class="title"><h2>${webname}</h2></div>
 			<div id="J_Message" class="login-msg msg">
 				<p class="error" id="failInfo" style="display:none">
 					<span id="errMessage"></span>
@@ -253,32 +196,27 @@
 			<div id="J_Static" class="authbox">
 
 				<form id="form1" method="post" action="${base.contextPath}/index/login">
-					<input type="hidden" name="userid" id="userid" />
-					<input type="hidden" name="linkpage" id="linkpage" value="http://sso.ccgp.gov.cn/GS0/workbench"/>
-					<input type="hidden" name="userName" id="userName" />
-					<input type="hidden" name="j_username" id="j_username" />
-					<input type="hidden" name="j_password" id="j_password" />
-					<input type="hidden" name="errorInfo" id="errorInfo" />
+					<input type="hidden" name="errorInfo" id="errorInfo" value="${errorInfo!}" />
 					<div class="field">
 						<label>用户名</label>
-						<input id="permit" name="permit" class="login-text" value="" maxlength="128" tabindex="1" type="text" onKeyDown="keyDownEvent(event)"/>
+						<input id="userName" name="userName" class="login-text" value="" maxlength="128" tabindex="1" type="text" onKeyDown="keyDownEvent(event)"/>
 						<div id="msg1" style="height:12px;"></div>
 					</div>
 					<div class="field">
 						<label>密　码</label>
-						<input type="password" id="password" name="password" value="" class="login-text" maxlength="128" tabindex="2"onKeyDown="keyDownEvent(event)" />
+						<input type="password" id="passwordEncrypted" name="passwordEncrypted" value="" class="login-text" maxlength="128" tabindex="2"onKeyDown="keyDownEvent(event)" />
 						<div id="msg2" style="height:12px;"></div>
 					</div>
-					<div class="field" style="text-align:right;margin-right:60px">
-						<a href="findpw.htm" class="forp">忘记密码</a>
-					</div>
+<!-- 					<div class="field" style="text-align:right;margin-right:60px"> -->
+<!-- 						<a href="findpw.htm" class="forp">忘记密码</a> -->
+<!-- 					</div> -->
 					<div class="filed button" style="margin-top: 20px;">
 						<input type="button" class="button_login" value="登&nbsp;录" onclick="_login();" style="cursor:pointer;" />
 					</div>
 				</form>
 			</div>
 			<div class="logininfo2">
-				<p>注：登录用户均有管理人员分配账号。</p>
+				<p>注：登录用户均由管理人员分配账号。</p>
 			</div>
 		</div>
 		</div>

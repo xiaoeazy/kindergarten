@@ -71,6 +71,7 @@ public class IndexDownloadController extends IndexBaseController{
          
          loadNavigation(mv, requestContext, IndexController.CH_INDEX);
          iKgNewsAttributeService.loadAttriteNews(mv, requestContext,3);
+         loadSysConfig(mv);
          return mv;
     }
 	

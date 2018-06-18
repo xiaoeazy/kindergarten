@@ -5,7 +5,8 @@ addorUpdateNews.addorUpdateNewsWindow = function(config) {
 	addorUpdateNews.addorUpdateNewsWindow.superclass.constructor.call(this);
 };
 
-Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
+//Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
+Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Panel, {
 	
 	initUIComponents : function() {
 		    var me  = this ; 
@@ -21,6 +22,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 	    	var parentStore = this.parentStore; 
 	    	var text = type=="update"?"更新":"添加";
 	    	var isAdd =  type=="update"?false:true;
+	    	var tabName = this.tabName;
 	    	
 	    	
 	    	
@@ -312,13 +314,13 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 
 		
 		Ext.apply(this, {
-				title : text+'咨讯',
+//				title : text+'咨讯',
 				layout:'fit',
 				items : [newsTabs],
-				width : 800,
-				height : 570,
+//				width : 800,
+//				height : 570,
 				autoHeight:true,
-				xtype : "window",
+//				xtype : "window",
 				resizable : false,
 				constrain:true,
 				minimize : function() { 
@@ -330,17 +332,18 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 				  width:50,
 					text : text,
 					handler : function(button, event) {
-						me.addorUpdateLink(me,formpanel,mainId,parentStore,id,type,isAdd);
+						me.addorUpdateLink(me,formpanel,mainId,parentStore,id,type,isAdd,tabName);
 					}
 			    },{
 				  width:50,
 					text : '取消',
 					handler : function(button, event) {
-						me.close();
+//						me.close();
+						tabs.remove(tabName);
 					}
 			    }],
 				listeners:{
-					show:function(){
+					afterRender:function(){
 						if(record!=null){
 				    		var newstitle= record.get("newstitle");
 				    		var typeid = record.get("typeid");
@@ -418,7 +421,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
 		 
 	},
 	
-	addorUpdateLink : function(me,formpanel,mainId,parentStore,id,type,isAdd) {
+	addorUpdateLink : function(me,formpanel,mainId,parentStore,id,type,isAdd,tabName) {
 		
 		var attributeValue = Ext.getCmp(mainId+'attribute').getChecked();
 		var attributeid="";
@@ -490,7 +493,8 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Window, {
                 	  var responseArray = Ext.util.JSON.decode(response.responseText);
 	                  if (responseArray.success == true) {
 	                	    parentStore.reload();
-	                    	me.close();
+//	                    	me.close();
+	                	    tabs.remove(tabName);
 	                    }else{
 	                    	ExtError(responseArray.message);
 	                    }

@@ -181,7 +181,7 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
 	//==========================grid====================
 		var store = new Ext.data.Store({
 			pageSize:10,
-			remoteSort: true,
+//			remoteSort: true,
 			proxy: {
 		        type: 'ajax',
 		        url : appName+ '/admin/news/query',
@@ -228,6 +228,8 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
 					handler : function() {
 						var records=getRecords(grid);
 						if(records==-1)
+							return;
+						if(records.length>1)
 							return;
 						var record = records[0];
 						me.editNews(record,store,mainId);
@@ -292,23 +294,43 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
 		   
 	},
 	addNews:function(store,mainId){
-		var win = new addorUpdateNews.addorUpdateNewsWindow ({
+//		var win = new addorUpdateNews.addorUpdateNewsWindow ({
+//			mainId:mainId,
+//			type:'add',
+//			record:null,
+//			parentStore:store
+//		});
+//		win.show();
+		var tabName ="addNewsPanel" ;
+		var panel = new addorUpdateNews.addorUpdateNewsWindow ({
 			mainId:mainId,
 			type:'add',
 			record:null,
-			parentStore:store
+			parentStore:store,
+			tabName :tabName
 		});
-		win.show();
+		addTabFuns(tabName,panel,'添加资讯');
 	},
 	editNews:function(record,store,mainId){
+//		var id = record.get("id");
+//		var win = new addorUpdateNews.addorUpdateNewsWindow ({
+//			mainId:mainId,
+//			type:'update',
+//			record:record,
+//			parentStore:store
+//		});
+//		win.show();
 		var id = record.get("id");
-		var win = new addorUpdateNews.addorUpdateNewsWindow ({
-			mainId:mainId,
+		var tabName ="updateNewsPanel_"+id ;
+		var panel = new addorUpdateNews.addorUpdateNewsWindow ({
+			mainId:mainId+tabName,
 			type:'update',
 			record:record,
-			parentStore:store
+			parentStore:store,
+			tabName :tabName
 		});
-		win.show();
+		addTabFuns(tabName,panel,'修改资讯');
+//		win.show();
 	},
 	deleteNews:function(records,store,mainId){
 		 Ext.Msg.confirm('提示信息','确认要删除这些信息吗？',function(op){  

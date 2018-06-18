@@ -71,7 +71,7 @@ public class IndexNewsController extends IndexBaseController{
         mv.addObject("sourceList",sourceList);
         loadNavigation(mv, requestContext,IndexController.CH_ZXZX);
         iKgNewsAttributeService.loadAttriteNews(mv, requestContext,2);
-       
+        loadSysConfig(mv);
         return mv;
     }
 	
@@ -108,7 +108,7 @@ public class IndexNewsController extends IndexBaseController{
         
         
         loadNavigation(mv, requestContext,IndexController.CH_ZXZX);
-        
+        loadSysConfig(mv);
        
         return mv;
     }
@@ -136,6 +136,7 @@ public class IndexNewsController extends IndexBaseController{
 	        
 	        loadNavigation(mv, requestContext,IndexController.CH_ZXZX);
 	        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,3);
+	        loadSysConfig(mv);
 	        return mv;
 	    }
 	 
@@ -162,6 +163,7 @@ public class IndexNewsController extends IndexBaseController{
 	        
 	        loadNavigation(mv, requestContext,IndexController.CH_ZXZX);
 	        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,3);
+	        loadSysConfig(mv);
 	        return mv;
 	    }
 
@@ -198,6 +200,7 @@ public class IndexNewsController extends IndexBaseController{
         
         loadNavigation(mv, requestContext,IndexController.CH_ZXZX);
         iKgNewsAttributeService.loadAttriteNews(mv, requestContext,3);
+        loadSysConfig(mv);
         return mv;
     }
     

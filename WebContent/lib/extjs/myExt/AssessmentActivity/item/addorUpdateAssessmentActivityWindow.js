@@ -5,8 +5,8 @@ addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow = function(con
 	addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow.superclass.constructor.call(this);
 };
 
-Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ext.Window, {
-	
+//Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ext.Window, {
+Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ext.Panel, {
 	initUIComponents : function() {
 		    var me  = this ; 
 		    
@@ -21,6 +21,7 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 	    	var parentStore = this.parentStore; 
 	    	var text = type=="update"?"更新":"添加";
 	    	var isAdd =  type=="update"?false:true;
+	    	var tabName = this.tabName;
 	    	
 	    	
 	    	
@@ -94,7 +95,7 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 			    }
 			});
 	       
-	       //=====================attribute=========================================
+	       //=====================是否结束=========================================
 	       var finished_Combo_Store = new Ext.data.Store({
 	    	   fields: [  
 	    	         {name: 'key', type: 'string'},  
@@ -181,7 +182,7 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 //==============tabs========================================================
 	    	
 		Ext.apply(this, {
-				title : text+'评估任务',
+//				title : text+'评估任务',
 				layout:'border',
 				items : [formpanel,{
 					region:'center',
@@ -204,10 +205,10 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 						}
 					}
 				}],
-				width : 800,
-				height : 670,
+//				width : 800,
+//				height : 670,
 				autoHeight:true,
-				xtype : "window",
+//				xtype : "window",
 				resizable : false,
 				constrain:true,
 				minimize : function() { 
@@ -219,17 +220,18 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 				  width:50,
 					text : text,
 					handler : function(button, event) {
-						me.addorUpdateAssessmentActivity(me,formpanel,mainId,parentStore,id,type,isAdd);
+						me.addorUpdateAssessmentActivity(me,formpanel,mainId,parentStore,id,type,isAdd,tabName);
 					}
 			    },{
 				  width:50,
 					text : '取消',
 					handler : function(button, event) {
-						me.close();
+//						me.close();
+						tabs.remove(tabName);
 					}
 			    }],
 				listeners:{
-					show:function(){
+					afterRender:function(){
 						if(record!=null){
 				    		var assessmentActivityName= record.get("assessmentActivityName");
 				    		var assessmentTypeId = record.get("assessmentTypeId");
@@ -293,7 +295,7 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 	},
 	
 	
-	addorUpdateAssessmentActivity : function(me,formpanel,mainId,parentStore,id,type,isAdd) {
+	addorUpdateAssessmentActivity : function(me,formpanel,mainId,parentStore,id,type,isAdd,tabName) {
 		var attributeValue = Ext.getCmp(mainId+'attribute').getChecked();
 		var attributeid="";
 		Ext.Array.each(attributeValue, function(item){
@@ -339,7 +341,8 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 	                  if (responseArray.success == true) {
 //	                	    ExtAlert("成功");
 	                	    parentStore.reload();
-	                    	me.close();
+//	                    	me.close();
+	                	    tabs.remove(tabName);
 	                    }else{
 	                    	ExtError(responseArray.message);
 	                    }

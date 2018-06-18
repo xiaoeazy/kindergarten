@@ -1,5 +1,7 @@
 package cn.huan.kindergarten.service.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,5 +16,21 @@ import cn.huan.kindergarten.service.IKgNewstypeService;
 public class KgNewstypeServiceImpl extends BaseServiceImpl<KgNewstype> implements IKgNewstypeService{
 	public int adminQueryCount(IRequest request,KgNewstype record) {
 		return  mapper.selectCount(record);
+	}
+	
+	public void updateDto(IRequest request,List<KgNewstype> dto) {
+		if(dto.get(0).getShowindex()==true) {
+			List<KgNewstype> dto2 = self().selectAll(request); 
+			for(KgNewstype t:dto2) {
+				t.setShowindex(false);
+				t.set__status("update");
+			}
+			self().batchUpdate(request, dto2);
+		}
+		self().batchUpdate(request, dto);
+	}
+	
+	public KgNewstype selectOne(IRequest request,KgNewstype dto) {
+		return mapper.selectOne(dto);
 	}
 }

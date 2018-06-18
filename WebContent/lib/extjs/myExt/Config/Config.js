@@ -35,7 +35,10 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 						var ICPlicense = store.getAt(5).get('sysvalue');
 						var webLogo = store.getAt(6).get('sysvalue');
 						var webIco = store.getAt(7).get('sysvalue');
-						
+						var ICPlicensePath = store.getAt(8).get('sysvalue');
+						var webIp = store.getAt(9).get('sysvalue');
+						var wx = store.getAt(10).get('sysvalue');
+						var wb = store.getAt(11).get('sysvalue');
 						Ext.getCmp(mainId+"webname").setValue(webname);
 			    		Ext.getCmp(mainId+"uploadpath").setValue(uploadpath);
 			    		Ext.getCmp(mainId+"copyright").setValue(copyright);
@@ -44,11 +47,19 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 			    		Ext.getCmp(mainId+"ICPlicense").setValue(ICPlicense);
 			    		Ext.getCmp(mainId+"webLogo").setValue(webLogo);
 			    		Ext.getCmp(mainId+"webIco").setValue(webIco);
+			    		Ext.getCmp(mainId+"ICPlicensePath").setValue(ICPlicensePath);
+			    		Ext.getCmp(mainId+"webIp").setValue(webIp);
 			    		if(webLogo!=null&&webLogo!=""){
 			    			Ext.getCmp(mainId+"showWebLogoPict").getEl().dom.src=appName+webLogo;
 			    		}
 			    		if(webIco!=null&&webIco!=""){
 			    			Ext.getCmp(mainId+"showWebIcoPict").getEl().dom.src=appName+webIco;
+			    		}
+			    		if(wx!=null&&wx!=""){
+			    			Ext.getCmp(mainId+"showWXPict").getEl().dom.src=appName+wx;
+			    		}
+			    		if(wb!=null&&wb!=""){
+			    			Ext.getCmp(mainId+"showWBPict").getEl().dom.src=appName+wb;
 			    		}
 		          }  
 		    }
@@ -79,7 +90,7 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 							name: 'webname',
 							blankText:'必须填写',
 							id:mainId+"webname",
-				            maxLength:45  
+				            maxLength:200  
 			  			},
 			  			{
 			          		fieldLabel:'图片上传默认路径',
@@ -87,7 +98,7 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 							name: 'uploadpath',
 							blankText:'必须填写',
 							id:mainId+"uploadpath",
-				            maxLength:45  
+				            maxLength:200  
 			  			},
 			  			{
 			          		fieldLabel:'网站版权信息',
@@ -95,7 +106,7 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 							name: 'copyright',
 							blankText:'必须填写',
 							id:mainId+"copyright",
-				            maxLength:45  
+				            maxLength:200  
 			  			},
 			  			{
 			          		fieldLabel:'站点默认关键字',
@@ -103,7 +114,7 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 							name: 'keyword',
 							blankText:'必须填写',
 							id:mainId+"keyword",
-				            maxLength:45  
+				            maxLength:200  
 			  			},
 			  			{
 			          		fieldLabel:'站点描述',
@@ -111,7 +122,7 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 							name: 'webdesc',
 							blankText:'必须填写',
 							id:mainId+"webdesc",
-				            maxLength:45  
+				            maxLength:200  
 			  			},
 			  			{
 			          		fieldLabel:'网站备案号',
@@ -119,7 +130,23 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 							name: 'ICPlicense',
 							blankText:'必须填写',
 							id:mainId+"ICPlicense",
-				            maxLength:45  
+				            maxLength:200  
+			  			},
+			  			{
+			          		fieldLabel:'网站备案信息地址',
+							allowBlank:false,
+							name: 'ICPlicensePath',
+							blankText:'必须填写',
+							id:mainId+"ICPlicensePath",
+				            maxLength:200  
+			  			},
+			  			{
+			          		fieldLabel:'网站地址',
+							allowBlank:false,
+							name: 'webIp',
+							blankText:'网站地址',
+							id:mainId+"webIp",
+				            maxLength:200  
 			  			},
 			  			{
 							xtype:'container',
@@ -157,7 +184,7 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 			                }]
 						},{
 							xtype:'container',
-							fieldLabel : '上传',
+							fieldLabel : '上传logo',
 							style:'padding:20px 0 5px 0px',
 							items:[{
 							 	width:16,
@@ -178,7 +205,7 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 								width : 150,
 								style : 'margin-left:10px',
 								//name : 'imgupload',
-								text : '上传（16*16）',
+								text : '上传ico（16*16）',
 								handler:function(){
 									var win = new uploadImageBase.uploadImageBaseWin({the_hidden_image_url:mainId+"webIco",the_image_show:mainId+"showWebIcoPict",type:'ico'});
 									win.show();
@@ -187,6 +214,74 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 				             	id:mainId+"webIco",
 				                xtype:"textfield",  
 								fieldLabel : 'webIco',
+				                hidden:true
+			                }]
+						},{
+							xtype:'container',
+							fieldLabel : '上传',
+							style:'padding:20px 0 5px 0px',
+							items:[{
+							 	width:100,
+							 	height:100,
+							 	fieldLabel : '显示',
+								xtype : 'box',
+								id :mainId+"showWXPict",
+								autoEl : {
+									width:100,
+								 	height:100,
+									tag : 'img',
+									src :nonePic,
+									style : 'filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);',
+									complete : 'off'
+								}
+							},{
+								xtype : 'button',
+								width : 150,
+								style : 'margin-left:10px',
+								//name : 'imgupload',
+								text : '上传微信二维码（100*100）',
+								handler:function(){
+									var win = new uploadImageBase.uploadImageBaseWin({the_hidden_image_url:mainId+"wx",the_image_show:mainId+"showWXPict",type:'wx'});
+									win.show();
+								}
+						 	},{ 
+				             	id:mainId+"wx",
+				                xtype:"textfield",  
+								fieldLabel : 'wx',
+				                hidden:true
+			                }]
+						},{
+							xtype:'container',
+							fieldLabel : '上传',
+							style:'padding:20px 0 5px 0px',
+							items:[{
+							 	width:100,
+							 	height:100,
+							 	fieldLabel : '显示',
+								xtype : 'box',
+								id :mainId+"showWBPict",
+								autoEl : {
+									width:100,
+								 	height:100,
+									tag : 'img',
+									src :nonePic,
+									style : 'filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);',
+									complete : 'off'
+								}
+							},{
+								xtype : 'button',
+								width : 150,
+								style : 'margin-left:10px',
+								//name : 'imgupload',
+								text : '上传微博二维码（100*100）',
+								handler:function(){
+									var win = new uploadImageBase.uploadImageBaseWin({the_hidden_image_url:mainId+"wb",the_image_show:mainId+"showWBPict",type:'wb'});
+									win.show();
+								}
+						 	},{ 
+				             	id:mainId+"wb",
+				                xtype:"textfield",  
+								fieldLabel : 'wb',
 				                hidden:true
 			                }]
 						}]
@@ -223,7 +318,15 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 		var keyword = Ext.getCmp(mainId+"keyword").getValue();
 		var webdesc = Ext.getCmp(mainId+"webdesc").getValue();
 		var ICPlicense = Ext.getCmp(mainId+"ICPlicense").getValue();
-		 
+		var webLogo  = Ext.getCmp(mainId+"webLogo").getValue();
+		var webIco = Ext.getCmp(mainId+"webIco").getValue();
+		var ICPlicensePath = Ext.getCmp(mainId+"ICPlicensePath").getValue();
+		var webIp = Ext.getCmp(mainId+"webIp").getValue();
+		var wx = Ext.getCmp(mainId+"wx").getValue();
+		var wb = Ext.getCmp(mainId+"wb").getValue();
+		
+		
+		
 		var jsonArray = [];   
     	var obj1 = me.madeObj(1,webname)
         jsonArray.push(obj1); 
@@ -237,6 +340,18 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
         jsonArray.push(obj5); 
     	var obj6 = me.madeObj(6,ICPlicense)
         jsonArray.push(obj6); 
+    	var obj7 = me.madeObj(7,webLogo)
+        jsonArray.push(obj7); 
+    	var obj8 = me.madeObj(8,webIco)
+        jsonArray.push(obj8); 
+    	var obj9 = me.madeObj(9,ICPlicensePath)
+        jsonArray.push(obj9); 
+    	var obj10 = me.madeObj(10,webIp)
+        jsonArray.push(obj10); 
+    	var obj11 = me.madeObj(11,wx)
+        jsonArray.push(obj11); 
+    	var obj12 = me.madeObj(12,wb)
+        jsonArray.push(obj12); 
     	
         Ext.Ajax.request({
 			url : appName + '/admin/config/submit',

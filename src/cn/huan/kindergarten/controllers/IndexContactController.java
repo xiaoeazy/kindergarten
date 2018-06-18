@@ -35,6 +35,7 @@ public class IndexContactController extends IndexBaseController{
     		map.put(ct.getSyskey(), ct.getSysvalue());
     	}
     	mv.addObject("contactMap",map);
+    	loadSysConfig(mv);
         return mv;
     }
 	

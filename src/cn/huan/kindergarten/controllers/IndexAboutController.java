@@ -31,6 +31,7 @@ public class IndexAboutController extends IndexBaseController{
     	 KgIntroduction result = list.get(0);
     	 loadNavigation(mv, requestContext, CH_XHJJ);
     	 mv.addObject("about",result.getIntroduction());
+    	 loadSysConfig(mv);
          return mv;
     }
 

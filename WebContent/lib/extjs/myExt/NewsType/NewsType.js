@@ -24,7 +24,7 @@ Ext.extend(NewsType.NewsTypePanel, Ext.Panel, {
 		        }
 		    },
 		    autoLoad : true,
-		    fields: ['id', 'typename']
+		    fields: ['id', 'typename','showindex']
 		});
 		
 
@@ -74,7 +74,8 @@ Ext.extend(NewsType.NewsTypePanel, Ext.Panel, {
 					}
 				}],
 	        columns: [
-	            {header: "类型名称",  sortable: true,  dataIndex: 'typename',align:'center'}
+	            {header: "类型名称",  sortable: true,  dataIndex: 'typename',align:'center'},
+	            {header: "前台显示",  sortable: true,  dataIndex: 'showindex',align:'center',renderer:me.showIndex}
 	            
 	        ],
 	        width:'100%',
@@ -97,7 +98,14 @@ Ext.extend(NewsType.NewsTypePanel, Ext.Panel, {
 			}
 		 });
 	},
-
+	showIndex:function(val){
+		if(val==true){
+			return "是";
+		}else{
+			return "否";
+		}
+		
+	},
 	addNewsType:function(store,mainId){
 		var win = new addorUpdateNewsType.addorUpdateNewsTypeWindow ({
 			mainId:mainId,

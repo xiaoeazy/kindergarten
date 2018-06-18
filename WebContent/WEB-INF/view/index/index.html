@@ -5,7 +5,7 @@
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
-<title></title>
+<title>${webname}</title>
 <link rel="shortcut icon" href="${base.contextPath}/favicon.ico" />
 <link href="${base.contextPath}/lib/index/css/banner.css"
 	rel="stylesheet" type="text/css" />
@@ -27,21 +27,30 @@
 	<!--固定菜单 start-->
 	<div id="top">
 		<ul>
-			<li><a class="web" href='javascript:void(0);'><img
-					src="${base.contextPath}/lib/index/img/theme/default/wb.png" /></a>
-				<div class="ewm_co2">
-					<img src="${base.contextPath}/lib/index/img/theme/default/wbe.png" />
-				</div></li>
-			<li class="ewm"><a href='javascript:void(0);'><img
-					src="${base.contextPath}/lib/index/img/theme/default/wx.png" /></a>
-				<div class="ewm_co">
-					<img src="${base.contextPath}/lib/index/img/theme/default/wbe.png" />
-				</div></li>
-			<li class="dianh"><a href='javascript:void(0);'><img
-					src="${base.contextPath}/lib/index/img//theme/default/dh.png" /></a>
-				<div class="phone">
-					<span>021-123456</span>
-				</div></li>
+			<#if wb??&&wb!="">
+				<li>
+					<a class="web" href='javascript:void(0);'><img src="${base.contextPath}/lib/index/img/theme/default/wb.png" /></a>
+					<div class="ewm_co2">
+						<img src="${base.contextPath}${wb}" />
+					</div>
+				</li>
+			</#if>
+			<#if wx??&&wx!="">
+				<li class="ewm">
+					<a href='javascript:void(0);'><img src="${base.contextPath}/lib/index/img/theme/default/wx.png" /></a>
+					<div class="ewm_co">
+						<img src="${base.contextPath}${wx}" />
+					</div>
+				</li>
+			</#if>
+			<#if tel??&&tel!="">
+				<li class="dianh">
+					<a href='javascript:void(0);'><img src="${base.contextPath}/lib/index/img//theme/default/dh.png" /></a>
+					<div class="phone">
+						<span>${tel}</span>
+					</div>
+				</li>
+			</#if>
 		</ul>
 	</div>
 	<!--固定菜单 end-->
@@ -169,41 +178,45 @@
 					<!-- 评估入口end -->
 
 					<!-- 公告公示 -->
-					<div class="wz_block">
-							<div class="newslist_bl_gsgg mt13">
-							<div class="newslist">
-								<div class="vF_t3">
-									<div class="vF_t2_r1" style="">
-										<div class="vF_tab unit2">
-											<div class="vF_title_bar3">
-												<h2 class="ui_til4_tab_u current2 word8">
-													<a href="${base.contextPath}/index/assessmentTypeList">公告公示</a>
-												</h2>
+					<#if typeNewsShow??>
+					
+					
+						<div class="wz_block">
+								<div class="newslist_bl_gsgg mt13">
+								<div class="newslist">
+									<div class="vF_t3">
+										<div class="vF_t2_r1" style="">
+											<div class="vF_tab unit2">
+												<div class="vF_title_bar3">
+													<h2 class="ui_til4_tab_u current2 word8">
+														<a href="${base.contextPath}/index/assessmentTypeList">${typeNewsShow.typename}</a>
+													</h2>
+												</div>
 											</div>
 										</div>
-									</div>
-									<ul class="c_list mt10 mb10 split" id="area3_con1">
-										<#list assessmentList as assessmentList>
-										<li style="width:628px"><a href="${base.contextPath}/index/assessmentDetail?id=${assessmentList.id}" target="_blank"
-											title="${assessmentList.assessmentActivityName}">${assessmentList.newsSimpleAssessmentActivityName}</a>
-											<font style="float:right">${assessmentList.createdate?string('yyyy-MM-dd')}</font>
-										</li>
-										</#list>
-									</ul>
-
-
-									<div class="vT_t3_r3">
-										<div class="vT_pg">
-											<div id="area3_sel_1"></div>
-											<div id="area3_sel_2"></div>
-											<div id="area3_sel_3"></div>
+										<ul class="c_list mt10 mb10 split" id="area3_con1">
+											<#list typeNewsShow.newsList as newsList>
+											<li style="width:628px"><a href="${base.contextPath}/index/newsDetail?id=${newsList.id}" target="_blank"
+												title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a>
+												<font style="float:right">${newsList.createdate?string('yyyy-MM-dd')}</font>
+											</li>
+											</#list>
+										</ul>
+	
+	
+										<div class="vT_t3_r3">
+											<div class="vT_pg">
+												<div id="area3_sel_1"></div>
+												<div id="area3_sel_2"></div>
+												<div id="area3_sel_3"></div>
+											</div>
 										</div>
+	
 									</div>
-
 								</div>
 							</div>
 						</div>
-					</div>
+					</#if>
 					<!-- 公告公示 end-->
 				</div>
 

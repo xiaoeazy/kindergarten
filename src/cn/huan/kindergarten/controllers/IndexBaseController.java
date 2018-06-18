@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.huan.HTed.core.IRequest;
 import com.huan.HTed.system.controllers.BaseController;
 
+import cn.huan.kindergarten.bean.SysConfig;
 import cn.huan.kindergarten.dto.KgConfig;
 import cn.huan.kindergarten.dto.KgLink;
 import cn.huan.kindergarten.dto.KgNewsSource;
@@ -68,6 +69,22 @@ public class IndexBaseController extends BaseController{
 	      	  }
 	        }
 	  }
+	
+	public void loadSysConfig(ModelAndView mv) {
+		mv.addObject("webname",SysConfig.webname);
+		mv.addObject("copyright",SysConfig.copyright);
+		mv.addObject("keyword",SysConfig.keyword);
+		mv.addObject("webdesc",SysConfig.webdesc);
+		mv.addObject("ICPlicense",SysConfig.ICPlicense);
+		mv.addObject("webLogo",SysConfig.webLogo);
+		mv.addObject("webIco",SysConfig.webIco);
+		mv.addObject("ICPlicensePath",SysConfig.ICPlicensePath);
+		mv.addObject("webIp",SysConfig.webIp);
+		mv.addObject("wx",SysConfig.wx);
+		mv.addObject("wb",SysConfig.wb);
+		mv.addObject("tel",SysConfig.tel);
+		
+	}
 
 
 }

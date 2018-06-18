@@ -41,6 +41,8 @@ public class ImageController {
 	private final String NEWS_PAGE="news";
 	private final String LOGO="logo";
 	private final String ICO = "ico";
+	private final String WX ="wx";
+	private final String WB ="wb";
 	/**
      * 图片上传提交页面.
      * 
@@ -142,8 +144,20 @@ public class ImageController {
     	if(type.equals(ICO)) {
     		imageName= "favicon.ico";
     		fileResourcesPath= "/";
-    		width =60;
-    		height=60;
+    		width =16;
+    		height=16;
+    	}
+    	if(type.equals(WX)) {
+    		imageName= "wx.png";
+    		fileResourcesPath= SysConfig.uploadpath+"/wx";
+    		width =100;
+    		height=100;
+    	}
+    	if(type.equals(WB)) {
+    		imageName= "wb.png";
+    		fileResourcesPath= SysConfig.uploadpath+"/wb";
+    		width =100;
+    		height=100;
     	}
     	String file_path=request.getServletContext().getRealPath("/")+fileResourcesPath;
         File dir=new File(file_path);

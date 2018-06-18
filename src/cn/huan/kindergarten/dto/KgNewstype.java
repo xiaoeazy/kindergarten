@@ -29,6 +29,8 @@ public class KgNewstype extends BaseDTO {
      @Length(max = 45)
      private String typename;
      
+     private Boolean showindex;
+     
      @Transient
      private Integer count ;
      @Transient
@@ -68,5 +70,17 @@ public class KgNewstype extends BaseDTO {
      public String getTypename(){
          return typename;
      }
+
+	public Boolean getShowindex() {
+		return showindex;
+	}
+
+	public void setShowindex(Boolean showindex) {
+		this.showindex = showindex;
+	}
+
+	
+     
+     
 
      }

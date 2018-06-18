@@ -10,18 +10,19 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.ServletContextAware;
 
-import com.huan.HTed.system.controllers.sy.ImageController;
-
 import cn.huan.kindergarten.bean.SysConfig;
 import cn.huan.kindergarten.dto.KgConfig;
+import cn.huan.kindergarten.dto.KgContact;
 import cn.huan.kindergarten.service.IKgConfigService;
+import cn.huan.kindergarten.service.IKgContactService;
 
 public class InitDataListener implements InitializingBean, ServletContextAware {
 	  /** 日志记录. **/
     private static Logger logger = LoggerFactory.getLogger(InitDataListener.class);
 		@Autowired
 		private IKgConfigService iKgConfigService;
-		
+		@Autowired
+		private IKgContactService iKgContactService;
 		@Override
 		public void setServletContext(ServletContext arg0) {
 				List<KgConfig> list = iKgConfigService.selectAll();
@@ -55,6 +56,37 @@ public class InitDataListener implements InitializingBean, ServletContextAware {
 							SysConfig.webIco=kg.getSysvalue();
 							break;
 						}
+						case "ICPlicense":{
+							SysConfig.ICPlicense=kg.getSysvalue();
+							break;
+						}
+						case "ICPlicensePath":{
+							SysConfig.ICPlicensePath=kg.getSysvalue();
+							break;
+						}
+						case "webIp":{
+							SysConfig.webIp=kg.getSysvalue();
+							break;
+						}
+						case "wx":{
+							SysConfig.wx=kg.getSysvalue();
+							break;
+						}
+						case "wb":{
+							SysConfig.wb=kg.getSysvalue();
+							break;
+						}
+						
+					}
+				}
+				List<KgContact> list2 = iKgContactService.selectAll();
+				for(KgContact kg :list2) {
+					switch(kg.getSyskey()) {
+						case "tel":{
+							SysConfig.tel=kg.getSysvalue();
+							break;
+						}
+						
 					}
 				}
 				logger.info("初始化加载完毕");

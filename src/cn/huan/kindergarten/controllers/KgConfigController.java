@@ -18,6 +18,7 @@ import com.huan.HTed.system.dto.ResponseData;
 
 import cn.huan.kindergarten.bean.ExtAjax;
 import cn.huan.kindergarten.bean.ExtStore;
+import cn.huan.kindergarten.bean.SysConfig;
 import cn.huan.kindergarten.dto.KgConfig;
 import cn.huan.kindergarten.dto.KgLink;
 import cn.huan.kindergarten.service.IKgConfigService;
@@ -72,6 +73,62 @@ import cn.huan.kindergarten.service.IKgConfigService;
 	public ExtAjax adminUpdate(@RequestBody List<KgConfig> dto, BindingResult result, HttpServletRequest request){
         IRequest requestCtx = createRequestContext(request);
         List<KgConfig> list = service.batchUpdate(requestCtx, dto);
+        List<KgConfig> list2 = service.selectAll(requestCtx);
+        for(KgConfig kg :list2) {
+			switch(kg.getSyskey()) {
+				case "webname":{
+					SysConfig.webname=kg.getSysvalue();
+					break;
+				}
+				case "uploadpath":{
+					SysConfig.uploadpath=kg.getSysvalue();
+					break;
+				}
+				case "copyright":{
+					SysConfig.copyright=kg.getSysvalue();
+					break;
+				}
+				case "keyword":{
+					SysConfig.keyword=kg.getSysvalue();
+					break;
+				}
+				case "webdesc":{
+					SysConfig.webdesc=kg.getSysvalue();
+					break;
+				}
+				case "webLogo":{
+					SysConfig.webLogo=kg.getSysvalue();
+					break;
+				}
+				case "webIco":{
+					SysConfig.webIco=kg.getSysvalue();
+					break;
+				}
+				case "ICPlicense":{
+					SysConfig.ICPlicense=kg.getSysvalue();
+					break;
+				}
+				case "ICPlicensePath":{
+					SysConfig.ICPlicensePath=kg.getSysvalue();
+					break;
+				}
+				case "webIp":{
+					SysConfig.webIp=kg.getSysvalue();
+					break;
+				}
+				case "wx":{
+					SysConfig.wx=kg.getSysvalue();
+					break;
+				}
+				case "wb":{
+					SysConfig.wb=kg.getSysvalue();
+					break;
+				}
+				default:{
+					
+				}
+			}
+		}
         return new ExtAjax(true, null);
     }
 

@@ -7,6 +7,7 @@ import com.huan.HTed.system.dto.ResponseData;
 
 import cn.huan.kindergarten.bean.ExtAjax;
 import cn.huan.kindergarten.bean.ExtStore;
+import cn.huan.kindergarten.bean.SysConfig;
 import cn.huan.kindergarten.dto.KgConfig;
 import cn.huan.kindergarten.dto.KgContact;
 import cn.huan.kindergarten.service.IKgContactService;
@@ -68,6 +69,14 @@ import java.util.List;
 	public ExtAjax adminUpdate(@RequestBody List<KgContact> dto, BindingResult result, HttpServletRequest request){
         IRequest requestCtx = createRequestContext(request);
         List<KgContact> list = service.batchUpdate(requestCtx, dto);
+        for(KgContact kg :list) {
+     			switch(kg.getSyskey()) {
+     				case "tel":{
+     					SysConfig.tel=kg.getSysvalue();
+     					break;
+     				}
+     			}
+     		}
         return new ExtAjax(true, null);
     }
     }

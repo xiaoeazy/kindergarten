@@ -47,6 +47,7 @@ public class IndexUserController extends IndexBaseController{
     	 loadNavigation(mv, requestContext, CH_NULL);
     	 
     	 mv.addObject("user",user);
+    	 loadSysConfig(mv);
          return mv;
     }
 	
@@ -73,6 +74,7 @@ public class IndexUserController extends IndexBaseController{
 	    	 ModelAndView mv = new ModelAndView(getViewPath() + "/index/user/userAssessment");
 	    	 IRequest requestContext = createRequestContext(request);
 	    	 loadNavigation(mv, requestContext, CH_NULL);
+	    	 loadSysConfig(mv);
 	         return mv;
 	    }
 	   

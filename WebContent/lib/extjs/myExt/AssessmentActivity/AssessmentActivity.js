@@ -144,6 +144,8 @@ Ext.extend(AssessmentActivity.AssessmentActivityPanel, Ext.Panel, {
 						var records=getRecords(grid);
 						if(records==-1)
 							return;
+						if(records.length>1)
+							return;
 						var record = records[0];
 						me.editAssessmentActivity(record,store,mainId);
 					}
@@ -255,26 +257,32 @@ Ext.extend(AssessmentActivity.AssessmentActivityPanel, Ext.Panel, {
 		  })  
 	},
 	addAssessmentActivity:function(store,mainId){
+		var tabName ="addAssessmentActivityPanel" ;
 		var win = new addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow ({
 			mainId:mainId,
 			type:'add',
 			record:null,
-			parentStore:store
+			parentStore:store,
+			tabName :tabName
 		});
-		win.show();
+//		win.show();
+		addTabFuns(tabName,win,'添加评估任务');
 	},
 	editAssessmentActivity:function(record,store,mainId){
 		var id = record.get("id");
+		var tabName ="updateAssessmentActivityPanel_"+id ;
 		var win = new addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow ({
-			mainId:mainId,
+			mainId:mainId+tabName,
 			type:'update',
 			record:record,
-			parentStore:store
+			parentStore:store,
+			tabName :tabName
 		});
-		win.show();
+//		win.show();
+		addTabFuns(tabName,win,'修改评估任务');
 	},
 	deleteAssessmentActivity:function(records,store,mainId){
-		Ext.Msg.confirm('提示信息','确认要删除这些信息吗？',function(op){  
+		Ext.Msg.confirm('提示信息','删除活动会将参与活动用户的上传内容一并删除，确认要删除这些信息吗？',function(op){  
 	        if(op == 'yes'){
 	        	      Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
 					  var linkobj = [];

@@ -66,11 +66,11 @@ import java.util.Map;
         @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit,String sort, HttpServletRequest request) {
     	 IRequest requestContext = createRequestContext(request);
 //         List<KgNews> list = service.select(requestContext,dto,1,limit);
-    	 Map<String,String> map = CommonUtil.getSort(sort);
-    	 if(map.size()!=0) {
-    		 dto.setSortname(map.get("property"));
-    		 dto.setSortorder(map.get("direction"));
-    	 }
+//    	 Map<String,String> map = CommonUtil.getSort(sort);
+//    	 if(map.size()!=0) {
+//    		 dto.setSortname(map.get("property"));
+//    		 dto.setSortorder(map.get("direction"));
+//    	 }
     	 List<KgNews> list = service.selectWithOtherInfo(requestContext,dto,page,limit);
     	 int count = service.adminQueryCount(requestContext, dto);
     	 return new ExtStore(start, limit, count, list);

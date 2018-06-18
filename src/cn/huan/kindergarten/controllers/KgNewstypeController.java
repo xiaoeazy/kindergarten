@@ -84,7 +84,7 @@ import cn.huan.kindergarten.service.IKgNewstypeService;
     @ResponseBody
 	public ExtAjax adminUpdate(@RequestBody List<KgNewstype> dto, BindingResult result, HttpServletRequest request){
     	 IRequest requestCtx = createRequestContext(request);
-         List<KgNewstype> list = service.batchUpdate(requestCtx, dto);
+         service.updateDto(requestCtx, dto);
          return new ExtAjax(true, null);
     }
 
