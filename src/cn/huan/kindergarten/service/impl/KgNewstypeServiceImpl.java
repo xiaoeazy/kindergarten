@@ -19,10 +19,17 @@ public class KgNewstypeServiceImpl extends BaseServiceImpl<KgNewstype> implement
 	}
 	
 	public void updateDto(IRequest request,List<KgNewstype> dto) {
+		List<KgNewstype> dto2 = self().selectAll(request); 
 		if(dto.get(0).getShowindex()==true) {
-			List<KgNewstype> dto2 = self().selectAll(request); 
 			for(KgNewstype t:dto2) {
 				t.setShowindex(false);
+				t.set__status("update");
+			}
+			self().batchUpdate(request, dto2);
+		}
+		if(dto.get(0).getShowentrance()==true) {
+			for(KgNewstype t:dto2) {
+				t.setShowentrance(false);
 				t.set__status("update");
 			}
 			self().batchUpdate(request, dto2);

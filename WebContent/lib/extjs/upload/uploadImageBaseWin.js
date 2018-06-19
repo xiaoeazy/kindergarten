@@ -55,7 +55,7 @@ Ext.extend(uploadImageBase.uploadImageBaseWin, Ext.Window, {
 		            	var url = appName+"/sys/config/upload?type="+type;
 		            	if(type=="download")
 		            		url=  appName+"/sys/config/file/upload?type="+type;
-		            	if(type=="logo"||type =="ico"||type =="wx"||type =="wb")
+		            	if(type=="logo"||type =="ico"||type =="wx"||type =="wb"||type=="entranceimage")
 		            		url=  appName+"/sys/config/uploadImagePath?type="+type;
 		                fp.getForm().submit({
 		                    url: url,

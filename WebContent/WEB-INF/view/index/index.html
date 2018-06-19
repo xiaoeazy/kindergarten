@@ -172,8 +172,32 @@
 					<!-- 内容检索end  -->
 
 					<!-- 评估入口start -->
-					<div class="banner_block mt10" style="height: 98px; overflow: hidden;">
-						
+					<div class="wz_block mt10" style="height: 120px; overflow: hidden;">
+						<div class="newslist_bl_gsgg" style="">
+							<div style="">
+								<div style=" float:left; width:25%;  height:120px;">
+									<a href="${base.contextPath}/index/assessmentTypeList" target="_blank">
+										<img src="${base.contextPath}/resources/images/assessment/assessmentEntrance.jpg" height="120" width="170" alt="图片" style="vertical-align:middle;" />
+									</a>
+								</div>
+								<div style=" float:left; width:25%;  height:120px;line-height: 120px;vertical-align:middle;text-align:center">
+									<a href="${base.contextPath}/index/assessmentTypeList" target="_blank" style="text-decoration:none">
+										<font size="5px">评估入口</font>
+									</a>
+								</div>
+								<#if typeEntranceShow??>
+									<div style=" float:left; width:25%;  height:120px;">
+										<img src="${base.contextPath}${typeEntranceShow.entranceimagepath}" height="120" width="170" alt="图片" style="vertical-align:middle;" />
+									</div>
+									<div style=" float:left; width:25%;  height:120px;line-height: 120px;vertical-align:middle;text-align:center">
+										<a href="${base.contextPath}/index/newsTypeList?typeid=${typeEntranceShow.id}" target="_blank" style="text-decoration:none">
+											<font size="5px">${typeEntranceShow.typename}</font>
+										</a>
+									</div>
+								</#if>
+							</div>
+								
+						</div>
 					</div>
 					<!-- 评估入口end -->
 
@@ -240,14 +264,18 @@
 						</ul>
 					</div>
 					<!-- 资料下载end -->
+					<!--预留广告位start-->
+					<#if 1!=1>
 					<div class="main_right_cbl mt13">
-						<h2>电子政务</h2>
+						<h2></h2>
 						<div class="dzzwlinks mt10">
 							<img src="img/wx_mof.gif" alt="" />
 							<img src="img/wx_ccgp.gif" alt="" /> 
 							<img src="img/app_qrcode.gif" alt="" style="margin-top: 6px" />
 						</div>
 					</div>
+					</#if>
+					<!-- 预留广告位end -->
 
 				</div>
 			</div>

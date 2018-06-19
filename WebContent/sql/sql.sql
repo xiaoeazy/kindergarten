@@ -347,7 +347,7 @@ CREATE TABLE `kg_download` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_download`
@@ -355,7 +355,11 @@ CREATE TABLE `kg_download` (
 
 /*!40000 ALTER TABLE `kg_download` DISABLE KEYS */;
 INSERT INTO `kg_download` (`id`,`file_title`,`file_path`,`summary`,`password`,`createDate`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (8,'新闻信息.txt','/uploadFile/download/新闻信息.txt','','','2018-06-18 19:20:28',1,-1,-1,-1,'2018-06-18 19:20:28',-1,'2018-06-18 19:20:28',-1,'ID',NULL,NULL,NULL);
+ (9,'学前教育人才交流登记表.doc','/uploadFile/download/学前教育人才交流登记表.doc','','','2018-06-19 20:36:04',1,-1,-1,-1,'2018-06-19 20:36:04',-1,'2018-06-19 20:36:04',-1,'ID',NULL,NULL,NULL),
+ (10,'学员报名调查表.xls','/uploadFile/download/学员报名调查表.xls','','','2018-06-19 20:36:53',1,-1,-1,-1,'2018-06-19 20:36:53',-1,'2018-06-19 20:36:53',-1,'ID',NULL,NULL,NULL),
+ (11,'学前岗位班招生简章2016.doc','/uploadFile/download/学前岗位班招生简章2016.doc','','','2018-06-19 20:37:07',1,-1,-1,-1,'2018-06-19 20:37:07',-1,'2018-06-19 20:37:07',-1,'ID',NULL,NULL,NULL),
+ (12,'各专业开班预排表.doc','/uploadFile/download/各专业开班预排表.doc','','','2018-06-19 20:38:34',1,-1,-1,-1,'2018-06-19 20:38:34',-1,'2018-06-19 20:38:34',-1,'ID',NULL,NULL,NULL),
+ (13,'保健教师培训资料2014.3.zip','/uploadFile/download/保健教师培训资料2014.3.zip','','','2018-06-19 20:41:07',1,-1,-1,-1,'2018-06-19 20:41:07',-1,'2018-06-19 20:41:07',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_download` ENABLE KEYS */;
 
 
@@ -559,6 +563,8 @@ CREATE TABLE `kg_newstype` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `typeName` varchar(45) NOT NULL,
   `showIndex` tinyint(1) DEFAULT '0',
+  `entranceImagePath` varchar(200) NOT NULL,
+  `showEntrance` tinyint(1) DEFAULT '0',
   `OBJECT_VERSION_NUMBER` bigint(20) DEFAULT '1',
   `REQUEST_ID` bigint(20) DEFAULT '-1',
   `PROGRAM_ID` bigint(20) DEFAULT '-1',
@@ -572,18 +578,18 @@ CREATE TABLE `kg_newstype` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_newstype`
 --
 
 /*!40000 ALTER TABLE `kg_newstype` DISABLE KEYS */;
-INSERT INTO `kg_newstype` (`id`,`typeName`,`showIndex`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (1,'公告通知',1,4,-1,-1,-1,'2018-04-10 10:10:56',-1,'2018-06-18 20:03:47',-1,'ID',NULL,NULL,NULL),
- (2,'政策法规',0,5,-1,-1,-1,'2018-06-17 18:16:00',-1,'2018-06-18 20:03:47',-1,'ID',NULL,NULL,NULL),
- (3,'培训通知',0,5,-1,-1,-1,'2018-04-10 10:11:12',-1,'2018-06-18 20:03:47',-1,'ID',NULL,NULL,NULL),
- (4,'协会动态',0,3,-1,-1,-1,'2018-06-17 18:17:16',-1,'2018-06-18 20:03:47',-1,'ID',NULL,NULL,NULL);
+INSERT INTO `kg_newstype` (`id`,`typeName`,`showIndex`,`entranceImagePath`,`showEntrance`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
+ (1,'公告通知',1,'',0,11,-1,-1,-1,'2018-04-10 10:10:56',-1,'2018-06-19 21:19:10',-1,'ID',NULL,NULL,NULL),
+ (2,'政策法规',0,'/uploadFile/entranceimage/entranceimage.png',1,12,-1,-1,-1,'2018-06-17 18:16:00',-1,'2018-06-19 21:19:10',-1,'ID',NULL,NULL,NULL),
+ (3,'培训通知',0,'',0,11,-1,-1,-1,'2018-04-10 10:11:12',-1,'2018-06-19 21:19:10',-1,'ID',NULL,NULL,NULL),
+ (4,'协会动态',0,'',0,9,-1,-1,-1,'2018-06-17 18:17:16',-1,'2018-06-19 21:19:10',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_newstype` ENABLE KEYS */;
 
 

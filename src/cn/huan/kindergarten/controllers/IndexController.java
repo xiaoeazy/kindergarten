@@ -61,7 +61,7 @@ public class IndexController extends IndexBaseController{
     	 IRequest requestContext = createRequestContext(request);
     	 KgIntroduction ki = new KgIntroduction();
     	 ki.setId(1l);
-    	//查询大轮播图
+    	//查询大轮播图和下载资料
     	 KgCarousel kc = new KgCarousel();
     	 kc.setSortorder("desc");
     	 kc.setSortname("sequence");
@@ -95,6 +95,12 @@ public class IndexController extends IndexBaseController{
 //    	 List<KgAssessmentActivity> assessmentList = iKgAssessmentActivityService.select(requestContext, null, 1, 10);
 //    	 CommonUtil.judgeAssessmentActivityTitleLength(assessmentList,22);
 //    	 mv.addObject("assessmentList",assessmentList);
+    	 //类型入口
+    	 KgNewstype kne = new KgNewstype();
+    	 kne.setShowentrance(true);
+    	 KgNewstype knea = iKgNewstypeService.selectOne(requestContext, kne);
+    	 mv.addObject("typeEntranceShow",knea);
+    	 //公告通知
     	 KgNewstype kn = new KgNewstype();
     	 kn.setShowindex(true);
     	 KgNewstype knt = iKgNewstypeService.selectOne(requestContext, kn);

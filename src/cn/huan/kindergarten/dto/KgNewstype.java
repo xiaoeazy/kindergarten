@@ -31,6 +31,10 @@ public class KgNewstype extends BaseDTO {
      
      private Boolean showindex;
      
+     private String entranceimagepath;
+     
+     private Boolean showentrance;
+     
      @Transient
      private Integer count ;
      @Transient
@@ -77,6 +81,24 @@ public class KgNewstype extends BaseDTO {
 
 	public void setShowindex(Boolean showindex) {
 		this.showindex = showindex;
+	}
+
+	
+
+	public String getEntranceimagepath() {
+		return entranceimagepath;
+	}
+
+	public void setEntranceimagepath(String entranceimagepath) {
+		this.entranceimagepath = entranceimagepath;
+	}
+
+	public Boolean getShowentrance() {
+		return showentrance;
+	}
+
+	public void setShowentrance(Boolean showentrance) {
+		this.showentrance = showentrance;
 	}
 
 	

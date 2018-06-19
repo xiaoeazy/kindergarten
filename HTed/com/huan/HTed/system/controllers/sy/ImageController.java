@@ -43,6 +43,7 @@ public class ImageController {
 	private final String ICO = "ico";
 	private final String WX ="wx";
 	private final String WB ="wb";
+	private final String ENTRANCEIMAGE="entranceimage";
 	/**
      * 图片上传提交页面.
      * 
@@ -159,6 +160,13 @@ public class ImageController {
     		width =100;
     		height=100;
     	}
+    	if(type.equals(ENTRANCEIMAGE)) {
+    		imageName= "entranceimage.png";
+    		fileResourcesPath= SysConfig.uploadpath+"/entranceimage";
+    		width =170;
+    		height=120;
+    	}
+    	
     	String file_path=request.getServletContext().getRealPath("/")+fileResourcesPath;
         File dir=new File(file_path);
         if(!dir.exists())

@@ -24,7 +24,7 @@ Ext.extend(NewsType.NewsTypePanel, Ext.Panel, {
 		        }
 		    },
 		    autoLoad : true,
-		    fields: ['id', 'typename','showindex']
+		    fields: ['id', 'typename','showindex','entranceimagepath','showentrance']
 		});
 		
 
@@ -75,7 +75,8 @@ Ext.extend(NewsType.NewsTypePanel, Ext.Panel, {
 				}],
 	        columns: [
 	            {header: "类型名称",  sortable: true,  dataIndex: 'typename',align:'center'},
-	            {header: "前台显示",  sortable: true,  dataIndex: 'showindex',align:'center',renderer:me.showIndex}
+	            {header: "前台显示",  sortable: true,  dataIndex: 'showindex',align:'center',renderer:me.showIndex},
+	            {header: "前台入口",  sortable: true,  dataIndex: 'showentrance',align:'center',renderer:me.showIndex}
 	            
 	        ],
 	        width:'100%',
