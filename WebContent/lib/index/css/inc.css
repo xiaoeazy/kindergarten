@@ -19,8 +19,9 @@ body,a{line-height:24px;font-size:14px;font-family:"Microsoft YaHei","微软雅�
 .logo a.ccgp2{display:block;width:60px;height:28px;float:left}
 .logo a.gmfw{display:block;width:328px;height:28px;float:right}
 .logo a.ccgp3{display:block;width:328px;height:28px;float:right}
-.searcharea1{width:388px;overflow:hidden;height:114px;float:left;}
-.searcharea2{width:612px;height:114px;float:left;background:url(../img/cloud.gif) no-repeat left bottom;overflow:hidden;float:left;}
+/* .searcharea1{width:388px;overflow:hidden;height:114px;float:left;} */
+.searcharea1{width:888px;overflow:hidden;height:114px;float:left;}
+.searcharea2{width:812px;height:114px;float:left;background:url(../img/cloud.gif) no-repeat left bottom;overflow:hidden;float:left;}
 
 .sangong_bl{width:420px;height:33px;float:left;background:url(../img/sangong.gif) no-repeat top center;margin-left:134px;margin-top:50px;display:none;}
 .v4incheadertop_nav_block{background:#005496;height:48px;box-shadow:0px 0px 8px #006baf;}
