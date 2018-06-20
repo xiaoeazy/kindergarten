@@ -138,9 +138,12 @@ public class ImageController {
     	int height = 100;
     	if(type.equals(LOGO)) {
     		imageName= "logo.png";
+//    		fileResourcesPath= "/resources/upload/logo/";
+//    		width =380;
+//    		height = 80;
     		fileResourcesPath= "/resources/upload/logo/";
-    		width =380;
-    		height = 80;
+    		width =100;
+    		height = 100;
     	}
     	if(type.equals(ICO)) {
     		imageName= "favicon.ico";

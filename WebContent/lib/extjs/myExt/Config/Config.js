@@ -49,6 +49,8 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 			    		Ext.getCmp(mainId+"webIco").setValue(webIco);
 			    		Ext.getCmp(mainId+"ICPlicensePath").setValue(ICPlicensePath);
 			    		Ext.getCmp(mainId+"webIp").setValue(webIp);
+			    		Ext.getCmp(mainId+"wx").setValue(wx);
+			    		Ext.getCmp(mainId+"wb").setValue(wb);
 			    		if(webLogo!=null&&webLogo!=""){
 			    			Ext.getCmp(mainId+"showWebLogoPict").getEl().dom.src=appName+webLogo;
 			    		}
@@ -153,14 +155,14 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 							fieldLabel : '上传',
 							style:'padding:0 0 5px 0px',
 							items:[{
-							 	width:390,
-							 	height:80,
+							 	width:100,
+							 	height:100,
 							 	fieldLabel : '显示',
 								xtype : 'box',
 								id :mainId+"showWebLogoPict",
 								autoEl : {
-									width:390,
-								 	height:80,
+									width:100,
+								 	height:100,
 									tag : 'img',
 									src :nonePic,
 									style : 'filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);',
@@ -171,7 +173,7 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 								width : 150,
 								style : 'margin-left:10px',
 								//name : 'imgupload',
-								text : '上传（*80）',
+								text : '上传（100*100）',
 								handler:function(){
 									var win = new uploadImageBase.uploadImageBaseWin({the_hidden_image_url:mainId+"webLogo",the_image_show:mainId+"showWebLogoPict",type:'logo'});
 									win.show();
@@ -249,7 +251,16 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 				                xtype:"textfield",  
 								fieldLabel : 'wx',
 				                hidden:true
-			                }]
+			                },{
+								xtype : 'button',
+								width : 150,
+								style : 'margin-left:10px',
+								text : '撤销图片',
+								handler:function(){
+									Ext.getCmp(mainId+"wx").setValue("");
+						    		Ext.getCmp(mainId+"showWXPict").getEl().dom.src=nonePic;
+								}
+						 	}]
 						},{
 							xtype:'container',
 							fieldLabel : '上传',
@@ -283,7 +294,16 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 				                xtype:"textfield",  
 								fieldLabel : 'wb',
 				                hidden:true
-			                }]
+			                },{
+								xtype : 'button',
+								width : 150,
+								style : 'margin-left:10px',
+								text : '撤销图片',
+								handler:function(){
+									Ext.getCmp(mainId+"wb").setValue("");
+						    		Ext.getCmp(mainId+"showWBPict").getEl().dom.src=nonePic;
+								}
+						 	}]
 						}]
 	});
    

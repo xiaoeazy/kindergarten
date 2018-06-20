@@ -233,18 +233,18 @@ CREATE TABLE `kg_config` (
 
 /*!40000 ALTER TABLE `kg_config` DISABLE KEYS */;
 INSERT INTO `kg_config` (`id`,`sysName`,`sysKey`,`sysValue`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (1,'网站名称','webname','上海市托幼协会',16,-1,-1,-1,'2018-04-09 14:03:06',-1,'2018-06-18 22:03:01',-1,'ID',NULL,NULL,NULL),
- (2,'图片上传默认路径','uploadpath','/uploadFile',16,-1,-1,-1,'2018-04-09 14:03:06',-1,'2018-06-18 22:03:01',-1,'ID',NULL,NULL,NULL),
- (3,'网站版权信息','copyright','copyright &copy huanTed ',17,-1,-1,-1,'2018-04-09 14:03:06',-1,'2018-06-18 22:03:01',-1,'ID',NULL,NULL,NULL),
- (4,'站点默认关键字','keyword','幼协会，上海幼协会，门户',15,-1,-1,-1,'2018-04-09 14:03:07',-1,'2018-06-18 22:03:01',-1,'ID',NULL,NULL,NULL),
- (5,'站点描述','webdesc','幼协会站点',14,-1,-1,-1,'2018-04-09 14:03:07',-1,'2018-06-18 22:03:01',-1,'ID',NULL,NULL,NULL),
- (6,'网站备案号','ICPlicense','沪ICP备01234567891',16,-1,-1,-1,'2018-04-09 14:03:08',-1,'2018-06-18 22:03:01',-1,'ID',NULL,NULL,NULL),
- (7,'网站logo','webLogo','/resources/upload/logo/logo.png',7,-1,-1,-1,'2018-05-05 13:30:10',-1,'2018-06-18 22:03:01',-1,'ID',NULL,NULL,NULL),
- (8,'网站ico','webIco','/favicon.ico',7,-1,-1,-1,'2018-05-05 13:44:02',-1,'2018-06-18 22:03:01',-1,'ID',NULL,NULL,NULL),
- (9,'网站备案信息地址','ICPlicensePath','http://www.baidu.com',7,-1,-1,-1,'2018-06-18 11:25:37',-1,'2018-06-18 22:03:01',-1,'ID',NULL,NULL,NULL),
- (10,'网站地址','webIp','http://localhost:8080/kindergarten',7,-1,-1,-1,'2018-06-18 11:36:11',-1,'2018-06-18 22:03:01',-1,'ID',NULL,NULL,NULL),
- (11,'微信','wx','/uploadFile/wx/wx.png',7,-1,-1,-1,'2018-06-18 21:29:27',-1,'2018-06-18 22:03:01',-1,'ID',NULL,NULL,NULL),
- (12,'微博','wb','/uploadFile/wb/wb.png',7,-1,-1,-1,'2018-06-18 21:29:41',-1,'2018-06-18 22:03:01',-1,'ID',NULL,NULL,NULL);
+ (1,'网站名称','webname','上海市托幼协会',19,-1,-1,-1,'2018-04-09 14:03:06',-1,'2018-06-20 16:27:11',-1,'ID',NULL,NULL,NULL),
+ (2,'图片上传默认路径','uploadpath','/uploadFile',19,-1,-1,-1,'2018-04-09 14:03:06',-1,'2018-06-20 16:27:11',-1,'ID',NULL,NULL,NULL),
+ (3,'网站版权信息','copyright','copyright &copy huanTed ',20,-1,-1,-1,'2018-04-09 14:03:06',-1,'2018-06-20 16:27:11',-1,'ID',NULL,NULL,NULL),
+ (4,'站点默认关键字','keyword','幼协会，上海幼协会，门户',18,-1,-1,-1,'2018-04-09 14:03:07',-1,'2018-06-20 16:27:11',-1,'ID',NULL,NULL,NULL),
+ (5,'站点描述','webdesc','幼协会站点',17,-1,-1,-1,'2018-04-09 14:03:07',-1,'2018-06-20 16:27:11',-1,'ID',NULL,NULL,NULL),
+ (6,'网站备案号','ICPlicense','沪ICP备01234567891',19,-1,-1,-1,'2018-04-09 14:03:08',-1,'2018-06-20 16:27:11',-1,'ID',NULL,NULL,NULL),
+ (7,'网站logo','webLogo','/resources/upload/logo/logo.png',10,-1,-1,-1,'2018-05-05 13:30:10',-1,'2018-06-20 16:27:11',-1,'ID',NULL,NULL,NULL),
+ (8,'网站ico','webIco','/favicon.ico',10,-1,-1,-1,'2018-05-05 13:44:02',-1,'2018-06-20 16:27:11',-1,'ID',NULL,NULL,NULL),
+ (9,'网站备案信息地址','ICPlicensePath','http://www.baidu.com',10,-1,-1,-1,'2018-06-18 11:25:37',-1,'2018-06-20 16:27:11',-1,'ID',NULL,NULL,NULL),
+ (10,'网站地址','webIp','http://localhost:8080/kindergarten',10,-1,-1,-1,'2018-06-18 11:36:11',-1,'2018-06-20 16:27:11',-1,'ID',NULL,NULL,NULL),
+ (11,'微信','wx','/uploadFile/wx/wx.png',10,-1,-1,-1,'2018-06-18 21:29:27',-1,'2018-06-20 16:27:11',-1,'ID',NULL,NULL,NULL),
+ (12,'微博','wb','/uploadFile/wb/wb.png',10,-1,-1,-1,'2018-06-18 21:29:41',-1,'2018-06-20 16:27:11',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_config` ENABLE KEYS */;
 
 
