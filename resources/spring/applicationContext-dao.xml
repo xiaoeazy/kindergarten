@@ -22,6 +22,8 @@
         <property name="password" value="${jdbc.password}"/>
         <property name="maxActive" value="30"/>
         <property name="maxIdle" value="5"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="validationQuery" value="select 1"/>
     </bean>
     
  
