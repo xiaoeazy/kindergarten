@@ -3,6 +3,11 @@ var tabs;
 var _panel2;
 var _panel3;
 var nonePic = _basePath +"/resources/images/none/none.jpg";
+var newsRoleNum=0;
+var newsAssessmentNum=0;
+var newsOtherNum=0;
+var newsQuestionNum=0;
+var newsSysNum=0;
 
 Ext.onReady(function() {
 		Ext.QuickTips.init();//QuickTips的作用是读取标签中的ext:qtip属性，并为它赋予显示提示的动作。
@@ -67,26 +72,32 @@ Ext.onReady(function() {
 				},
 				items : [ {
 					title : '资讯中心',
+					xtype:'panel',
+					id:'main_zxzx',
 					border : false,
 					iconCls : 'nav',
 					html : getNews(funcs)
 				},{
 					title : '评估任务',
+					id:'main_pgrw',
 					border : false,
 					iconCls : 'nav',
 					html : getAssessment(funcs)
 				},{
 					title : '其他',
+					id:'main_qt',
 					border : false,
 					iconCls : 'nav',
 					html : getOthers(funcs)
 				},{
 					title : '调查问卷',
+					id:'main_dcwj',
 					border : false,
 					iconCls : 'nav',
 					html : getQuestion(funcs)
 				},{
 					title : '系统',
+					id:'main_xt',
 					border : false,
 					iconCls : 'nav',
 					html : getConfig(funcs)
@@ -95,7 +106,21 @@ Ext.onReady(function() {
 				region : 'center',
 				layout : 'fit',
 				items : tabs
-			} ]
+			} ],
+			listeners:{
+				afterRender:function(){
+					if(newsRoleNum==0)
+						Ext.getCmp("main_zxzx").hide();
+					if(newsAssessmentNum==0)
+						Ext.getCmp("main_pgrw").hide();
+					if(newsOtherNum==0)
+						Ext.getCmp("main_qt").hide();
+					if(newsQuestionNum==0)
+						Ext.getCmp("main_dcwj").hide();
+					if(newsSysNum==0)
+						Ext.getCmp("main_xt").hide();
+				}
+			}
 		});
 
 	}
@@ -134,6 +159,8 @@ function getQuestion(funcs) {
 	
 	if(isHaveFunc(funcs,16))
 		str +=addFunc('questionSurvey1.png','questionSurvey2.png','questionSurvey');
+	if(str!="")
+		newsQuestionNum=1;
 	return addFuncStr(str);
 }
 function getNews(funcs){
@@ -144,6 +171,8 @@ function getNews(funcs){
 		str +=addFunc('type1.png','type2.png','newsType');
 	if(isHaveFunc(funcs,8))
 		str +=addFunc('source1.png','source2.png','newsSource');
+	if(str!="")
+		newsRoleNum = 1;
 	return addFuncStr(str);
 }
 
@@ -157,6 +186,8 @@ function getAssessment(funcs){
 		str +=addFunc('expertAssessment1.png','expertAssessment2.png','expertAssessment');
 	if(isHaveFunc(funcs,2))
 		str +=addFunc('assessmentType1.png','assessmentType2.png','assessmentType');
+	if(str!="")
+		newsAssessmentNum=1;
 	return addFuncStr(str);
 }
 
@@ -171,6 +202,8 @@ function getOthers(funcs){
 		str +=addFunc('contact1.png','contact2.png','contact');
 	if(isHaveFunc(funcs,14))
 		str +=addFunc('carousel1.png','carousel2.png','carousel');
+	if(str!="")
+		newsOtherNum=1;
 	return addFuncStr(str);
 }
 
@@ -188,7 +221,8 @@ function getConfig(funcs){
 		str +=addFunc('user1.png','user2.png','user');
 	if(isHaveFunc(funcs,13))
 		str +=addFunc('role1.png','role2.png','role');
-	
+	if(str!="")
+		newsSysNum=1;
 	
 	return addFuncStr(str);
 }

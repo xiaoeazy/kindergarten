@@ -186,7 +186,7 @@ public class IndexAssessmentController extends IndexBaseController{
 			    		 
 			    	 }else {
 			    		 ua = new ResponseData(false);
-						 ua.setMessage("上传文件等待后台人员处理中，不能上传！");
+						 ua.setMessage("后台人员审批中，不能修改！");
 			    	 }
 			     }
 			}
@@ -283,7 +283,9 @@ public class IndexAssessmentController extends IndexBaseController{
         for(KgNewsAttribute ka :rightAttributeList){
         	KgAssessmentActivity kn = new KgAssessmentActivity();
         	kn.setAttributeid(ka.getId()+"");
-        	List<KgAssessmentActivity> assessmentActivityList=iKgAssessmentActivityService.selectWithOtherInfo(requestContext, kn, 1, 5);
+        	kn.setSortname("createdate");
+        	kn.setSortorder("desc");
+        	List<KgAssessmentActivity> assessmentActivityList=iKgAssessmentActivityService.select(requestContext, kn, 1, 5);
         	judgeTitleLength(assessmentActivityList);
         	ka.setAssessmentActivityList(assessmentActivityList);
         	

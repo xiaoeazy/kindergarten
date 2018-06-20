@@ -60,9 +60,7 @@ import java.util.List;
  	@RequestMapping(value = "/admin/assessment/activity/user/upload/query")
  	@ResponseBody
  	public ExtStore adminQuery(KgAssessmentActivityUserUpload dto,HttpServletRequest request) {
- 		 HttpSession session = request.getSession(false);
-         Long userid = (Long)session.getAttribute(IRequest.FIELD_USER_ID);
-         dto.setUploadUserId(userid);
+ 		
  		IRequest requestContext = createRequestContext(request);
  		List<KgAssessmentActivityUserUpload> list = service.select(requestContext, dto);
  		return new ExtStore(null, null, null, list);

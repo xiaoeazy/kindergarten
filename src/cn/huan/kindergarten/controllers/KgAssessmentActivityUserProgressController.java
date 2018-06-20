@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.huan.HTed.account.service.IUserService;
 import com.huan.HTed.core.IRequest;
 import com.huan.HTed.system.controllers.BaseController;
 import com.huan.HTed.system.dto.ResponseData;
@@ -36,6 +37,8 @@ public class KgAssessmentActivityUserProgressController extends BaseController {
 	}
 	@Autowired
 	private IKgAssessmentActivityUserProgressService service;
+	@Autowired
+	private IUserService iUserService;
 
 	@RequestMapping(value = "/kg/assessment/activity/user/progress/query")
 	@ResponseBody
@@ -75,6 +78,17 @@ public class KgAssessmentActivityUserProgressController extends BaseController {
 		IRequest requestContext = createRequestContext(request);
 		// List<KgNews> list = service.select(requestContext,dto,1,limit);
 		List<KgAssessmentActivityUserProgress> list = service.selectWithOtherInfo(requestContext, dto, page, limit);
+		Map<Long ,String> map = iUserService.loadAllUserToMap(requestContext);
+		String uploadUserName="";
+		String expertUserName="";
+		for(KgAssessmentActivityUserProgress p:list) {
+			uploadUserName = map.get(p.getUploadUserId());
+			p.setUploadUserName(uploadUserName);
+			if(p.getExpertUserId()!=null) {
+				expertUserName = map.get(p.getExpertUserId());
+				p.setExpertUserName(expertUserName);
+			}
+		}
 		int count = service.adminQueryCount(requestContext, dto);
 		return new ExtStore(start, limit, count, list);
 	}

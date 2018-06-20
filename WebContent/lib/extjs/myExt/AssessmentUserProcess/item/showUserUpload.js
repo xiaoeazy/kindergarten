@@ -15,6 +15,7 @@ Ext.extend(showUserUpload.showUserUploadWindow , Ext.Window, {
 	    	var type = me.type;
 	    	var record = me.record;
 	    	var id =record.get("id");
+	    	var uploadUserId = record.get("uploadUserId");
 	    	var parentStore = this.parentStore; 
 	    
 	    	//==========================grid====================
@@ -28,7 +29,8 @@ Ext.extend(showUserUpload.showUserUploadWindow , Ext.Window, {
 						successProperty:'success'
 			        },
 			        extraParams: {
-				    	progressId :  id 
+				    	progressId :  id ,
+				    	uploadUserId:uploadUserId
 			        }
 			    },
 			   

@@ -5,6 +5,7 @@ import com.huan.HTed.core.ProxySelf;
 import com.huan.HTed.system.service.IBaseService;
 
 import java.util.List;
+import java.util.Map;
 
 import com.huan.HTed.account.dto.Role;
 import com.huan.HTed.account.dto.User;
@@ -17,4 +18,5 @@ public interface IUserService extends IBaseService<User>, ProxySelf<IUserService
 	public User selectOne(IRequest request, User record);
 	public List<User> selectWithRole(IRequest request, Role dto);
 	public int adminQueryCountWithRole(IRequest request, Role dto);
+	public Map<Long ,String> loadAllUserToMap(IRequest request);
 }

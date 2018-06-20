@@ -55,7 +55,7 @@ Ext.extend(User.UserPanel, Ext.Panel, {
 					icon : _basePath+'/resources/images/icon/edit.png',
 					text : '修改用户',
 					handler : function() {
-						var records=getRecords(grid);
+						var records=getUpdateRecords(grid);
 						if(records==-1)
 							return;
 						var record = records[0];

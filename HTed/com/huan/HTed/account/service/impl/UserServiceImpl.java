@@ -1,7 +1,9 @@
 package com.huan.HTed.account.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +16,6 @@ import com.huan.HTed.account.mapper.UserMapper;
 import com.huan.HTed.account.service.IUserRoleService;
 import com.huan.HTed.account.service.IUserService;
 import com.huan.HTed.core.IRequest;
-import com.huan.HTed.mybatis.common.example.DeleteByExampleMapper;
 import com.huan.HTed.system.dto.DTOStatus;
 import com.huan.HTed.system.service.impl.BaseServiceImpl;
 
@@ -34,6 +35,15 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements IUserServi
 	private IKgAssessmentActivityUserUploadService iKgAssessmentActivityUserUploadService;
 	@Autowired
 	private UserMapper userMapper;
+	
+	public Map<Long ,String> loadAllUserToMap(IRequest request){
+		Map<Long ,String> map = new HashMap<Long, String>();
+		List<User> list = self().selectAll(request);
+		for(User u :list) {
+			map.put(u.getUserId(), u.getRealName());
+		}
+		return map;
+	}
 	
 	public void adminUpdate(IRequest request ,User user,List<UserRole> userRole) {
 		 List<User> list = new ArrayList<User>();

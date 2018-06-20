@@ -68,10 +68,10 @@ Ext.extend(AssessmentUserProcess.AssessmentUserProcessPanel, Ext.Panel, {
 	        }
 	    },
 	    autoLoad : true,
-	    fields: ['userName','realName'],
+	    fields: ['userId','realName'],
 	    listeners:{
         	'load': function(store, records, options) {
-        		user_Combo_Store.insert(0,{userName:'-1',realName:'所有'});
+        		user_Combo_Store.insert(0,{userId:'-1',realName:'所有'});
 	    	}
         }
 	});
@@ -80,7 +80,7 @@ Ext.extend(AssessmentUserProcess.AssessmentUserProcessPanel, Ext.Panel, {
 	   		fieldLabel:'上传用户',
     	    id:mainId+"uploadUserId",
             store : user_Combo_Store,  
-            valueField : "userName",  
+            valueField : "userId",  
             mode : 'remote',  
             displayField : "realName",  
             forceSelection : true,  
@@ -121,6 +121,9 @@ Ext.extend(AssessmentUserProcess.AssessmentUserProcessPanel, Ext.Panel, {
 				handler : function(button, event) {
 					var uploadUserId = Ext.getCmp(mainId+"uploadUserId").getValue();
 					var assessmentActivityId 	  = Ext.getCmp(mainId+"assessmentActivityId").getValue();
+					if(uploadUserId==-1){
+						uploadUserId=null;
+					}
 					store.proxy.url = appName+ '/admin/assessment/activity/user/progress/query';
 					store.proxy.extraParams={
 							page:1,
@@ -195,7 +198,7 @@ Ext.extend(AssessmentUserProcess.AssessmentUserProcessPanel, Ext.Panel, {
 					icon : _basePath+'/resources/images/icon/showSuggest.png',
 					text : '查看专家评论',
 					handler : function() {
-						var records=getRecords(grid);
+						var records=getUpdateRecords(grid);
 						if(records==-1)
 							return;
 						var record = records[0];
@@ -205,7 +208,7 @@ Ext.extend(AssessmentUserProcess.AssessmentUserProcessPanel, Ext.Panel, {
 					icon : _basePath+'/resources/images/icon/showUpload.png',
 					text : '查看上传文件',
 					handler : function() {
-						var records=getRecords(grid);
+						var records=getUpdateRecords(grid);
 						if(records==-1)
 							return;
 						var record = records[0];
@@ -214,9 +217,9 @@ Ext.extend(AssessmentUserProcess.AssessmentUserProcessPanel, Ext.Panel, {
 				}],
 	        columns: [
 	            {header: "评估任务名称",  width:50,sortable: true,  dataIndex: 'kgAssessmentActivity',align:'center',renderer:me.assessmentNameRender},
-	            {header: "上传用户",  width:50,sortable: true,  dataIndex: 'uploadUserId',align:'center'},
+	            {header: "上传用户",  width:50,sortable: true,  dataIndex: 'uploadUserName',align:'center'},
 	            {header: "管理员建议",  width:50,sortable: true,  dataIndex: 'adminSuggestion',align:'center'},
-	            {header: "专家用户",  width:50,sortable: true,  dataIndex: 'expertUserId',align:'center'},
+	            {header: "专家用户",  width:50,sortable: true,  dataIndex: 'expertUserName',align:'center'},
 	            {header: "状态",  width:50,sortable: true,  dataIndex: 'state',align:'center',renderer:me.stateRender},
 	            {header: "预览",  width:50,sortable: true,  dataIndex: 'assessmentActivityId',align:'center',renderer:me.buttonRender}
 	        ],

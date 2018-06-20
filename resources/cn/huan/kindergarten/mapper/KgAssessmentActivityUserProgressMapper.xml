@@ -10,6 +10,7 @@
         <result column="expert_user_id" property="expertUserId" jdbcType="DECIMAL" />
         <result column="expert_suggestion" property="expertSuggestion" jdbcType="VARCHAR" />
         <result column="state" property="state" jdbcType="INTEGER" />
+         <result column="createDate" property="createdate" jdbcType="DATE" />
     </resultMap>
     
      <resultMap  id="OtherResultMap" type="cn.huan.kindergarten.dto.KgAssessmentActivityUserProgress">
@@ -20,6 +21,7 @@
         <result column="expert_user_id" property="expertUserId" jdbcType="DECIMAL" />
         <result column="expert_suggestion" property="expertSuggestion" jdbcType="VARCHAR" />
         <result column="state" property="state" jdbcType="INTEGER" />
+         <result column="createDate" property="createdate" jdbcType="DATE" />
         
         <association property="kgAssessmentActivity" javaType="cn.huan.kindergarten.dto.KgAssessmentActivity">
             <id column="assessment_activity_id" property="id"></id>

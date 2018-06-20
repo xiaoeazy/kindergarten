@@ -58,7 +58,7 @@ Ext.extend(Role.RolePanel, Ext.Panel, {
 					icon : _basePath+'/resources/images/icon/edit.png',
 					text : '修改角色',
 					handler : function() {
-						var records=getRecords(grid);
+						var records=getUpdateRecords(grid);
 						if(records==-1)
 							return;
 						var record = records[0];
@@ -123,10 +123,21 @@ Ext.extend(Role.RolePanel, Ext.Panel, {
 	deleteRole:function(records,store,mainId){
 		  Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
 		  var linkobj = [];
+		  var canSubmit = true;
 		  for(var i=0;i<records.length;i++){
 			  var record = records[i];
 			  var roleId = record.get("roleId");
+			  if(roleId==10003||roleId==10004||roleId==10006){
+				  ExtAlert(record.get("roleName")+" 为基础角色，不允许删除！");
+				  canSubmit=false;
+				  break;
+			  }
 			  linkobj.push({"roleId":roleId});
+		  }
+		  
+		  if(!canSubmit){
+			  Ext.getBody().unmask();
+			  return;
 		  }
 		
 		  Ext.Msg.confirm('提示信息','确认要删除这些信息吗？',function(op){  

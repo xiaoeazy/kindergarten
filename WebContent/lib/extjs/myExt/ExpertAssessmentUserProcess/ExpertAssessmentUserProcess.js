@@ -70,10 +70,10 @@ Ext.extend(ExpertAssessmentUserProcess.ExpertAssessmentUserProcessPanel, Ext.Pan
 	        }
 	    },
 	    autoLoad : true,
-	    fields: ['userName','realName'],
+	    fields: ['userId','realName'],
 	    listeners:{
         	'load': function(store, records, options) {
-        		user_Combo_Store.insert(0,{userName:'-1',realName:'所有'});
+        		user_Combo_Store.insert(0,{userId:'-1',realName:'所有'});
 	    	}
         }
 	});
@@ -84,7 +84,7 @@ Ext.extend(ExpertAssessmentUserProcess.ExpertAssessmentUserProcessPanel, Ext.Pan
 	   		fieldLabel:'上传用户',
     	    id:mainId+"uploadUserId",
             store : user_Combo_Store,  
-            valueField : "userName",  
+            valueField : "userId",  
             mode : 'remote',  
             displayField : "realName",  
             forceSelection : true,  
@@ -232,7 +232,7 @@ Ext.extend(ExpertAssessmentUserProcess.ExpertAssessmentUserProcessPanel, Ext.Pan
 					icon : _basePath+'/resources/images/icon/edit.png',
 					text : '建议',
 					handler : function() {
-						var records=getRecords(grid);
+						var records=getUpdateRecords(grid);
 						if(records==-1)
 							return;
 						var record = records[0];
@@ -242,7 +242,7 @@ Ext.extend(ExpertAssessmentUserProcess.ExpertAssessmentUserProcessPanel, Ext.Pan
 					icon : _basePath+'/resources/images/icon/showUpload.png',
 					text : '查看上传文件',
 					handler : function() {
-						var records=getRecords(grid);
+						var records=getUpdateRecords(grid);
 						if(records==-1)
 							return;
 						var record = records[0];

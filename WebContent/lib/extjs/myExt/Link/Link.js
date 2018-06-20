@@ -140,7 +140,7 @@ Ext.extend(Link.LinkPanel, Ext.Panel, {
 					icon : _basePath+'/resources/images/icon/edit.png',
 					text : '修改链接',
 					handler : function() {
-						var records=getRecords(grid);
+						var records=getUpdateRecords(grid);
 						if(records==-1)
 							return;
 						var record = records[0];

@@ -226,10 +226,8 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
 					icon : _basePath+'/resources/images/icon/edit.png',
 					text : '修改咨讯',
 					handler : function() {
-						var records=getRecords(grid);
+						var records=getUpdateRecords(grid);
 						if(records==-1)
-							return;
-						if(records.length>1)
 							return;
 						var record = records[0];
 						me.editNews(record,store,mainId);

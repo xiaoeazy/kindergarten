@@ -31,7 +31,10 @@ public class KgNewsAttributeServiceImpl extends BaseServiceImpl<KgNewsAttribute>
 	        for(KgNewsAttribute ka :rightAttributeList){
 	        	KgNews kn = new KgNews();
 	        	kn.setAttributeid(ka.getId()+"");
-	        	List<KgNews> newsList=iKgNewsService.selectWithOtherInfo(requestContext, kn, 1, 5);
+//	        	List<KgNews> newsList=iKgNewsService.selectWithOtherInfo(requestContext, kn, 1, 5);
+	        	kn.setSortname("sequence");
+	        	kn.setSortorder("desc");
+	        	List<KgNews> newsList=iKgNewsService.select(requestContext, kn, 1, 5);
 	        	CommonUtil.judgeNewsTitleLength(newsList,17);
 	        	ka.setNewsList(newsList);
 	        	

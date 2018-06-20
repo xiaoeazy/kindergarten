@@ -27,7 +27,7 @@ Ext.extend(assessmentUserToExpert.assessmentUserToExpertWindow, Ext.Window, {
 			        }
 			    },
 			    autoLoad : true,
-			    fields: ['userId', 'userName']
+			    fields: ['userId', 'realName']
 			});
 	    	
 	       var userCombo = new Ext.form.ComboBox({
@@ -36,14 +36,14 @@ Ext.extend(assessmentUserToExpert.assessmentUserToExpertWindow, Ext.Window, {
 		            store : sourceid_Combo_Store,  
 		            valueField : "userId",  
 		            mode : 'remote',  
-		            displayField : "userName",  
+		            displayField : "realName",  
 		            forceSelection : true,  
 		            blankText : '请选择',  
 		            emptyText : '请选择',  
 		            editable : false,  
 		            triggerAction : 'all',  
 		            allowBlank : false,  
-		            hiddenName : "userName",  
+		            hiddenName : "realName",  
 		            autoShow : true,  
 		            selectOnFocus : true,  
 		            name : "expertUserId",

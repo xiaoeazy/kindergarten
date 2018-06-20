@@ -36,6 +36,19 @@ function getRecords(grid){
 	return records;
 }
 
+function getUpdateRecords(grid){
+	var records=grid.getSelectionModel().getSelection();
+	if(records==null||records==""){
+		ExtError("请选择要编辑的行数据");
+		return -1;
+	}
+	if(records.length!=1){
+		ExtError("请选择一个编辑");
+		return -1;
+	}
+	return records;
+}
+
 function getDeleteRecords(grid){
 	var records=grid.getSelectionModel().getSelection();
 	if(records==null||records==""){
