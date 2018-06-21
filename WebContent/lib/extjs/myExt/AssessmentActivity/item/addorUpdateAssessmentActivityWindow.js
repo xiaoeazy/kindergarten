@@ -47,6 +47,7 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 			});
 	    	
 	       var typeCombo = new Ext.form.ComboBox({
+	    	   allowBlank : false,
 	    	   		fieldLabel:'类型<font color="red">*</font>',
 		    	    id:mainId+"assessmentTypeId",
 		            store : typeid_Combo_Store,  

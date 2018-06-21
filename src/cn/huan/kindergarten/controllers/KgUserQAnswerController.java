@@ -69,7 +69,7 @@ import cn.huan.kindergarten.utils.CommonUtil;
 		 KgQuestionsurvey qs = new KgQuestionsurvey();
 		 qs.setId(sid);
 		 KgQuestionsurvey questionState = iKgQuestionsurveyService.selectByPrimaryKey(requestCtx, qs);
-    	 if(questionState.getFinished()==false) {
+    	 if(questionState.getFinished()==null||questionState.getFinished()==false) {
     		 return new ExtAjax(false, "问卷活动已经结束");
     	 }
     	 String ip = CommonUtil.getIpAddress(request);
@@ -80,11 +80,7 @@ import cn.huan.kindergarten.utils.CommonUtil;
     	 if(num!=0) {
     		 return new ExtAjax(false, "对不起，该ip已经投过票了");
     	 }
-    	 for(KgUserQAnswer kq:dto) {
-    		 kq.setIp(ip);
-    		 kq.set__status("add");
-    	 }
-         List<KgUserQAnswer> list = service.batchUpdate(requestCtx, dto);
+    	 service.adminUpdate(requestCtx, dto, ip, sid);
          return new ExtAjax(true, null);
     }
     }

@@ -52,6 +52,12 @@ Ext.extend(showUserUpload.showUserUploadWindow , Ext.Window, {
 		            type: 'spreadsheet',
 		            checkboxSelect :true
 		        },
+		        tbar:[{
+		        	text:'打包下载',
+		        	handler:function(){
+		        		me.zipdownload(id,uploadUserId);
+		        	}
+		        }],
 		        columns: [
 		            {header: "文件名",  width:50,sortable: true,  dataIndex: 'fileName',align:'center'},
 		            {header: "下载",  sortable: true, align:'center',dataIndex:'filePath',renderer:me.downloadFunc}
@@ -89,16 +95,6 @@ Ext.extend(showUserUpload.showUserUploadWindow , Ext.Window, {
 				listeners:{
 					show:function(){
 						if(record!=null){
-				    		var expertSuggestion= record.get("expertSuggestion");
-				    		var state = record.get("state");
-				    		if(state =="50"){
-				    			rg.setValue({pass: "Y"});
-				    		}
-				    		if(state =="60"){
-				    			rg.setValue({pass: "N"});
-				    		}
-				    		if(expertSuggestion!=null&&expertSuggestion!="")
-				    			Ext.getCmp(mainId+"expertSuggestion").setValue(expertSuggestion);
 				    	}
 					}
 				}
@@ -107,6 +103,10 @@ Ext.extend(showUserUpload.showUserUploadWindow , Ext.Window, {
 		
 		
 		
+	},
+	zipdownload:function(progressId,uploadUserId){
+		var path = appName +"/admin/assessment/activity/user/upload/download?progressId="+progressId+"&uploadUserId="+uploadUserId;
+		window.open(path)
 	},
 	downloadFunc :function(value){
 		if(value!=null&&value!=""){
@@ -118,7 +118,7 @@ Ext.extend(showUserUpload.showUserUploadWindow , Ext.Window, {
 });
 
 function download(value){
-	window.open(appName+value);
+	var newwindow=window.open(appName+value);
 }
 
 

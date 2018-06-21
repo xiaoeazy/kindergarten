@@ -91,7 +91,7 @@ public class IndexAssessmentServiceImpl  implements IIndexAssessmentService{
 		   	        kaup.setAssessmentActivityId(assessmentActivityId);
 		   	        kaup.setState(10);
 		   	        kaup.setUploadUserId(userid);
-		   	        insertBean=iKgAssessmentActivityUserProgressService.insert(requestContext, kaup);
+		   	        insertBean=iKgAssessmentActivityUserProgressService.insertSelective(requestContext, kaup);
 	        }else {
 	        		insertBean = isExistHaveUploadResult.get(0);
 	        }
@@ -103,7 +103,7 @@ public class IndexAssessmentServiceImpl  implements IIndexAssessmentService{
   	        	kauu.setProgressId(insertBean.getId());
   	        	kauu.setFileName(fi.getFileName());
   	        	kauu.setFilePath(fi.getFilePath());
-  	        	iKgAssessmentActivityUserUploadService.insert(requestContext, kauu);
+  	        	iKgAssessmentActivityUserUploadService.insertSelective(requestContext, kauu);
 	        }
 	        return allFilePath;
 	      

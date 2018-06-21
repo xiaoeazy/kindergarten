@@ -1,24 +1,35 @@
 package cn.huan.kindergarten.controllers;
 
-import org.springframework.stereotype.Controller;
-import com.huan.HTed.system.controllers.BaseController;
-import com.huan.HTed.core.IRequest;
-import com.huan.HTed.system.dto.ResponseData;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import java.util.zip.ZipOutputStream;
 
-import cn.huan.kindergarten.bean.ExtStore;
-import cn.huan.kindergarten.dto.KgAssessmentActivityUserProgress;
-import cn.huan.kindergarten.dto.KgAssessmentActivityUserUpload;
-import cn.huan.kindergarten.service.IKgAssessmentActivityUserUploadService;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import org.springframework.validation.BindingResult;
-import java.util.List;
+import com.huan.HTed.core.IRequest;
+import com.huan.HTed.system.controllers.BaseController;
+import com.huan.HTed.system.dto.ResponseData;
+
+import cn.huan.kindergarten.bean.ExtStore;
+import cn.huan.kindergarten.bean.ZipFile;
+import cn.huan.kindergarten.dto.KgAssessmentActivityUserUpload;
+import cn.huan.kindergarten.exception.KgFileException;
+import cn.huan.kindergarten.service.IKgAssessmentActivityUserUploadService;
+import cn.huan.kindergarten.utils.CommonUtil;
 
     @Controller
     public class KgAssessmentActivityUserUploadController extends BaseController{
@@ -65,5 +76,47 @@ import java.util.List;
  		List<KgAssessmentActivityUserUpload> list = service.select(requestContext, dto);
  		return new ExtStore(null, null, null, list);
  	}
+ 	
+ 	
+ 	@RequestMapping("/admin/assessment/activity/user/upload/download")  
+    public String downloadFiles(KgAssessmentActivityUserUpload kauu, HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, KgFileException {
+ 		File fileZip;
+		// 文件输出流
+		FileOutputStream outStream=null;
+		// 压缩流
+		ZipOutputStream toClient=null;
+			IRequest requestContext = createRequestContext(request);
+			List<KgAssessmentActivityUserUpload> list = service.select(requestContext, kauu);
+			String webPath = request.getServletContext().getRealPath("/");
+			List<ZipFile> files = new ArrayList<ZipFile>();
+			for(KgAssessmentActivityUserUpload ku:list) {
+				File file = new File(webPath+ku.getFilePath());
+				if(file.exists()) {
+					ZipFile zipfile = new ZipFile(ku.getFileName(), file);
+					files.add(zipfile);
+				}
+					
+			}
+
+			String fileName = UUID.randomUUID().toString() + ".zip";
+			// 在服务器端创建打包下载的临时文件
+			String outFilePath = webPath + "/zipFile/";
+
+			fileZip = new File(outFilePath + fileName);
+			outStream = new FileOutputStream(fileZip);
+			toClient = new ZipOutputStream(outStream);
+   //  toClient.setEncoding("gbk");
+			CommonUtil.zipFile(files, toClient);
+			toClient.close();
+			outStream.close();
+			CommonUtil.downloadFile(fileZip, response, true);
+        return null;
+    }
+ 	
+ 	
+
+ 	
+ 	
     
     }

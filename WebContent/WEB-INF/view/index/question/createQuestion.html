@@ -148,12 +148,16 @@
                         				listItems.aid = $(this).find('.hiddenAId').html();
                         				listItems.sid = ${questionsurvey.id};
                         				listItems.content = $(this).find('.contentInfo').val();
-                        				questionItems.push(listItems);
+                        				if($(this).find('.contentInfo').val()!=""){
+                        					questionItems.push(listItems);
+                        				}
                         		});
                     		}
                     	});
                     	console.log(JSON.stringify(questionItems));
-                    	
+                    	if(questionItems==false){
+                    		return;
+                    	}
 	               		 $.ajax({  
 	         	            "url":"${base.contextPath}/index/kg/user/q/answer/submit?sid="+${questionsurvey.id},  
 	         	            "type":"post",  

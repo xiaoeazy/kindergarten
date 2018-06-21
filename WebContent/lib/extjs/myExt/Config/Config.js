@@ -238,7 +238,7 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 								}
 							},{
 								xtype : 'button',
-								width : 150,
+								width : 200,
 								style : 'margin-left:10px',
 								//name : 'imgupload',
 								text : '上传微信二维码（100*100）',
@@ -281,7 +281,7 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 								}
 							},{
 								xtype : 'button',
-								width : 150,
+								width : 200,
 								style : 'margin-left:10px',
 								//name : 'imgupload',
 								text : '上传微博二维码（100*100）',

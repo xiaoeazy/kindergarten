@@ -209,7 +209,7 @@ Ext.extend(addorUpdateUser.addorUpdateUserWindow, Ext.Window, {
 				  width:50,
 					text : text,
 					handler : function(button, event) {
-						me.addorUpdateUser(me,formpanel,mainId,parentStore,id,type,isAdd);
+						me.addorUpdateUser(me,formpanel,mainId,parentStore,id,type,isAdd,dsTo);
 					}
 			    },{
 				  width:50,
@@ -242,7 +242,7 @@ Ext.extend(addorUpdateUser.addorUpdateUserWindow, Ext.Window, {
 		
 	},
 
-	addorUpdateUser : function(me,formpanel,mainId,parentStore,id,type,isAdd) {
+	addorUpdateUser : function(me,formpanel,mainId,parentStore,id,type,isAdd,dsTo) {
 		var userRoleList = [];
 		var itemselector = Ext.getCmp(mainId+"itemselector");
 		var allRole = itemselector.getValue();
@@ -251,6 +251,15 @@ Ext.extend(addorUpdateUser.addorUpdateUserWindow, Ext.Window, {
             	 roleId:allRole[index]
              })
          });  
+//		for (var i = 0; i < dsTo.getCount(); i++) {
+//			var record = dsTo.getAt(i);
+//			alert(record.get("roleId"));
+//	        userRoleList.push({
+//	       	 	roleId:record.get("roleId")
+//	        })
+//		}
+		if(allRole=="")
+			userRoleList=null;
 		var userName =Ext.getCmp(mainId+"userName").getValue().trim();
 		var realName = Ext.getCmp(mainId+"realName").getValue().trim();
 		var password =Ext.getCmp(mainId+"password").getValue();

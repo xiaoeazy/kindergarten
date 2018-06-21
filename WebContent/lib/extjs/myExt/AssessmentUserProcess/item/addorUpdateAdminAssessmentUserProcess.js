@@ -50,6 +50,8 @@ Ext.extend(addorUpdateAdminAssessmentUserProcess.addorUpdateAdminAssessmentUserP
 				  				xtype:"textarea",
 				          		fieldLabel:'管理员审核意见',
 								allowBlank:true,
+								width:'100%',
+								height:300,
 								name: 'adminSuggestion',
 								id:mainId+"adminSuggestion"
 				  			}
@@ -64,7 +66,7 @@ Ext.extend(addorUpdateAdminAssessmentUserProcess.addorUpdateAdminAssessmentUserP
 				layout:'fit',
 				items : [formpanel],
 				width : 400,
-				height : 270,
+				height : 470,
 				autoHeight:true,
 				xtype : "window",
 				resizable : false,

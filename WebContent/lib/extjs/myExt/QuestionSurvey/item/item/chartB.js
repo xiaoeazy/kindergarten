@@ -68,7 +68,8 @@ Ext.extend(chartB.chartBPanel, Ext.Panel, {
 	            axes: [{
 	                type: 'Numeric',
 	                position: 'bottom',
-	                fields: ['percent'],
+//	                fields: ['percent'],
+	                maximum: 100,
 	                label: {
 	                    renderer: function(v) { return v + '%'; }
 	                },

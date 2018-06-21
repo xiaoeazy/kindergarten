@@ -52,28 +52,34 @@ public class AdminController extends BaseController {
 	@ResponseBody
 	public ModelAndView login(User dto, HttpServletRequest request, HttpServletResponse response) {
 
-		HttpSession session = request.getSession(false);
-		// 有session 则不再登录
-		if (session != null && session.getAttribute(User.FIELD_USER_ID) != null) {
-			ModelAndView mv = indexView(request, response);
-			return mv;
-		}
-		
-		ModelAndView view = new ModelAndView(getViewPath() + VIEW_MAIN);
-		IRequest requestContext = createRequestContext(request);
-		if(dto.getPasswordEncrypted()!=null)
-			dto.setPasswordEncrypted( DigestUtils.md5Hex(dto.getPasswordEncrypted()));
-		User user = userService.selectOne(requestContext, dto);
-		if (user == null) {
-			view.setViewName(VIEW_LOGIN);
-			if(dto.getUserName()!=null)
-				view.addObject("message", "用户名或密码错误！");
-		} else {
-			session = request.getSession();
-			setRoleInfo(request, session, user);
-			session.setAttribute(IRequest.FIELD_USER_ID, user.getUserId());
-			session.setAttribute("userRealName", user.getRealName());
+		ModelAndView view=null;
+		try {
+			HttpSession session = request.getSession(false);
+			// 有session 则不再登录
+			if (session != null && session.getAttribute(User.FIELD_USER_ID) != null) {
+				ModelAndView mv = indexView(request, response);
+				return mv;
+			}
 			
+			view = new ModelAndView(getViewPath() + VIEW_MAIN);
+			IRequest requestContext = createRequestContext(request);
+			if(dto.getPasswordEncrypted()!=null)
+				dto.setPasswordEncrypted( DigestUtils.md5Hex(dto.getPasswordEncrypted()));
+			User user = userService.selectOne(requestContext, dto);
+			if (user == null) {
+				view.setViewName(VIEW_LOGIN);
+				if(dto.getUserName()!=null) {
+					throw new Exception( "用户名或密码错误！");
+				}
+			} else {
+				session = request.getSession();
+				setRoleInfo(request, session, user);
+				session.setAttribute(IRequest.FIELD_USER_ID, user.getUserId());
+				session.setAttribute("userRealName", user.getRealName());
+			}
+		} catch (Exception e) {
+			view.setViewName(VIEW_LOGIN);
+			view.addObject("message", e.getMessage());
 		}
 		return view;
 	}
@@ -103,13 +109,13 @@ public class AdminController extends BaseController {
 		return view;
 	}
 
-	private void setRoleInfo(HttpServletRequest request, HttpSession session, User user) {
+	private void setRoleInfo(HttpServletRequest request, HttpSession session, User user)  throws Exception {
 		UserRole ur = new UserRole();
 		ur.setUserId(user.getUserId());
 		List<Role> roles = roleService.adminQueryHave(RequestHelper.createServiceRequest(request), ur);
 		if (roles.isEmpty()) {
 			request.setAttribute("code", "NO_ROLE");
-			throw new RuntimeException(new Exception("该用户不存在角色"));
+			throw new Exception("该用户不存在角色");
 		}
 		List<Long> roleIds = new ArrayList<Long>();
 		for (Role role : roles) {

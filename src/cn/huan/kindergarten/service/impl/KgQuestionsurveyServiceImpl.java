@@ -59,11 +59,11 @@ public class KgQuestionsurveyServiceImpl extends BaseServiceImpl<KgQuestionsurve
 	
 	public void addKgQuestionsurvey(IRequest request,KgQuestionsurvey record) {
 		record.set__status("add");
-		KgQuestionsurvey sqs = self().insert(request, record);
+		KgQuestionsurvey sqs = self().insertSelective(request, record);
 		for(KgQuestionmainitem ki :sqs.getQuestionItems()) {
 			ki.setSid(sqs.getId());
 			ki.set__status("add");
-			KgQuestionmainitem kii = iKgQuestionmainitemService.insert(request, ki);
+			KgQuestionmainitem kii = iKgQuestionmainitemService.insertSelective(request, ki);
 			if(ki.getqListItems()!=null&&ki.getqListItems().size()!=0) {
 				for(KgQuestionAnswer kqa :ki.getqListItems()) {
 					kqa.setQid(kii.getId());

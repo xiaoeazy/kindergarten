@@ -36,6 +36,7 @@ import cn.huan.kindergarten.service.IKgDownloadService;
 import cn.huan.kindergarten.service.IKgNewsAttributeService;
 import cn.huan.kindergarten.service.IKgNewsSourceService;
 import cn.huan.kindergarten.service.IKgNewstypeService;
+import cn.huan.kindergarten.utils.CommonUtil;
 
 @Controller
 public class IndexDownloadController extends IndexBaseController{
@@ -43,10 +44,7 @@ public class IndexDownloadController extends IndexBaseController{
      * 文件下载默认编码.
      */
     private static final String ENC = "UTF-8";
-    /**
-     * buffer 大小.
-     */
-    private static final Integer BUFFER_SIZE = 1024;
+    
 	
 	@Autowired
 	private IKgDownloadService iKgDownloadService;
@@ -112,7 +110,7 @@ public class IndexDownloadController extends IndexBaseController{
             int fileLength = (int) file.length();
             response.setContentLength(fileLength);
             if (fileLength > 0) {
-                writeFileToResp(response, file);
+                CommonUtil.writeFileToResp(response, file);
             }
         } else {
             throw new KgFileException(null, "文件不存在", null);
@@ -132,7 +130,7 @@ public class IndexDownloadController extends IndexBaseController{
             int fileLength = (int) file.length();
             response.setContentLength(fileLength);
             if (fileLength > 0) {
-                writeFileToResp(response, file);
+            	CommonUtil.writeFileToResp(response, file);
             }
         } else {
             throw new KgFileException(null, "文件不存在", null);
@@ -140,27 +138,7 @@ public class IndexDownloadController extends IndexBaseController{
     }
 	
 
-    /**
-     * 将文件对象的流写入Responsne对象.
-     *
-     * @param response HttpServletResponse
-     * @param file     File
-     * @throws FileNotFoundException 找不到文件异常
-     * @throws IOException           IO异常
-     */
-    private void writeFileToResp(HttpServletResponse response, File file) throws FileNotFoundException, IOException  {
-        byte[] buf = new byte[BUFFER_SIZE];
-        try (InputStream inStream = new FileInputStream(file);
-             ServletOutputStream outputStream = response.getOutputStream()) {
-            int readLength;
-            while (((readLength = inStream.read(buf)) != -1)) {
-                outputStream.write(buf, 0, readLength);
-            }
-            outputStream.flush();
-
-        }
-    }
-	
+  
 
    
 }

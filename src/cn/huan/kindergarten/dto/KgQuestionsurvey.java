@@ -35,6 +35,8 @@ public class KgQuestionsurvey extends BaseDTO {
      
      private Boolean finished;
      
+     private Long joincount;
+     
      @Transient
      private List<KgQuestionmainitem> questionItems;
 
@@ -77,6 +79,14 @@ public class KgQuestionsurvey extends BaseDTO {
 
 	public void setFinished(Boolean finished) {
 		this.finished = finished;
+	}
+
+	public Long getJoincount() {
+		return joincount;
+	}
+
+	public void setJoincount(Long joincount) {
+		this.joincount = joincount;
 	}
 
 	

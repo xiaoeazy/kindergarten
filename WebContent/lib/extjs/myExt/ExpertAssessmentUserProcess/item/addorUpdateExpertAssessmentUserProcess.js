@@ -50,6 +50,8 @@ Ext.extend(addorUpdateExpertAssessmentUserProcess.addorUpdateExpertAssessmentUse
 				  				xtype:"textarea",
 				          		fieldLabel:'审核意见',
 								allowBlank:true,
+								width:'100%',
+								height:300,
 								name: 'expertSuggestion',
 								id:mainId+"expertSuggestion"
 				  			}
@@ -64,7 +66,7 @@ Ext.extend(addorUpdateExpertAssessmentUserProcess.addorUpdateExpertAssessmentUse
 				layout:'fit',
 				items : [formpanel],
 				width : 400,
-				height : 270,
+				height : 470,
 				autoHeight:true,
 				xtype : "window",
 				resizable : false,

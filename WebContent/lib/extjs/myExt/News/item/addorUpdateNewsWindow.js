@@ -453,10 +453,6 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Panel, {
 			return;
 		}
 		
-		if(indexshow==""){
-			Ext.getCmp(mainId+"indexshow").markInvalid("是否首页显示不能为空！");
-			return;
-		}
 //		if(summary==""){
 //			Ext.getCmp(mainId+"summary").markInvalid("咨讯简介不能为空！");
 //			return;

@@ -8,8 +8,15 @@
         <result column="survey_desc" property="surveyDesc" jdbcType="VARCHAR" />
         <result column="survey_desc" property="surveyDesc" jdbcType="VARCHAR" />
         <result column="finished" property="finished" jdbcType="TINYINT" />
+        <result column="joinCount" property="joincount" jdbcType="DECIMAL" />
+        
         
     </resultMap>
 
-
+	<update id="updateJonCount" parameterType="java.lang.Long">  
+        UPDATE kg_questionsurvey  
+            SET joinCount=joinCount+1   
+        WHERE 
+        	id = #{id}
+	</update>  
 </mapper>
