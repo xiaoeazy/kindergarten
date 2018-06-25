@@ -10,3 +10,6 @@ MySQL:    版本: 5.7.16  目录:/etc/my.cnf     使用:systemctl (start|stop|re
 Mysql：   用户名:root    默认密码:uAiqwVwjJ8-i
                                                   
                                          详细图文操作说明请参见网址:  https://market.aliyun.com/products/53400005/cmjj014493.html
+                                         
+环境============:
+351fac1                                        
