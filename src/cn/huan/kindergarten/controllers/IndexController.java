@@ -65,7 +65,11 @@ public class IndexController extends IndexBaseController{
     	 KgCarousel kc = new KgCarousel();
     	 kc.setSortorder("desc");
     	 kc.setSortname("sequence");
-    	 List<KgDownload> downloadList = iKgDownloadService.select(requestContext, null, 1, 4);
+    	 
+    	 KgDownload kl = new KgDownload();
+    	 kl.setSortorder("desc");
+    	 kl.setSortname("createdate");
+    	 List<KgDownload> downloadList = iKgDownloadService.select(requestContext, kl, 1, 4);
     	 List<KgCarousel> carouselList =iKgCarouselService.select(requestContext, kc, 1, 5);
     	
     	 //查询13条文章

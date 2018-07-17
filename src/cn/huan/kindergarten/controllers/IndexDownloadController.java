@@ -58,7 +58,11 @@ public class IndexDownloadController extends IndexBaseController{
 		limit=20;
     	ModelAndView mv = new ModelAndView(getViewPath() + "/index/download/download");
     	 IRequest requestContext = createRequestContext(request);
-    	 List<KgDownload> list =iKgDownloadService.select(requestContext, null, page, limit);
+    	 
+    	 KgDownload kl = new KgDownload();
+    	 kl.setSortorder("desc");
+    	 kl.setSortname("createdate");
+    	 List<KgDownload> list =iKgDownloadService.select(requestContext, kl, page, limit);
     	 int count = iKgDownloadService.adminQueryCount(requestContext, null);
     	 int allPageNum = count%limit==0?count/limit:count/limit+1;
 	     if(count==0) allPageNum=1;

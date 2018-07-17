@@ -30,7 +30,7 @@
         <result column="content" property="content" jdbcType="VARCHAR" />
         <result column="indexshow" property="indexshow" jdbcType="VARCHAR" />
         <result column="sequence" property="sequence" jdbcType="DECIMAL" />
-        <result column="createDate" property="createdate" jdbcType="DATE" />
+        <result column="createDate" property="createdate" jdbcType="TIMESTAMP" />
         <result column="viewsCount" property="viewscount" jdbcType="DECIMAL" />
         <association property="kgNewstype" javaType="cn.huan.kindergarten.dto.KgNewstype">
             <id column="typeid" property="id"></id>
