@@ -5,7 +5,7 @@
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
-<title>学前教育岗位培训班报名单</title>
+<title></title>
 <style type="text/css">
 .tabp {
 	border-color: #000000 #000000 #000000 #000000;
@@ -65,9 +65,8 @@ table tr td {
 
 input {
 	text-align: center;
-	outline: none;
+/* 	outline: none; */
 	border-width: 0;
-	outline: none;
 }
 </style>
 <script type="text/javascript"
@@ -77,15 +76,22 @@ input {
 <script
 	src="https://linwalker.github.io/render-html-to-pdf/js/jsPdf.debug.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-		var downPdf = document.getElementById("renderPdf");
-		downPdf.onclick = function() {
+	function downPdf (){
 			var newstr = document.getElementById("mainId").innerHTML;
 			var oldstr = document.body.innerHTML; 
 			document.body.innerHTML = newstr; 
 			window.print(); 
 			document.body.innerHTML = oldstr; 
-			return false; 
+	}
+// 	$(document).ready(function() {
+// 		var downPdf = document.getElementById("renderPdf");
+// 		downPdf.onclick = function() {
+// 			var newstr = document.getElementById("mainId").innerHTML;
+// 			var oldstr = document.body.innerHTML; 
+// 			document.body.innerHTML = newstr; 
+// 			window.print(); 
+// 			document.body.innerHTML = oldstr; 
+// 			return false; 
 // 			html2canvas(document.body, {
 // 				onrendered : function(canvas) {
 
@@ -125,8 +131,8 @@ input {
 // 						                   pdf.save('content.pdf');
 // 				}
 // 			})
-		}
-	});
+// 		}
+// 	});
 </script>
 </head>
 <body id="index">
@@ -234,7 +240,7 @@ input {
 		
 	</div>
 	<div style="text-align:center;margin-top:20px">
-			<button id="renderPdf">生成pdf</button>
+			<button id="renderPdf" onclick="downPdf()">提交</button>
 	</div>
 </body>
 </html>

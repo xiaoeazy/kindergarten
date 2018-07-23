@@ -31,14 +31,14 @@
 
 <div class="vF_detail_main">
             <div class="vF_detail_header">
-            <h2 class="tc">${newsInfo.newstitle};</h2>
+            <h2 class="tc">${newsInfo.newstitle}&nbsp;</h2>
             <p class="tc">
             	<span id="pubTime">${newsInfo.createdate?string('yyyy-MM-dd HH:mm:ss')}</span> 
             	<#if kgNewsSource.id!=1>来源：<span id="sourceName">${kgNewsSource.sourcename}</span> </#if>
             	</p>
             </div>
             <div class="vF_detail_content">
-                ${newsInfo.content};
+                ${newsInfo.content}&nbsp;
             </div>
         </div>
 
