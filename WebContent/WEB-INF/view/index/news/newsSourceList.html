@@ -35,7 +35,7 @@
 		
 		
 			<#list newsList as news>   
-		               <li><a href="${base.contextPath}/index/newsDetail?id=${news.id}"  title="${news.newstitle}">${news.newstitle}</a>
+		               <li><a href="${base.contextPath}/index/newsDetail?id=${news.id}"  title="${news.newstitle}">${news.newsSimpleTitle}</a>
 		     				 <span> ${news.createdate?string('yyyy-MM-dd HH:mm:ss')} </span>
 					    </li> 
 		    </#list>   

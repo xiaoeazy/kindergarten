@@ -128,6 +128,7 @@ public class IndexNewsController extends IndexBaseController{
 	        KgNewstype newsType = new KgNewstype();
 	        newsType.setId(typeid);
 	        KgNewstype kgNewstype = iKgNewstypeService.selectByPrimaryKey(requestContext, newsType);
+	        CommonUtil.judgeNewsTitleLength(list,33);
 	        mv.addObject("newsList", list);
 	        mv.addObject("page", page);
 	        mv.addObject("allPageNum",allPageNum);
@@ -152,6 +153,7 @@ public class IndexNewsController extends IndexBaseController{
 	        int allPageNum = count%limit==0?count/limit:count/limit+1;
 	        if(count==0) allPageNum=1;
 	        List<KgNews> list = iKgNewsService.selectWithOtherInfo(requestContext, news, page, limit);
+	        CommonUtil.judgeNewsTitleLength(list,33);
 	        KgNewsSource newsSource = new KgNewsSource();
 	        newsSource.setId(sourceid);
 	        KgNewsSource kgNewsSource = iKgNewsSourceService.selectByPrimaryKey(requestContext, newsSource);
